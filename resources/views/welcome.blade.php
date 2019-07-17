@@ -76,6 +76,7 @@
 
 
 
+            <a href="authLogin">Login</a>
             <a href="signup">signup</a>
 
             @endauth

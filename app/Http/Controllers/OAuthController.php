@@ -102,17 +102,19 @@ class OAuthController extends Controller
 
         // var_dump($accessToken);exit;
 
+        // usersテーブルに会員情報を登録
         $user = new User;
-
         $user->screen_name = $screen_name;
         $user->email = $email;
         $user->password = $password;
         $user->oauth_token = $oauth_token;
         $user->oauth_token_secret = $oauth_token_secret;
-
         $user->save();
 
+        // ログイン認証
         Auth::login($user);
+
+        // 会員登録画面にて格納したsessionのパラメータを破棄
         session()->forget('screen_name');
         session()->forget('email');
         session()->forget('password');
@@ -131,6 +133,7 @@ class OAuthController extends Controller
         session()->forget('oauth_token_secret');
         // session()->flush();
 
+        // ログアウト処理
         Auth::logout();
 
         //OAuthログイン画面にリダイレクト

@@ -17,6 +17,11 @@ Route::get('/', function () {
 
 // Auth::routes();
 
+// ログイン
+Route::get('/authLogin', 'AuthLoginController@index');
+Route::post('/authLogin', 'AuthLoginController@authLogin');
+
+// 会員登録
 Route::get('/signup', 'SignUpController@index');
 Route::post('/signup', 'SignUpController@signup');
 

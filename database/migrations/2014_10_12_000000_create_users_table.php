@@ -17,10 +17,12 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('email');
             $table->string('password');
-            $table->string('screan_name');
+            $table->string('screen_name');
             // $table->string('avatar')->nullable();
             // $table->string('twitter_id')->unique()->nullable();
-            $table->string('access_token');
+            $table->string('oauth_token');
+            $table->string('oauth_token_secret');
+            // $table->string('accesstoken');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

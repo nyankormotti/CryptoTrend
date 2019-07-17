@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
-use Abraham\TwitterOAuth\TwitterOAuth;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 class OAuthController extends Controller
 {
@@ -55,17 +57,21 @@ class OAuthController extends Controller
         // var_dump($accessToken);exit;
 
         //セッションにアクセストークンを登録
-        session()->put('accessToken', $accessToken);
+        session()->put('oauth_token', $accessToken['oauth_token']);
+        session()->put('oauth_token_secret', $accessToken['oauth_token_secret']);
+        // session()->put('accessToken', $accessToken);
 
         //indexページにリダイレクト
-        return redirect('index');
+        return redirect('main');
     }
 
     //アクセストークンを使用してAPIを叩いて結果をビューに受け渡す
-    public function index()
+    public function main()
     {
         //セッションからアクセストークン取得
-        $accessToken = session()->get('accessToken');
+        $oauth_token = session()->get('oauth_token');
+        $oauth_token_secret = session()->get('oauth_token_secret');
+        // $accessToken = session()->get('accessToken');
 
         //インスタンス生成
         $twitter = new TwitterOAuth(
@@ -74,8 +80,8 @@ class OAuthController extends Controller
             //API Secret
             env('TWITTER_CLIENT_SECRET'),
             //アクセストークン
-            $accessToken['oauth_token'],
-            $accessToken['oauth_token_secret']
+            $oauth_token,
+            $oauth_token_secret
         );
 
         //ユーザ情報を取得
@@ -83,9 +89,34 @@ class OAuthController extends Controller
         // get_object_vars()でオブジェクトの中身をjsonで返す
         $userInfo = get_object_vars($twitter->get('account/verify_credentials'));
 
-        // var_dump($userInfo); exit;
+        $screen_name = session()->get('screen_name');
+        $email = session()->get('email');
+        $password = session()->get('password');
+        
 
-        // $i = json_decode($userInfo,true);
+        if($screen_name !== $userInfo['screen_name']){
+            session()->flush();
+
+            return redirect('signup');
+        }
+
+        // var_dump($accessToken);exit;
+
+        $user = new User;
+
+        $user->screen_name = $screen_name;
+        $user->email = $email;
+        $user->password = $password;
+        $user->oauth_token = $oauth_token;
+        $user->oauth_token_secret = $oauth_token_secret;
+
+        $user->save();
+
+        Auth::login($user);
+        session()->forget('screen_name');
+        session()->forget('email');
+        session()->forget('password');
+
         //twitterというビューにユーザ情報が入った$userInfoを受け渡す
         return view('twitter', ['userInfo' => $userInfo]);
     }
@@ -95,7 +126,12 @@ class OAuthController extends Controller
         //セッションクリア
         // session()->flush();
         // アクセストークンだけsessionから破棄
-        session()->forget('accessToken');
+        // session()->forget('accessToken');
+        session()->forget('oauth_token');
+        session()->forget('oauth_token_secret');
+        // session()->flush();
+
+        Auth::logout();
 
         //OAuthログイン画面にリダイレクト
         return redirect('/');

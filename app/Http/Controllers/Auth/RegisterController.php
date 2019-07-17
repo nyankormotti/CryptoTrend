@@ -21,7 +21,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    // use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -63,10 +63,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'screan_name' => $data['screan_name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+
+         session()->put('screan_name', $data['screan_name']);
+         session()->put('email', $data['email']);
+         session()->put('password', Hash::make($data['password']));
+
+         return redirect('oauth');
+        // return User::create([
+        //     'screan_name' => $data['screan_name'],
+        //     'email' => $data['email'],
+        //     'password' => Hash::make($data['password']),
+        // ]);
     }
 }

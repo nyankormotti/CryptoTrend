@@ -16,10 +16,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'screan_name', 'email', 'password',
+        'screan_name', 'email', 'password', 'oauth_token', 'oauth_token_secret',
     ];
-
-    // protected $fillable = ["name", "nickname", "twitter_id", "avatar"];
 
     /**
      * The attributes that should be hidden for arrays.

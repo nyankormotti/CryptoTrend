@@ -15,7 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+// Auth::routes();
+
+Route::get('/signup', 'SignUpController@index');
+Route::post('/signup', 'SignUpController@signup');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -33,7 +36,7 @@ Route::get('/oauth', 'OAuthController@login');
 Route::get('/callback', 'OAuthController@callBack');
 
 //indexのルーティング
-Route::get('/index', 'OAuthController@index');
+Route::get('/main', 'OAuthController@main');
 
 //logoutのルーティング
 Route::get('/oauthlogout', 'OAuthController@logout');

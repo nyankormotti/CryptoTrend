@@ -4,11 +4,6 @@ namespace App\Libraries;
 
 class CommonFunctions
 {
-    public static function is_foo($data)
-    {
-        return ($data == 'foo') ? true : false;
-    }
-
 
     // Google News 取得関数
     function get_news($max_num)
@@ -50,7 +45,6 @@ class CommonFunctions
         } else {
             $list_gn = $list;
         }
-        
 
         //配列を出力
         return $list_gn;

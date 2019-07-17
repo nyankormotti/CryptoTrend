@@ -83,6 +83,8 @@ class OAuthController extends Controller
         // get_object_vars()でオブジェクトの中身をjsonで返す
         $userInfo = get_object_vars($twitter->get('account/verify_credentials'));
 
+        // var_dump($userInfo); exit;
+
         // $i = json_decode($userInfo,true);
         //twitterというビューにユーザ情報が入った$userInfoを受け渡す
         return view('twitter', ['userInfo' => $userInfo]);
@@ -91,7 +93,9 @@ class OAuthController extends Controller
     public function logout()
     {
         //セッションクリア
-        session()->flush();
+        // session()->flush();
+        // アクセストークンだけsessionから破棄
+        session()->forget('accessToken');
 
         //OAuthログイン画面にリダイレクト
         return redirect('/');

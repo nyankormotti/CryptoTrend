@@ -13,28 +13,28 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        // Schema::create('users', function (Blueprint $table) {
-        //     $table->bigIncrements('id');
-        //     $table->string('name');
-        //     $table->string('email')->nullable()->change();
-        //     $table->string('password')->nullable()->change();
-        //     $table->string('avatar')->nullable();
-        //     $table->string('twitter_id')->unique()->nullable();
-        //     $table->string('twitter_name')->nullable();
-        //     $table->timestamp('email_verified_at')->nullable();
-        //     $table->rememberToken();
-        //     $table->timestamps();
-        // });
-
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('nickname');
-            $table->string("twitter_id")->unique();
-            $table->string("avatar");
+            $table->bigIncrements('id');
+            $table->string('email');
+            $table->string('password');
+            $table->string('screan_name');
+            // $table->string('avatar')->nullable();
+            // $table->string('twitter_id')->unique()->nullable();
+            $table->string('access_token');
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
+
+        // Schema::create('users', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->string('name');
+        //     $table->string('nickname');
+        //     $table->string("twitter_id")->unique();
+        //     $table->string("avatar");
+        //     $table->rememberToken();
+        //     $table->timestamps();
+        // });
     }
 
     /**

@@ -10,6 +10,9 @@
 
 <body>
     <h1>coincheck</h1>
+    <h2>銘柄：BTC</h2>
+    <p>24時間以内の最高取引価格：{{$rate['high']}}</p>
+    <p>24時間以内の最安取引価格：{{$rate['low']}}</p>
 
 
 </body>

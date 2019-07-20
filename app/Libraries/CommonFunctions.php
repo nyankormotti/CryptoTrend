@@ -54,34 +54,34 @@ class CommonFunctions
 
     function coincheck()
     {
-        // $strUrl = "https://coincheck.com/api/ticker";
-        // $file = file_get_contents($strUrl);
-        // $file = mb_convert_encoding($file, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
+        $strUrl = "https://coincheck.com/api/ticker";
+        $file = file_get_contents($strUrl);
+        $file = mb_convert_encoding($file, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 
-        // $asdf = json_decode($file, true);
-        // // var_dump($asdf);  
-        // return $asdf;
+        $asdf = json_decode($file, true);
+        // var_dump($asdf);  
+        return $asdf;
 
         // ticker api url
 
         // zaif api url
-        $zaif_api_url  = "https://api.zaif.jp/api/1/ticker/";
+        // $zaif_api_url  = "https://api.zaif.jp/api/1/ticker/";
 
-        $ZF = array();
+        // $ZF = array();
 
-        $currency_pairs = array(
-            "bch_jpy", "bitcrystals_jpy", "btc_jpy", "cicc_jpy", "eth_jpy","fscc_jpy", "jpyz_jpy","mona_jpy", "ncxc_jpy","pepecash_jpy", "sjcx_jpy", "xcp_jpy", "xem_jpy", "zaif_jpy"
-        );
+        // $currency_pairs = array(
+        //     "bch_jpy", "bitcrystals_jpy", "btc_jpy", "cicc_jpy", "eth_jpy","fscc_jpy", "jpyz_jpy","mona_jpy", "ncxc_jpy","pepecash_jpy", "sjcx_jpy", "xcp_jpy", "xem_jpy", "zaif_jpy"
+        // );
 
-        foreach($currency_pairs as $pairs){
-            // urlに通過を結合
-            $url = $zaif_api_url. $pairs;
-            $file = file_get_contents($url);
-            $file = mb_convert_encoding($file, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
-            array_push($ZF,$pairs, json_decode($file, true));
-        }
+        // foreach($currency_pairs as $pairs){
+        //     // urlに通過を結合
+        //     $url = $zaif_api_url. $pairs;
+        //     $file = file_get_contents($url);
+        //     $file = mb_convert_encoding($file, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
+        //     array_push($ZF,$pairs, json_decode($file, true));
+        // }
 
-        return $ZF;
+        // return $ZF;
     }
 
     

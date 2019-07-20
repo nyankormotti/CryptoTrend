@@ -11,7 +11,8 @@ class CoincheckController extends Controller
     {
         $commonFunc = new CommonFunctions;
         $rate = $commonFunc->coincheck();
+        // var_dump($rate);exit;
 
-        return view('coincheck', $rate);
+        return view('coincheck', compact('rate'));
     }
 }

@@ -17,9 +17,10 @@ $i = 0;
     @foreach($news_list as $list)
     <?php $i = $i + 1; ?>
     <div>
-        <p>
-        <?php echo $i;?>
-            <a href="{{$list['url']}}">{{$list['title']}}</a>
+        <p style="background:#f0f8ff;">
+            <?php echo $i; ?>
+            <a href="{{$list['url']}}" target=”_blank” rel=”noopener”>{{$list['title']}}</a>
+            <span>更新日：{{$list['updated']}}</span>
         </p>
     </div>
 

@@ -9,7 +9,7 @@ class GoogleController extends Controller
 {
     public function sample() {
         $commonFunc = new CommonFunctions;
-        $news_list = $commonFunc->get_news(10);
+        $news_list = $commonFunc->get_news();
         // $data = $cf->is_foo('foo');
         // var_dump($news_list);
         // exit;

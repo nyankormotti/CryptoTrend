@@ -14,29 +14,18 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->index();
             $table->string('email');
             $table->string('password');
+            $table->string('twitter_id')->unique()->nullable();
             $table->string('screen_name');
-            // $table->string('avatar')->nullable();
-            // $table->string('twitter_id')->unique()->nullable();
             $table->string('oauth_token');
             $table->string('oauth_token_secret');
-            // $table->string('accesstoken');
+            $table->boolean('delete_flg')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
-
-        // Schema::create('users', function (Blueprint $table) {
-        //     $table->increments('id');
-        //     $table->string('name');
-        //     $table->string('nickname');
-        //     $table->string("twitter_id")->unique();
-        //     $table->string("avatar");
-        //     $table->rememberToken();
-        //     $table->timestamps();
-        // });
     }
 
     /**

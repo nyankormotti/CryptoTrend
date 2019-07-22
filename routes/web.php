@@ -30,6 +30,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Google news
 Route::get('/google', 'GoogleController@sample')->name('google');
 
+// ツイート数
+Route::get('/tweet', 'TweetCountController@index')->name('tweet');
+
 // coincheck
 Route::get('/coincheck', 'CoincheckController@index')->name('coin');
 

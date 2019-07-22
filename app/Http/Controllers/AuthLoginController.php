@@ -25,8 +25,6 @@ class AuthLoginController extends Controller
         // 認証
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $rem)) {
             $user = User::where('id', Auth::id())->first();
-            // $request->session()->flash('status', 'ようこそ  ' . $user->name . ' さん');
-            // return redirect()->action('TaskController@index');
 
             $oauth_token = $user->oauth_token;
             $oauth_token_secret = $user->oauth_token_secret;

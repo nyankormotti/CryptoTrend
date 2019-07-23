@@ -14,10 +14,10 @@ class CreateCurrenciesTable extends Migration
     public function up()
     {
         Schema::create('currencies', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('currency_name');
-            $table->integer('max_price');
-            $table->integer('min_price');
+            $table->integer('max_price')->nullable();
+            $table->integer('min_price')->nullable();
             $table->timestamps();
         });
     }

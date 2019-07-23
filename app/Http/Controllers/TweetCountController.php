@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
@@ -17,9 +18,60 @@ class TweetCountController extends Controller
 
         $connection = new TwitterOAuth($api_key, $api_secret);
 
+        $date = new Carbon();
+        
+
+        // $dt1 = new Carbon('2019-07-23 22:00:00');
+        // $dt2 = new Carbon('2019-07-23 23:00:00');
+        // $dt2 = $dt1->copy()->subDay();
+        // $dt2 = $dt2->addMinutes(15);
+
+
+        // var_dump($dt1);
+        // var_dump($dt2);
+        // var_dump($dt1->diffInSeconds($dt2));exit;
+        // var_dump($dt1->diffInMinutes($dt2));
+        // var_dump($dt1);
+        // var_dump($dt2);
+        // exit;
+
+
+        // var_dump($date);
+        // var_dump($date->subHour());
+        // var_dump($date);
+        // var_dump($date->date);
+        // if($date < '2019-07-01'){
+        //     var_dump('テスト');
+        // } else{
+        //     var_dump('外れ');
+        // }
+        // exit;
         $date = substr(date("Y-m-d_H:i:s", strtotime('-1 hour', time())), 0, 13);
+        // $date = substr($date->subHour(), 0, 13);
         $since_time = $date . ":00:00_JST";
         $until_time = $date. ":59:59_JST";
+        // var_dump($date);
+        // var_dump($since_time);
+        // var_dump($until_time);
+        // exit;
+
+        $acquisition_date = (substr(date("Y-m-d H:i:s", strtotime('-1 hour', time())), 0, 13)) . ":00:00";
+        // $x[] = "現在 " . $acquisition_date;
+
+        // $week_ago = substr(date("Y-m-d H:i:s", strtotime("-1 week")),0,13). ":00:00";
+        $week_ago = date("Y-m-d H:i:s", strtotime("-7 day".$acquisition_date));
+        // var_dump($acquisition_date);
+        // var_dump($week_ago);exit;
+
+
+
+        // $x[] = "1時間前 " . $week_ago;
+
+        // $x[] = "現在 " . date("Y-m-d H:i:s");
+        // $x[] = "1週間前 " . date("Y-m-d H:i:s", strtotime("-1 week"));
+
+        // var_dump($x);exit;
+
 
         // 銘柄一覧(検索パラメータ)
         $currency = array(
@@ -76,7 +128,7 @@ class TweetCountController extends Controller
 
                 // next_results が無ければ処理を終了
                 if (empty($tweets_arr['search_metadata']['next_results'])) {
-                    // var_dump($j);
+                    // var_dump($j);exit;
                     break;
                 }
 

@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Trend;
 use App\Tweet;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 class GetCryptoTweetCountBatch extends Command
@@ -40,8 +42,8 @@ class GetCryptoTweetCountBatch extends Command
      */
     public function handle()
     {
-        \Log::info('===============');
-        \Log::info('バッチスタート');
+        // \Log::info('===============');
+        // \Log::info('バッチスタート');
         // アプリケーション単独認証処理(ベアラートークン)
         // APIキー
         $api_key = env('TWITTER_CLIENT_KEY');
@@ -114,7 +116,7 @@ class GetCryptoTweetCountBatch extends Command
 
             // パラメータ設定にて設定した銘柄のツイート数を取得
             for ($j = 0; $j < $REQUEST_COUNT; $j++) {
-                \Log::info(($j + 1) . 'リクエスト処理スタート');
+                // \Log::info(($j + 1) . 'リクエスト処理スタート');
 
                 // 現在時刻を取得
                 $now_time = new Carbon();
@@ -160,7 +162,9 @@ class GetCryptoTweetCountBatch extends Command
                 // オブジェクトを配列に変換
                 $tweets_arr = json_decode(json_encode($tweets_obj), true);
 
-                 \Log::info('ツイート数'.empty($tweets_arr['statuses']));
+                // \Log::info($tweets_arr);
+
+                //  \Log::info('ツイート数'.empty($tweets_arr['statuses']));
 
                 // ツイート本文を抽出
                 for ($k = 0; $k < count($tweets_arr['statuses']); $k++) {
@@ -206,8 +210,100 @@ class GetCryptoTweetCountBatch extends Command
 
             // 検索ツイート結果を初期化
             $tweet_texts = array();
-
         }
+
+        // Trendsテーブルを更新
+        // 1時間当たりの各銘柄のツイート数を更新 処理開始
+
+        // Tweetsテーブルより、1時間当たりのツイート数を取得
+        $tweet = Tweet::where('acquisition_date', '=', $acquisition_date)
+            ->orderBy('currency_id')
+            ->get();
+
+        // Trendsテーブルに1時間あたりのツイート数を更新
+        for ($i = 0; $i < 10; $i++) {
+            $trend = Trend::where('period_id', '1')
+                ->where('currency_id', $tweet[$i]['currency_id'])
+                ->first();
+
+            $trend->tweet_count = $tweet[$i]['tweet_count'];
+            $trend->acquisition_date = $acquisition_date;
+            $trend->save();
+        }
+        // 1時間当たりの各銘柄のツイート数を更新 処理終了
+
+
+        // 現在時刻より過去1日の各銘柄のツイート数を更新 処理開始
+        // 現在日付よりも1日前の日時
+        $one_days_ago_date = date("Y-m-d H:i:s", strtotime($acquisition_date . "-23 hour"));
+
+        // 銘柄ごとの過去1日のツイート数を格納する配列
+        $tweet_days_count = array();
+
+         // Tweetsテーブルより、各銘柄の過去一日のツイート数を取得
+        for ($i = 0; $i < 10; $i++) {
+            $sum = DB::table('tweets')
+                ->where('currency_id', $i + 1)
+                ->where('acquisition_date', '<=', $acquisition_date)
+                ->where('acquisition_date', '>=', $one_days_ago_date)
+                ->sum('tweet_count');
+
+            array_push($tweet_days_count, $sum);
+        }
+
+        // Trendテーブル(1日あたり)のデータ編集
+        for ($i = 0; $i < 10; $i++) {
+            $trend = Trend::where('period_id', '2')
+                ->where('currency_id', $i + 1)
+                ->first();
+
+            $trend->tweet_count = $tweet_days_count[$i];
+            $trend->acquisition_date = $acquisition_date;
+            $trend->save();
+        }
+
+        // 現在時刻より過去1日の各銘柄のツイート数を更新 処理終了
+
+
+        // 現在時刻より過去1週間の各銘柄のツイート数を更新 処理開始
+        // 現在日付よりも1週間前の日時
+        $one_weeks_ago_date = date("Y-m-d H:i:s", strtotime($acquisition_date . "-7 day" . "+1 hour"));
+
+        // 銘柄ごとの過去1週間のツイート数を格納する配列
+        $tweet_weeks_count = array();
+
+        // Tweetsテーブルより、各銘柄の過去一週間のツイート数を取得
+        for ($i = 0; $i < 10; $i++) {
+            $sum = DB::table('tweets')
+                ->where('currency_id', $i + 1)
+                ->where('acquisition_date', '<=', $acquisition_date)
+                ->where('acquisition_date', '>=', $one_weeks_ago_date)
+                ->sum('tweet_count');
+
+            array_push($tweet_weeks_count, $sum);
+        }
+
+        // Trendテーブル(1週間あたり)のデータ編集
+        for ($i = 0; $i < 10; $i++) {
+            $trend = Trend::where('period_id', '3')
+                ->where('currency_id', $i + 1)
+                ->first();
+
+            $trend->tweet_count = $tweet_days_count[$i];
+            $trend->acquisition_date = $acquisition_date;
+            $trend->save();
+        }
+
+        // 現在時刻より過去1週間の各銘柄のツイート数を更新 処理終了
+
+
+        // 現在時間より1週間前のツイート数のレコードを削除(Tweetsテーブルより削除)
+        $delete_weeks_ago_date = date("Y-m-d H:i:s", strtotime($acquisition_date . "-7 day"));
+
+        $tweet = Tweet::where('acquisition_date', '=', $delete_weeks_ago_date)
+            ->delete();
+
+        // 削除処理終了
 
     }
 }

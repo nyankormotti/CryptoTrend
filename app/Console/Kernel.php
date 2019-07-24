@@ -5,6 +5,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use App\Console\Commands\GetCryptoPriceBatch;
+use App\Console\Commands\GetCryptoTweetCountBatch;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -16,6 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         GetCryptoPriceBatch::class,
+        GetCryptoTweetCountBatch::class,
     ];
 
     /**
@@ -28,6 +30,9 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('batch:CryptoPrice')
             ->daily();
+            
+        $schedule->command('batch:CryptoTweet')
+            ->hourly();
     }
 
     /**

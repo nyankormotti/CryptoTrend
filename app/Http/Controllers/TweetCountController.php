@@ -2,14 +2,72 @@
 
 namespace App\Http\Controllers;
 
+use App\Trend;
+use App\Tweet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 class TweetCountController extends Controller
 {
     public function index(){
 
+        // $tweet = json_decode(json_encode(DB::table('tweets')
+        // ->where('currency_id','1')
+        // ->where('acquisition_date','=','2019-07-24 07:00:00')
+        // ->get()), true);
+
+        $acquisition_date = new Carbon('2019-07-24 22:00:00');
+        $acquisition_date2 = $acquisition_date->copy()->subDay();
+        $acquisition_date2->subDay(7);
+        // var_dump($acquisition_date);
+        // var_dump($acquisition_date2);exit;
+
+
+        // ORMでのDBデータ取得
+        // $tweet = Tweet::where('acquisition_date','<=', $acquisition_date)
+        //     ->where('acquisition_date', '>=', $acquisition_date2)
+        //         // ->orderBy('currency_id')
+        //         ->delete();
+        $tweet = Tweet::where('acquisition_date','=', $acquisition_date)
+                // ->orderBy('currency_id')
+                ->delete();
+
+                exit;
+
+
+        // $tweet_days_count = array();
+
+        // for($i = 0; $i < 10; $i++){
+
+        //     $sum = DB::table('tweets')
+        //         ->where('currency_id', $i + 1)
+        //         ->where('acquisition_date', '<=', $acquisition_date)
+        //         ->where('acquisition_date', '>=', $acquisition_date2)
+        //         ->sum('tweet_count');
+        //     // var_dump($tweet[$i]['currency_id']);
+        //     // var_dump($tweet[$i]['tweet_count']);
+
+        //     array_push($tweet_days_count, $sum);
+        //     // var_dump($sum);exit;
+        // }
+        // var_dump($tweet_days_count);
+        // exit;
+
+        // Trendテーブル(1時間あたり)のデータ編集
+        // for($i = 0;$i < 10; $i++){
+        //     $trend = Trend::where('period_id','2')
+        //             ->where('currency_id', $i + 1)
+        //             ->first();
+
+        //     $trend->tweet_count = $tweet_days_count[$i];
+        //     $trend->acquisition_date = $acquisition_date;
+        //     $trend->save();
+        // }
+        // exit;
+
+        $nowDate = new Carbon();
 
 
         $api_key = env('TWITTER_CLIENT_KEY');    // APIキー
@@ -19,6 +77,12 @@ class TweetCountController extends Controller
         $connection = new TwitterOAuth($api_key, $api_secret);
 
         $date = new Carbon();
+        $acquisition_date = (substr($nowDate->subHour(), 0, 13)) . ":00:00";
+
+        var_dump($acquisition_date);
+        $dat = date("Y-m-d H:i:s", strtotime($acquisition_date."-7 day". "+1 hour"));
+        var_dump($dat);
+        exit;
         
 
         // $dt1 = new Carbon('2019-07-23 22:00:00');
@@ -86,6 +150,30 @@ class TweetCountController extends Controller
             '8' => '$BCH',
             '9' => '$MONA',
         );
+
+        $tweet_count = array();
+        for($i=1; $i<=10; $i++){
+            // exit;
+            $tweets = DB::table('tweets');
+            // $tweet_count = $tweets->where('currency_id',$i)->where('acquisition_date','2019-07-23 23:00:00');
+            $tweet_data = $tweets->where([
+                ['currency_id',$i],
+                ['acquisition_date', '2019-07-24 7:00:00']
+            ])->get();
+            
+            $tweets = json_decode(json_encode($tweet_data), true);
+            // var_dump($tweet_count);
+            // var_dump($tweets);
+            // var_dump($tweets[0]['tweet_count']);
+
+            $tweet_count = $tweets[0]['tweet_count'];
+            
+        }
+        // var_dump($tweet_count);
+        // exit;
+        
+        
+
 
         
 

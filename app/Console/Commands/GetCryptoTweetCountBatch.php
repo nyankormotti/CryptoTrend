@@ -42,8 +42,8 @@ class GetCryptoTweetCountBatch extends Command
      */
     public function handle()
     {
-        // \Log::info('===============');
-        // \Log::info('バッチスタート');
+        \Log::info('===============');
+        \Log::info('各銘柄のツイート数集計バッチ開始');
         // アプリケーション単独認証処理(ベアラートークン)
         // APIキー
         $api_key = env('TWITTER_CLIENT_KEY');
@@ -300,10 +300,13 @@ class GetCryptoTweetCountBatch extends Command
         // 現在時間より1週間前のツイート数のレコードを削除(Tweetsテーブルより削除)
         $delete_weeks_ago_date = date("Y-m-d H:i:s", strtotime($acquisition_date . "-7 day"));
 
-        $tweet = Tweet::where('acquisition_date', '=', $delete_weeks_ago_date)
+        $tweet = Tweet::where('acquisition_date', '<=', $delete_weeks_ago_date)
             ->delete();
 
         // 削除処理終了
+
+        \Log::info('各銘柄のツイート数集計バッチ終了');
+        \Log::info('===============');
 
     }
 }

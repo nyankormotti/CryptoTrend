@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Account;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
@@ -96,19 +97,20 @@ class OAuthController extends Controller
 
         if($screen_name !== $userInfo['screen_name']){
             session()->flush();
-
             return redirect('signup');
         }
 
-        // var_dump($accessToken);exit;
 
         // usersテーブルに会員情報を登録
         $user = new User;
         $user->screen_name = $screen_name;
         $user->email = $email;
         $user->password = $password;
+        $user->twitter_id = $userInfo['id_str'];;
         $user->oauth_token = $oauth_token;
         $user->oauth_token_secret = $oauth_token_secret;
+        $user->follow_limit = 25;
+        $user->unfollow_limit = 100;
         $user->save();
 
         // ログイン認証
@@ -118,6 +120,80 @@ class OAuthController extends Controller
         session()->forget('screen_name');
         session()->forget('email');
         session()->forget('password');
+
+        // Accountテーブルに「仮想通貨」キーワードで検索したtwitterアカウントを登録する。
+        // ユーザーごとに他のアカウント情報を保持する(フォローの有無があるため)
+
+        //インスタンス生成
+        $twitter = new TwitterOAuth(
+            //API Key
+            env('TWITTER_CLIENT_KEY'),
+            //API Secret
+            env('TWITTER_CLIENT_SECRET'),
+            //アクセストークン
+            $oauth_token,
+            $oauth_token_secret
+        );
+
+        // 現在日付より1日前の日時を取得(1週間以内に活動しているアカウントを選定するため)
+        $one_month_ago = new Carbon();
+        $one_month_ago->subDay(7);
+
+        // ユーザーIDを取得
+        $id = Auth::id();
+
+        for ($i = 0; $i < 100; $i++) {
+
+            // 検索パラメータ
+            $params = array(
+                'q'     => '仮想通貨',
+                'page'  => $i + 1,
+                'count' =>  20,
+            );
+
+            // twitter ユーザー認証処理(アカウント検索処理)
+            $account = $twitter->get('users/search', $params);
+            // オブジェクト形式を配列形式に変換
+            $twitter_account = json_decode(json_encode($account), true);
+
+
+            // アカウントが取得できなかった場合、ループ処理を終了させる
+            if (!empty($twitter_account['errors'])) {
+                break;
+            }
+
+            for ($j = 0; $j < count($twitter_account); $j++) {
+
+                // アカウントの情報が取得できなかった場合、処理を終了させる
+                if (empty($twitter_account[$j]['status']['created_at'])) {
+                    break;
+                }
+                $account_date = date('Y-m-d H:i:s', strtotime($twitter_account[$j]['status']['created_at']));
+
+                // 活動時間が現在日時よりも1日より過去だった場合、DBへのアカウント情報の格納処理をスキップする。
+                if ($account_date < $one_month_ago) {
+                    continue;
+                }
+
+                // 自分と同じアカウントはAccoutテーブルには格納しない。
+                if ($screen_name == $twitter_account[$j]['screen_name']) {
+                    continue;
+                }
+
+                // アカウント情報をAccountテーブルに格納
+                $account = new Account();
+                $account->user_id = $id;
+                $account->twitter_id = $twitter_account[$j]['id_str'];
+                $account->screen_name = $twitter_account[$j]['screen_name'];
+                $account->account_name = $twitter_account[$j]['name'];
+                $account->follow = $twitter_account[$j]['friends_count'];
+                $account->follower = $twitter_account[$j]['followers_count'];
+                $account->profile = $twitter_account[$j]['description'];
+                $account->recent_tweet = $twitter_account[$j]['status']['text'];
+                $account->follow_flg = $twitter_account[$j]['following'];
+                $account->save();
+            }
+        }
 
         //twitterというビューにユーザ情報が入った$userInfoを受け渡す
         return view('twitter', ['userInfo' => $userInfo]);

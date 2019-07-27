@@ -171,11 +171,6 @@ class TweetCountController extends Controller
         }
         // var_dump($tweet_count);
         // exit;
-        
-        
-
-
-        
 
         // リクエスト回数
         $request_number = 100;

@@ -39,6 +39,10 @@ class GetCryptoPriceBatch extends Command
      */
     public function handle()
     {
+
+        \Log::info('===============');
+        \Log::info('各銘柄の取引価格取得バッチ開始');
+
         // coincheck API Tickerにて銘柄の取引価格を取得
         // coincheckのTickerではBTCの取引価格のみ取得可能
         // そのため、CurrenciesテーブルのBTCのレコードにのみ、取引価格の値を更新する。
@@ -49,5 +53,8 @@ class GetCryptoPriceBatch extends Command
         $currency->max_price = $rate['high'];
         $currency->min_price = $rate['low'];
         $currency->save();
+
+        \Log::info('各銘柄の取引価格取得バッチ終了');
+        \Log::info('===============');
     }
 }

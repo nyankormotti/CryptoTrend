@@ -32,6 +32,8 @@ Route::get('/google', 'GoogleController@sample')->name('google');
 
 // ツイート数
 Route::get('/tweet', 'TweetCountController@index')->name('tweet');
+// アカウント数
+Route::get('/account', 'AccountSearchController@index')->name('account');
 
 // coincheck
 Route::get('/coincheck', 'CoincheckController@index')->name('coin');

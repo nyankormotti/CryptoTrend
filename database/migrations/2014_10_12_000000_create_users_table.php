@@ -21,6 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('screen_name');
             $table->string('oauth_token');
             $table->string('oauth_token_secret');
+            $table->integer('follow_limit')->unsigned();
+            $table->integer('unfollow_limit')->unsigned();
+            $table->boolean('autofollow_flg')->default(false);
             $table->boolean('delete_flg')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

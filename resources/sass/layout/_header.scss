@@ -33,7 +33,7 @@
     .menu{
         display:flex;
         align-items:center;
-        font-size:$font-size_l;
+        font-size:$font-size_m;
 
         &__item{
             margin-right:$space_xxl;
@@ -43,7 +43,15 @@
             text-decoration:none;
             color:$font_color_main2;
             font-weight:bold;
+            padding:10px;
+            border-radius:10px;
             &--color{
+                color:$font-color_white;
+                background:$background_color_red;
+                padding:10px;
+                border-radius:10px;
+            }
+            &--hover:hover{
                 color:$font-color_white;
                 background:$background_color_red;
                 padding:10px;

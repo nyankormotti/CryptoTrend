@@ -44,6 +44,8 @@ Route::get('/changeTwitterAccount', function () {
     return view('changeTwitterAccount');
 });
 
+// ===================================================
+// ログイン後
 
 // Google news
 Route::get('/google', 'GoogleController@sample')->name('google');
@@ -53,9 +55,15 @@ Route::get('/tweet', 'TweetCountController@index')->name('tweet');
 // アカウント数
 Route::get('/account', 'AccountSearchController@index')->name('account');
 
+// マイページ
+Route::get('/mypage', function () {
+    return view('mypage');
+});
+
 // coincheck
 Route::get('/coincheck', 'CoincheckController@index')->name('coin');
 
+// ===================================================
 
 //ログイン認証するためのルーティング
 Route::get('/oauth', 'OAuthController@login');

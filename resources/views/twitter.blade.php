@@ -1,5 +1,10 @@
-@extends('layouts.common')
-@section('content')
+@extends('layouts/basic')
+
+@section('title','メイン')
+@include('common.head')
+
+@include('common.header')
+@section('contents')
 <div class="container">
     <div class="col-sm-offset-2 col-sm-8">
         <div class="panel panel-default">
@@ -68,3 +73,5 @@
     </div>
 </div>
 @endsection
+
+@include('common.footer')

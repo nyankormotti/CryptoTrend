@@ -1,77 +1,71 @@
-@extends('layouts.app')
+@extends('layouts/basic')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+@section('title','会員登録')
+@include('common.head')
 
-                <div class="card-body">
-                    <form method="POST" action="signup">
-                        @csrf
+@include('common.header')
 
-                        <div class="form-group row">
-                            <label for="screen_name" class="col-md-4 col-form-label text-md-right">{{ __('Twitter_Account') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('screen_name') is-invalid @enderror" name="screen_name" value="{{ old('screen_name') }}" placeholder="@の後ろの文字を記載してください。" required autocomplete="screen_name" autofocus>
-
-                                @error('screen_name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+@section('contents')
+<main>
+    <div class="form form__signup">
+        <h2 class="form__title">会員登録</h2>
+        <div class="form__content">
+            @if(count($errors) > 0)
+            <p class="err__msg__main">入力値に問題があります。再入力してください。</p>
+            @elseif(!empty($message))
+            <p class="err__msg__main">{{$message}}</p>
+            @endif
+            <p class="form__content__descript">会員登録されるユーザー様お一人につき、
+                <br>twitterアカウントを1つ登録いたします。
+                <br>ご登録されるtwitterアカウントにてTwitterにログインし、
+                <br>会員登録を行ってください。</p>
+            <form action="/authLogin" method="post" class="form__block">
+                {{ csrf_field() }}
+                <div>
+                    <label class="textfield__label" for="Screen_name">Twitterアカウント</label>
                 </div>
-            </div>
+                @if($errors->has('screen_name'))
+                <div class="err__msg">{{$errors->first('screen_name')}}</div>
+                @endif
+                <div class="textfield__area">
+                    <input type="text" class="textfield__input" name="screen_name" placeholder="@の後ろの文字を入力してください。" autocomplete="off" value="{{old('screen_name')}}">
+                </div>
+                <div>
+                    <label class="textfield__label" for="Email">メールアドレス</label>
+                </div>
+                @if($errors->has('email'))
+                <div class="err__msg">{{$errors->first('email')}}</div>
+                @endif
+                <div class="textfield__area">
+                    <input type="text" class="textfield__input" name="email" placeholder="メールアドレスを入力してください。" autocomplete="off" value="{{old('email')}}">
+                </div>
+                <div>
+                    <label class="textfield__label" for="Password">パスワード</label>
+                </div>
+                @if($errors->has('password'))
+                <div class="err__msg">{{$errors->first('password')}}</div>
+                @endif
+                <div class="textfield__area">
+                    <input type="password" class="textfield__input" name="password" placeholder="パスワードを入力してください。">
+                </div>
+                <div>
+                    <label class=" textfield__label" for="Password">パスワード(確認)</label>
+                </div>
+                @if($errors->has('password_re'))
+                <div class="err__msg">{{$errors->first('password_confirmation')}}</div>
+                @endif
+                <div class="textfield__area">
+                    <input type="password" class="textfield__input" name="password_confirmation" placeholder="パスワードを入力してください。">
+                </div>
+                <div class="btn__form">
+                    <input class="btn" type="submit" name="submit" value="会員登録">
+                </div>
+            </form>
         </div>
     </div>
-</div>
+</main>
+
+
 @endsection
+
+@include('common.footer')

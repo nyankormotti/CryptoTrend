@@ -1,0 +1,12 @@
+@import '../foundation/_variable.scss';
+@import '../foundation/_mixin.scss';
+
+.footer{
+    background:$background_color_main1;
+    color:$font-color_white;
+    text-align:center;
+    width:100%;
+    padding-top:$space_l;
+    padding-bottom:$space_l;
+    font-size:$font-size_default;
+}

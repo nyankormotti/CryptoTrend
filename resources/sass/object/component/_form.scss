@@ -1,0 +1,82 @@
+@import '../../foundation/_variable.scss';
+@import '../../foundation/_mixin.scss';
+
+.form{
+    width:50%;
+    min-height:200px;
+    background:$background-color_white;
+    border-radius:5px;
+    margin-top:80px;
+    margin-right:auto;
+    margin-left:auto;
+    margin-bottom:80px;
+    &__contact{
+        width:60%;
+        margin-top:40px;
+    }
+
+    &__title{
+        width:100%;
+        padding:$space_xl;
+        box-sizing:border-box;
+        font-size:$font-size_xl;
+        font-family:$font-family_corp;
+        color:$font-color_main1;
+        text-align:center;
+    }
+
+    &__content{
+        width:100%;
+        padding:$space_xl $space_xl_l;
+        box-sizing:border-box;
+        font-size:$font-size_m;
+        &__descript{
+             margin-bottom:$space_xxl;
+             line-height:150%;
+        }
+    }
+
+    &__bottom--reset{
+        margin-bottom:0;
+    }
+}
+
+.textfield{
+    &__label{
+        font-size:$font-size_default;
+    }
+    &__area{
+        width:80%;
+        padding:$space_m 0 $space_xxl 0;
+    }
+    &__input{
+        width:100%;
+        border:none;
+        border-bottom:1px solid $font-color_clear;
+        font-size:$font-size_default;
+        padding:4px;
+    }
+    &__comment{
+        width:100%;
+        padding:4px;
+        border:1px solid $font-color_clear;
+        border-radius:5px;
+        box-sizing:border-box;
+        font-size:$font-size_default;
+        &__area{
+            width:100%;
+            padding-top:$space_xl;
+            padding-bottom:$space_s;
+        }
+    }
+    
+}
+
+.passSave{
+    &__content{
+        letter-spacing:0;
+        margin-bottom:16px;
+        color:$font-color_gray;
+        font-size:$font-size_m;
+    }
+}

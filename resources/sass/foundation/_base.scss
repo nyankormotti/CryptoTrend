@@ -1,0 +1,10 @@
+@import '_variable.scss';
+
+body{
+  background:$background_color_base;
+}
+
+.wrapper{
+    min-height:100%;
+    margin-bottom:-46px;
+}

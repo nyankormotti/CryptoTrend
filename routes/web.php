@@ -11,8 +11,9 @@
 |
 */
 
+// トップページ
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 // Auth::routes();
@@ -25,7 +26,24 @@ Route::post('/authLogin', 'AuthLoginController@authLogin');
 Route::get('/signup', 'SignUpController@index');
 Route::post('/signup', 'SignUpController@signup');
 
-Route::get('/home', 'HomeController@index')->name('home');
+//logout後のリダイレクト先
+Route::get('/', function () {
+    return view('index');
+});
+
+// パスワードリマインダー送信
+Route::get('/passwordRemindSend', function () {
+    return view('passwordRemindSend');
+});
+// パスワードリマインダー(認証キー)送信
+Route::get('/passwordRemindRecieve', function () {
+    return view('passwordRemindRecieve');
+});
+// Twitterアカウント変更
+Route::get('/changeTwitterAccount', function () {
+    return view('changeTwitterAccount');
+});
+
 
 // Google news
 Route::get('/google', 'GoogleController@sample')->name('google');
@@ -51,10 +69,9 @@ Route::get('/main', 'OAuthController@main');
 //logoutのルーティング
 Route::get('/oauthlogout', 'OAuthController@logout');
 
-//logout後のリダイレクト先
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+// Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::get('login/twitter', 'Auth\SocialAccountController@redirectToProvider');
 // Route::get('login/twitter/callback', 'Auth\SocialAccountController@handleProviderCallback');

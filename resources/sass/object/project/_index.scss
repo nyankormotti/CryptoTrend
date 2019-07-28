@@ -1,0 +1,99 @@
+@import '../../foundation/_variable.scss';
+@import '../../foundation/_mixin.scss';
+
+// トップバナー
+.p-banner{
+    position:relative;
+    width:100%;
+    &__img{
+        width:100%;
+    }
+    &__title{
+        position:absolute;
+        top:30%;
+        right:10%;
+        text-align:center;
+        line-height:150%;
+        color:$font-color_titleYellow;
+        font-size:$font-size_xxl;
+        font-family: $font-family_corp;
+        font-weight:bold;
+        &--main{
+            font-style:oblique;
+        }
+    }
+}
+
+
+// 会員登録、ログインボタン
+.p-entrance{
+    width:100%;
+    height:300px;
+    margin-top:40px;
+    
+    &__content{
+        width:70%;
+        height:90%;
+        margin-right:auto;
+        margin-left:auto;
+        display:flex;
+        flex-wrap:wrap;
+        align-items:center;
+        justify-content: space-between;
+    }
+    &__panel{
+        width:40%;
+        margin:0 auto;
+        &__title{
+            text-align:center;
+            margin-top:20px;
+            margin-bottom:20px;
+            font-size:$font-size_xl;
+            font-family:$font-family_corp;
+        }
+        &__btn{
+            display:block;
+            margin:50px;
+            margin-right:auto;
+            margin-left:auto;
+            width:40%;
+            text-align:center;
+            // border:none;
+            border-radius:5px;
+            font-size:$font-size_xl;
+            text-decoration:none;
+            padding:10px 20px;
+            color:$font-color_white;
+            font-family:$font-family_corp;
+        }
+    }
+}
+
+// 会員登録ボタン
+.signup__btn{
+    background:$background_color_lightGreen;
+    border:2px solid $background_color_lightGreen;
+    &:hover{
+        background:$background_color_white;
+        color:$font-color_lightGreen;
+        
+    }
+}
+
+// ログインボタン
+.login__btn{
+    background:$background_color_ligntBlue;
+    border:2px solid $background_color_ligntBlue;
+    &:hover{
+        background:$background_color_white;
+        color:$font-color_lightBlue;
+        
+    }
+}
+
+
+ // お問い合わせフォーム
+.p-contact{
+    width:100%;
+    // min-height:300px;
+}

@@ -1,0 +1,10 @@
+@import '../../foundation/_variable.scss';
+@import '../../foundation/_mixin.scss';
+
+.link{
+    font-size:$font-size_m;
+    color:$font_color_main1;
+    &__content{
+        margin-bottom:16px;
+    }
+}

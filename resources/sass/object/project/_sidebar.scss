@@ -1,0 +1,53 @@
+@import '../../foundation/_variable.scss';
+@import '../../foundation/_mixin.scss';
+
+.p-sidebar{
+    display:block;
+    width:30%;
+    max-height:350px;
+    background:$background_color_white;
+    border-radius:5px;
+    &__top{
+        padding: 10px 20px;
+        &__title{
+            font-size: $font-size_ll;
+            font-weight: bold;
+            color: #05215c;
+        }
+        &__border{
+            margin-top: 5px;
+            display: block;
+            background: #969696;
+            width: 100%;
+            height: 5px;
+        }
+    }
+
+    &__period{
+        color:$background_color_gray;
+        padding: 10px 20px;
+        &__title{
+            font-size: $font-size_l;
+            padding:10px 0;
+        }
+        &__area{
+            display:flex;
+            justify-content:flex-start
+        }
+    }
+
+    &__brand{
+        color:$background_color_gray;
+        padding: 10px 20px;
+        &__title{
+            font-size: $font-size_l;
+            padding:10px 0;
+        }
+        &__area{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:flex-start;
+            align-content:flex-start;
+        }
+    }
+}

@@ -47,8 +47,15 @@ Route::get('/changeTwitterAccount', function () {
 // ===================================================
 // ログイン後
 
-// Google news
-Route::get('/google', 'GoogleController@sample')->name('google');
+// 仮想通貨トレンド画面
+Route::get('/trend', function () {
+    return view('trend');
+});
+
+// 仮想通貨関連ニュース
+Route::get('/news', 'NewsController@sample')->name('news');
+
+
 
 // ツイート数
 Route::get('/tweet', 'TweetCountController@index')->name('tweet');

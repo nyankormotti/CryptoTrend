@@ -7,12 +7,9 @@
 .toggle_switch {
   position: relative;
   cursor: pointer;
-}
-
-.toggle_switch:hover {
-    // color:$font-color_white;
-    font-weight:bold;
-    // background:$background_color_main1;
+  &:hover{
+      font-weight:bold;
+  }
 }
 // .toggle_switch::after {
 //   content: "";

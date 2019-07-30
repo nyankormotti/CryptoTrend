@@ -19,9 +19,9 @@
                 <li class="menu__item"><a href="signup" class="menu__link menu__link--color">会員登録</a></li>
                 <li class="menu__item"><a href="authLogin" class="menu__link">ログイン</a></li>
                 @else
-                <li><a href="tweet" class="menu__link menu__link--hover">トレンド</a></li>
+                <li><a href="trend" class="menu__link menu__link--hover">トレンド</a></li>
                 <li><a href="account" class="menu__link menu__link--hover">関連アカウント</a></li>
-                <li><a href="google" class="menu__link menu__link--hover">ニュース</a></li>
+                <li><a href="news" class="menu__link menu__link--hover">ニュース</a></li>
                 <li><a href="mypage" class="menu__link menu__link--hover">マイページ</a></li>
                 <li><a href="oauthlogout" class="menu__link menu__link--hover">ログアウト</a></li>
                 @endif

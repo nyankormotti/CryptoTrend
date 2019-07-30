@@ -123,7 +123,7 @@
                         <div class="textfield__area">
                             <input type="password" class="textfield__input" name="password_confirmation" placeholder="パスワードを入力してください。">
                         </div>
-                        <div class="btn__myMenu__user btn__form">
+                        <div class="btn__mypage__user btn__form">
                             <input class="btn" type="submit" name="submit" value="送信">
                         </div>
                     </form>
@@ -193,10 +193,33 @@
             </div>
 
         </section>
-
-        <div class="mypage__dummy"></div>
-
     </div>
+
+    <!-- モーダルエリアここから -->
+    <section id="modalArea" class="modal__Area">
+        <div id="modalBg" class="modal__Bg"></div>
+        <form class="modal__Wrapper" action="__withdraw" method="post">
+            {{ csrf_field() }}
+            <div class="modal__Contents">
+                <p class="modal__state">本当に退会しますか？</p>
+                <div class="modal__btn__part">
+                    <div class="btn__mypage__user btn__form">
+                        <input id="btn--withdraw__btn" class="btn withdraw__btn" type="submit" name="submit" value="退会">
+                    </div>
+                    <div class="btn__mypage__user btn__form">
+                        <div id="closeModal" class="btn modal__btn">閉じる</div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="closeModal" class="closeModal">
+                ×
+            </div>
+        </form>
+    </section>
+    <!-- モーダルエリアここまで -->
+
+    <div class="mypage__dummy"></div>
 </main>
 
 

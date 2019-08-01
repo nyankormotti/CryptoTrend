@@ -64,7 +64,7 @@ Route::get('/account', function () {
 Route::get('/tweet', 'TweetCountController@index')->name('tweet');
 
 // アカウント数
-// Route::get('/account', 'AccountSearchController@index')->name('account');
+Route::get('/accountSearch', 'AccountSearchController@index')->name('accountSearch');
 
 // マイページ
 Route::get('/mypage', function () {

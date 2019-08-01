@@ -44,11 +44,15 @@ class GetCryptoAccountBatch extends Command
         \Log::info('===============');
         \Log::info('アカウント集計バッチ開始');
 
+        // Accountテーブルに最新のtwitterアカウント情報を追加
+        $user = User::where('delete_flg', '!=', '1')->get();
+        foreach ($user as $a_user) {
+            $a_user->update_flg = 1;
+            $a_user->save();
+        }
+
         // Accountテーブル全件削除
         Account::query()->truncate();
-
-        // Accountテーブルに最新のtwitterアカウント情報を追加
-        $user = User::all();
 
         for ($i = 0; $i < count($user); $i++) {
 
@@ -68,8 +72,8 @@ class GetCryptoAccountBatch extends Command
             );
 
             $one_month_ago = new Carbon();
-            // 現在日時より1習慣前
-            $one_month_ago->subDay(7);
+            // 現在日時より１ヶ月
+            $one_month_ago->subMonth();;
 
             for ($j = 0; $j < 100; $j++) {
 
@@ -123,6 +127,8 @@ class GetCryptoAccountBatch extends Command
 
                 }
             }
+            $user[$i]->update_flg = 0;
+            $user[$i]->save();
         }
 
         

@@ -15,17 +15,29 @@ class AccountSearchController extends Controller
     public function index(){
 
         // Accountテーブル全件削除
-        Account::query()->truncate();
+        // Account::query()->truncate();
         // $account->delete();
         // var_dump($account);
         // exit;
 
         // Accountテーブルに最新のtwitterアカウント情報を追加
-        $user = User::all();
+        $user = User::where('delete_flg','!=','1')->get();
+        foreach($user as $a_user){
+            $a_user->update_flg = 1;
+            $a_user->save();
+        }
+        // var_dump($user[0]['delete_flg'] = 1);exit;
+        // $user = User::where('delete_flg', '!=', '1')->get();
+        // var_dump($user);exit;
 
         // var_dump(count($user));exit;
 
         for($i = 0; $i < count($user); $i++){
+
+            // $targetAccount = Account::where('user_id', $user[$i]->id)->get();
+            // var_dump('テスト前');
+            // $targetAccount->truncate();
+            // var_dump('テスト');exit;
 
             $oauth_token = $user[$i]->oauth_token;
             $oauth_token_secret = $user[$i]->oauth_token_secret;
@@ -42,7 +54,7 @@ class AccountSearchController extends Controller
             );
 
             $one_month_ago = new Carbon();
-            $one_month_ago->subDay(3);
+            $one_month_ago->subMonth();
 
             $account_count = 0;
 
@@ -89,7 +101,10 @@ class AccountSearchController extends Controller
                     $account_count++;
                 }
             }
+            $user[$i]->update_flg = 0;
+            $user[$i]->save();
         }
+        
 
         var_dump($account_count);
         // exit();

@@ -109,8 +109,8 @@ class OAuthController extends Controller
         $user->twitter_id = $userInfo['id_str'];;
         $user->oauth_token = $oauth_token;
         $user->oauth_token_secret = $oauth_token_secret;
-        $user->follow_limit = 25;
-        $user->unfollow_limit = 100;
+        $user->follow_limit = 0;
+        $user->unfollow_limit = 0;
         $user->save();
 
         // ログイン認証
@@ -135,9 +135,9 @@ class OAuthController extends Controller
             $oauth_token_secret
         );
 
-        // 現在日付より1日前の日時を取得(1週間以内に活動しているアカウントを選定するため)
+        // 現在日付より1ヶ月前の日時を取得(1ヶ月以内に活動しているアカウントを選定するため)
         $one_month_ago = new Carbon();
-        $one_month_ago->subDay(7);
+        $one_month_ago->subMonth();
 
         // ユーザーIDを取得
         $id = Auth::id();

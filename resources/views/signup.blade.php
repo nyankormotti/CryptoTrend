@@ -19,7 +19,7 @@
                 <br>twitterアカウントを1つ登録いたします。
                 <br>ご登録されるtwitterアカウントにてTwitterにログインし、
                 <br>会員登録を行ってください。</p>
-            <form action="/authLogin" method="post" class="form__block">
+            <form action="/signup" method="post" class="form__block">
                 {{ csrf_field() }}
                 <div>
                     <label class="textfield__label" for="Screen_name">Twitterアカウント</label>

@@ -47,7 +47,8 @@ class AuthLoginController extends Controller
             session()->put('oauth_token', $oauth_token);
             session()->put('oauth_token_secret', $oauth_token_secret);
 
-            return view('twitter', ['userInfo' => $userInfo]);
+            // return view('twitter', ['userInfo' => $userInfo]);
+            return view('trend');
         } else {
             $msg = 'メールアドレスまたはパスワードが違います。';
             return view('authLogin', ['message' => $msg]);

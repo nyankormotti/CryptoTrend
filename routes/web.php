@@ -55,12 +55,16 @@ Route::get('/trend', function () {
 // 仮想通貨関連ニュース
 Route::get('/news', 'NewsController@sample')->name('news');
 
-
+// 関連アカウント一覧画面
+Route::get('/account', function () {
+    return view('account');
+});
 
 // ツイート数
 Route::get('/tweet', 'TweetCountController@index')->name('tweet');
+
 // アカウント数
-Route::get('/account', 'AccountSearchController@index')->name('account');
+// Route::get('/account', 'AccountSearchController@index')->name('account');
 
 // マイページ
 Route::get('/mypage', function () {

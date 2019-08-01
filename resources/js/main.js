@@ -6,12 +6,18 @@ $(function(){
         btn.toggleClass('c-action-btn--blue');
     });
 
+    // ===========================================================
+    // アカウントプロフィールの文字列が長い時「…」を末尾につける処理
+    longString($('.p-user__text__profile__describe'),55);
+    // 最新のチートの文字列が長い時「…」を末尾につける処理
+    longString($('.p-user__text__tweet__describe'),85);
 
 
     // ===========================================================
     // 続きを読むボタン(関連ニュース画面)
+    // ===========================================================
     // 分割したい個数を入力
-    let division = 10;
+    let division = 5;
     // 要素の数を数える
     let divlength = $('.p-news__content__article').length;
     //分割数で割る
@@ -45,20 +51,42 @@ $(function(){
     });
 
     // ===========================================================
-
-
-
     // アコーディオンメニュー
+    // ===========================================================
     $('.toggle_switch').on('click', function () {
         $(this).toggleClass('open');
         $(this).next('.toggle_contents').slideToggle();
     });
 
+    // ===========================================================
     // モーダルウィンドウ
+    // ===========================================================
     $('#openModal').click(function () {
         $('#modalArea').fadeIn();
     });
     $('#closeModal , #modalBg').click(function () {
         $('#modalArea').fadeOut();
     });
+  
+
+
+    // ============================関数=============================
+    // ===========================================================
+    // 文字列が長い時「…」を末尾につける処理
+    // ===========================================================
+    function longString($setElm, cutFigure) {
+        // let cutFigure = '60'; // 表示する文字数
+        let afterTxt = ' …'; // 文字カット後に表示するテキスト
+
+        $setElm.each(function () {
+            let textLength = $(this).text().length;  // 文字数を取得
+            let textTrim = $(this).text().substr(0, (cutFigure)) // 表示する数以上の文字をトリムする
+
+            if (cutFigure < textLength) { // 文字数が表示数より多い場合
+                $(this).html(textTrim + afterTxt).css({ visibility: 'visible' }); // カット後の文字数に…を追加
+            } else if (cutFigure >= textLength) {// 文字数が表示数以下の場合
+                $(this).css({ visibility: 'visible' }); // そのまま表示
+            }
+        });
+    }
 });

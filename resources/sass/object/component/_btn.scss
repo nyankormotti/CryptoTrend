@@ -38,4 +38,10 @@
         background:$background_color_main2;
         border:1px solid $background_color_main2;
     }
+    &--follow{
+        font-size:$font-size_m;
+        padding:10px 10px;
+        width:70px;
+        text-align:center;
+    }
 }

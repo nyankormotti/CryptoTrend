@@ -7,6 +7,9 @@
     max-height:350px;
     background:$background_color_white;
     border-radius:5px;
+    &--option{
+        max-height:380px;
+    }
     &__top{
         padding: 10px 20px;
         &__title{
@@ -32,7 +35,34 @@
         }
         &__area{
             display:flex;
-            justify-content:flex-start
+            justify-content:flex-start;
+        }
+    }
+    &__limit{
+        color:$background_color_gray;
+        padding: 10px 20px;
+        &__title{
+            font-size: $font-size_l;
+            padding:10px 0;
+        }
+        &__area{
+            display:flex;
+            justify-content:space-around;
+            &--f_action{
+                text-align:center;
+                font-size: $font-size_m;
+                width:45%;
+                &--title{
+                    padding:5px 0;
+                }
+                &--count{
+                    font-size: $font-size_m;
+                    &--now{
+                        font-size: $font-size_default;
+                        font-weight:bold;
+                    }
+                }
+            }
         }
     }
 
@@ -47,6 +77,21 @@
             display:flex;
             flex-wrap:wrap;
             justify-content:flex-start;
+            align-content:flex-start;
+        }
+    }
+    &__follow{
+        color:$background_color_gray;
+        padding: 10px 20px;
+        &__title{
+            font-size: $font-size_l;
+            padding:10px 0;
+        }
+        &__area{
+            padding:5px;
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:space-around;
             align-content:flex-start;
         }
     }

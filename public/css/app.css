@@ -397,6 +397,13 @@ body {
   border: 1px solid #2858a7;
 }
 
+.c-action-btn--follow {
+  font-size: 14px;
+  padding: 10px 10px;
+  width: 70px;
+  text-align: center;
+}
+
 .p-banner {
   position: relative;
   width: 100%;
@@ -734,12 +741,149 @@ body {
   color: #2858a7;
 }
 
+.p-account {
+  display: block;
+  width: 60%;
+  min-height: 650px;
+  background: white;
+  border-radius: 5px;
+}
+
+.p-account__top {
+  padding: 10px 20px;
+}
+
+.p-account__top__area {
+  display: flex;
+  align-items: flex-end;
+}
+
+.p-account__top__area__title {
+  width: 60%;
+  font-size: 20px;
+  font-weight: bold;
+  color: #05215c;
+}
+
+.p-account__top__area__page {
+  width: 30%;
+  text-align: right;
+}
+
+.p-account__top__border {
+  margin-top: 5px;
+  display: block;
+  background: #969696;
+  width: 100%;
+  height: 5px;
+}
+
+.p-account__main {
+  padding: 10px 20px;
+}
+
+.p-account__page {
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.p-user {
+  margin-top: 20px;
+  width: 100%;
+  border: 1px solid #969696;
+  border-radius: 5px;
+}
+
+.p-user:first-child {
+  margin-top: 0;
+}
+
+.p-user__top {
+  width: 90%;
+  padding: 10px 20px 5px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.p-user__top__name {
+  width: 70%;
+  font-size: 24px;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.p-user__top__btn {
+  margin-right: 0;
+  margin-bottom: 0;
+  padding: 5px 15px;
+  font-size: 16px;
+  color: white;
+  background: #ff9900;
+  border: 1px solid #ff9900;
+}
+
+.p-user__top__btn:hover {
+  color: #ff9900;
+  background: white;
+}
+
+.p-user__status {
+  width: 90%;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.p-user__text {
+  width: 90%;
+  padding: 5px 20px;
+  font-size: 14px;
+}
+
+.p-user__text__profile__describe {
+  padding: 5px;
+  color: #c7c5c5;
+  height: 44.8px;
+  line-height: 1.6;
+}
+
+.p-user__text__border {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background: #969696;
+  width: 100%;
+  height: 1px;
+}
+
+.p-user__text__tweet__title {
+  color: #ff9900;
+  font-weight: bold;
+  padding: 5px 0;
+  font-size: 18px;
+}
+
+.p-user__text__tweet__describe {
+  padding: 5px;
+  color: #c7c5c5;
+  line-height: 1.6;
+}
+
 .p-sidebar {
   display: block;
   width: 30%;
   max-height: 350px;
   background: white;
   border-radius: 5px;
+}
+
+.p-sidebar--option {
+  max-height: 380px;
 }
 
 .p-sidebar__top {
@@ -775,6 +919,40 @@ body {
   justify-content: flex-start;
 }
 
+.p-sidebar__limit {
+  color: #5c5c5c;
+  padding: 10px 20px;
+}
+
+.p-sidebar__limit__title {
+  font-size: 18px;
+  padding: 10px 0;
+}
+
+.p-sidebar__limit__area {
+  display: flex;
+  justify-content: space-around;
+}
+
+.p-sidebar__limit__area--f_action {
+  text-align: center;
+  font-size: 14px;
+  width: 45%;
+}
+
+.p-sidebar__limit__area--f_action--title {
+  padding: 5px 0;
+}
+
+.p-sidebar__limit__area--f_action--count {
+  font-size: 14px;
+}
+
+.p-sidebar__limit__area--f_action--count--now {
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .p-sidebar__brand {
   color: #5c5c5c;
   padding: 10px 20px;
@@ -789,6 +967,24 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  align-content: flex-start;
+}
+
+.p-sidebar__follow {
+  color: #5c5c5c;
+  padding: 10px 20px;
+}
+
+.p-sidebar__follow__title {
+  font-size: 18px;
+  padding: 10px 0;
+}
+
+.p-sidebar__follow__area {
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   align-content: flex-start;
 }
 

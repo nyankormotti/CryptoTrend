@@ -196,7 +196,8 @@ class OAuthController extends Controller
         }
 
         //twitterというビューにユーザ情報が入った$userInfoを受け渡す
-        return view('twitter', ['userInfo' => $userInfo]);
+        // return view('twitter', ['userInfo' => $userInfo]);
+        return view('trend');
     }
     //ログアウト処理(今回は最終的にwelcomeページにリダイレクトするようにする)
     public function logout()

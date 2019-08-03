@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class TrendController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         
-        $trends = Trend::where('period_id','1')->with('currency')->orderBy('tweet_count','DESC')->get();
+        $trends = Trend::where('period_id',$request->period_id)->with('currency')->orderBy('tweet_count','DESC')->get();
         // var_dump($trends);exit;
         // var_dump($trends[0]->currency->currency_name);exit;
         $rank = 0;

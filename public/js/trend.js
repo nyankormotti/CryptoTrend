@@ -1747,12 +1747,108 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     TrendMain: _TrendMainComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     TrendSearch: _TrendSearchComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      period: '',
+      currency1: false,
+      currency2: false,
+      currency3: false,
+      currency4: false,
+      currency5: false,
+      currency6: false,
+      currency7: false,
+      currency8: false,
+      currency9: false,
+      currency10: false
+    };
+  },
+  methods: {
+    searchHourPeriod: function searchHourPeriod() {
+      this.period = 1;
+    },
+    searchDatePeriod: function searchDatePeriod() {
+      this.period = 2;
+    },
+    searchWeekPeriod: function searchWeekPeriod() {
+      this.period = 3;
+    },
+    changeBTC: function changeBTC() {
+      this.currency1 = !this.currency1;
+    },
+    changeETH: function changeETH() {
+      this.currency2 = !this.currency2;
+    },
+    changeETC: function changeETC() {
+      this.currency3 = !this.currency3;
+    },
+    changeLSK: function changeLSK() {
+      this.currency4 = !this.currency4;
+    },
+    changeFCT: function changeFCT() {
+      this.currency5 = !this.currency5;
+    },
+    changeXRP: function changeXRP() {
+      this.currency6 = !this.currency6;
+    },
+    changeXEM: function changeXEM() {
+      this.currency7 = !this.currency7;
+    },
+    changeLTC: function changeLTC() {
+      this.currency8 = !this.currency8;
+    },
+    changeBCH: function changeBCH() {
+      this.currency9 = !this.currency9;
+    },
+    changeMONA: function changeMONA() {
+      this.currency10 = !this.currency10;
+    }
+  },
+  created: function created() {
+    this.searchHourPeriod();
   }
 });
 
@@ -1800,18 +1896,88 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['period', 'currency1', 'currency2', 'currency3', 'currency4', 'currency5', 'currency6', 'currency7', 'currency8', 'currency9', 'currency10'],
   data: function data() {
     return {
-      trends: []
+      trends: [],
+      ranking: 0
     };
   },
   methods: {
     fetchTrend: function fetchTrend() {
       var _this = this;
 
-      this.$axios.get('/trend/get').then(function (res) {
+      this.$axios.post('/trend/get', {
+        period_id: this.period
+      }).then(function (res) {
         _this.trends = res.data;
       });
+    },
+    searchCheck: function searchCheck(i, id, trend, trends) {
+      if (id == trend.currency.id) {
+        trends.push(trend);
+      }
+    }
+  },
+  computed: {
+    searchTrend: function searchTrend() {
+      if (!this.currency1 && !this.currency2 && !this.currency3 && !this.currency4 && !this.currency5 && !this.currency6 && !this.currency7 && !this.currency8 && !this.currency9 && !this.currency10) {
+        return this.trends;
+      } else {
+        var trends = [];
+
+        for (var i in this.trends) {
+          var trend = this.trends[i];
+          var id = 0;
+
+          if (this.currency1) {
+            this.searchCheck(i, 1, trend, trends);
+          }
+
+          if (this.currency2) {
+            this.searchCheck(i, 2, trend, trends);
+          }
+
+          if (this.currency3) {
+            this.searchCheck(i, 3, trend, trends);
+          }
+
+          if (this.currency4) {
+            this.searchCheck(i, 4, trend, trends);
+          }
+
+          if (this.currency5) {
+            this.searchCheck(i, 5, trend, trends);
+          }
+
+          if (this.currency6) {
+            this.searchCheck(i, 6, trend, trends);
+          }
+
+          if (this.currency7) {
+            this.searchCheck(i, 7, trend, trends);
+          }
+
+          if (this.currency8) {
+            this.searchCheck(i, 8, trend, trends);
+          }
+
+          if (this.currency9) {
+            this.searchCheck(i, 9, trend, trends);
+          }
+
+          if (this.currency10) {
+            this.searchCheck(i, 10, trend, trends);
+          }
+        }
+
+        return trends;
+      }
+    }
+  },
+  watch: {
+    period: function period() {
+      this.fetchTrend();
     }
   },
   created: function created() {
@@ -1862,65 +2028,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      search: [],
-      period: '',
-      currency1: false,
-      currency2: false,
-      currency3: false,
-      currency4: false,
-      currency5: false,
-      currency6: false,
-      currency7: false,
-      currency8: false,
-      currency9: false,
-      currency10: false
-    };
-  },
+  props: ['period', 'currency1', 'currency2', 'currency3', 'currency4', 'currency5', 'currency6', 'currency7', 'currency8', 'currency9', 'currency10'],
   methods: {
-    searchHourPeriod: function searchHourPeriod() {
-      this.period = 1;
+    hourPeriod: function hourPeriod() {
+      this.$emit('child-h-period');
     },
-    searchDatePeriod: function searchDatePeriod() {
-      this.period = 2;
+    datePeriod: function datePeriod() {
+      this.$emit('child-d-period');
     },
-    searchWeekPeriod: function searchWeekPeriod() {
-      this.period = 3;
+    weekPeriod: function weekPeriod() {
+      this.$emit('child-w-period');
     },
     clickBTC: function clickBTC() {
-      this.currency1 = !this.currency1;
+      this.$emit('child-BTC');
     },
     clickETH: function clickETH() {
-      this.currency2 = !this.currency2;
+      this.$emit('child-ETH');
     },
     clickETC: function clickETC() {
-      this.currency3 = !this.currency3;
+      this.$emit('child-ETC');
     },
     clickLSK: function clickLSK() {
-      this.currency4 = !this.currency4;
+      this.$emit('child-LSK');
     },
     clickFCT: function clickFCT() {
-      this.currency5 = !this.currency5;
+      this.$emit('child-FCT');
     },
     clickXRP: function clickXRP() {
-      this.currency6 = !this.currency6;
+      this.$emit('child-XRP');
     },
     clickXEM: function clickXEM() {
-      this.currency7 = !this.currency7;
+      this.$emit('child-XEM');
     },
     clickLTC: function clickLTC() {
-      this.currency8 = !this.currency8;
+      this.$emit('child-LTC');
     },
     clickBCH: function clickBCH() {
-      this.currency9 = !this.currency9;
+      this.$emit('child-BCH');
     },
     clickMONA: function clickMONA() {
-      this.currency10 = !this.currency10;
+      this.$emit('child-MONA');
     }
-  },
-  created: function created() {
-    this.searchHourPeriod();
   }
 });
 
@@ -2416,7 +2564,26 @@ var render = function() {
       _c(
         "div",
         { staticClass: "p-trend__main", attrs: { id: "trend_main_template" } },
-        [_c("TrendMain", { tag: "table" }), _vm._v(" "), _vm._m(1)],
+        [
+          _c("TrendMain", {
+            tag: "table",
+            attrs: {
+              period: _vm.period,
+              currency1: _vm.currency1,
+              currency2: _vm.currency2,
+              currency3: _vm.currency3,
+              currency4: _vm.currency4,
+              currency5: _vm.currency5,
+              currency6: _vm.currency6,
+              currency7: _vm.currency7,
+              currency8: _vm.currency8,
+              currency9: _vm.currency9,
+              currency10: _vm.currency10
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(1)
+        ],
         1
       )
     ]),
@@ -2424,7 +2591,40 @@ var render = function() {
     _c(
       "section",
       { staticClass: "p-sidebar", attrs: { id: "trend_main_template" } },
-      [_vm._m(2), _vm._v(" "), _c("TrendSearch")],
+      [
+        _vm._m(2),
+        _vm._v(" "),
+        _c("TrendSearch", {
+          attrs: {
+            period: _vm.period,
+            currency1: _vm.currency1,
+            currency2: _vm.currency2,
+            currency3: _vm.currency3,
+            currency4: _vm.currency4,
+            currency5: _vm.currency5,
+            currency6: _vm.currency6,
+            currency7: _vm.currency7,
+            currency8: _vm.currency8,
+            currency9: _vm.currency9,
+            currency10: _vm.currency10
+          },
+          on: {
+            "child-h-period": _vm.searchHourPeriod,
+            "child-d-period": _vm.searchDatePeriod,
+            "child-w-period": _vm.searchWeekPeriod,
+            "child-BTC": _vm.changeBTC,
+            "child-ETH": _vm.changeETH,
+            "child-ETC": _vm.changeETC,
+            "child-LSK": _vm.changeLSK,
+            "child-FCT": _vm.changeFCT,
+            "child-XRP": _vm.changeXRP,
+            "child-XEM": _vm.changeXEM,
+            "child-LTC": _vm.changeLTC,
+            "child-BCH": _vm.changeBCH,
+            "child-MONA": _vm.changeMONA
+          }
+        })
+      ],
       1
     )
   ])
@@ -2494,7 +2694,7 @@ var render = function() {
     _c(
       "tbody",
       { staticClass: "p-table__tbody" },
-      _vm._l(_vm.trends, function(trend) {
+      _vm._l(_vm.searchTrend, function(trend) {
         return _c(
           "tr",
           { key: trend.rank, staticClass: "p-table__tbody__tr" },
@@ -2652,10 +2852,7 @@ var render = function() {
             ])
           : _c(
               "div",
-              {
-                staticClass: "c-action-btn",
-                on: { click: _vm.searchHourPeriod }
-              },
+              { staticClass: "c-action-btn", on: { click: _vm.hourPeriod } },
               [_vm._v("1時間")]
             ),
         _vm._v(" "),
@@ -2665,10 +2862,7 @@ var render = function() {
             ])
           : _c(
               "div",
-              {
-                staticClass: "c-action-btn",
-                on: { click: _vm.searchDatePeriod }
-              },
+              { staticClass: "c-action-btn", on: { click: _vm.datePeriod } },
               [_vm._v("1日間")]
             ),
         _vm._v(" "),
@@ -2678,10 +2872,7 @@ var render = function() {
             ])
           : _c(
               "div",
-              {
-                staticClass: "c-action-btn",
-                on: { click: _vm.searchWeekPeriod }
-              },
+              { staticClass: "c-action-btn", on: { click: _vm.weekPeriod } },
               [_vm._v("1週間")]
             )
       ])

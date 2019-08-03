@@ -4,11 +4,11 @@
             <h3 class="p-sidebar__period__title">期間</h3>
             <div class="p-sidebar__period__area">
                 <div v-if="period == 1" class="c-action-btn c-action-btn--blue">1時間</div>
-                <div v-else class="c-action-btn" @click="searchHourPeriod">1時間</div>
+                <div v-else class="c-action-btn" @click="hourPeriod">1時間</div>
                 <div v-if="period == 2" class="c-action-btn c-action-btn--blue">1日間</div>
-                <div v-else class="c-action-btn" @click="searchDatePeriod">1日間</div>
+                <div v-else class="c-action-btn" @click="datePeriod">1日間</div>
                 <div v-if="period == 3" class="c-action-btn c-action-btn--blue">1週間</div>
-                <div v-else class="c-action-btn" @click="searchWeekPeriod">1週間</div>
+                <div v-else class="c-action-btn" @click="weekPeriod">1週間</div>
             </div>
         </div>
         <div class="p-sidebar__brand">
@@ -31,65 +31,60 @@
 
 <script>
 export default {
-    data: function() {
-        return {
-            search: [],
-            period: '',
-            currency1: false,
-            currency2: false,
-            currency3: false,
-            currency4: false,
-            currency5: false,
-            currency6: false,
-            currency7: false,
-            currency8: false,
-            currency9: false,
-            currency10: false
-        }
-    },
+    props:[
+        'period',
+        'currency1',
+        'currency2',
+        'currency3',
+        'currency4',
+        'currency5',
+        'currency6',
+        'currency7',
+        'currency8',
+        'currency9',
+        'currency10'
+    ],
     methods: {
-        searchHourPeriod:function() {
-            this.period = 1;
+        hourPeriod:function() {
+            this.$emit('child-h-period')
         },
-        searchDatePeriod:function() {
-            this.period = 2;
+        datePeriod:function() {
+            this.$emit('child-d-period')
         },
-        searchWeekPeriod:function() {
-            this.period = 3;
+        weekPeriod:function() {
+            this.$emit('child-w-period')
         },
         clickBTC:function() {
-            this.currency1 = !this.currency1;
+            this.$emit('child-BTC')
         },
         clickETH:function() {
-            this.currency2 = !this.currency2;
+            this.$emit('child-ETH')
         },
         clickETC:function() {
-            this.currency3 = !this.currency3;
+            this.$emit('child-ETC')
         },
         clickLSK:function() {
-            this.currency4 = !this.currency4;
+            this.$emit('child-LSK')
         },
         clickFCT:function() {
-            this.currency5 = !this.currency5;
+            this.$emit('child-FCT')
         },
         clickXRP:function() {
-            this.currency6 = !this.currency6;
+            this.$emit('child-XRP')
         },
         clickXEM:function() {
-            this.currency7 = !this.currency7;
+            this.$emit('child-XEM')
         },
         clickLTC:function() {
-            this.currency8 = !this.currency8;
+            this.$emit('child-LTC')
         },
         clickBCH:function() {
-            this.currency9 = !this.currency9;
+            this.$emit('child-BCH')
         },
         clickMONA:function() {
-            this.currency10 = !this.currency10;
+            this.$emit('child-MONA')
         },
-    },
-    created() {
-        this.searchHourPeriod()
-    },
+
+    }
 }
 </script>

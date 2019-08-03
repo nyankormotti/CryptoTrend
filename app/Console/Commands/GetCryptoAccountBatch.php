@@ -166,6 +166,7 @@ class GetCryptoAccountBatch extends Command
                         $account->follower = $twitter_account[$j]['followers_count'];
                         $account->profile = $twitter_account[$j]['description'];
                         $account->recent_tweet = $twitter_account[$j]['status']['text'];
+                        $account->last_updated = $account_date;
                         $account->follow_flg = $twitter_account[$j]['following'];
                         $account->save();
                     }

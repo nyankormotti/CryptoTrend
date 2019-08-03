@@ -22,6 +22,7 @@ class CreateAccountsTable extends Migration
             $table->integer('follower');
             $table->string('profile');
             $table->string('recent_tweet');
+            $table->datetime('last_updated');
             $table->boolean('follow_flg');
             $table->timestamps();
         });

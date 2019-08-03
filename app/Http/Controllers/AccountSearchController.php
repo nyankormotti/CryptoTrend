@@ -22,10 +22,6 @@ class AccountSearchController extends Controller
 
         // Accountテーブルに最新のtwitterアカウント情報を追加
         $user = User::where('delete_flg','!=','1')->get();
-        foreach($user as $a_user){
-            $a_user->update_flg = 1;
-            $a_user->save();
-        }
         // var_dump($user[0]['delete_flg'] = 1);exit;
         // $user = User::where('delete_flg', '!=', '1')->get();
         // var_dump($user);exit;
@@ -33,10 +29,14 @@ class AccountSearchController extends Controller
         // var_dump(count($user));exit;
 
         for($i = 0; $i < count($user); $i++){
+            // ユーザー情報をアカウント情報更新中に更新
+            $user[$i]->update_flg = 1;
+            $user[$i]->save();
 
             // $targetAccount = Account::where('user_id', $user[$i]->id)->get();
+            DB::table('accounts')->where('user_id', $user[$i]->id)->delete();
             // var_dump('テスト前');
-            // $targetAccount->truncate();
+            // $targetAccount->delete();
             // var_dump('テスト');exit;
 
             $oauth_token = $user[$i]->oauth_token;

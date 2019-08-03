@@ -6,6 +6,7 @@ use App\User;
 use App\Account;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 class GetCryptoAccountBatch extends Command
@@ -43,95 +44,101 @@ class GetCryptoAccountBatch extends Command
     {
         \Log::info('===============');
         \Log::info('アカウント集計バッチ開始');
-
         // Accountテーブルに最新のtwitterアカウント情報を追加
-        $user = User::where('delete_flg', '!=', '1')->get();
-        foreach ($user as $a_user) {
-            $a_user->update_flg = 1;
-            $a_user->save();
-        }
 
-        // Accountテーブル全件削除
-        Account::query()->truncate();
+        DB::beginTransaction();
+        try {
+            // ユーザー情報を取得
+            $user = User::where('delete_flg', '!=', '1')->get();
 
-        for ($i = 0; $i < count($user); $i++) {
+            // ユーザーごとにアカウント情報を更新する
+            for ($i = 0; $i < count($user); $i++) {
 
-            // User情報からアクセストークンを取得
-            $oauth_token = $user[$i]->oauth_token;
-            $oauth_token_secret = $user[$i]->oauth_token_secret;
+                // ユーザー情報をアカウント情報更新中に更新
+                $user[$i]->update_flg = 1;
+                $user[$i]->save();
 
-            //インスタンス生成
-            $twitter = new TwitterOAuth(
-                //API Key
-                env('TWITTER_CLIENT_KEY'),
-                //API Secret
-                env('TWITTER_CLIENT_SECRET'),
-                //アクセストークン
-                $oauth_token,
-                $oauth_token_secret
-            );
+                // 更新するユーザーのuser_idに紐付くaccountsテーブルのレコードを削除
+                DB::table('accounts')->where('user_id', $user[$i]->id)->delete();
 
-            $one_month_ago = new Carbon();
-            // 現在日時より１ヶ月
-            $one_month_ago->subMonth();;
+                // User情報からアクセストークンを取得
+                $oauth_token = $user[$i]->oauth_token;
+                $oauth_token_secret = $user[$i]->oauth_token_secret;
 
-            for ($j = 0; $j < 100; $j++) {
-
-                $params = array(
-                    'q'     => '仮想通貨',
-                    'page'  => $j + 1,
-                    'count' =>  20,
+                //インスタンス生成
+                $twitter = new TwitterOAuth(
+                    //API Key
+                    env('TWITTER_CLIENT_KEY'),
+                    //API Secret
+                    env('TWITTER_CLIENT_SECRET'),
+                    //アクセストークン
+                    $oauth_token,
+                    $oauth_token_secret
                 );
 
-                // TwitterAPI実行(関連仮想通貨アカウント取得)
-                $account = $twitter->get('users/search', $params);
-                // オブジェクトを配列形式に変換
-                $twitter_account = json_decode(json_encode($account), true);
+                $one_month_ago = new Carbon();
+                // 現在日時より１ヶ月前の日付を取得
+                $one_month_ago->subMonth();;
 
-                // アカウントが取得できなかった場合、処理を終了する。
-                if (!empty($twitter_account['errors'])) {
-                    break;
-                }
+                // Twitter API連携処理('users/search'のリクエスト制限は1ユーザー15分間で900回まで)
+                for ($j = 0; $j < 900; $j++) {
 
-                // 関連アカウントをAccountテーブルに格納する。
-                for ($k = 0; $k < count($twitter_account); $k++) {
+                    // 検索条件
+                    $params = array(
+                        'q'     => '仮想通貨',
+                        'page'  => $j + 1,
+                        'count' =>  20,
+                    );
+
+                    // TwitterAPI実行(関連仮想通貨アカウント取得)
+                    $account = $twitter->get('users/search', $params);
+                    // オブジェクトを配列形式に変換
+                    $twitter_account = json_decode(json_encode($account), true);
 
                     // アカウントが取得できなかった場合、処理を終了する。
-                    if (empty($twitter_account[$k]['status']['created_at'])) {
+                    if (!empty($twitter_account['errors'])) {
                         break;
                     }
-                    // アカウントの最終更新日を取得
-                    $account_date = date('Y-m-d H:i:s', strtotime($twitter_account[$k]['status']['created_at']));
-                    // 最終更新日が現在日時より過去1週間以上であるアカウントはAccountテーブルに格納しない。
-                    if ($account_date < $one_month_ago) {
-                        continue;
+
+                    // 関連アカウントをAccountテーブルに格納する。
+                    for ($k = 0; $k < count($twitter_account); $k++) {
+
+                        // アカウントが取得できなかった場合、処理を終了する。
+                        if (empty($twitter_account[$k]['status']['created_at'])) {
+                            break;
+                        }
+                        // アカウントの最終更新日を取得
+                        $account_date = date('Y-m-d H:i:s', strtotime($twitter_account[$k]['status']['created_at']));
+
+                        // 最終更新日が現在日時より過去1ヶ月以上であるアカウントはAccountテーブルに格納しない。
+                        // または、自分と同じアカウントはAccoutテーブルには格納しない。
+                        if ($account_date < $one_month_ago || $user[$i]->screen_name == $twitter_account[$k]['screen_name']) {
+                            continue;
+                        }
+
+                        // Accountテーブルへ格納
+                        $account = new Account();
+                        $account->user_id = $user[$i]->id;
+                        $account->twitter_id = $twitter_account[$k]['id_str'];
+                        $account->screen_name = $twitter_account[$k]['screen_name'];
+                        $account->account_name = $twitter_account[$k]['name'];
+                        $account->follow = $twitter_account[$k]['friends_count'];
+                        $account->follower = $twitter_account[$k]['followers_count'];
+                        $account->profile = $twitter_account[$k]['description'];
+                        $account->recent_tweet = $twitter_account[$k]['status']['text'];
+                        $account->follow_flg = $twitter_account[$k]['following'];
+                        $account->save();
                     }
-
-                    // 自分と同じアカウントはAccoutテーブルには格納しない。
-                    if($user[$i]->screen_name == $twitter_account[$k]['screen_name']){
-                        continue;
-                    }
-
-                    // Accountテーブルへ格納
-                    $account = new Account();
-                    $account->user_id = $user[$i]->id;
-                    $account->twitter_id = $twitter_account[$k]['id_str'];
-                    $account->screen_name = $twitter_account[$k]['screen_name'];
-                    $account->account_name = $twitter_account[$k]['name'];
-                    $account->follow = $twitter_account[$k]['friends_count'];
-                    $account->follower = $twitter_account[$k]['followers_count'];
-                    $account->profile = $twitter_account[$k]['description'];
-                    $account->recent_tweet = $twitter_account[$k]['status']['text'];
-                    $account->follow_flg = $twitter_account[$k]['following'];
-                    $account->save();
-
                 }
+                // ユーザー情報をアカウント情報更新完了に更新
+                $user[$i]->update_flg = 0;
+                $user[$i]->save();
             }
-            $user[$i]->update_flg = 0;
-            $user[$i]->save();
+            DB::commit();
+        } catch(Exception $e) {
+            DB::rollback();
         }
 
-        
         \Log::info('アカウント集計バッチ終了');
         \Log::info('===============');
     }

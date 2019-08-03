@@ -18,9 +18,9 @@ class TweetCountController extends Controller
         // ->where('acquisition_date','=','2019-07-24 07:00:00')
         // ->get()), true);
 
-        $acquisition_date = new Carbon('2019-07-24 22:00:00');
-        $acquisition_date2 = $acquisition_date->copy()->subDay();
-        $acquisition_date2->subDay(7);
+        // $acquisition_date = new Carbon('2019-07-24 22:00:00');
+        // $acquisition_date2 = $acquisition_date->copy()->subDay();
+        // $acquisition_date2->subDay(7);
         // var_dump($acquisition_date);
         // var_dump($acquisition_date2);exit;
 
@@ -30,11 +30,11 @@ class TweetCountController extends Controller
         //     ->where('acquisition_date', '>=', $acquisition_date2)
         //         // ->orderBy('currency_id')
         //         ->delete();
-        $tweet = Tweet::where('acquisition_date','=', $acquisition_date)
-                // ->orderBy('currency_id')
-                ->delete();
+        // $tweet = Tweet::where('acquisition_date','=', $acquisition_date)
+        //         // ->orderBy('currency_id')
+        //         ->delete();
 
-                exit;
+                // exit;
 
 
         // $tweet_days_count = array();
@@ -79,10 +79,10 @@ class TweetCountController extends Controller
         $date = new Carbon();
         $acquisition_date = (substr($nowDate->subHour(), 0, 13)) . ":00:00";
 
-        var_dump($acquisition_date);
+        // var_dump($acquisition_date);
         $dat = date("Y-m-d H:i:s", strtotime($acquisition_date."-7 day". "+1 hour"));
-        var_dump($dat);
-        exit;
+        // var_dump($dat);
+        // exit;
         
 
         // $dt1 = new Carbon('2019-07-23 22:00:00');
@@ -138,37 +138,50 @@ class TweetCountController extends Controller
 
 
         // 銘柄一覧(検索パラメータ)
+        // $currency = array(
+        //     '0' => '$BTC OR #BTCOR Bitcoin',
+        //     '1' => '$ETH',
+        //     '2' => '$ETC',
+        //     '3' => '$LSK',
+        //     '4' => '$FCT',
+        //     '5' => '$XRP',
+        //     '6' => '$XEM',
+        //     '7' => '$LTC',
+        //     '8' => '$BCH',
+        //     '9' => '$MONA',
+        // );
         $currency = array(
-            '0' => '$BTC',
-            '1' => '$ETH',
-            '2' => '$ETC',
-            '3' => '$LSK',
-            '4' => '$FCT',
-            '5' => '$XRP',
-            '6' => '$XEM',
-            '7' => '$LTC',
-            '8' => '$BCH',
-            '9' => '$MONA',
+            '0' => '$BTC OR #BTC OR Bitcoin -BitcoinCash',
+            '0' => '$ETH OR #ETH OR Ethereum -EthereumClassic',
+            '0' => '$ETC OR EthereumClassic',
+            '0' => '$LSK OR #LSK',
+            '0' => '$FCT OR #FCT OR Factom',
+            '0' => '$XRP OR #XRP OR Ripple',
+            '0' => '$XEM OR #XEM OR $NEM OR #NEM',
+            '0' => '$LTC OR #LTC OR Litecoin',
+            '0' => '$BCH OR #BCH OR BitcoinCash',
+            '0' => '$MONA OR MONACOIN',
         );
 
-        $tweet_count = array();
-        for($i=1; $i<=10; $i++){
-            // exit;
-            $tweets = DB::table('tweets');
-            // $tweet_count = $tweets->where('currency_id',$i)->where('acquisition_date','2019-07-23 23:00:00');
-            $tweet_data = $tweets->where([
-                ['currency_id',$i],
-                ['acquisition_date', '2019-07-24 7:00:00']
-            ])->get();
-            
-            $tweets = json_decode(json_encode($tweet_data), true);
-            // var_dump($tweet_count);
-            // var_dump($tweets);
-            // var_dump($tweets[0]['tweet_count']);
 
-            $tweet_count = $tweets[0]['tweet_count'];
+        $tweet_count = array();
+        // for($i=1; $i<=10; $i++){
+        //     // exit;
+        //     $tweets = DB::table('tweets');
+        //     // $tweet_count = $tweets->where('currency_id',$i)->where('acquisition_date','2019-07-23 23:00:00');
+        //     $tweet_data = $tweets->where([
+        //         ['currency_id',$i],
+        //         ['acquisition_date', '2019-07-24 7:00:00']
+        //     ])->get();
             
-        }
+        //     $tweets = json_decode(json_encode($tweet_data), true);
+        //     // var_dump($tweet_count);
+        //     // var_dump($tweets);
+        //     // var_dump($tweets[0]['tweet_count']);
+
+        //     $tweet_count = $tweets[0]['tweet_count'];
+            
+        // }
         // var_dump($tweet_count);
         // exit;
 
@@ -179,6 +192,8 @@ class TweetCountController extends Controller
         $tweet_texts = array();
         // 検索ツイート数
         $tweet_count = array();
+
+        $request_count = 0;
 
 
         // 銘柄ごとのツイート数を検索する
@@ -220,11 +235,15 @@ class TweetCountController extends Controller
 
                 // パラメータに変換
                 parse_str($next_results, $params);
+
+                $request_count++;
             }
 
             // ツイート数を格納
             // $tweet_count[$i] = count($tweet_texts);
             array_push($tweet_count, count($tweet_texts));
+
+            var_dump($request_count);
 
             // 検索ツイート結果を初期化
             $tweet_texts = array();

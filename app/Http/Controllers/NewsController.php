@@ -7,7 +7,7 @@ use \App\Libraries\CommonFunctions;
 
 class NewsController extends Controller
 {
-    public function sample() {
+    public function index() {
         $commonFunc = new CommonFunctions;
         $news_list = $commonFunc->get_news();
         return view('news', compact('news_list'));

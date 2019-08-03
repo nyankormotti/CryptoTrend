@@ -59,7 +59,12 @@ Route::get('/account', function () {
 })->name('account');
 
 // 仮想通貨関連ニュース
-Route::get('/news', 'NewsController@sample')->name('news');
+Route::get('/news', 'NewsController@index')->name('news');
+// Route::get('/news', function () {
+//     return view('news');
+// })->name('news');
+
+// Route::get('/news/get', 'NewsController@index');
 
 
 

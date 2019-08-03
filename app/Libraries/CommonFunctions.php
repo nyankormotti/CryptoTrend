@@ -28,35 +28,22 @@ class CommonFunctions
 
         //記事エントリを取り出す
         $data = $xml->entry;
-        // var_dump($data);exit;
 
         //記事のタイトルとURLを取り出して配列に格納
         for ($i = 0; $i < count($data); $i++) {
 
             $list[$i]['title'] = mb_convert_encoding($data[$i]->title, "UTF-8", "auto");
             $url_split =  explode("=", (string) $data[$i]->link->attributes()->href);
-            // $list[$i]['updated'] = $data[$i]->updated;
             $list[$i]['updated'] = mb_convert_encoding($data[$i]->updated, "UTF-8", "auto");
             $list[$i]['updated'] = substr($list[$i]['updated'],0,10).' '. substr($list[$i]['updated'], 11, 8);
             $list[$i]['url'] = end($url_split);
         }
-
-        //$max_num以上の記事数の場合は切り捨て
-        // if (count($list) > $max_num) {
-        //     for ($i = 0; $i < $max_num; $i++) {
-        //         $list_gn[$i] = $list[$i];
-        //     }
-        // } else {
-        //     $list_gn = $list;
-        // }
-        // var_dump($list_gn);exit;
 
         //配列を出力
         return $list;
     }
 
     // 取引価格を取得する関数
-
     function coincheck()
     {
         $strUrl = "https://coincheck.com/api/ticker";

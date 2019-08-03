@@ -55,8 +55,6 @@ class OAuthController extends Controller
         //'oauth/access_token'はアクセストークンを取得するためのAPIのリソース
         $accessToken = $twitter->oauth('oauth/access_token', array('oauth_token' => $oauth_token, 'oauth_verifier' => $oauth_verifier));
 
-        // var_dump($accessToken);exit;
-
         //セッションにアクセストークンを登録
         session()->put('oauth_token', $accessToken['oauth_token']);
         session()->put('oauth_token_secret', $accessToken['oauth_token_secret']);
@@ -156,7 +154,6 @@ class OAuthController extends Controller
         // 初回API連携の時間を取得
         $start_time = new Carbon();
 
-        // for ($i = 0; $i < 100; $i++) {
         // Twitter API連携処理
         while ($api_flg) {
             // ページカウントのカウントアップ
@@ -244,12 +241,9 @@ class OAuthController extends Controller
     public function logout()
     {
         //セッションクリア
-        // session()->flush();
-        // アクセストークンだけsessionから破棄
-        // session()->forget('accessToken');
+        //アクセストークンだけsessionから破棄
         session()->forget('oauth_token');
         session()->forget('oauth_token_secret');
-        // session()->flush();
 
         // ログアウト処理
         Auth::logout();

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Currency;
 use Illuminate\Console\Command;
 use App\Libraries\CommonFunctions;
+use Illuminate\Support\Facades\DB;
 
 class GetCryptoPriceBatch extends Command
 {
@@ -49,10 +50,16 @@ class GetCryptoPriceBatch extends Command
         $commonFunc = new CommonFunctions;
         $rate = $commonFunc->coincheck();
 
-        $currency = Currency::find(1);
-        $currency->max_price = $rate['high'];
-        $currency->min_price = $rate['low'];
-        $currency->save();
+        DB::beginTransaction();
+        try {
+            $currency = Currency::find(1);
+            $currency->max_price = $rate['high'];
+            $currency->min_price = $rate['low'];
+            $currency->save();
+            DB::commit();
+        } catch(Exception $e) {
+            DB::rollback();
+        }
 
         \Log::info('各銘柄の取引価格取得バッチ終了');
         \Log::info('===============');

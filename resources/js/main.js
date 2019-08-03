@@ -1,10 +1,10 @@
 $(function(){
 
     // ボタンを押した時の挙動
-    $('.c-action-btn').on('click',function(){
-        let btn = $(this);
-        btn.toggleClass('c-action-btn--blue');
-    });
+    // $('.c-action-btn').on('click',function(){
+    //     let btn = $(this);
+    //     btn.toggleClass('c-action-btn--blue');
+    // });
 
     // ===========================================================
     // アカウントプロフィールの文字列が長い時「…」を末尾につける処理

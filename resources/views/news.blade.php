@@ -8,9 +8,6 @@
 <main class="main">
     <div class="p-news">
         <h1 class="p-news__title">Crypto News</h1>
-        <div id="test">
-            <news></news>
-        </div>
         <div class="p-news__content">
             @foreach($news_list as $list)
             <div class="p-news__content__article">

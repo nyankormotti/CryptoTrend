@@ -48,10 +48,11 @@ Route::get('/changeTwitterAccount', function () {
 // ログイン後
 
 // 仮想通貨トレンド画面
-// Route::get('/trend', function () {
-//     return view('trend');
-// });
-Route::get('/trend', 'TrendController@index')->name('trend');
+Route::get('/trend', function () {
+    return view('trend');
+})->name('trend');
+// Route::get('/trend', 'TrendController@index')->name('trend');
+Route::get('/trend/get', 'TrendController@index');
 
 // 関連アカウント一覧画面
 Route::get('/account', function () {

@@ -95,12 +95,12 @@
 
 $(function () {
   // ボタンを押した時の挙動
-  $('.c-action-btn').on('click', function () {
-    var btn = $(this);
-    btn.toggleClass('c-action-btn--blue');
-  }); // ===========================================================
+  // $('.c-action-btn').on('click',function(){
+  //     let btn = $(this);
+  //     btn.toggleClass('c-action-btn--blue');
+  // });
+  // ===========================================================
   // アカウントプロフィールの文字列が長い時「…」を末尾につける処理
-
   longString($('.p-user__text__profile__describe'), 55); // 最新のチートの文字列が長い時「…」を末尾につける処理
 
   longString($('.p-user__text__tweet__describe'), 85); // ===========================================================

@@ -10,9 +10,16 @@ class TrendController extends Controller
 {
     public function index() {
         
-        $trends = Trend::where('period_id','1')->orderBy('tweet_count','DESC')->get();
+        $trends = Trend::where('period_id','1')->with('currency')->orderBy('tweet_count','DESC')->get();
+        // var_dump($trends);exit;
         // var_dump($trends[0]->currency->currency_name);exit;
         $rank = 0;
-        return view('trend', ['trends' => $trends, 'rank' => $rank]);
+        foreach($trends as $trend){
+            $trends[$rank]['rank'] = $rank + 1;
+            $rank++;
+        }
+        
+        return $trends;
+        // return view('trend', ['trends' => $trends, 'rank' => $rank]);
     }
 }

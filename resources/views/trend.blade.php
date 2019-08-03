@@ -26,16 +26,34 @@
                         </tr>
                     </thead>
                     <tbody class="p-table__tbody">
+                        @foreach($trends as $trend)
                         <tr class="p-table__tbody__tr">
-                            <td class="p-table__tbody__tr__td">1位</td>
+                            <td class="p-table__tbody__tr__td">{{++$rank}}位</td>
                             <td class="p-table__tbody__tr__td">
-                                <a href="https://twitter.com/search?q=$BTC&src=recent_search_click" class="p-table__tbody__tr__td__link p-table__tbody__tr__td__link--gold">$BTC</a>
+                                @if($rank == 1)
+                                <a href="https://twitter.com/search?q={{$trend->currency->currency_name}}&src=recent_search_click" class="p-table__tbody__tr__td__link p-table__tbody__tr__td__link--gold">{{$trend->currency->currency_name}}</a>
+                                @elseif($rank == 2)
+                                <a href="https://twitter.com/search?q={{$trend->currency->currency_name}}&src=recent_search_click" class="p-table__tbody__tr__td__link p-table__tbody__tr__td__link--silver">{{$trend->currency->currency_name}}</a>
+                                @elseif( $rank == 3)
+                                <a href="https://twitter.com/search?q={{$trend->currency->currency_name}}&src=recent_search_click" class="p-table__tbody__tr__td__link p-table__tbody__tr__td__link--blonze">{{$trend->currency->currency_name}}</a>
+                                @else
+                                <a href="https://twitter.com/search?q={{$trend->currency->currency_name}}&src=recent_search_click" class="p-table__tbody__tr__td__link">{{$trend->currency->currency_name}}</a>
+                                @endif
                             </td>
-                            <td class="p-table__tbody__tr__td">356</td>
-                            <td class="p-table__tbody__tr__td">1120292</td>
-                            <td class="p-table__tbody__tr__td">1049008</td>
+                            <td class="p-table__tbody__tr__td">{{$trend->tweet_count}}</td>
+                            @if(is_null($trend->currency->max_price))
+                            <td class="p-table__tbody__tr__td">不明</td>
+                            @else
+                            <td class="p-table__tbody__tr__td">{{$trend->currency->max_price}}</td>
+                            @endif
+                            @if(is_null($trend->currency->max_price))
+                            <td class="p-table__tbody__tr__td">不明</td>
+                            @else
+                            <td class="p-table__tbody__tr__td">{{$trend->currency->min_price}}</td>
+                            @endif
                         </tr>
-                        <tr class="p-table__tbody__tr">
+                        @endforeach
+                        <!-- <tr class="p-table__tbody__tr">
                             <td class="p-table__tbody__tr__td">2位</td>
                             <td class="p-table__tbody__tr__td">
                                 <a href="https://twitter.com/search?q=$BTC&src=recent_search_click" class="p-table__tbody__tr__td__link p-table__tbody__tr__td__link--silver">$BTC</a>
@@ -115,7 +133,7 @@
                             <td class="p-table__tbody__tr__td">356</td>
                             <td class="p-table__tbody__tr__td">不明</td>
                             <td class="p-table__tbody__tr__td">不明</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
                 <div class="p-note">

@@ -655,7 +655,6 @@ body {
 .p-trend {
   display: block;
   width: 60%;
-  max-height: 650px;
   background: white;
   border-radius: 5px;
 }

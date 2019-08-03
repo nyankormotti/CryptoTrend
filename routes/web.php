@@ -48,9 +48,10 @@ Route::get('/changeTwitterAccount', function () {
 // ログイン後
 
 // 仮想通貨トレンド画面
-Route::get('/trend', function () {
-    return view('trend');
-});
+// Route::get('/trend', function () {
+//     return view('trend');
+// });
+Route::get('/trend', 'TrendController@index');
 
 // 仮想通貨関連ニュース
 Route::get('/news', 'NewsController@sample')->name('news');
@@ -60,19 +61,22 @@ Route::get('/account', function () {
     return view('account');
 });
 
+// マイページ
+Route::get('/mypage', function () {
+    return view('mypage');
+});
+
+// 検証用コントローラ
 // ツイート数
 Route::get('/tweet', 'TweetCountController@index')->name('tweet');
 
 // アカウント数
 Route::get('/accountSearch', 'AccountSearchController@index')->name('accountSearch');
 
-// マイページ
-Route::get('/mypage', function () {
-    return view('mypage');
-});
-
 // coincheck
 Route::get('/coincheck', 'CoincheckController@index')->name('coin');
+// 検証用コントローラ
+
 
 // ===================================================
 

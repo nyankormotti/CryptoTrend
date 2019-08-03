@@ -51,15 +51,17 @@ Route::get('/changeTwitterAccount', function () {
 // Route::get('/trend', function () {
 //     return view('trend');
 // });
-Route::get('/trend', 'TrendController@index');
-
-// 仮想通貨関連ニュース
-Route::get('/news', 'NewsController@sample')->name('news');
+Route::get('/trend', 'TrendController@index')->name('trend');
 
 // 関連アカウント一覧画面
 Route::get('/account', function () {
     return view('account');
-});
+})->name('account');
+
+// 仮想通貨関連ニュース
+Route::get('/news', 'NewsController@sample')->name('news');
+
+
 
 // マイページ
 Route::get('/mypage', function () {

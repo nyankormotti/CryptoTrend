@@ -8,11 +8,13 @@
 <main class="main">
     <div class="p-news">
         <h1 class="p-news__title">Crypto News</h1>
+        <div id="test">
+            <news></news>
+        </div>
         <div class="p-news__content">
             @foreach($news_list as $list)
             <div class="p-news__content__article">
                 <div class="p-news__content__article__area">
-                    <!-- <div class="p-news__content__article__area__mark"></div> -->
                     <a href="{{$list['url']}}" class="p-news__content__article__area__describe" target=”_blank” rel=”noopener”>{{$list['title']}}</a>
                 </div>
                 <div class="p-news__content__article__area">

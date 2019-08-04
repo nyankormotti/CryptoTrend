@@ -84,7 +84,6 @@ export default {
         clickMONA:function() {
             this.$emit('child-MONA')
         },
-
     }
 }
 </script>

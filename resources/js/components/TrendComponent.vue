@@ -1,33 +1,21 @@
 <template>
     <section class="main__base">
-        <section class="p-trend">
-            <div class="p-trend__top">
-                <div class="p-trend__top__area">
-                    <h2 class="p-trend__top__area__title">Crypto Ranking</h2>
-                    <p class="p-trend__top__area__page">更新：2019-08-02 11:00:00</p>
-                </div>
-                <span class="p-trend__top__border"></span>
-            </div>
-            <div id="trend_main_template" class="p-trend__main">
-                <table is="TrendMain"
-                :period="period"
-                    :currency1="currency1"
-                    :currency2="currency2"
-                    :currency3="currency3"
-                    :currency4="currency4"
-                    :currency5="currency5"
-                    :currency6="currency6"
-                    :currency7="currency7"
-                    :currency8="currency8"
-                    :currency9="currency9"
-                    :currency10="currency10">
-                </table>
-                <div class="p-note">
-                    <p class="p-note__describe">※銘柄名をクリックするとtwitter検索画面が表示されます。</p>
-                    <p class="p-note__describe">※取引価格は24時間当たりの価格を示しています。</p>
-                </div>
-            </div>
+        <section 
+            is="TrendMain"
+            :period="period"
+            :currency1="currency1"
+            :currency2="currency2"
+            :currency3="currency3"
+            :currency4="currency4"
+            :currency5="currency5"
+            :currency6="currency6"
+            :currency7="currency7"
+            :currency8="currency8"
+            :currency9="currency9"
+            :currency10="currency10">
         </section>
+
+
         <section id="trend_main_template" class="p-sidebar">
             <div class="p-sidebar__top">
                 <h2 class="p-sidebar__top__title">Search</h2>

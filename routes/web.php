@@ -51,13 +51,16 @@ Route::get('/changeTwitterAccount', function () {
 Route::get('/trend', function () {
     return view('trend');
 })->name('trend');
-// Route::get('/trend', 'TrendController@index')->name('trend');
+
 Route::post('/trend/get', 'TrendController@index');
 
-// 関連アカウント一覧画面
+// 仮想通貨関連アカウント一覧画面
 Route::get('/account', function () {
     return view('account');
 })->name('account');
+
+Route::post('/account/get', 'AccountController@index');
+Route::post('/account/count', 'AccountController@totalCount');
 
 // 仮想通貨関連ニュース
 Route::get('/news', 'NewsController@index')->name('news');
@@ -83,6 +86,9 @@ Route::get('/accountSearch', 'AccountSearchController@index')->name('accountSear
 
 // coincheck
 Route::get('/coincheck', 'CoincheckController@index')->name('coin');
+
+// アカウントテーブルからの取得
+
 // 検証用コントローラ
 
 

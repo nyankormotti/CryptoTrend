@@ -18,8 +18,8 @@ class CreateAccountsTable extends Migration
             $table->string('twitter_id')->index();
             $table->string('screen_name');
             $table->string('account_name');
-            $table->integer('follow');
-            $table->integer('follower');
+            $table->integer('follow')->unsigned();;
+            $table->integer('follower')->unsigned();;
             $table->string('profile');
             $table->string('recent_tweet');
             $table->datetime('last_updated');

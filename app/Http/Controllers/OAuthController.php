@@ -107,6 +107,8 @@ class OAuthController extends Controller
         $user->twitter_id = $userInfo['id_str'];;
         $user->oauth_token = $oauth_token;
         $user->oauth_token_secret = $oauth_token_secret;
+        $user->first_request_time = new Carbon();
+        $user->request_count = 0;
         $user->follow_limit = 0;
         $user->unfollow_limit = 0;
         $user->save();

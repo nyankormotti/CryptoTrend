@@ -54,16 +54,16 @@ class GetCryptoTweetCountBatch extends Command
 
         // 銘柄一覧(検索パラメータ)
         $currency = array(
-            '0' => '$BTC OR #BTC OR Bitcoin -BitcoinCash',
-            '1' => '$ETH OR #ETH OR Ethereum -EthereumClassic',
-            '2' => '$ETC OR EthereumClassic',
-            '3' => '$LSK OR #LSK',
-            '4' => '$FCT OR #FCT OR Factom',
-            '5' => '$XRP OR #XRP OR Ripple',
-            '6' => '$XEM OR #XEM OR $NEM OR #NEM',
-            '7' => '$LTC OR #LTC OR Litecoin',
-            '8' => '$BCH OR #BCH OR BitcoinCash',
-            '9' => '$MONA OR MONACOIN',
+            '0' => '$BTC OR #BTC OR Bitcoin OR ビットコイン -BitcoinCash -ビットコインキャッシュ',
+            '1' => '$ETH OR #ETH OR Ethereum OR イーサリアム -EthereumClassic -イーサリアムクラシック',
+            '2' => '$ETC OR EthereumClassic  OR イーサリアムクラシック',
+            '3' => '$LSK OR #LSK OR $LISK OR #LISK',
+            '4' => '$FCT OR #FCT OR Factom OR ファクトム',
+            '5' => '$XRP OR #XRP OR Ripple OR #リップル',
+            '6' => '$XEM OR #XEM OR $NEM OR #NEM OR #ネム',
+            '7' => '$LTC OR #LTC OR Litecoin OR ライトコイン',
+            '8' => '$BCH OR #BCH OR BitcoinCash OR ビットコインキャッシュ',
+            '9' => '$MONA OR MONACOIN OR モナコイン',
         );
 
         // ツイート検索期間の設定(開始日時、終了日時)

@@ -16,11 +16,9 @@ class CreateTweetsTable extends Migration
         Schema::create('tweets', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('currency_id')->unsigned();
-            $table->integer('tweet_count');
-            $table->datetime('acquisition_date');
+            $table->integer('tweet_count')->unsigned();
+            $table->datetime('acquisition_date')->index();
             $table->timestamps();
-
-            
         });
     }
 

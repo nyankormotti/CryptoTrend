@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('screen_name');
             $table->string('oauth_token');
             $table->string('oauth_token_secret');
+            $table->datetime('first_request_time');
+            $table->integer('request_count')->unsigned();
             $table->integer('follow_limit')->unsigned();
             $table->integer('unfollow_limit')->unsigned();
             $table->boolean('autofollow_flg')->default(false);

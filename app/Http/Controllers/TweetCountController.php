@@ -151,16 +151,20 @@ class TweetCountController extends Controller
         //     '9' => '$MONA',
         // );
         $currency = array(
-            '0' => '$BTC OR #BTC OR Bitcoin -BitcoinCash',
-            '0' => '$ETH OR #ETH OR Ethereum -EthereumClassic',
-            '0' => '$ETC OR EthereumClassic',
-            '0' => '$LSK OR #LSK',
-            '0' => '$FCT OR #FCT OR Factom',
-            '0' => '$XRP OR #XRP OR Ripple',
-            '0' => '$XEM OR #XEM OR $NEM OR #NEM',
-            '0' => '$LTC OR #LTC OR Litecoin',
-            '0' => '$BCH OR #BCH OR BitcoinCash',
-            '0' => '$MONA OR MONACOIN',
+            // '0' => '$BTC OR #BTC OR Bitcoin  -BitcoinCash',
+            // '0' => '$BTC OR #BTC OR Bitcoin OR ビットコイン -BitcoinCash -ビットコインキャッシュ',
+            // '0' => '$ETH OR #ETH OR Ethereum -EthereumClassic',
+            // '0' => '$ETH OR #ETH OR Ethereum OR イーサリアム -EthereumClassic -イーサリアムクラシック',
+            // '0' => '$ETC OR EthereumClassic',
+            // '0' => '$ETC OR EthereumClassic OR イーサリアムクラシック',
+            // '0' => '$LSK OR #LSK',
+            // '0' => '$LSK OR #LSK OR $LISK OR #LISK',
+            // '0' => '$FCT OR #FCT OR Factom OR ファクトム',
+            // '0' => '$XRP OR #XRP OR Ripple OR #リップル',
+            // '0' => '$XEM OR #XEM OR $NEM OR #NEM OR #ネム',
+            // '0' => '$LTC OR #LTC OR Litecoin OR ライトコイン',
+            // '0' => '$BCH OR #BCH OR BitcoinCash OR ビットコインキャッシュ',
+            // '0' => '$MONA OR MONACOIN OR モナコイン',
         );
 
 

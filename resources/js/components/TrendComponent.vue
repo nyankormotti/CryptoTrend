@@ -2,7 +2,10 @@
     <section class="main__base">
         <section class="p-trend">
             <div class="p-trend__top">
-                <h2 class="p-trend__top__title">Crypto Ranking</h2>
+                <div class="p-trend__top__area">
+                    <h2 class="p-trend__top__area__title">Crypto Ranking</h2>
+                    <p class="p-trend__top__area__page">更新：2019-08-02 11:00:00</p>
+                </div>
                 <span class="p-trend__top__border"></span>
             </div>
             <div id="trend_main_template" class="p-trend__main">

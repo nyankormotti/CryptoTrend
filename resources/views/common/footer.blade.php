@@ -8,8 +8,6 @@
 <script src="{{ asset('js/trend.js') }}"></script>
 @elseif(\Route::current() -> getName() == 'account')
 <script src="{{ asset('js/account.js') }}"></script>
-@elseif(\Route::current() -> getName() == 'news')
-<script src="{{ asset('js/news.js') }}"></script>
 @endif
 <script src="{{ asset('js/main.js') }}"></script>
 @endsection

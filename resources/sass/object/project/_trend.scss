@@ -8,10 +8,22 @@
     border-radius:5px;
     &__top{
         padding:10px 20px;
-        &__title{
-            font-size:$font-size_ll;
-            font-weight:bold;
-            color:$font_color_main1;
+        &__area{
+            display:flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            &__title{
+                width:50%;
+                font-size:$font-size_ll;
+                font-weight:bold;
+                color:$font_color_main1;
+            }
+            &__page{
+                width:50%;
+                text-align:right;
+                color:$font-color_gray;
+                font-size:$font-size_m;
+            }
         }
         &__border{
             margin-top:5px;

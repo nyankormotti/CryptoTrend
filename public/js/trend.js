@@ -1784,6 +1784,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2635,8 +2638,14 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "p-trend__top" }, [
-      _c("h2", { staticClass: "p-trend__top__title" }, [
-        _vm._v("Crypto Ranking")
+      _c("div", { staticClass: "p-trend__top__area" }, [
+        _c("h2", { staticClass: "p-trend__top__area__title" }, [
+          _vm._v("Crypto Ranking")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "p-trend__top__area__page" }, [
+          _vm._v("更新：2019-08-02 11:00:00")
+        ])
       ]),
       _vm._v(" "),
       _c("span", { staticClass: "p-trend__top__border" })

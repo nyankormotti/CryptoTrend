@@ -4,20 +4,21 @@
             <div class="p-account__top">
                 <div class="p-account__top__area">
                     <h2 class="p-account__top__area__title">Crypto Account</h2>
-                    <p class="p-account__top__area__page">{{firstCount}} - {{lastCount}} / {{count}}</p>
+                    <p v-if="count !== 0" class="p-account__top__area__page">
+                        {{firstCount}} - {{lastCount}} / {{count}}
+                    </p>
                 </div>
                 <span class="p-account__top__border"></span>
             </div>
             <AccountMain
             :accounts="accounts"
             :page="page"
-            :perPage="perPage"
-            :totalPage="totalPage">
+            :perPage="perPage">
             </AccountMain>
             <div class="p-account__page">
-                <a href="#" class="prev" @click="onPrev">&lt; 前へ</a>
+                <a href="#" class="prev" @click="onPrev">&lt; Prev</a>
                 <div class="total">ページ {{page}}/{{totalPage}}</div>
-                <a href="#" class="next" @click="onNext">次へ &gt;</a>
+                <a href="#" class="next" @click="onNext">Next &gt;</a>
             </div>
         </section>
         <section class="p-sidebar p-sidebar--option">
@@ -25,34 +26,14 @@
                 <h2 class="p-sidebar__top__title">Option</h2>
                 <span class="p-sidebar__top__border"></span>
             </div>
-            <div class="p-sidebar__limit">
-                <h3 class="p-sidebar__limit__title">上限回数</h3>
-                <div class="p-sidebar__limit__area">
-                    <div class="p-sidebar__limit__area--f_action">
-                        <h3 class="p-sidebar__limit__area--f_action--title">フォロー</h3>
-                        <p class="p-sidebar__limit__area--f_action--count"><span class="p-sidebar__limit__area--f_action--count--now">0</span> / 25</p>
-                    </div>
-                    <div class="p-sidebar__limit__area--f_action">
-                        <h3 class="p-sidebar__limit__area--f_action--title">フォロー解除</h3>
-                        <p class="p-sidebar__limit__area--f_action--count"><span class="p-sidebar__limit__area--f_action--count--now">0</span> / 100</p>
-                    </div>
-                </div>
-            </div>
-            <div class="p-sidebar__follow">
-                <h3 class="p-sidebar__follow__title">表示形式</h3>
-                <div class="p-sidebar__follow__area">
-                    <div class="c-action-btn c-action-btn--follow">未フォロー</div>
-                    <div class="c-action-btn c-action-btn--follow">フォロー済</div>
-                </div>
-            </div>
-
-            <div class="p-sidebar__follow">
-                <h3 class="p-sidebar__follow__title">自動フォロー</h3>
-                <div class="p-sidebar__follow__area">
-                    <div class="c-action-btn c-action-btn--follow">ON</div>
-                    <div class="c-action-btn c-action-btn--follow">OFF</div>
-                </div>
-            </div>
+            <AccountOption
+            :followLimit="followLimit"
+            :unFollowLimit="unFollowLimit"
+            :followFlg="followFlg"
+            :autoFollowFlg="autoFollowFlg"
+            @child-search="searchAccount"
+            @child-auto="autoFollow"
+            ></AccountOption>
         </section>
     </section>
 </template>
@@ -69,14 +50,18 @@ export default {
     },
     data: function() {
         return {
-            accounts: [],
+            accounts: [], //関連アカウント情報
             page: 1, //現在のページ番号
             perPage: 20, //1ページ毎の表示件数
             totalPage: 0, //総ページ数
             count: 0, //accountsの総数
             firstCount:0, //表示初めの件数
             lastCount:0, //表示終りの件数
-            followFlg:0, //フォロー済の有無のflg
+            followFlg:0, //フォロー済の有無のフラグ
+            users:[], //user情報
+            followLimit: 0, //フォロー回数
+            unFollowLimit: 0, // フォロー解除回数
+            autoFollowFlg:0, //自動フォローフラグ
         }
     },
     methods: {
@@ -85,6 +70,25 @@ export default {
                 follow_flg:this.followFlg
             }).then((res)=>{
                 this.accounts = res.data
+            })
+        },
+        fetchUser: function() {
+            this.$axios.post('/account/user').then((res)=>{
+                this.users = res.data
+                this.followLimit = this.users.follow_limit
+                this.unFollowLimit = this.users.unfollow_limit
+                this.autoFollowFlg = this.users.autofollow_flg
+            })
+        },
+        searchAccount: function() {
+            this.followFlg = !this.followFlg
+        },
+        autoFollow: function() {
+            this.$axios.post('/account/auto',{
+                autoFollow_flg:this.autoFollowFlg
+            }).then((res)=>{
+                this.users = res.data
+                this.autoFollowFlg = this.users.autofollow_flg
             })
         },
         pageCount: function() {
@@ -115,13 +119,17 @@ export default {
         page: function() {
             this.lastCount = this.page * this.perPage
             this.firstCount = this.lastCount -19
-        }
+            if(this.lastCount > this.count) {
+                this.lastCount = this.count
+            }
+        },
+        followFlg: function() {
+            this.fetchAccount()
+        },
     },
     created() {
         this.fetchAccount()
-    },
-    beforeUpdate() {
-        this.fetchAccount()
+        this.fetchUser()
     }
 }
 </script>

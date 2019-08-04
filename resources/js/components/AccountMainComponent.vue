@@ -30,28 +30,10 @@ export default {
         'accounts',
         'page',
         'perPage',
-        'totalPage',
     ],
     data: function() {
         return {
         }
-    },
-    methods: {
-        // // 文字列が長い時「…」を末尾につける処理
-        // longString: function($setElm, cutFigure) {
-        //     let afterTxt = ' …'; // 文字カット後に表示するテキスト
-
-        //     $setElm.each(function () {
-        //         let textLength = $(this).text().length;  // 文字数を取得
-        //         let textTrim = $(this).text().substr(0, (cutFigure)) // 表示する数以上の文字をトリムする
-
-        //         if (cutFigure < textLength) { // 文字数が表示数より多い場合
-        //             $(this).html(textTrim + afterTxt).css({ visibility: 'visible' }); // カット後の文字数に…を追加
-        //         } else if (cutFigure >= textLength) {// 文字数が表示数以下の場合
-        //             $(this).css({ visibility: 'visible' }); // そのまま表示
-        //         }
-        //     });
-        // }
     },
     computed: {
         filterAccounts() {
@@ -61,13 +43,6 @@ export default {
                 i < this.page * this.perPage
             );
         }
-    },
-    
-    updated() {
-        // アカウントプロフィールの文字列が長い時「…」を末尾につける処理
-        // this.longString($('.p-user__text__profile__describe'),60)
-        // 最新のチートの文字列が長い時「…」を末尾につける処理
-        // this.longString($('.p-user__text__tweet__describe'),140)
     }
 }
 </script>

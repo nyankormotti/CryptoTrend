@@ -1739,25 +1739,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1768,6 +1749,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       accounts: [],
+      //関連アカウント情報
       page: 1,
       //現在のページ番号
       perPage: 20,
@@ -1780,7 +1762,15 @@ __webpack_require__.r(__webpack_exports__);
       //表示初めの件数
       lastCount: 0,
       //表示終りの件数
-      followFlg: 0 //フォロー済の有無のflg
+      followFlg: 0,
+      //フォロー済の有無のフラグ
+      users: [],
+      //user情報
+      followLimit: 0,
+      //フォロー回数
+      unFollowLimit: 0,
+      // フォロー解除回数
+      autoFollowFlg: 0 //自動フォローフラグ
 
     };
   },
@@ -1792,6 +1782,29 @@ __webpack_require__.r(__webpack_exports__);
         follow_flg: this.followFlg
       }).then(function (res) {
         _this.accounts = res.data;
+      });
+    },
+    fetchUser: function fetchUser() {
+      var _this2 = this;
+
+      this.$axios.post('/account/user').then(function (res) {
+        _this2.users = res.data;
+        _this2.followLimit = _this2.users.follow_limit;
+        _this2.unFollowLimit = _this2.users.unfollow_limit;
+        _this2.autoFollowFlg = _this2.users.autofollow_flg;
+      });
+    },
+    searchAccount: function searchAccount() {
+      this.followFlg = !this.followFlg;
+    },
+    autoFollow: function autoFollow() {
+      var _this3 = this;
+
+      this.$axios.post('/account/auto', {
+        autoFollow_flg: this.autoFollowFlg
+      }).then(function (res) {
+        _this3.users = res.data;
+        _this3.autoFollowFlg = _this3.users.autofollow_flg;
       });
     },
     pageCount: function pageCount() {
@@ -1822,13 +1835,18 @@ __webpack_require__.r(__webpack_exports__);
     page: function page() {
       this.lastCount = this.page * this.perPage;
       this.firstCount = this.lastCount - 19;
+
+      if (this.lastCount > this.count) {
+        this.lastCount = this.count;
+      }
+    },
+    followFlg: function followFlg() {
+      this.fetchAccount();
     }
   },
   created: function created() {
     this.fetchAccount();
-  },
-  beforeUpdate: function beforeUpdate() {
-    this.fetchAccount();
+    this.fetchUser();
   }
 });
 
@@ -1870,23 +1888,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['accounts', 'page', 'perPage', 'totalPage'],
+  props: ['accounts', 'page', 'perPage'],
   data: function data() {
     return {};
-  },
-  methods: {// // 文字列が長い時「…」を末尾につける処理
-    // longString: function($setElm, cutFigure) {
-    //     let afterTxt = ' …'; // 文字カット後に表示するテキスト
-    //     $setElm.each(function () {
-    //         let textLength = $(this).text().length;  // 文字数を取得
-    //         let textTrim = $(this).text().substr(0, (cutFigure)) // 表示する数以上の文字をトリムする
-    //         if (cutFigure < textLength) { // 文字数が表示数より多い場合
-    //             $(this).html(textTrim + afterTxt).css({ visibility: 'visible' }); // カット後の文字数に…を追加
-    //         } else if (cutFigure >= textLength) {// 文字数が表示数以下の場合
-    //             $(this).css({ visibility: 'visible' }); // そのまま表示
-    //         }
-    //     });
-    // }
   },
   computed: {
     filterAccounts: function filterAccounts() {
@@ -1896,11 +1900,78 @@ __webpack_require__.r(__webpack_exports__);
         return i >= (_this.page - 1) * _this.perPage && i < _this.page * _this.perPage;
       });
     }
-  },
-  updated: function updated() {// アカウントプロフィールの文字列が長い時「…」を末尾につける処理
-    // this.longString($('.p-user__text__profile__describe'),60)
-    // 最新のチートの文字列が長い時「…」を末尾につける処理
-    // this.longString($('.p-user__text__tweet__describe'),140)
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AccountOptionComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AccountOptionComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["followLimit", "unFollowLimit", "autoFollowFlg", "followFlg"],
+  methods: {
+    search: function search() {
+      this.$emit('child-search');
+    },
+    autoFollow: function autoFollow() {
+      this.$emit('child-auto');
+    }
   }
 });
 
@@ -2422,15 +2493,19 @@ var render = function() {
               _vm._v("Crypto Account")
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "p-account__top__area__page" }, [
-              _vm._v(
-                _vm._s(_vm.firstCount) +
-                  " - " +
-                  _vm._s(_vm.lastCount) +
-                  " / " +
-                  _vm._s(_vm.count)
-              )
-            ])
+            _vm.count !== 0
+              ? _c("p", { staticClass: "p-account__top__area__page" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.firstCount) +
+                      " - " +
+                      _vm._s(_vm.lastCount) +
+                      " / " +
+                      _vm._s(_vm.count) +
+                      "\n                "
+                  )
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("span", { staticClass: "p-account__top__border" })
@@ -2440,8 +2515,7 @@ var render = function() {
           attrs: {
             accounts: _vm.accounts,
             page: _vm.page,
-            perPage: _vm.perPage,
-            totalPage: _vm.totalPage
+            perPage: _vm.perPage
           }
         }),
         _vm._v(" "),
@@ -2453,7 +2527,7 @@ var render = function() {
               attrs: { href: "#" },
               on: { click: _vm.onPrev }
             },
-            [_vm._v("< 前へ")]
+            [_vm._v("< Prev")]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "total" }, [
@@ -2467,14 +2541,34 @@ var render = function() {
               attrs: { href: "#" },
               on: { click: _vm.onNext }
             },
-            [_vm._v("次へ >")]
+            [_vm._v("Next >")]
           )
         ])
       ],
       1
     ),
     _vm._v(" "),
-    _vm._m(0)
+    _c(
+      "section",
+      { staticClass: "p-sidebar p-sidebar--option" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("AccountOption", {
+          attrs: {
+            followLimit: _vm.followLimit,
+            unFollowLimit: _vm.unFollowLimit,
+            followFlg: _vm.followFlg,
+            autoFollowFlg: _vm.autoFollowFlg
+          },
+          on: {
+            "child-search": _vm.searchAccount,
+            "child-auto": _vm.autoFollow
+          }
+        })
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -2482,98 +2576,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "p-sidebar p-sidebar--option" }, [
-      _c("div", { staticClass: "p-sidebar__top" }, [
-        _c("h2", { staticClass: "p-sidebar__top__title" }, [_vm._v("Option")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "p-sidebar__top__border" })
-      ]),
+    return _c("div", { staticClass: "p-sidebar__top" }, [
+      _c("h2", { staticClass: "p-sidebar__top__title" }, [_vm._v("Option")]),
       _vm._v(" "),
-      _c("div", { staticClass: "p-sidebar__limit" }, [
-        _c("h3", { staticClass: "p-sidebar__limit__title" }, [
-          _vm._v("上限回数")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-sidebar__limit__area" }, [
-          _c("div", { staticClass: "p-sidebar__limit__area--f_action" }, [
-            _c(
-              "h3",
-              { staticClass: "p-sidebar__limit__area--f_action--title" },
-              [_vm._v("フォロー")]
-            ),
-            _vm._v(" "),
-            _c(
-              "p",
-              { staticClass: "p-sidebar__limit__area--f_action--count" },
-              [
-                _c(
-                  "span",
-                  {
-                    staticClass: "p-sidebar__limit__area--f_action--count--now"
-                  },
-                  [_vm._v("0")]
-                ),
-                _vm._v(" / 25")
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-sidebar__limit__area--f_action" }, [
-            _c(
-              "h3",
-              { staticClass: "p-sidebar__limit__area--f_action--title" },
-              [_vm._v("フォロー解除")]
-            ),
-            _vm._v(" "),
-            _c(
-              "p",
-              { staticClass: "p-sidebar__limit__area--f_action--count" },
-              [
-                _c(
-                  "span",
-                  {
-                    staticClass: "p-sidebar__limit__area--f_action--count--now"
-                  },
-                  [_vm._v("0")]
-                ),
-                _vm._v(" / 100")
-              ]
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "p-sidebar__follow" }, [
-        _c("h3", { staticClass: "p-sidebar__follow__title" }, [
-          _vm._v("表示形式")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-sidebar__follow__area" }, [
-          _c("div", { staticClass: "c-action-btn c-action-btn--follow" }, [
-            _vm._v("未フォロー")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "c-action-btn c-action-btn--follow" }, [
-            _vm._v("フォロー済")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "p-sidebar__follow" }, [
-        _c("h3", { staticClass: "p-sidebar__follow__title" }, [
-          _vm._v("自動フォロー")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-sidebar__follow__area" }, [
-          _c("div", { staticClass: "c-action-btn c-action-btn--follow" }, [
-            _vm._v("ON")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "c-action-btn c-action-btn--follow" }, [
-            _vm._v("OFF")
-          ])
-        ])
-      ])
+      _c("span", { staticClass: "p-sidebar__top__border" })
     ])
   }
 ]
@@ -2660,6 +2666,168 @@ var render = function() {
     }),
     0
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AccountOptionComponent.vue?vue&type=template&id=b2080e74&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AccountOptionComponent.vue?vue&type=template&id=b2080e74& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "p-sidebar__area" }, [
+    _c("div", { staticClass: "p-sidebar__limit" }, [
+      _c("h3", { staticClass: "p-sidebar__limit__title" }, [
+        _vm._v("上限回数")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "p-sidebar__limit__area" }, [
+        _c("div", { staticClass: "p-sidebar__limit__area--f_action" }, [
+          _c("h3", { staticClass: "p-sidebar__limit__area--f_action--title" }, [
+            _vm._v("フォロー")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "p-sidebar__limit__area--f_action--count" }, [
+            _c(
+              "span",
+              { staticClass: "p-sidebar__limit__area--f_action--count--now" },
+              [
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.followLimit) +
+                    "\n                    "
+                )
+              ]
+            ),
+            _vm._v(" / 25\n                ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "p-sidebar__limit__area--f_action" }, [
+          _c("h3", { staticClass: "p-sidebar__limit__area--f_action--title" }, [
+            _vm._v("フォロー解除")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "p-sidebar__limit__area--f_action--count" }, [
+            _c(
+              "span",
+              { staticClass: "p-sidebar__limit__area--f_action--count--now" },
+              [
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.unFollowLimit) +
+                    "\n                    "
+                )
+              ]
+            ),
+            _vm._v(" / 100\n                ")
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-sidebar__follow" }, [
+      _c("h3", { staticClass: "p-sidebar__follow__title" }, [
+        _vm._v("表示形式")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "p-sidebar__follow__area" }, [
+        !_vm.followFlg
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "c-action-btn c-action-btn--follow c-action-btn--follow--optionBlue"
+              },
+              [_vm._v("\n                未フォロー\n            ")]
+            )
+          : _c(
+              "div",
+              {
+                staticClass: "c-action-btn c-action-btn--follow",
+                on: { click: _vm.search }
+              },
+              [_vm._v("未フォロー")]
+            ),
+        _vm._v(" "),
+        _vm.followFlg
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "c-action-btn c-action-btn--follow c-action-btn--follow--optionBlue"
+              },
+              [_vm._v("\n                フォロー済\n            ")]
+            )
+          : _c(
+              "div",
+              {
+                staticClass: "c-action-btn c-action-btn--follow",
+                on: { click: _vm.search }
+              },
+              [_vm._v("フォロー済")]
+            )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-sidebar__follow" }, [
+      _c("h3", { staticClass: "p-sidebar__follow__title" }, [
+        _vm._v("自動フォロー")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "p-sidebar__follow__area" }, [
+        _vm.autoFollowFlg
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "c-action-btn c-action-btn--follow c-action-btn--follow--optionGreen"
+              },
+              [_vm._v("ON")]
+            )
+          : _c(
+              "div",
+              {
+                staticClass: "c-action-btn c-action-btn--follow",
+                on: { click: _vm.autoFollow }
+              },
+              [_vm._v("ON")]
+            ),
+        _vm._v(" "),
+        !_vm.autoFollowFlg
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "c-action-btn c-action-btn--follow c-action-btn--follow--optionGreen"
+              },
+              [_vm._v("OFF")]
+            )
+          : _c(
+              "div",
+              {
+                staticClass: "c-action-btn c-action-btn--follow",
+                on: { click: _vm.autoFollow }
+              },
+              [_vm._v("OFF")]
+            )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -14946,17 +15114,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
-var script = {}
+/* harmony import */ var _AccountOptionComponent_vue_vue_type_template_id_b2080e74___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AccountOptionComponent.vue?vue&type=template&id=b2080e74& */ "./resources/js/components/AccountOptionComponent.vue?vue&type=template&id=b2080e74&");
+/* harmony import */ var _AccountOptionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AccountOptionComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/AccountOptionComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
-  script,
-  render,
-  staticRenderFns,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AccountOptionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AccountOptionComponent_vue_vue_type_template_id_b2080e74___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AccountOptionComponent_vue_vue_type_template_id_b2080e74___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -14964,8 +15135,42 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
+/* hot reload */
+if (false) { var api; }
 component.options.__file = "resources/js/components/AccountOptionComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/AccountOptionComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/AccountOptionComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountOptionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AccountOptionComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AccountOptionComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountOptionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AccountOptionComponent.vue?vue&type=template&id=b2080e74&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/AccountOptionComponent.vue?vue&type=template&id=b2080e74& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountOptionComponent_vue_vue_type_template_id_b2080e74___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AccountOptionComponent.vue?vue&type=template&id=b2080e74& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AccountOptionComponent.vue?vue&type=template&id=b2080e74&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountOptionComponent_vue_vue_type_template_id_b2080e74___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountOptionComponent_vue_vue_type_template_id_b2080e74___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

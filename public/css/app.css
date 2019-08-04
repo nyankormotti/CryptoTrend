@@ -404,6 +404,18 @@ body {
   text-align: center;
 }
 
+.c-action-btn--follow--optionBlue {
+  color: white;
+  background: #5e8ddb;
+  border: 1px solid #5e8ddb;
+}
+
+.c-action-btn--follow--optionGreen {
+  color: white;
+  background: #008a8a;
+  border: 1px solid #008a8a;
+}
+
 .p-banner {
   position: relative;
   width: 100%;
@@ -862,7 +874,6 @@ body {
 .p-user__text__profile__describe {
   padding: 5px 5px 10px 5px;
   color: #969696;
-  max-height: 120px;
   line-height: 1.6;
 }
 

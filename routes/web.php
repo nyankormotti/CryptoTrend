@@ -16,7 +16,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-// Auth::routes();
 
 // ログイン
 Route::get('/authLogin', 'AuthLoginController@index');
@@ -60,7 +59,10 @@ Route::get('/account', function () {
 })->name('account');
 
 Route::post('/account/get', 'AccountController@index');
-Route::post('/account/count', 'AccountController@totalCount');
+Route::post('/account/user', 'AccountController@getUser');
+Route::post('/account/auto', 'AccountController@autoFollow');
+Route::post('/account/follow', 'AccountController@follow');
+Route::post('/account/unfollow', 'AccountController@unFollow');
 
 // 仮想通貨関連ニュース
 Route::get('/news', 'NewsController@index')->name('news');
@@ -77,22 +79,7 @@ Route::get('/mypage', function () {
     return view('mypage');
 });
 
-// 検証用コントローラ
-// ツイート数
-Route::get('/tweet', 'TweetCountController@index')->name('tweet');
 
-// アカウント数
-Route::get('/accountSearch', 'AccountSearchController@index')->name('accountSearch');
-
-// coincheck
-Route::get('/coincheck', 'CoincheckController@index')->name('coin');
-
-// アカウントテーブルからの取得
-
-// 検証用コントローラ
-
-
-// ===================================================
 
 //ログイン認証するためのルーティング
 Route::get('/oauth', 'OAuthController@login');
@@ -108,15 +95,22 @@ Route::get('/oauthlogout', 'OAuthController@logout');
 
 
 
-// Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::get('login/twitter', 'Auth\SocialAccountController@redirectToProvider');
-// Route::get('login/twitter/callback', 'Auth\SocialAccountController@handleProviderCallback');
 
-// Route::get('auth/twitter', 'Auth\AuthController@redirectToProvider');
-// Route::get('auth/twitter/callback', 'Auth\AuthController@handleProviderCallback');
-// Route::get("auth/twitter/logout", "Auth\AuthController@getLogout");
 
-// Route::get("main", array("as" => "main", "uses" => function () {
-//     return view("main");
-// }));
+
+// ===================================================
+// 検証用コントローラ
+// ツイート数
+Route::get('/tweet', 'TweetCountController@index')->name('tweet');
+
+// アカウント数
+Route::get('/accountSearch', 'AccountSearchController@index')->name('accountSearch');
+
+// coincheck
+Route::get('/coincheck', 'CoincheckController@index')->name('coin');
+
+// アカウントテーブルからの取得
+
+// 検証用コントローラ
+// ===================================================

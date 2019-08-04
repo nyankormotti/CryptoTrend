@@ -43,5 +43,16 @@
         padding:10px 10px;
         width:60px;
         text-align:center;
+        &--optionBlue{
+            color:$font-color_white;
+            background:$background_color_optionBlue;
+            border:1px solid $background_color_optionBlue;
+        }
+        &--optionGreen{
+            color:$font-color_white;
+            background:$background_color_optionGreen;
+            border:1px solid $background_color_optionGreen;
+        }
     }
+    
 }

@@ -172,7 +172,12 @@ class GetCryptoAccountBatch extends Command
                     }
                 }
                 // ユーザー情報をアカウント情報更新完了に更新
+                // update_flg(アカウント更新フラグ)をfalse
+                // follow_limit(フォロー回数)を初期化
+                // unfollow_limit(フォロー解除回数)を初期化
                 $user[$i]->update_flg = 0;
+                $user[$i]->follow_limit = 0;
+                $user[$i]->unfollow_limit = 0;
                 $user[$i]->save();
             }
             DB::commit();

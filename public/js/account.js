@@ -1739,6 +1739,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1770,7 +1771,12 @@ __webpack_require__.r(__webpack_exports__);
       //フォロー回数
       unFollowLimit: 0,
       // フォロー解除回数
-      autoFollowFlg: 0 //自動フォローフラグ
+      autoFollowFlg: 0,
+      //自動フォローフラグ
+      twitter_id: 0,
+      action_flg: 1,
+      //フォロー成功の有無フラグ
+      act_follow_sign: 0 //フォロー、フォロー解除アクション時のサイン
 
     };
   },
@@ -1811,6 +1817,11 @@ __webpack_require__.r(__webpack_exports__);
       this.count = this.accounts.length;
       this.lastCount = this.page * this.perPage;
       this.firstCount = this.lastCount - 19;
+
+      if (this.lastCount > this.count) {
+        this.lastCount = this.count;
+      }
+
       this.totalPage = Math.ceil(this.accounts.length / this.perPage);
     },
     onPrev: function onPrev() {
@@ -1818,6 +1829,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     onNext: function onNext() {
       this.page = Math.min(this.page + 1, this.totalPage);
+    },
+    // 手動フォローメソッド
+    follow: function follow(id) {
+      var _this4 = this;
+
+      this.$axios.post('/account/follow', {
+        twitter_id: id
+      }).then(function (res) {
+        _this4.action_flg = res.data;
+        _this4.act_follow_sign = !_this4.act_follow_sign;
+      });
     }
   },
   computed: {
@@ -1841,6 +1863,9 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     followFlg: function followFlg() {
+      this.fetchAccount();
+    },
+    act_follow_sign: function act_follow_sign() {
       this.fetchAccount();
     }
   },
@@ -1886,11 +1911,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['accounts', 'page', 'perPage'],
   data: function data() {
     return {};
+  },
+  methods: {
+    follow: function follow(twitter_id) {
+      this.$emit('child-follow', twitter_id); // this.id = twitter_id 
+    }
   },
   computed: {
     filterAccounts: function filterAccounts() {
@@ -2516,7 +2545,8 @@ var render = function() {
             accounts: _vm.accounts,
             page: _vm.page,
             perPage: _vm.perPage
-          }
+          },
+          on: { "child-follow": _vm.follow }
         }),
         _vm._v(" "),
         _c("div", { staticClass: "p-account__page" }, [
@@ -2618,7 +2648,11 @@ var render = function() {
             "div",
             {
               staticClass: "p-user__top__btn c-action-btn",
-              attrs: { name: account.twiiter_id }
+              on: {
+                click: function($event) {
+                  return _vm.follow(account.twitter_id)
+                }
+              }
             },
             [_vm._v("フォロー")]
           )

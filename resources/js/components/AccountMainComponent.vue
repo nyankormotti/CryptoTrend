@@ -3,7 +3,7 @@
         <div v-for="(account, i) in filterAccounts" :key="i" class="p-user">
             <div class="p-user__top">
                 <h2 class="p-user__top__name">{{account.account_name}}</h2>
-                <div class="p-user__top__btn c-action-btn" :name="account.twiiter_id">フォロー</div>
+                <div class="p-user__top__btn c-action-btn" v-on:click="follow(account.twitter_id)">フォロー</div>
             </div>
             <div class="p-user__status">
                 <p class="p-user__status__screen">@{{account.screen_name}}</p>
@@ -21,7 +21,6 @@
             </div>
         </div>
     </div>
-            
 </template>
 
 <script>
@@ -33,6 +32,12 @@ export default {
     ],
     data: function() {
         return {
+        }
+    },
+    methods: {
+        follow: function(twitter_id) {
+            this.$emit('child-follow',twitter_id)
+            // this.id = twitter_id 
         }
     },
     computed: {

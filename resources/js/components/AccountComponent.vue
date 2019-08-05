@@ -13,7 +13,8 @@
             <AccountMain
             :accounts="accounts"
             :page="page"
-            :perPage="perPage">
+            :perPage="perPage"
+            @child-follow="follow">
             </AccountMain>
             <div class="p-account__page">
                 <a href="#" class="prev" @click="onPrev">&lt; Prev</a>
@@ -62,6 +63,9 @@ export default {
             followLimit: 0, //フォロー回数
             unFollowLimit: 0, // フォロー解除回数
             autoFollowFlg:0, //自動フォローフラグ
+            twitter_id:0,
+            action_flg:1,//フォロー成功の有無フラグ
+            act_follow_sign: 0 //フォロー、フォロー解除アクション時のサイン
         }
     },
     methods: {
@@ -95,6 +99,9 @@ export default {
             this.count = this.accounts.length
             this.lastCount = this.page * this.perPage
             this.firstCount = this.lastCount -19
+            if(this.lastCount > this.count) {
+                this.lastCount = this.count
+            }
             this.totalPage = Math.ceil(this.accounts.length / this.perPage)
         },
         onPrev() {
@@ -103,6 +110,15 @@ export default {
         onNext() {
             this.page= Math.min(this.page+ 1, this.totalPage);
         },
+        // 手動フォローメソッド
+        follow(id) {
+            this.$axios.post('/account/follow',{
+                twitter_id:id
+            }).then((res)=>{
+                this.action_flg = res.data
+                this.act_follow_sign = !this.act_follow_sign
+            })
+        }
     },
     computed: {
         prevPage() {
@@ -126,6 +142,9 @@ export default {
         followFlg: function() {
             this.fetchAccount()
         },
+        act_follow_sign:function() {
+            this.fetchAccount()
+        }
     },
     created() {
         this.fetchAccount()

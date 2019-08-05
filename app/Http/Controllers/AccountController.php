@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Account;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
@@ -54,9 +55,11 @@ class AccountController extends Controller
      * @return $action_flg (API連携の成功の有無)
      */
     public function follow(Request $request) {
+        \Log::info('===============');
+        \Log::info('手動フォロー開始');
 
         // API連携成功の有無フラグ
-        $action_flg = true;
+        $action_flg = 1;
 
         // セッションのユーザーIDよりユーザー情報を取得
         $user = User::find(Auth::id());
@@ -76,16 +79,58 @@ class AccountController extends Controller
             $oauth_token_secret
         );
 
+        // usersテーブルより初回リクエスト時間を取得
+        // usersテーブルより、リクエスト回数を取得
+        // usersテーブルより、フォロー回数を取得
+        // 現在時刻を取得
+        // 条件1
+        // if(15分 > (現在時間 - 初回時間)) {
+            
+             // if(リクエスト回数が15回未満ではない場合){
+                // $action_flg = 0;
+                // return $action_flg
+            // }
+        // }
+        // 15分以上
+        // else {
+            // 現在時刻を初回リクエスト時間に登録
+             // リクエスト回数を初期化
+            //  usersテーブルを更新
+        // }
+
+        // 条件2
+        // if(フォロー回数が24回以下の場合){
+            // フォロー回数を+1
+            // usersテーブルを更新
+        // } 
+        // 25回の場合
+        // else{
+            // $action_flg = 0;
+                // return $action_flg
+        // }
+
         // API連携(フォロー)
-        $result = $twitter->get('friendships/create', ["user_id" => $request->twitter_id]);
+        $result = $twitter->post('friendships/create', ["user_id" => $request->twitter_id]);
 
         // オブジェクトを配列形式に変換
         $result_array = json_decode(json_encode($result), true);
 
         // API連携が失敗した場合、API連携成功の有無フラグをfalseにする。
         if(!empty($result_array['errors'])) {
-            $action_flg = false;
+            \Log::info('エラー');
+            $action_flg = 0;
+        } else {
+            \Log::info('OK');
+            // アカウント情報のfollow_flgをtrueにする。
+            DB::table('accounts')
+            ->where('user_id', Auth::id())
+            ->where('twitter_id', $request->twitter_id)
+            ->update([
+                'follow_flg' => 1
+            ]);
         }
+
+        \Log::info('リターン前');
 
         return $action_flg;
     }
@@ -125,6 +170,11 @@ class AccountController extends Controller
 
         if(!empty($result_array['errors'])) {
             $action_flg = false;
+        } else {
+            // アカウント情報のfollow_flgをfalseにする。
+            $account = Account::where('user_id', Auth::id())->where('twitter_id', $request->twitter_id)->get();
+            $account->follow_flg = 0;
+            $account->save();
         }
 
         // API連携が失敗した場合、API連携成功の有無フラグをfalseにする。

@@ -269,7 +269,7 @@ class GetCryptoTweetCountBatch extends Command
                     ->where('currency_id', $i + 1)
                     ->first();
 
-                $trend->tweet_count = $tweet_days_count[$i];
+                $trend->tweet_count = $tweet_weeks_count[$i];
                 $trend->acquisition_date = $acquisition_date;
                 $trend->save();
             }

@@ -856,6 +856,21 @@ body {
   background: white;
 }
 
+.p-user__top__btn--actUnFollow {
+  margin-right: 0;
+  margin-bottom: 0;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: white;
+  background: #cc3d3d;
+  border: 1px solid #cc3d3d;
+}
+
+.p-user__top__btn--actUnFollow:hover {
+  color: #cc3d3d;
+  background: white;
+}
+
 .p-user__status {
   width: 90%;
   padding: 10px 20px;
@@ -888,6 +903,13 @@ body {
 
 .p-user__text__tweet__title {
   color: #ff9900;
+  font-weight: bold;
+  padding: 5px 0;
+  font-size: 18px;
+}
+
+.p-user__text__tweet__title--actUnFollow {
+  color: #cc3d3d;
   font-weight: bold;
   padding: 5px 0;
   font-size: 18px;

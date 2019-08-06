@@ -14,7 +14,9 @@
             :accounts="accounts"
             :page="page"
             :perPage="perPage"
-            @child-follow="follow">
+            :followFlg="followFlg"
+            @child-follow="follow"
+            @child-unfollow="unfollow">
             </AccountMain>
             <div class="p-account__page">
                 <a href="#" class="prev" @click="onPrev">&lt; Prev</a>
@@ -64,8 +66,10 @@ export default {
             unFollowLimit: 0, // フォロー解除回数
             autoFollowFlg:0, //自動フォローフラグ
             twitter_id:0,
-            action_flg:1,//フォロー成功の有無フラグ
-            act_follow_sign: 0 //フォロー、フォロー解除アクション時のサイン
+            result_follow_flg:1,//手動フォローの結果フラグ
+            act_follow_sign: 0,//フォローリクエスト時のサイン
+            result_unfollow_flg:1,//手動フォロー解除の結果フラグ
+            act_unfollow_sign: 0 //フォロー解除リクエスト時のサイン
         }
     },
     methods: {
@@ -74,7 +78,9 @@ export default {
                 follow_flg:this.followFlg
             }).then((res)=>{
                 this.accounts = res.data
-            })
+            }).catch(err => {
+                alert('例外が発生しました。しばらく経ってからお試しください。')
+            });
         },
         fetchUser: function() {
             this.$axios.post('/account/user').then((res)=>{
@@ -93,14 +99,24 @@ export default {
             }).then((res)=>{
                 this.users = res.data
                 this.autoFollowFlg = this.users.autofollow_flg
-            })
+            }).catch(err => {
+                alert('例外が発生しました。しばらく経ってからお試しください。')
+            });
         },
         pageCount: function() {
             this.count = this.accounts.length
             this.lastCount = this.page * this.perPage
-            this.firstCount = this.lastCount -19
+            if(this.count % 20 == 0 || this.lastCount <= 20) {
+                this.firstCount = 1
+            } else if(this.lastCount <= this.count){
+                this.firstCount = this.lastCount -19
+            } else {
+                this.firstCount = (this.page - 1) * this.perPage + 1
+            }
+
             if(this.lastCount > this.count) {
                 this.lastCount = this.count
+                this.firstCount = (this.page - 1) * this.perPage + 1
             }
             this.totalPage = Math.ceil(this.accounts.length / this.perPage)
         },
@@ -115,9 +131,24 @@ export default {
             this.$axios.post('/account/follow',{
                 twitter_id:id
             }).then((res)=>{
-                this.action_flg = res.data
+                this.result_follow_flg = res.data
                 this.act_follow_sign = !this.act_follow_sign
-            })
+            }).catch(err => {
+                this.act_follow_sign = !this.act_follow_sign
+                alert('例外が発生しました。しばらく経ってからお試しください。')
+            });
+        },
+        // 手動フォロー解除メソッド
+        unfollow(id) {
+            this.$axios.post('/account/unfollow',{
+                twitter_id:id
+            }).then((res)=>{
+                this.result_unfollow_flg = res.data
+                this.act_unfollow_sign = !this.act_unfollow_sign
+            }).catch(err => {
+                this.act_follow_sign = !this.act_follow_sign
+                alert('例外が発生しました。しばらく経ってからお試しください。')
+            });
         }
     },
     computed: {
@@ -133,8 +164,32 @@ export default {
             this.pageCount()
         },
         page: function() {
+            if(this.totalPage < this.page){
+                this.page = this.totalPage
+            }
             this.lastCount = this.page * this.perPage
-            this.firstCount = this.lastCount -19
+            if(this.count % 20 == 0 || this.lastCount <= 20) {
+                this.firstCount = 1
+            } else if(this.lastCount <= this.count){
+                this.firstCount = this.lastCount -19
+            } else {
+                this.firstCount = (this.page - 1) * this.perPage + 1
+            }
+            if(this.lastCount > this.count) {
+                this.lastCount = this.count
+                this.firstCount = (this.page - 1) * this.perPage + 1
+            } 
+        },
+        count: function() {
+            if(this.totalPage < this.page){
+                this.page = this.totalPage
+            }
+            this.lastCount = this.page * this.perPage
+            if(this.count % 20 == 0 || this.lastCount <= 20) {
+                this.firstCount = 1
+            } else {
+                this.firstCount = (this.page - 1) * this.perPage + 1
+            }
             if(this.lastCount > this.count) {
                 this.lastCount = this.count
             }
@@ -142,8 +197,39 @@ export default {
         followFlg: function() {
             this.fetchAccount()
         },
-        act_follow_sign:function() {
+        // 手動フォローリクエスト時のサイン
+        // 手動フォロー実行後に処理を実行する。
+        act_follow_sign: function() {
+            // API連携が失敗した場合、アラートを発行
+            if(this.result_follow_flg == 0) {
+                alert('そのアカウントはフォローできません。')
+            } else if(this.result_follow_flg == 2) {
+                alert('15分間のリクエスト回数を超えているため、フォローできません。')
+            } else if(this.result_follow_flg == 3) {
+                alert('1日のフォロー上限回数を超えているため、処理できません。')
+            } else if(this.result_follow_flg == 4) {
+                alert('そのアカウントはフォロー済みです。')
+            }
+            this.result_follow_flg = 1
             this.fetchAccount()
+            this.fetchUser();
+        },
+        // 手動フォロー解除リクエスト時のサイン
+        // 手動フォロー解除実行後に処理を実行する。
+        act_unfollow_sign: function() {
+            // API連携が失敗した場合、アラートを発行
+            if(this.result_unfollow_flg == 0) {
+                alert('そのアカウントはフォロー解除できません。')
+            } else if(this.result_unfollow_flg == 2) {
+                alert('15分間のリクエスト回数を超えているため、フォロー解除できません。')
+            } else if(this.result_unfollow_flg == 3) {
+                alert('1日のフォロー解除上限回数を超えているため、処理できません。')
+            } else if(this.result_unfollow_flg == 4) {
+                alert('そのアカウントはフォロー解除済です。')
+            }
+            this.result_unfollow_flg = 1
+            this.fetchAccount()
+            this.fetchUser();
         }
     },
     created() {

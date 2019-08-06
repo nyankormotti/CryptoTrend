@@ -52,6 +52,7 @@ Route::get('/trend', function () {
 })->name('trend');
 
 Route::post('/trend/get', 'TrendController@index');
+Route::post('/trend/getUpdated', 'TrendController@getUpdated');
 
 // 仮想通貨関連アカウント一覧画面
 Route::get('/account', function () {

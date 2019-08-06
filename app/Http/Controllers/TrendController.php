@@ -8,18 +8,34 @@ use Illuminate\Http\Request;
 
 class TrendController extends Controller
 {
-    public function index(Request $request) {
-        
+
+    /**
+     * トレンド一覧取得
+     * @param $request (twitter_id)
+     * @return $trends(トレンド一覧)
+     */
+    public function index(Request $request)
+    {
         $trends = Trend::where('period_id',$request->period_id)->with('currency')->orderBy('tweet_count','DESC')->get();
-        // var_dump($trends);exit;
-        // var_dump($trends[0]->currency->currency_name);exit;
         $rank = 0;
+        // ランキング付け処理
         foreach($trends as $trend){
             $trends[$rank]['rank'] = $rank + 1;
             $rank++;
         }
-        
         return $trends;
-        // return view('trend', ['trends' => $trends, 'rank' => $rank]);
+    }
+
+    /**
+     * トレンド一覧更新日取得
+     * @param $request (twitter_id)
+     * @return $updated (トレンド一覧更新日)
+     */
+    public function getUpdated(Request $request)
+    {
+        $trends = Trend::where('period_id', $request->period_id)->with('currency')->orderBy('tweet_count', 'DESC')->get();
+        $updated = $trends[0]['updated_at'];
+
+        return $updated;
     }
 }

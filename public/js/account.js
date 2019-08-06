@@ -1740,6 +1740,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1774,9 +1776,13 @@ __webpack_require__.r(__webpack_exports__);
       autoFollowFlg: 0,
       //自動フォローフラグ
       twitter_id: 0,
-      action_flg: 1,
-      //フォロー成功の有無フラグ
-      act_follow_sign: 0 //フォロー、フォロー解除アクション時のサイン
+      result_follow_flg: 1,
+      //手動フォローの結果フラグ
+      act_follow_sign: 0,
+      //フォローリクエスト時のサイン
+      result_unfollow_flg: 1,
+      //手動フォロー解除の結果フラグ
+      act_unfollow_sign: 0 //フォロー解除リクエスト時のサイン
 
     };
   },
@@ -1788,6 +1794,8 @@ __webpack_require__.r(__webpack_exports__);
         follow_flg: this.followFlg
       }).then(function (res) {
         _this.accounts = res.data;
+      })["catch"](function (err) {
+        alert('例外が発生しました。しばらく経ってからお試しください。');
       });
     },
     fetchUser: function fetchUser() {
@@ -1811,15 +1819,25 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this3.users = res.data;
         _this3.autoFollowFlg = _this3.users.autofollow_flg;
+      })["catch"](function (err) {
+        alert('例外が発生しました。しばらく経ってからお試しください。');
       });
     },
     pageCount: function pageCount() {
       this.count = this.accounts.length;
       this.lastCount = this.page * this.perPage;
-      this.firstCount = this.lastCount - 19;
+
+      if (this.count % 20 == 0 || this.lastCount <= 20) {
+        this.firstCount = 1;
+      } else if (this.lastCount <= this.count) {
+        this.firstCount = this.lastCount - 19;
+      } else {
+        this.firstCount = (this.page - 1) * this.perPage + 1;
+      }
 
       if (this.lastCount > this.count) {
         this.lastCount = this.count;
+        this.firstCount = (this.page - 1) * this.perPage + 1;
       }
 
       this.totalPage = Math.ceil(this.accounts.length / this.perPage);
@@ -1837,8 +1855,25 @@ __webpack_require__.r(__webpack_exports__);
       this.$axios.post('/account/follow', {
         twitter_id: id
       }).then(function (res) {
-        _this4.action_flg = res.data;
+        _this4.result_follow_flg = res.data;
         _this4.act_follow_sign = !_this4.act_follow_sign;
+      })["catch"](function (err) {
+        _this4.act_follow_sign = !_this4.act_follow_sign;
+        alert('例外が発生しました。しばらく経ってからお試しください。');
+      });
+    },
+    // 手動フォロー解除メソッド
+    unfollow: function unfollow(id) {
+      var _this5 = this;
+
+      this.$axios.post('/account/unfollow', {
+        twitter_id: id
+      }).then(function (res) {
+        _this5.result_unfollow_flg = res.data;
+        _this5.act_unfollow_sign = !_this5.act_unfollow_sign;
+      })["catch"](function (err) {
+        _this5.act_follow_sign = !_this5.act_follow_sign;
+        alert('例外が発生しました。しばらく経ってからお試しください。');
       });
     }
   },
@@ -1855,8 +1890,37 @@ __webpack_require__.r(__webpack_exports__);
       this.pageCount();
     },
     page: function page() {
+      if (this.totalPage < this.page) {
+        this.page = this.totalPage;
+      }
+
       this.lastCount = this.page * this.perPage;
-      this.firstCount = this.lastCount - 19;
+
+      if (this.count % 20 == 0 || this.lastCount <= 20) {
+        this.firstCount = 1;
+      } else if (this.lastCount <= this.count) {
+        this.firstCount = this.lastCount - 19;
+      } else {
+        this.firstCount = (this.page - 1) * this.perPage + 1;
+      }
+
+      if (this.lastCount > this.count) {
+        this.lastCount = this.count;
+        this.firstCount = (this.page - 1) * this.perPage + 1;
+      }
+    },
+    count: function count() {
+      if (this.totalPage < this.page) {
+        this.page = this.totalPage;
+      }
+
+      this.lastCount = this.page * this.perPage;
+
+      if (this.count % 20 == 0 || this.lastCount <= 20) {
+        this.firstCount = 1;
+      } else {
+        this.firstCount = (this.page - 1) * this.perPage + 1;
+      }
 
       if (this.lastCount > this.count) {
         this.lastCount = this.count;
@@ -1865,8 +1929,41 @@ __webpack_require__.r(__webpack_exports__);
     followFlg: function followFlg() {
       this.fetchAccount();
     },
+    // 手動フォローリクエスト時のサイン
+    // 手動フォロー実行後に処理を実行する。
     act_follow_sign: function act_follow_sign() {
+      // API連携が失敗した場合、アラートを発行
+      if (this.result_follow_flg == 0) {
+        alert('そのアカウントはフォローできません。');
+      } else if (this.result_follow_flg == 2) {
+        alert('15分間のリクエスト回数を超えているため、フォローできません。');
+      } else if (this.result_follow_flg == 3) {
+        alert('1日のフォロー上限回数を超えているため、処理できません。');
+      } else if (this.result_follow_flg == 4) {
+        alert('そのアカウントはフォロー済みです。');
+      }
+
+      this.result_follow_flg = 1;
       this.fetchAccount();
+      this.fetchUser();
+    },
+    // 手動フォロー解除リクエスト時のサイン
+    // 手動フォロー解除実行後に処理を実行する。
+    act_unfollow_sign: function act_unfollow_sign() {
+      // API連携が失敗した場合、アラートを発行
+      if (this.result_unfollow_flg == 0) {
+        alert('そのアカウントはフォロー解除できません。');
+      } else if (this.result_unfollow_flg == 2) {
+        alert('15分間のリクエスト回数を超えているため、フォロー解除できません。');
+      } else if (this.result_unfollow_flg == 3) {
+        alert('1日のフォロー解除上限回数を超えているため、処理できません。');
+      } else if (this.result_unfollow_flg == 4) {
+        alert('そのアカウントはフォロー解除済です。');
+      }
+
+      this.result_unfollow_flg = 1;
+      this.fetchAccount();
+      this.fetchUser();
     }
   },
   created: function created() {
@@ -1911,14 +2008,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['accounts', 'page', 'perPage'],
+  props: ['accounts', 'page', 'perPage', 'followFlg'],
   data: function data() {
     return {};
   },
   methods: {
     follow: function follow(twitter_id) {
-      this.$emit('child-follow', twitter_id); // this.id = twitter_id 
+      this.$emit('child-follow', twitter_id);
+    },
+    unfollow: function unfollow(twitter_id) {
+      this.$emit('child-unfollow', twitter_id);
     }
   },
   computed: {
@@ -2544,9 +2646,10 @@ var render = function() {
           attrs: {
             accounts: _vm.accounts,
             page: _vm.page,
-            perPage: _vm.perPage
+            perPage: _vm.perPage,
+            followFlg: _vm.followFlg
           },
-          on: { "child-follow": _vm.follow }
+          on: { "child-follow": _vm.follow, "child-unfollow": _vm.unfollow }
         }),
         _vm._v(" "),
         _c("div", { staticClass: "p-account__page" }, [
@@ -2644,18 +2747,31 @@ var render = function() {
             _vm._v(_vm._s(account.account_name))
           ]),
           _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "p-user__top__btn c-action-btn",
-              on: {
-                click: function($event) {
-                  return _vm.follow(account.twitter_id)
-                }
-              }
-            },
-            [_vm._v("フォロー")]
-          )
+          !_vm.followFlg
+            ? _c(
+                "div",
+                {
+                  staticClass: "p-user__top__btn c-action-btn",
+                  on: {
+                    click: function($event) {
+                      return _vm.follow(account.twitter_id)
+                    }
+                  }
+                },
+                [_vm._v("フォロー")]
+              )
+            : _c(
+                "div",
+                {
+                  staticClass: "p-user__top__btn--actUnFollow c-action-btn",
+                  on: {
+                    click: function($event) {
+                      return _vm.unfollow(account.twitter_id)
+                    }
+                  }
+                },
+                [_vm._v("フォロー解除")]
+              )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "p-user__status" }, [
@@ -2685,9 +2801,15 @@ var render = function() {
           _c("span", { staticClass: "p-user__text__border" }),
           _vm._v(" "),
           _c("div", { staticClass: "p-user__text__tweet" }, [
-            _c("h3", { staticClass: "p-user__text__tweet__title" }, [
-              _vm._v("最新ツイート")
-            ]),
+            !_vm.followFlg
+              ? _c("h3", { staticClass: "p-user__text__tweet__title" }, [
+                  _vm._v("最新ツイート")
+                ])
+              : _c(
+                  "h3",
+                  { staticClass: "p-user__text__tweet__title--actUnFollow" },
+                  [_vm._v("最新ツイート")]
+                ),
             _vm._v(" "),
             _c(
               "p",

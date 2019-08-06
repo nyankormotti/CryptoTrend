@@ -1887,7 +1887,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       trends: [],
-      ranking: 0
+      ranking: 0,
+      updated: ''
     };
   },
   methods: {
@@ -1898,6 +1899,19 @@ __webpack_require__.r(__webpack_exports__);
         period_id: this.period
       }).then(function (res) {
         _this.trends = res.data;
+      })["catch"](function (err) {
+        alert('例外が発生しました。しばらく経ってからお試しください。');
+      });
+    },
+    getUpdatedTime: function getUpdatedTime() {
+      var _this2 = this;
+
+      this.$axios.post('/trend/getUpdated', {
+        period_id: this.period
+      }).then(function (res) {
+        _this2.updated = res.data;
+      })["catch"](function (err) {
+        alert('例外が発生しました。しばらく経ってからお試しください。');
       });
     },
     searchCheck: function searchCheck(i, id, trend, trends) {
@@ -1972,10 +1986,12 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     period: function period() {
       this.fetchTrend();
+      this.getUpdatedTime();
     }
   },
   created: function created() {
     this.fetchTrend();
+    this.getUpdatedTime();
   }
 });
 
@@ -20283,9 +20299,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("p", { staticClass: "p-trend__top__area__page" }, [
-          _vm._v(
-            "更新：" + _vm._s(_vm._f("moment")(_vm.searchTrend[0].updated_at))
-          )
+          _vm._v("更新：" + _vm._s(_vm._f("moment")(_vm.updated)))
         ])
       ]),
       _vm._v(" "),

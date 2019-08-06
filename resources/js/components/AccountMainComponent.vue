@@ -3,7 +3,8 @@
         <div v-for="(account, i) in filterAccounts" :key="i" class="p-user">
             <div class="p-user__top">
                 <h2 class="p-user__top__name">{{account.account_name}}</h2>
-                <div class="p-user__top__btn c-action-btn" v-on:click="follow(account.twitter_id)">フォロー</div>
+                <div v-if="!followFlg" class="p-user__top__btn c-action-btn" v-on:click="follow(account.twitter_id)">フォロー</div>
+                <div v-else class="p-user__top__btn--actUnFollow c-action-btn" v-on:click="unfollow(account.twitter_id)">フォロー解除</div>
             </div>
             <div class="p-user__status">
                 <p class="p-user__status__screen">@{{account.screen_name}}</p>
@@ -15,7 +16,8 @@
                 </div>
                 <span class="p-user__text__border"></span>
                 <div class="p-user__text__tweet">
-                    <h3 class="p-user__text__tweet__title">最新ツイート</h3>
+                    <h3 v-if="!followFlg" class="p-user__text__tweet__title">最新ツイート</h3>
+                    <h3 v-else class="p-user__text__tweet__title--actUnFollow">最新ツイート</h3>
                     <p class="p-user__text__tweet__describe" key="text">{{account.recent_tweet}}</p>
                 </div>
             </div>
@@ -29,6 +31,7 @@ export default {
         'accounts',
         'page',
         'perPage',
+        'followFlg'
     ],
     data: function() {
         return {
@@ -37,8 +40,10 @@ export default {
     methods: {
         follow: function(twitter_id) {
             this.$emit('child-follow',twitter_id)
-            // this.id = twitter_id 
-        }
+        },
+        unfollow: function(twitter_id) {
+            this.$emit('child-unfollow',twitter_id)
+        },
     },
     computed: {
         filterAccounts() {

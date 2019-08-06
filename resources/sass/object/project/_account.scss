@@ -76,6 +76,19 @@
                 color:$font-color_orange;
                 background:$background_color_white;
             }
+            &--actUnFollow{
+                margin-right:0;
+                margin-bottom:0;
+                padding:5px 10px;
+                font-size:$font-size_m;
+                color:$font-color_white;
+                background:$background_color_softRed;
+                border:1px solid $font-color_softRed;
+                &:hover{
+                    color:$background_color_softRed;
+                    background:$background_color_white;
+                }
+            }
         }
     }
     &__status{
@@ -111,6 +124,12 @@
                 font-weight:bold;
                 padding: 5px 0;
                 font-size:$font-size_l;
+                &--actUnFollow{
+                    color:$font-color_softRed;
+                    font-weight:bold;
+                    padding: 5px 0;
+                    font-size:$font-size_l;
+                }
             }
             &__describe{
                 padding:5px;
@@ -119,5 +138,4 @@
             }
         }
     }
-    
 }

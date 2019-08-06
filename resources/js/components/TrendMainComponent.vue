@@ -3,7 +3,7 @@
         <div class="p-trend__top">
             <div class="p-trend__top__area">
                 <h2 class="p-trend__top__area__title">Crypto Ranking</h2>
-                <p class="p-trend__top__area__page">更新：{{searchTrend[0].updated_at | moment}}</p>
+                <p class="p-trend__top__area__page">更新：{{updated | moment}}</p>
             </div>
             <span class="p-trend__top__border"></span>
         </div>
@@ -64,7 +64,8 @@ export default {
     data: function() {
     return {
         trends: [],
-        ranking: 0
+        ranking: 0,
+        updated: ''
         }
     },
     methods: {
@@ -73,7 +74,18 @@ export default {
                 period_id: this.period
             }).then((res)=>{
                 this.trends = res.data
-            })
+            }).catch(err => {
+                alert('例外が発生しました。しばらく経ってからお試しください。')
+            });
+        },
+        getUpdatedTime: function() {
+            this.$axios.post('/trend/getUpdated',{
+                period_id: this.period
+            }).then((res)=>{
+                this.updated = res.data
+            }).catch(err => {
+                alert('例外が発生しました。しばらく経ってからお試しください。')
+            });
         },
         searchCheck: function(i,id,trend,trends) {
             if(id == trend.currency.id) {
@@ -142,11 +154,13 @@ export default {
     },
     watch: {
         period: function() {
-            this.fetchTrend();
+            this.fetchTrend()
+            this.getUpdatedTime()
         }
     },
     created() {
         this.fetchTrend()
+        this.getUpdatedTime()
     },
 }
 </script>

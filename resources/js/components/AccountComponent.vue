@@ -45,6 +45,7 @@
 
 import AccountMain from './AccountMainComponent.vue'
 import AccountOption from './AccountOptionComponent.vue'
+import { setInterval } from 'timers';
 
 export default {
     components: {
@@ -69,7 +70,8 @@ export default {
             result_follow_flg:1,//手動フォローの結果フラグ
             act_follow_sign: 0,//フォローリクエスト時のサイン
             result_unfollow_flg:1,//手動フォロー解除の結果フラグ
-            act_unfollow_sign: 0 //フォロー解除リクエスト時のサイン
+            act_unfollow_sign: 0, //フォロー解除リクエスト時のサイン
+            intervalId: undefined // setInterval用
         }
     },
     methods: {
@@ -235,6 +237,21 @@ export default {
     created() {
         this.fetchAccount()
         this.fetchUser()
+    },
+    mounted () {
+        let that = this
+        // 毎分、アカウント情報、ユーザー情報の最新のデータを取得(DBからデータを取得)
+        // 自動フォローをバッチで行なっているため、
+        this.intervalId = setInterval(function() {
+            that.fetchAccount()
+            that.fetchUser()
+            console.log('setInterval')
+        },60000);
+    },
+    beforeDestroy() {
+        // Vueインスタンスが破壊される直前に、setInteval処理を中断する。
+        console.log('clearInterval')
+        clearInterval(this.intervalId)
     }
 }
 </script>

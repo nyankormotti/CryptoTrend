@@ -1699,6 +1699,8 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AccountMainComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AccountMainComponent.vue */ "./resources/js/components/AccountMainComponent.vue");
 /* harmony import */ var _AccountOptionComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AccountOptionComponent.vue */ "./resources/js/components/AccountOptionComponent.vue");
+/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! timers */ "./node_modules/timers-browserify/main.js");
+/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(timers__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -1742,6 +1744,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1782,7 +1785,9 @@ __webpack_require__.r(__webpack_exports__);
       //フォローリクエスト時のサイン
       result_unfollow_flg: 1,
       //手動フォロー解除の結果フラグ
-      act_unfollow_sign: 0 //フォロー解除リクエスト時のサイン
+      act_unfollow_sign: 0,
+      //フォロー解除リクエスト時のサイン
+      intervalId: undefined // setInterval用
 
     };
   },
@@ -1969,6 +1974,21 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.fetchAccount();
     this.fetchUser();
+  },
+  mounted: function mounted() {
+    var that = this; // 毎分、アカウント情報、ユーザー情報の最新のデータを取得(DBからデータを取得)
+    // 自動フォローをバッチで行なっているため、
+
+    this.intervalId = Object(timers__WEBPACK_IMPORTED_MODULE_2__["setInterval"])(function () {
+      that.fetchAccount();
+      that.fetchUser();
+      console.log('setInterval');
+    }, 60000);
+  },
+  beforeDestroy: function beforeDestroy() {
+    // Vueインスタンスが破壊される直前に、setInteval処理を中断する。
+    console.log('clearInterval');
+    clearInterval(this.intervalId);
   }
 });
 

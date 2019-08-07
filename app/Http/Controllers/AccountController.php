@@ -111,7 +111,6 @@ class AccountController extends Controller
         }
 
         // usersテーブルより初回リクエスト時間を取得
-        // $first_request_time = $user->first_request_time;
         $first_request_time = new Carbon($user->first_request_time);
         // usersテーブルより、リクエスト回数を取得
         $request_count = $user->request_count;
@@ -145,13 +144,9 @@ class AccountController extends Controller
             // 初回リクエストした時間から15分以上経過した場合
             // 現在時刻を初回リクエスト時間に登録
             // リクエスト回数を初期化
-            $request_count = 0;
+            $request_count = 1;
             // リクエスト時間を現在時刻に更新
             $first_request_time = new Carbon();
-            //  usersテーブルを更新
-            $user->request_count = $request_count;
-            $user->first_request_time = $first_request_time;
-            $user->save();
         }
 
         // リクエスト制限判定その2
@@ -160,10 +155,6 @@ class AccountController extends Controller
             // フォローした回数が24回以下の場合
             // フォロー回数を+1回
             $follow_count = $follow_count + 1;
-            // usersテーブルを更新
-            $user->request_count = $request_count;
-            $user->follow_limit = $follow_count;
-            $user->save();
         } else {
             \Log::info('フォローした回数が25回以上');
             \Log::info('エラー：フォロー上限回数を超えています');
@@ -173,6 +164,11 @@ class AccountController extends Controller
             $action_flg = 3;
             return $action_flg;
         }
+        //  usersテーブルを更新
+        $user->request_count = $request_count;
+        $user->follow_limit = $follow_count;
+        $user->first_request_time = $first_request_time;
+        $user->save();
 
         // API連携(フォローリクエスト実施)
         $result = $twitter->post('friendships/create', ["user_id" => $request->twitter_id]);
@@ -195,7 +191,6 @@ class AccountController extends Controller
                 'follow_flg' => 1
             ]);
         }
-
         \Log::info('手動フォロー処理終了');
         \Log::info('===============');
 
@@ -297,13 +292,10 @@ class AccountController extends Controller
             // リクエスト回数が1回以上であり、初回リクエストした時間から15分以上経過した場合
             // 現在時刻を初回リクエスト時間に登録
             // リクエスト回数を初期化
-            $request_count = 0;
+            $request_count = 1;
             // リクエスト時間を現在時刻に更新
             $first_request_time = new Carbon();
-            //  usersテーブルを更新
-            $user->request_count = $request_count;
-            $user->first_request_time = $first_request_time;
-            $user->save();
+            
         }
 
         // リクエスト制限判定その2
@@ -312,10 +304,6 @@ class AccountController extends Controller
             // フォローした回数が99回以下の場合
             // フォロー回数を+1回
             $unfollow_count = $unfollow_count + 1;
-            // usersテーブルを更新
-            $user->request_count = $request_count;
-            $user->unfollow_limit = $unfollow_count;
-            $user->save();
         } else {
             \Log::info('フォロー解除した回数が100回以上');
             \Log::info('エラー：フォロー解除上限回数を超えています');
@@ -325,6 +313,11 @@ class AccountController extends Controller
             $action_flg = 3;
             return $action_flg;
         }
+        //  usersテーブルを更新
+        $user->request_count = $request_count;
+        $user->unfollow_limit = $unfollow_count;
+        $user->first_request_time = $first_request_time;
+        $user->save();
 
         // API連携(フォローリクエスト実施)
         $result = $twitter->post('friendships/destroy', ["user_id" => $request->twitter_id]);

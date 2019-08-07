@@ -1976,8 +1976,8 @@ __webpack_require__.r(__webpack_exports__);
     this.fetchUser();
   },
   mounted: function mounted() {
-    var that = this; // 毎分、アカウント情報、ユーザー情報の最新のデータを取得(DBからデータを取得)
-    // 自動フォローをバッチで行なっているため、
+    var that = this; // 毎分、最新のアカウント情報とユーザー情報を描画(DBからデータを取得)
+    // 自動フォローをバッチで行なっているため、リアルタイムでの描画が必要となる(自動フォロー処理は30分毎に1アカウントをフォローしている)
 
     this.intervalId = Object(timers__WEBPACK_IMPORTED_MODULE_2__["setInterval"])(function () {
       that.fetchAccount();

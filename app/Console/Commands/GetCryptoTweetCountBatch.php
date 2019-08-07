@@ -278,7 +278,8 @@ class GetCryptoTweetCountBatch extends Command
             // 現在時間より1週間前のツイート数のレコードを削除(Tweetsテーブルより削除)
             $delete_weeks_ago_date = date("Y-m-d H:i:s", strtotime($acquisition_date . "-7 day"));
 
-            $tweet = Tweet::where('acquisition_date', '<=', $delete_weeks_ago_date)
+            $tweet = DB::table('tweets')
+                ->where('acquisition_date', '<=', $delete_weeks_ago_date)
                 ->delete();
             // 削除処理終了
 

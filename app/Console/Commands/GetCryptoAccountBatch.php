@@ -49,7 +49,7 @@ class GetCryptoAccountBatch extends Command
         DB::beginTransaction();
         try {
             // ユーザー情報を取得
-            $user = User::where('delete_flg', '!=', '1')->get();
+            $user = User::where('delete_flg', 0)->get();
 
             // 15分間のAPIリクエスト上限回数('users/search'のリクエスト制限は1ユーザー15分間で900回まで)
             $RQUEST_LIMIT = 900;

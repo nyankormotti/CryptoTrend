@@ -3,6 +3,7 @@
 namespace App\Console;
 
 
+use App\Console\Commands\AutoFollowBatch;
 use Illuminate\Console\Scheduling\Schedule;
 use App\Console\Commands\GetCryptoPriceBatch;
 use App\Console\Commands\GetCryptoAccountBatch;
@@ -20,6 +21,7 @@ class Kernel extends ConsoleKernel
         GetCryptoPriceBatch::class,
         GetCryptoTweetCountBatch::class,
         GetCryptoAccountBatch::class,
+        AutoFollowBatch::class,
     ];
 
     /**
@@ -35,10 +37,13 @@ class Kernel extends ConsoleKernel
             ->hourly();
 
         $schedule->command('batch:CryptoPrice')
-            ->daily();
+            ->daily()->withoutOverlapping();
 
         $schedule->command('batch:CryptoAccount')
-            ->daily();
+            ->daily()->withoutOverlapping();
+
+        $schedule->command('batch:AutoFollow')
+            ->everyThirtyMinutes()->withoutOverlapping();
 
     }
 

@@ -240,8 +240,8 @@ export default {
     },
     mounted () {
         let that = this
-        // 毎分、アカウント情報、ユーザー情報の最新のデータを取得(DBからデータを取得)
-        // 自動フォローをバッチで行なっているため、
+        // 毎分、最新のアカウント情報とユーザー情報を描画(DBからデータを取得)
+        // 自動フォローをバッチで行なっているため、リアルタイムでの描画が必要となる(自動フォロー処理は30分毎に1アカウントをフォローしている)
         this.intervalId = setInterval(function() {
             that.fetchAccount()
             that.fetchUser()

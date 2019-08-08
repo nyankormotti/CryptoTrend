@@ -41,6 +41,14 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+
+        'before.login' => [
+            \App\Http\Middleware\BeforeLoginMiddleware::class
+        ],
+
+        'after.login' => [
+            \App\Http\Middleware\AfterLoginMiddleware::class
+        ],
     ];
 
     /**
@@ -60,6 +68,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'before.login' => \App\Http\Middleware\BeforeLoginMiddleware::class
     ];
 
     /**

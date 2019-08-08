@@ -58,7 +58,6 @@ class OAuthController extends Controller
         //セッションにアクセストークンを登録
         session()->put('oauth_token', $accessToken['oauth_token']);
         session()->put('oauth_token_secret', $accessToken['oauth_token_secret']);
-        // session()->put('accessToken', $accessToken);
 
         //indexページにリダイレクト
         return redirect('main');

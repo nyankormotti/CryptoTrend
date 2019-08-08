@@ -11,24 +11,25 @@
 |
 */
 
-// トップページ
-Route::get('/', function () {
-    return view('index');
+// ログイン前の画面表示
+Route::group(['middleware' => ['before.login']], function () {
+    // トップページ
+    Route::get('/', 'IndexController@index');
+    // ログイン
+    Route::get('/authLogin', 'AuthLoginController@index');
+    // 会員登録
+    Route::get('/signup', 'SignUpController@index');
 });
 
-
-// ログイン
-Route::get('/authLogin', 'AuthLoginController@index');
+// ログイン処理
 Route::post('/authLogin', 'AuthLoginController@authLogin');
-
-// 会員登録
-Route::get('/signup', 'SignUpController@index');
+// 会員登録処理
 Route::post('/signup', 'SignUpController@signup');
 
 //logout後のリダイレクト先
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 // パスワードリマインダー送信
 Route::get('/passwordRemindSend', function () {
@@ -46,49 +47,37 @@ Route::get('/changeTwitterAccount', function () {
 // ===================================================
 // ログイン後
 
-// 仮想通貨トレンド画面
-Route::get('/trend', function () {
-    return view('trend');
-})->name('trend');
+Route::group(['middleware' => ['after.login']], function () {
+    // 仮想通貨トレンド画面
+    Route::get('/trend', 'TrendController@index')->name('trend');
+    // 仮想通貨関連アカウント一覧画面
+    Route::get('/account', 'AccountController@index')->name('account');
+    // 仮想通貨関連ニュース
+    Route::get('/news', 'NewsController@index')->name('news');
+    // マイページ
+    Route::get('/mypage', 'MypageController@index')->name('mypage');
+});
 
-Route::post('/trend/get', 'TrendController@index');
+// 仮想通貨トレンド画面 axios連携ルーティング
+Route::post('/trend/get', 'TrendController@getTrend');
 Route::post('/trend/getUpdated', 'TrendController@getUpdated');
 
-// 仮想通貨関連アカウント一覧画面
-Route::get('/account', function () {
-    return view('account');
-})->name('account');
-
-Route::post('/account/get', 'AccountController@index');
+// 仮想通貨関連アカウント一覧画面 axios連携ルーティング
+Route::post('/account/get', 'AccountController@getAccount');
 Route::post('/account/user', 'AccountController@getUser');
 Route::post('/account/auto', 'AccountController@autoFollow');
 Route::post('/account/follow', 'AccountController@follow');
 Route::post('/account/unfollow', 'AccountController@unFollow');
 
-// 仮想通貨関連ニュース
-Route::get('/news', 'NewsController@index')->name('news');
-// Route::get('/news', function () {
-//     return view('news');
-// })->name('news');
 
-// Route::get('/news/get', 'NewsController@index');
-
-
-
-// マイページ
-Route::get('/mypage', function () {
-    return view('mypage');
-});
-
-
-
-//ログイン認証するためのルーティング
+// ====================================================================
+// Twitter認証処理のルーティング
+// Twitter認証のルーティング
 Route::get('/oauth', 'OAuthController@login');
-
 //Callback用のルーティング
 Route::get('/callback', 'OAuthController@callBack');
 
-//indexのルーティング
+// callbackよりアクセストークンを受け取り、ログイン認証をするルーティング
 Route::get('/main', 'OAuthController@main');
 
 //logoutのルーティング

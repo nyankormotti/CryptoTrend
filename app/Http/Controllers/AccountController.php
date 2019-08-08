@@ -12,13 +12,19 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 
 class AccountController extends Controller
 {
-
+    /**
+     * 仮想通貨アカウント一覧画面表示
+     * @return void
+     */
+    public function index() {
+        return view('account');
+    }
     /**
      * 仮想通貨関連Twitterアカウント取得処理
      * @param $request (follow_flg, last_updated)
      * @return array (アカウント情報)
      */
-    public function index(Request $request) {
+    public function getAccount(Request $request) {
 
         $account_list = Account::where('user_id',Auth::id())->where('follow_flg', $request->follow_flg)->orderBy('last_updated','DESC')->get();
 

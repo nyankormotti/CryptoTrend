@@ -9,12 +9,16 @@ use Illuminate\Http\Request;
 class TrendController extends Controller
 {
 
+    public function index() {
+        return view('trend');
+    }
+
     /**
      * トレンド一覧取得
      * @param $request (twitter_id)
      * @return $trends(トレンド一覧)
      */
-    public function index(Request $request)
+    public function getTrend(Request $request)
     {
         $trends = Trend::where('period_id',$request->period_id)->with('currency')->orderBy('tweet_count','DESC')->get();
         $rank = 0;

@@ -19,30 +19,29 @@ Route::group(['middleware' => ['before.login']], function () {
     Route::get('/authLogin', 'AuthLoginController@index');
     // 会員登録
     Route::get('/signup', 'SignUpController@index');
+    // パスワードリマインダー送信(認証キー)
+    Route::get('/passwordRemindSend', 'PasswordRemindSendController@index');
+    // パスワードリマインダー(認証キー)送信
+    Route::get('/passwordRemindRecieve', 'PasswordRemindRecieveController@index');
 });
 
 // ログイン処理
 Route::post('/authLogin', 'AuthLoginController@authLogin');
 // 会員登録処理
 Route::post('/signup', 'SignUpController@signup');
+// パスワードリマインダー送信(認証キー)送信処理
+Route::post('/passwordRemindSend', 'PasswordRemindSendController@send');
+// パスワードリマインダー送信(再発行パスワード)送信処理
+Route::post('/passwordRemindRecieve', 'PasswordRemindRecieveController@send');
 
-//logout後のリダイレクト先
-// Route::get('/', function () {
-//     return view('index');
-// });
 
-// パスワードリマインダー送信
-Route::get('/passwordRemindSend', function () {
-    return view('passwordRemindSend');
-});
-// パスワードリマインダー(認証キー)送信
-Route::get('/passwordRemindRecieve', function () {
-    return view('passwordRemindRecieve');
-});
 // Twitterアカウント変更
 Route::get('/changeTwitterAccount', function () {
     return view('changeTwitterAccount');
 });
+
+// お問い合わせ(ログイン前)
+Route::post('/contact', 'IndexController@contact');
 
 // ===================================================
 // ログイン後

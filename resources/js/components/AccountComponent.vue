@@ -121,6 +121,7 @@ export default {
                 this.firstCount = (this.page - 1) * this.perPage + 1
             }
             this.totalPage = Math.ceil(this.accounts.length / this.perPage)
+            
         },
         onPrev() {
             this.page= Math.max(this.page- 1, 1);
@@ -185,6 +186,9 @@ export default {
         count: function() {
             if(this.totalPage < this.page){
                 this.page = this.totalPage
+            } else if(this.count !== 0 && this.page == 0) {
+                this.page = 1
+                this.lastCount = this.page * this.perPage
             }
             this.lastCount = this.page * this.perPage
             if(this.count % 20 == 0 || this.lastCount <= 20) {

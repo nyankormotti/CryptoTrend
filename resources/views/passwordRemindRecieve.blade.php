@@ -17,7 +17,7 @@
             @endif
             <p class="form__content__descript">受信されたメールに記載のある認証キーをご記載ください。
                 <br>メールにて再発行したパスワードをお伝えします。</p>
-            <form action="/authLogin" method="post" class="form__block">
+            <form action="/passwordRemindRecieve" method="post" class="form__block">
                 {{ csrf_field() }}
                 <div>
                     <label class="textfield__label" for="Auth_Key">認証キー</label>

@@ -1917,6 +1917,9 @@ __webpack_require__.r(__webpack_exports__);
     count: function count() {
       if (this.totalPage < this.page) {
         this.page = this.totalPage;
+      } else if (this.count !== 0 && this.page == 0) {
+        this.page = 1;
+        this.lastCount = this.page * this.perPage;
       }
 
       this.lastCount = this.page * this.perPage;

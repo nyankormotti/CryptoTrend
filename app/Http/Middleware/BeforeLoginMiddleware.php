@@ -16,9 +16,7 @@ class BeforeLoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        \Log::info('ミドルウェアだよ');
         if (Auth::check()) {
-            \Log::info('ミドルウェア');
             return redirect()->action('TrendController@index');
         }
         return $next($request);

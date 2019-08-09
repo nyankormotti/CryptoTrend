@@ -43,7 +43,7 @@ class Kernel extends ConsoleKernel
             ->daily()->withoutOverlapping();
 
         $schedule->command('batch:AutoFollow')
-            ->everyThirtyMinutes()->withoutOverlapping();
+            ->everyFifteenMinutes()->withoutOverlapping();
 
     }
 

@@ -23,6 +23,8 @@ Route::group(['middleware' => ['before.login']], function () {
     Route::get('/passwordRemindSend', 'PasswordRemindSendController@index');
     // パスワードリマインダー(認証キー)送信
     Route::get('/passwordRemindRecieve', 'PasswordRemindRecieveController@index');
+    // 退会完了画面
+    Route::get('/withdrawDone', 'withdrawDoneController@index');
 });
 
 // ログイン処理
@@ -72,6 +74,9 @@ Route::post('/account/unfollow', 'AccountController@unFollow');
 Route::post('/mypage/changeEmail', 'MypageController@changeEmail');
 Route::post('/mypage/changePassword', 'MypageController@changePassword');
 Route::post('/mypage/contact', 'MypageController@contact');
+Route::post('/mypage/withdraw', 'MypageController@withdraw');
+
+
 
 
 // ====================================================================

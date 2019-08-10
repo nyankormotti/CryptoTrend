@@ -6,6 +6,7 @@ use App\User;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use App\Mail\ChangePasswordMail;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -65,6 +66,32 @@ class MypageController extends Controller
         Mail::to('info@info.com')->send(new ContactMail($fromEmail, $comment));
         $request->session()->flash('status', 'お問い合わせメールを送信しました。');
         return redirect()->action('TrendController@index', $request);
+    }
+
+    /**
+     * 退会処理
+     * @param $request リクエストパラメータ
+     * @return void
+     */
+    public function withdraw(Request $request)
+    {
+        // usersテーブルの該当ユーザーを削除(削除フラグをONにする)
+        $id = Auth::id();
+        $user = User::where('id', $id)->first();
+        $user->delete_flg = true;
+        $user->save();
+        // 更新するユーザーのuser_idに紐付くaccountsテーブルのレコードを削除
+        DB::table('accounts')->where('user_id', $id)->delete();
+
+        //セッションクリア
+        //アクセストークンだけsessionから破棄
+        session()->forget('oauth_token');
+        session()->forget('oauth_token_secret');
+
+        // ログアウト処理
+        Auth::logout();
+
+        return redirect()->action('withdrawDoneController@index', $request);
     }
 
 }

@@ -165,7 +165,7 @@
                 <p class="mypage__title__sub">退会</p>
 
             </div>
-            <div class="form__content toggle_contents" action="__withdraw" method="post">
+            <div class="form__content toggle_contents">
 
                 <p class="form__descript withdraw__descropt">退会する場合は、<br class="mypage__descropt__line">下記のボタンを押してください。</p>
 
@@ -180,7 +180,7 @@
     <!-- モーダルエリアここから -->
     <section id="modalArea" class="modal__Area">
         <div id="modalBg" class="modal__Bg"></div>
-        <form class="modal__Wrapper" action="__withdraw" method="post">
+        <form class="modal__Wrapper" action="/mypage/withdraw" method="post">
             {{ csrf_field() }}
             <div class="modal__Contents">
                 <p class="modal__state">本当に退会しますか？</p>

@@ -33,18 +33,9 @@
     <div class="form form__contact">
         <h2 class="form__title">お問い合わせ</h2>
         <div class="form__content">
-            <p class="form__content__descript">お名前とメールアドレス、内容をご記載の上、お問い合わせください。</p>
+            <p class="form__content__descript">メールアドレス、内容をご記載の上、お問い合わせください。</p>
             <form action="contact" method="post" class="form__content__block">
                 {{ csrf_field() }}
-                <div>
-                    <label class="textfield__label" for="name">お名前</label>
-                </div>
-                @if($errors->has('email'))
-                <div class="err__msg">{{$errors->first('name')}}</div>
-                @endif
-                <div class="textfield__area">
-                    <input type="text" class="textfield__input" name="name" placeholder="15文字以内にて入力してください。" autocomplete="off" value="{{old('name')}}">
-                </div>
                 <div>
                     <label class="textfield__label" for="Email">メールアドレス</label>
                 </div>

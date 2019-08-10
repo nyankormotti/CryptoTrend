@@ -69,7 +69,9 @@ Route::post('/account/follow', 'AccountController@follow');
 Route::post('/account/unfollow', 'AccountController@unFollow');
 
 
+Route::post('/mypage/changeEmail', 'MypageController@changeEmail');
 Route::post('/mypage/changePassword', 'MypageController@changePassword');
+Route::post('/mypage/contact', 'MypageController@contact');
 
 
 // ====================================================================

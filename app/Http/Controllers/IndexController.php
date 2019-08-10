@@ -19,14 +19,14 @@ class IndexController extends Controller
 
     /**
      * お問い合わせ処理
+     * @param $request リクエストパラメータ
+     * @return void
      */
     public function contact(Request $request)
     {
-
-        $name = $request->name;
         $fromEmail = $request->email;
         $comment = $request->comment;
-        Mail::to('info@info.com')->send(new ContactMail($name, $fromEmail, $comment));
+        Mail::to('info@info.com')->send(new ContactMail($fromEmail, $comment));
         $request->session()->flash('status', 'お問い合わせメールを送信しました。');
         return redirect()->action('IndexController@index', $request);
     }

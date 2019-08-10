@@ -56,9 +56,9 @@
                     <p class="mypage__title__sub">メールアドレス変更</p>
                 </div>
                 @if($errors->has('email'))
-                <form class="form__content toggle_contents" action="" method="post" style="display:block;">
+                <form class="form__content toggle_contents" action="/mypage/changeEmail" method="post" style="display:block;">
                     @else
-                    <form class="form__content toggle_contents" action="" method="post">
+                    <form class="form__content toggle_contents" action="/mypage/changeEmail" method="post">
                         @endif
                         {{ csrf_field() }}
                         <p class="form__content__descript">新しいメールアドレスを入力してください。</p>
@@ -138,30 +138,12 @@
                     @endif
                     <p class="mypage__title__sub">お問い合わせ</p>
                 </div>
-                @if($errors->has('old_pass') || $errors->has('password'))
-                <form class="form__content toggle_contents" action="contact" method="post" style="display:block;">
+                @if($errors->has('old_pass') || $errors->has('comment'))
+                <form class="form__content toggle_contents" action="/mypage/contact" method="post" style="display:block;">
                     @else
-                    <form class="form__content toggle_contents" action="contact" method="post">
+                    <form class="form__content toggle_contents" action="/mypage/contact" method="post">
                         @endif
                         {{ csrf_field() }}
-                        <div>
-                            <label class="textfield__label" for="name">お名前</label>
-                        </div>
-                        @if($errors->has('email'))
-                        <div class="err__msg">{{$errors->first('name')}}</div>
-                        @endif
-                        <div class="textfield__area">
-                            <input type="text" class="textfield__input" name="name" placeholder="15文字以内にて入力してください。" autocomplete="off" value="{{old('name')}}">
-                        </div>
-                        <div>
-                            <label class="textfield__label" for="Email">メールアドレス</label>
-                        </div>
-                        @if($errors->has('email'))
-                        <div class="err__msg">{{$errors->first('email')}}</div>
-                        @endif
-                        <div class="textfield__area">
-                            <input type="text" class="textfield__input" name="email" placeholder="メールアドレスを入力してください。" autocomplete="off" value="{{old('email')}}">
-                        </div>
                         <div>
                             <label class="textfield__label" for="Comment">お問い合わせ内容</label>
                         </div>

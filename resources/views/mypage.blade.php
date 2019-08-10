@@ -91,9 +91,9 @@
                     <p class="mypage__title__sub">パスワード変更</p>
                 </div>
                 @if($errors->has('old_pass') || $errors->has('password'))
-                <form class="form__content toggle_contents" action="__changePassword" method="post" style="display:block;">
+                <form class="form__content toggle_contents" action="/mypage/changePassword" method="post" style="display:block;">
                     @else
-                    <form class="form__content toggle_contents" action="__changePassword" method="post">
+                    <form class="form__content toggle_contents" action="/mypage/changePassword" method="post">
                         @endif
                         {{ csrf_field() }}
                         <input type="hidden" name="err_dummy">

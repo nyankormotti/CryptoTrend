@@ -69,6 +69,9 @@ Route::post('/account/follow', 'AccountController@follow');
 Route::post('/account/unfollow', 'AccountController@unFollow');
 
 
+Route::post('/mypage/changePassword', 'MypageController@changePassword');
+
+
 // ====================================================================
 // Twitter認証処理のルーティング
 // Twitter認証のルーティング

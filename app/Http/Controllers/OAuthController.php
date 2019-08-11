@@ -20,7 +20,6 @@ class OAuthController extends Controller
         $twitter = new TwitterOAuth(env('TWITTER_CLIENT_KEY'), env('TWITTER_CLIENT_SECRET'));
 
         //リクエストトークン取得
-        //リクエストトークンは認証用のURLを生成するのに必要になります
         //'oauth/request_token'はリクエストークンを取得するためのAPIのリソース
         $request_token = $twitter->oauth('oauth/request_token', array('oauth_callback' => env('TWITTER_CLIENT_CALLBACK')));
 
@@ -28,7 +27,7 @@ class OAuthController extends Controller
         //'oauth/authorize'は認証URLを取得するためのAPIのリソース
         $url = $twitter->url('oauth/authorize', array('oauth_token' => $request_token['oauth_token']));
 
-        //認証ページにリダイレクト
+        //TwitterAPI認証ページにリダイレクト
         return redirect($url);
     }
     //callBack後の処理について書く(アクセストークンとか取得する)
@@ -59,8 +58,15 @@ class OAuthController extends Controller
         session()->put('oauth_token', $accessToken['oauth_token']);
         session()->put('oauth_token_secret', $accessToken['oauth_token_secret']);
 
-        //indexページにリダイレクト
-        return redirect('main');
+        if(!empty(session()->get('change_account_flg'))) {
+            // Twitterアカウント変更画面からの遷移の場合、Twitterアカウント変更画面にリダイレクト
+            session()->forget('change_account_flg');
+            return redirect('changeTwitterAccountMain');
+            return redirect()->action('ChangeTwitterAccountController@changeAccountMain');
+        } else{
+            //indexページにリダイレクト
+            return redirect('main');
+        }
     }
 
     //アクセストークンを使用してAPIを叩いて結果をビューに受け渡す
@@ -69,7 +75,6 @@ class OAuthController extends Controller
         //セッションからアクセストークン取得
         $oauth_token = session()->get('oauth_token');
         $oauth_token_secret = session()->get('oauth_token_secret');
-        // $accessToken = session()->get('accessToken');
 
         //インスタンス生成
         $twitter = new TwitterOAuth(
@@ -90,14 +95,13 @@ class OAuthController extends Controller
         $screen_name = session()->get('screen_name');
         $email = session()->get('email');
         $password = session()->get('password');
-        
 
         if($screen_name !== $userInfo['screen_name']){
+            // screen_nameがTwitterのユーザー情報と異なる場合
+            // 会員登録画面にリダイレクト
             session()->flush();
             return redirect('signup');
         }
-
-
         // usersテーブルに会員情報を登録
         $user = new User;
         $user->screen_name = $screen_name;
@@ -122,7 +126,6 @@ class OAuthController extends Controller
 
         // Accountテーブルに「仮想通貨」キーワードで検索したtwitterアカウントを登録する。
         // ユーザーごとに他のアカウント情報を保持する(フォローの有無があるため)
-
         //インスタンス生成
         $twitter = new TwitterOAuth(
             //API Key
@@ -238,7 +241,7 @@ class OAuthController extends Controller
         return redirect('trend');
         // return view('trend');
     }
-    //ログアウト処理(今回は最終的にwelcomeページにリダイレクトするようにする)
+    //ログアウト処理
     public function logout()
     {
         //セッションクリア

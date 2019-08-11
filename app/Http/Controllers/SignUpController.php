@@ -25,6 +25,5 @@ class SignUpController extends Controller
         session()->put('password', Hash::make($request->password));
 
         return redirect('oauth');
-        
     }
 }

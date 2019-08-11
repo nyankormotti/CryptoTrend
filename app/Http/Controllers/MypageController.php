@@ -22,7 +22,7 @@ class MypageController extends Controller
     }
 
     /**
-     * メールアドレス変更
+     * メールアドレス変更処理
      * @param $request リクエストパラメータ
      * @return void
      */
@@ -80,8 +80,6 @@ class MypageController extends Controller
         $user = User::where('id', $id)->first();
         $user->delete_flg = true;
         $user->save();
-        // 更新するユーザーのuser_idに紐付くaccountsテーブルのレコードを削除
-        DB::table('accounts')->where('user_id', $id)->delete();
 
         //セッションクリア
         //アクセストークンだけsessionから破棄

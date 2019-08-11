@@ -38,9 +38,9 @@ Route::post('/passwordRemindRecieve', 'PasswordRemindRecieveController@send');
 
 
 // Twitterアカウント変更
-Route::get('/changeTwitterAccount', function () {
-    return view('changeTwitterAccount');
-});
+Route::get('/changeTwitterAccount', 'ChangeTwitterAccountController@index');
+Route::post('/changeTwitterAccount', 'ChangeTwitterAccountController@changeAccount');
+Route::get('/changeTwitterAccountMain', 'ChangeTwitterAccountController@changeAccountMain');
 
 // お問い合わせ(ログイン前)
 Route::post('/contact', 'IndexController@contact');
@@ -70,10 +70,15 @@ Route::post('/account/auto', 'AccountController@autoFollow');
 Route::post('/account/follow', 'AccountController@follow');
 Route::post('/account/unfollow', 'AccountController@unFollow');
 
-
+// Twitterアカウント変更処理(マイページ)
+Route::post('/mypage/changeTwitterAccount', 'MypageController@changeTwitterAccount');
+// メールアドレス変更処理
 Route::post('/mypage/changeEmail', 'MypageController@changeEmail');
+// パスワード変更処理
 Route::post('/mypage/changePassword', 'MypageController@changePassword');
+// お問い合わせ処理(マイページ)
 Route::post('/mypage/contact', 'MypageController@contact');
+// 退会処理
 Route::post('/mypage/withdraw', 'MypageController@withdraw');
 
 
@@ -85,11 +90,10 @@ Route::post('/mypage/withdraw', 'MypageController@withdraw');
 Route::get('/oauth', 'OAuthController@login');
 //Callback用のルーティング
 Route::get('/callback', 'OAuthController@callBack');
-
 // callbackよりアクセストークンを受け取り、ログイン認証をするルーティング
 Route::get('/main', 'OAuthController@main');
 
-//logoutのルーティング
+//ログアウト
 Route::get('/oauthlogout', 'OAuthController@logout');
 
 

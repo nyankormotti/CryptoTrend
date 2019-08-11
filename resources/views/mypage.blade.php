@@ -9,42 +9,7 @@
 <!-- main -->
 <main class="main">
     <div class="mypage">
-        <div class="mypage__maintitle">マイページ</div>
-
-        <!-- Twitterアカウント変更 -->
-        <section class="mypage__parts mypage__account toggle_wrap">
-            @if($errors->has('screen_name'))
-            <div class="mypage__title toggle_switch open">
-                @else
-                <div class="mypage__title toggle_switch">
-                    @endif
-                    <p class="mypage__title__sub">Twitterアカウント変更</p>
-                </div>
-                @if($errors->has('screen_name'))
-                <form class="form__content toggle_contents" action="" method="post" style="display:block;">
-                    @else
-                    <form class="form__content toggle_contents" action="" method="post">
-                        @endif
-                        {{ csrf_field() }}
-                        <p class="form__content__descript">新しいTwitterアカウントを入力してください。</p>
-                        <div>
-                            <label class="textfield__label" for="Screen_name">Twitterアカウント</label>
-                        </div>
-                        @if($errors->has('screen_name'))
-                        <div class="err__msg">{{$errors->first('screen_name')}}</div>
-                        @endif
-                        <div class="textfield__area">
-                            @if($errors->has('screen_name'))
-                            <input type="text" class="textfield__input" name="screen_name" autocomplete="off" value="{{old('screen_name')}}">
-                            @else
-                            <input type="text" class="textfield__input" name="screen_name" autocomplete="off" placeholder="@の後ろの文字を入力してください。">
-                            @endif
-                        </div>
-                        <div class="btn__mypage__user btn__form">
-                            <input class="btn" type="submit" name="account_change" value="変更">
-                        </div>
-                    </form>
-        </section>
+        <div class="mypage__maintitle">MyPage</div>
 
         <!-- メールアドレス変更 -->
         <section class="mypage__parts mypage__account toggle_wrap">

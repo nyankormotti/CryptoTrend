@@ -47,7 +47,12 @@ class AuthLoginController extends Controller
             session()->put('oauth_token', $oauth_token);
             session()->put('oauth_token_secret', $oauth_token_secret);
 
-            return redirect('trend');
+            if($user->twitter_id !== $userInfo['id_str'] || $user->screen_name !== $userInfo['screen_name']) {
+                return redirect()->action('ChangeTwitterAccountController@index');
+            } else {
+                return redirect('trend');
+            }
+
         } else {
             $msg = 'メールアドレスまたはパスワードが違います。';
             return view('authLogin', ['message' => $msg]);

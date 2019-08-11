@@ -19,7 +19,7 @@
                 <br>別のTwitterアカウントにてTwitterにログインした後に、
                 <br>Twitterアカウントの変更処理を行ってください。
             </p>
-            <form action="/authLogin" method="post" class="form__block">
+            <form action="/changeTwitterAccount" method="post" class="form__block">
                 {{ csrf_field() }}
                 <div>
                     <label class="textfield__label" for="Screen_name">Twitterアカウント</label>

@@ -2,11 +2,17 @@
 
 namespace App\Libraries;
 
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use Abraham\TwitterOAuth\TwitterOAuth;
+
 class CommonFunctions
 {
-
-    // Google News 取得関数
-    function get_news()
+    /**
+     * 仮想通貨関連ニュース 取得関数
+     * @return array $list 仮想通貨関連ニュース一覧
+     */
+    public function get_news()
     {
         set_time_limit(90);
 
@@ -16,7 +22,7 @@ class CommonFunctions
         //---- キーワード検索したいときのベースURL 
         $API_BASE_URL = "https://news.google.com/news?hl=ja&ned=ja&ie=UTF-8&oe=UTF-8&output=atom&q=";
 
-        //----　キーワードの文字コード変更
+        //---- キーワードの文字コード変更
         $query = urlencode(mb_convert_encoding("仮想通貨", "UTF-8", "auto"));
 
         //---- APIへのリクエストURL生成
@@ -43,9 +49,13 @@ class CommonFunctions
         return $list;
     }
 
-    // 取引価格を取得する関数
-    function coincheck()
+    /**
+     * 仮想通貨取引価格 取得関数
+     * @return array $asdf 仮想通貨取引価格一覧
+     */
+    public function coincheck()
     {
+        // coincheck ticker API連携
         $strUrl = "https://coincheck.com/api/ticker";
         $file = file_get_contents($strUrl);
         $file = mb_convert_encoding($file, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
@@ -54,5 +64,41 @@ class CommonFunctions
         return $asdf;
     }
 
-    
+    /**
+     * Twitterアカウント照合処理
+     * @return boolean $change_flg Twitterアカウント変更有無フラグ
+     */
+    public function checkAccount()
+    {
+        // Twitterアカウント変更有無フラグ
+        $change_flg = false;
+        // ユーザー情報を取得
+        $user = User::where('id', Auth::id())->first();
+
+        $screen_name = $user->screen_name;
+        $oauth_token = $user->oauth_token;
+        $oauth_token_secret = $user->oauth_token_secret;
+        // twitter認証
+        //インスタンス生成
+        $twitter = new TwitterOAuth(
+            //API Key
+            env('TWITTER_CLIENT_KEY'),
+            //API Secret
+            env('TWITTER_CLIENT_SECRET'),
+            //アクセストークン
+            $oauth_token,
+            $oauth_token_secret
+        );
+
+        // twitterのユーザー情報を取得
+        $userInfo = get_object_vars($twitter->get('account/verify_credentials'));
+
+        if ($screen_name !== $userInfo['screen_name']) {
+            // Twitterアカウントのスクリーンネームが、CryptoTrendに保持しているユーザー情報のものと異なる場合、
+            // Twitterアカウント変更画面にリダイレクト
+            $change_flg = true;
+        }
+
+        return $change_flg;
+    }
 }

@@ -32,7 +32,6 @@ class SignUpController extends Controller
      */
     protected function signup(SignUpRequest $request)
     {
-
         session()->put('screen_name', $request->screen_name);
         session()->put('email', $request->email);
         session()->put('password', Hash::make($request->password));

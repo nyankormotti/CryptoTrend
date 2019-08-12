@@ -1,6 +1,6 @@
 @extends('layouts/basic')
 
-@section('title','パスワードリマインド')
+@section('title','Twitterアカウント変更')
 @include('common.head')
 
 @include('common.header')
@@ -10,10 +10,8 @@
     <div class="form form__bottom--reset">
         <h2 class="form__title">Twitterアカウント変更</h2>
         <div class="form__content">
-            @if(count($errors) > 0)
+            @if(count($errors) > 0 || !empty($message))
             <p class="u-err__msg__main">入力値に問題があります。再入力してください。</p>
-            @elseif(!empty($message))
-            <p class="u-err__msg__main">{{$message}}</p>
             @endif
             <p class="form__content__descript">ご登録されているTwitterアカウントが見つかりません。
                 <br>別のTwitterアカウントにてTwitterにログインした後に、
@@ -26,6 +24,8 @@
                 </div>
                 @if($errors->has('screen_name'))
                 <div class="u-err__msg">{{$errors->first('screen_name')}}</div>
+                @elseif(!empty($message))
+                <div class="u-err__msg">{{$message}}</div>
                 @endif
                 <div class="textfield__area">
                     <input type="text" class="textfield__input" name="screen_name" placeholder="@の後ろの文字を入力してください。" autocomplete="off" value="{{old('screen_name')}}">

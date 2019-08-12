@@ -1753,7 +1753,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+ //トレンドランキング表示領域
 
+ //検索フォーム
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1762,62 +1765,96 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      period: '',
+      period: 1,
+      //期間(1:1時間, 2:1日, 3:１週間)
       currency1: false,
+      // 銘柄検索フラグ ($BTC)
       currency2: false,
+      // 銘柄検索フラグ ($ETH)
       currency3: false,
+      // 銘柄検索フラグ ($ETC)
       currency4: false,
+      // 銘柄検索フラグ ($LSK)
       currency5: false,
+      // 銘柄検索フラグ ($FCT)
       currency6: false,
+      // 銘柄検索フラグ ($XRP)
       currency7: false,
+      // 銘柄検索フラグ ($XEM)
       currency8: false,
+      // 銘柄検索フラグ ($LTC)
       currency9: false,
-      currency10: false
+      // 銘柄検索フラグ ($BCH)
+      currency10: false // 銘柄検索フラグ ($MONA)
+
     };
   },
   methods: {
+    // 期間：「1時間」を選択した場合
     searchHourPeriod: function searchHourPeriod() {
+      // 期間(1:1時間)を更新
       this.period = 1;
     },
+    // 期間：「1日」を選択した場合
     searchDatePeriod: function searchDatePeriod() {
+      // 期間(2:1日)を更新
       this.period = 2;
     },
+    // 期間：「1週間」を選択した場合
     searchWeekPeriod: function searchWeekPeriod() {
+      // 期間(3:1週間)を更新
       this.period = 3;
     },
+    // 銘柄：「$BTC」を選択した場合
     changeBTC: function changeBTC() {
+      // 銘柄検索フラグ ($BTC)の値を反転
       this.currency1 = !this.currency1;
     },
+    // 銘柄：「$ETH」を選択した場合
     changeETH: function changeETH() {
+      // 銘柄検索フラグ ($ETH)の値を反転
       this.currency2 = !this.currency2;
     },
+    // 銘柄：「$ETC」を選択した場合
     changeETC: function changeETC() {
+      // 銘柄検索フラグ ($ETC)の値を反転
       this.currency3 = !this.currency3;
     },
+    // 銘柄：「$LSK」を選択した場合
     changeLSK: function changeLSK() {
+      // 銘柄検索フラグ ($LSK)の値を反転
       this.currency4 = !this.currency4;
     },
+    // 銘柄：「$FCT」を選択した場合
     changeFCT: function changeFCT() {
+      // 銘柄検索フラグ ($FCT)の値を反転
       this.currency5 = !this.currency5;
     },
+    // 銘柄：「$XRP」を選択した場合
     changeXRP: function changeXRP() {
+      // 銘柄検索フラグ ($XRP)の値を反転
       this.currency6 = !this.currency6;
     },
+    // 銘柄：「$XEM」を選択した場合
     changeXEM: function changeXEM() {
+      // 銘柄検索フラグ ($XEM)の値を反転
       this.currency7 = !this.currency7;
     },
+    // 銘柄：「$LTC」を選択した場合
     changeLTC: function changeLTC() {
+      // 銘柄検索フラグ ($LTC)の値を反転
       this.currency8 = !this.currency8;
     },
+    // 銘柄：「$BCH」を選択した場合
     changeBCH: function changeBCH() {
+      // 銘柄検索フラグ ($BCH)の値を反転
       this.currency9 = !this.currency9;
     },
+    // 銘柄：「$MONA」を選択した場合
     changeMONA: function changeMONA() {
+      // 銘柄検索フラグ ($MONA)の値を反転
       this.currency10 = !this.currency10;
     }
-  },
-  created: function created() {
-    this.searchHourPeriod();
   }
 });
 
@@ -1883,44 +1920,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['period', 'currency1', 'currency2', 'currency3', 'currency4', 'currency5', 'currency6', 'currency7', 'currency8', 'currency9', 'currency10'],
+  props: ['period', //期間(1:1時間, 2:1日, 3:１週間)
+  'currency1', // 銘柄検索フラグ ($BTC)
+  'currency2', // 銘柄検索フラグ ($ETH)
+  'currency3', // 銘柄検索フラグ ($ETC)
+  'currency4', // 銘柄検索フラグ ($LSK)
+  'currency5', // 銘柄検索フラグ ($FCT)
+  'currency6', // 銘柄検索フラグ ($XRP)
+  'currency7', // 銘柄検索フラグ ($XEM)
+  'currency8', // 銘柄検索フラグ ($LTC)
+  'currency9', // 銘柄検索フラグ ($BCH)
+  'currency10' // 銘柄検索フラグ ($MONA)
+  ],
   data: function data() {
     return {
       trends: [],
-      ranking: 0,
-      updated: ''
+      //トレンド情報
+      updated: '' //トレンド情報の最終更新日時
+
     };
   },
   methods: {
+    // トレンド情報を取得
     fetchTrend: function fetchTrend() {
       var _this = this;
 
       this.$axios.post('/trend/get', {
-        period_id: this.period
+        period_id: this.period //期間(1:1時間, 2:1日, 3:１週間)
+
       }).then(function (res) {
         _this.trends = res.data;
       })["catch"](function (err) {
         alert('例外が発生しました。しばらく経ってからお試しください。');
       });
     },
+    // トレンド情報の最終更新日時を取得
     getUpdatedTime: function getUpdatedTime() {
       var _this2 = this;
 
       this.$axios.post('/trend/getUpdated', {
-        period_id: this.period
+        period_id: this.period //期間(1:1時間, 2:1日, 3:１週間)
+
       }).then(function (res) {
         _this2.updated = res.data;
       })["catch"](function (err) {
         alert('例外が発生しました。しばらく経ってからお試しください。');
       });
     },
-    searchCheck: function searchCheck(i, id, trend, trends) {
+    // 銘柄検索結果を表示する配列に格納
+    searchCheck: function searchCheck(i, id, trend, searchTrends) {
       if (id == trend.currency.id) {
-        trends.push(trend);
+        searchTrends.push(trend);
       }
     }
   },
   filters: {
+    // トレンド情報の最終更新日時のフォーマットを変換する。
     moment: function moment(date) {
       moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale("ja");
 
@@ -1928,68 +1983,83 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    // 銘柄検索処理
     searchTrend: function searchTrend() {
       if (!this.currency1 && !this.currency2 && !this.currency3 && !this.currency4 && !this.currency5 && !this.currency6 && !this.currency7 && !this.currency8 && !this.currency9 && !this.currency10) {
+        // 画面上の全ての銘柄を選択していない場合、全ての銘柄を表示する。
         return this.trends;
       } else {
-        var trends = [];
+        // 銘柄が個別で選択されている場合
+        var searchTrends = [];
 
         for (var i in this.trends) {
+          // DBから取得したトレンド情報
           var trend = this.trends[i];
-          var id = 0;
+          var id = 0; // $BTCを選択している場合、$BTCを表示する
 
           if (this.currency1) {
-            this.searchCheck(i, 1, trend, trends);
-          }
+            this.searchCheck(i, 1, trend, searchTrends);
+          } // $ETHを選択している場合、$ETHを表示する
+
 
           if (this.currency2) {
-            this.searchCheck(i, 2, trend, trends);
-          }
+            this.searchCheck(i, 2, trend, searchTrends);
+          } // $ETCを選択している場合、$ETCを表示する
+
 
           if (this.currency3) {
-            this.searchCheck(i, 3, trend, trends);
-          }
+            this.searchCheck(i, 3, trend, searchTrends);
+          } // $LSKを選択している場合、$LSKを表示する
+
 
           if (this.currency4) {
-            this.searchCheck(i, 4, trend, trends);
-          }
+            this.searchCheck(i, 4, trend, searchTrends);
+          } // $FTCを選択している場合、$FTBを表示する
+
 
           if (this.currency5) {
-            this.searchCheck(i, 5, trend, trends);
-          }
+            this.searchCheck(i, 5, trend, searchTrends);
+          } // $XRPを選択している場合、$XRPを表示する
+
 
           if (this.currency6) {
-            this.searchCheck(i, 6, trend, trends);
-          }
+            this.searchCheck(i, 6, trend, searchTrends);
+          } // $XEMを選択している場合、$XEMを表示する
+
 
           if (this.currency7) {
-            this.searchCheck(i, 7, trend, trends);
-          }
+            this.searchCheck(i, 7, trend, searchTrends);
+          } // $LTCを選択している場合、$LTCを表示する
+
 
           if (this.currency8) {
-            this.searchCheck(i, 8, trend, trends);
-          }
+            this.searchCheck(i, 8, trend, searchTrends);
+          } // $BCHを選択している場合、$BCHを表示する
+
 
           if (this.currency9) {
-            this.searchCheck(i, 9, trend, trends);
-          }
+            this.searchCheck(i, 9, trend, searchTrends);
+          } // $MONAを選択している場合、$MONAを表示する
+
 
           if (this.currency10) {
-            this.searchCheck(i, 10, trend, trends);
+            this.searchCheck(i, 10, trend, searchTrends);
           }
         }
 
-        return trends;
+        return searchTrends;
       }
     }
   },
   watch: {
+    // 表示形式(1時間、1日、１週間)が変わった際に、トレンド情報とその最終更新日時を取得する。
     period: function period() {
       this.fetchTrend();
       this.getUpdatedTime();
     }
   },
   created: function created() {
+    // 初期表示時に、トレンド情報とその最終更新日時を取得する。
     this.fetchTrend();
     this.getUpdatedTime();
   }
@@ -2038,45 +2108,82 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['period', 'currency1', 'currency2', 'currency3', 'currency4', 'currency5', 'currency6', 'currency7', 'currency8', 'currency9', 'currency10'],
+  props: ['period', //期間(1:1時間, 2:1日, 3:１週間)
+  'currency1', // 銘柄検索フラグ ($BTC)
+  'currency2', // 銘柄検索フラグ ($ETH)
+  'currency3', // 銘柄検索フラグ ($ETC)
+  'currency4', // 銘柄検索フラグ ($LSK)
+  'currency5', // 銘柄検索フラグ ($FCT)
+  'currency6', // 銘柄検索フラグ ($XRP)
+  'currency7', // 銘柄検索フラグ ($XEM)
+  'currency8', // 銘柄検索フラグ ($LTC)
+  'currency9', // 銘柄検索フラグ ($BCH)
+  'currency10' // 銘柄検索フラグ ($MONA)
+  ],
   methods: {
+    // 期間：「1時間」を選択した場合
     hourPeriod: function hourPeriod() {
+      // 親コンポーネントに通知
       this.$emit('child-h-period');
     },
+    // 期間：「1日」を選択した場合
     datePeriod: function datePeriod() {
+      // 親コンポーネントに通知
       this.$emit('child-d-period');
     },
+    // 期間：「1週間」を選択した場合
     weekPeriod: function weekPeriod() {
+      // 親コンポーネントに通知
       this.$emit('child-w-period');
     },
+    // 銘柄：「$BTC」を選択した場合
     clickBTC: function clickBTC() {
+      // 親コンポーネントに通知
       this.$emit('child-BTC');
     },
+    // 銘柄：「$ETH」を選択した場合
     clickETH: function clickETH() {
+      // 親コンポーネントに通知
       this.$emit('child-ETH');
     },
+    // 銘柄：「$ETC」を選択した場合
     clickETC: function clickETC() {
+      // 親コンポーネントに通知
       this.$emit('child-ETC');
     },
+    // 銘柄：「$LSK」を選択した場合
     clickLSK: function clickLSK() {
+      // 親コンポーネントに通知
       this.$emit('child-LSK');
     },
+    // 銘柄：「$FCT」を選択した場合
     clickFCT: function clickFCT() {
+      // 親コンポーネントに通知
       this.$emit('child-FCT');
     },
+    // 銘柄：「$XRP」を選択した場合
     clickXRP: function clickXRP() {
+      // 親コンポーネントに通知
       this.$emit('child-XRP');
     },
+    // 銘柄：「$XEM」を選択した場合
     clickXEM: function clickXEM() {
+      // 親コンポーネントに通知
       this.$emit('child-XEM');
     },
+    // 銘柄：「$LTC」を選択した場合
     clickLTC: function clickLTC() {
+      // 親コンポーネントに通知
       this.$emit('child-LTC');
     },
+    // 銘柄：「$BCH」を選択した場合
     clickBCH: function clickBCH() {
+      // 親コンポーネントに通知
       this.$emit('child-BCH');
     },
+    // 銘柄：「$MONA」を選択した場合
     clickMONA: function clickMONA() {
+      // 親コンポーネントに通知
       this.$emit('child-MONA');
     }
   }

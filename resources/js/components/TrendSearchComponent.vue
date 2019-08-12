@@ -32,56 +32,82 @@
 <script>
 export default {
     props:[
-        'period',
-        'currency1',
-        'currency2',
-        'currency3',
-        'currency4',
-        'currency5',
-        'currency6',
-        'currency7',
-        'currency8',
-        'currency9',
-        'currency10'
+        'period', //期間(1:1時間, 2:1日, 3:１週間)
+        'currency1', // 銘柄検索フラグ ($BTC)
+        'currency2', // 銘柄検索フラグ ($ETH)
+        'currency3', // 銘柄検索フラグ ($ETC)
+        'currency4', // 銘柄検索フラグ ($LSK)
+        'currency5', // 銘柄検索フラグ ($FCT)
+        'currency6', // 銘柄検索フラグ ($XRP)
+        'currency7', // 銘柄検索フラグ ($XEM)
+        'currency8', // 銘柄検索フラグ ($LTC)
+        'currency9', // 銘柄検索フラグ ($BCH)
+        'currency10' // 銘柄検索フラグ ($MONA)
     ],
     methods: {
+        // 期間：「1時間」を選択した場合
         hourPeriod:function() {
+            // 親コンポーネントに通知
             this.$emit('child-h-period')
         },
+         // 期間：「1日」を選択した場合
         datePeriod:function() {
+            // 親コンポーネントに通知
             this.$emit('child-d-period')
         },
+         // 期間：「1週間」を選択した場合
         weekPeriod:function() {
+            // 親コンポーネントに通知
             this.$emit('child-w-period')
         },
+        // 銘柄：「$BTC」を選択した場合
         clickBTC:function() {
+            // 親コンポーネントに通知
             this.$emit('child-BTC')
         },
+        // 銘柄：「$ETH」を選択した場合
         clickETH:function() {
+            // 親コンポーネントに通知
             this.$emit('child-ETH')
         },
+        // 銘柄：「$ETC」を選択した場合
         clickETC:function() {
+            // 親コンポーネントに通知
             this.$emit('child-ETC')
         },
+        // 銘柄：「$LSK」を選択した場合
         clickLSK:function() {
+            // 親コンポーネントに通知
             this.$emit('child-LSK')
         },
+        // 銘柄：「$FCT」を選択した場合
         clickFCT:function() {
+            // 親コンポーネントに通知
             this.$emit('child-FCT')
         },
+        // 銘柄：「$XRP」を選択した場合
         clickXRP:function() {
+            // 親コンポーネントに通知
             this.$emit('child-XRP')
         },
+        // 銘柄：「$XEM」を選択した場合
         clickXEM:function() {
+            // 親コンポーネントに通知
             this.$emit('child-XEM')
         },
+        // 銘柄：「$LTC」を選択した場合
         clickLTC:function() {
+            // 親コンポーネントに通知
             this.$emit('child-LTC')
         },
+        // 銘柄：「$BCH」を選択した場合
         clickBCH:function() {
+            // 親コンポーネントに通知
             this.$emit('child-BCH')
         },
+        // 銘柄：「$MONA」を選択した場合
         clickMONA:function() {
+            // 親コンポーネントに通知
             this.$emit('child-MONA')
         },
     }

@@ -13,7 +13,12 @@ class PasswordRemindRecieveRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        if ($this->path() == 'passwordRemindRecieve') {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     /**
@@ -24,7 +29,15 @@ class PasswordRemindRecieveRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'auth_key' => 'required|same_auth_key_verifi'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'auth_key.required' => '入力必須です。',
+            'auth_key.same_auth_key_verifi' => '認証キーが違います。'
         ];
     }
 }

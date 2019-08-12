@@ -6,7 +6,7 @@
 @include('common.header')
 
 @section('contents')
-<main>
+<main>  
     <div class="form form__bottom--reset">
         <h2 class="form__title">ログイン</h2>
         <div class="form__content">

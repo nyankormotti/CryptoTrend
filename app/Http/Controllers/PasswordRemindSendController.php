@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Mail\PasswordRemindSendMail;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\PasswordRemindSendRequest;
 
 class PasswordRemindSendController extends Controller
 {
@@ -13,7 +14,7 @@ class PasswordRemindSendController extends Controller
         return view('passwordRemindSend');
     }
 
-    public function send(Request $request)
+    public function send(PasswordRemindSendRequest $request)
     {
         $toEmail = $request->email;
         $auth_key = '';

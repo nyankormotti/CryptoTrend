@@ -11,9 +11,9 @@
         <h2 class="form__title">パスワードリマインダー</h2>
         <div class="form__content">
             @if(count($errors) > 0)
-            <p class="err__msg__main">入力値に問題があります。再入力してください。</p>
+            <p class="u-err__msg__main">入力値に問題があります。再入力してください。</p>
             @elseif(!empty($message))
-            <p class="err__msg__main">{{$message}}</p>
+            <p class="u-err__msg__main">{{$message}}</p>
             @endif
             <p class="form__content__descript">受信されたメールに記載のある認証キーをご記載ください。
                 <br>メールにて再発行したパスワードをお伝えします。</p>
@@ -23,7 +23,7 @@
                     <label class="textfield__label" for="Auth_Key">認証キー</label>
                 </div>
                 @if($errors->has('auth_key'))
-                <div class="err__msg">{{$errors->first('auth_key')}}</div>
+                <div class="u-err__msg">{{$errors->first('auth_key')}}</div>
                 @endif
                 <div class="textfield__area">
                     <input type="text" class="textfield__input" name="auth_key" placeholder="認証キーを入力してください。" autocomplete="off">

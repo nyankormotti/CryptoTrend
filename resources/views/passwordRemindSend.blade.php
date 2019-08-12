@@ -11,9 +11,9 @@
         <h2 class="form__title">パスワードリマインダー</h2>
         <div class="form__content">
             @if(count($errors) > 0)
-            <p class="err__msg__main">入力値に問題があります。再入力してください。</p>
+            <p class="u-err__msg__main">入力値に問題があります。再入力してください。</p>
             @elseif(!empty($message))
-            <p class="err__msg__main">{{$message}}</p>
+            <p class="u-err__msg__main">{{$message}}</p>
             @endif
             <p class="form__content__descript">ご指定いただいたメールアドレス宛に、
                 <br>パスワード再発行用の認証キーを送付します。</p>
@@ -23,7 +23,7 @@
                     <label class="textfield__label" for="Email">メールアドレス</label>
                 </div>
                 @if($errors->has('email'))
-                <div class="err__msg">{{$errors->first('email')}}</div>
+                <div class="u-err__msg">{{$errors->first('email')}}</div>
                 @endif
                 <div class="textfield__area">
                     <input type="text" class="textfield__input" name="email" placeholder="メールアドレスを入力してください。" autocomplete="off" value="{{old('email')}}">

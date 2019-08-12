@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PasswordRemindRecieveMail;
+use App\Http\Requests\PasswordRemindRecieveRequest;
 
 class PasswordRemindRecieveController extends Controller
 {
@@ -17,7 +18,7 @@ class PasswordRemindRecieveController extends Controller
         return view('passwordRemindRecieve', ['status' => $status]);
     }
 
-    public function send(Request $request)
+    public function send(PasswordRemindRecieveRequest $request)
     {
 
         $toEmail = $request->session()->get('toEmail');

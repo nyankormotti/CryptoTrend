@@ -11,9 +11,9 @@
         <h2 class="form__title">会員登録</h2>
         <div class="form__content">
             @if(count($errors) > 0)
-            <p class="err__msg__main">入力値に問題があります。再入力してください。</p>
+            <p class="u-err__msg__main">入力値に問題があります。再入力してください。</p>
             @elseif(!empty($message))
-            <p class="err__msg__main">{{$message}}</p>
+            <p class="u-err__msg__main">{{$message}}</p>
             @endif
             <p class="form__content__descript">会員登録されるユーザー様お一人につき、
                 <br>twitterアカウントを1つ登録いたします。
@@ -25,7 +25,7 @@
                     <label class="textfield__label" for="Screen_name">Twitterアカウント</label>
                 </div>
                 @if($errors->has('screen_name'))
-                <div class="err__msg">{{$errors->first('screen_name')}}</div>
+                <div class="u-err__msg">{{$errors->first('screen_name')}}</div>
                 @endif
                 <div class="textfield__area">
                     <input type="text" class="textfield__input" name="screen_name" placeholder="@の後ろの文字を入力してください。" autocomplete="off" value="{{old('screen_name')}}">
@@ -34,7 +34,7 @@
                     <label class="textfield__label" for="Email">メールアドレス</label>
                 </div>
                 @if($errors->has('email'))
-                <div class="err__msg">{{$errors->first('email')}}</div>
+                <div class="u-err__msg">{{$errors->first('email')}}</div>
                 @endif
                 <div class="textfield__area">
                     <input type="text" class="textfield__input" name="email" placeholder="メールアドレスを入力してください。" autocomplete="off" value="{{old('email')}}">
@@ -43,7 +43,7 @@
                     <label class="textfield__label" for="Password">パスワード</label>
                 </div>
                 @if($errors->has('password'))
-                <div class="err__msg">{{$errors->first('password')}}</div>
+                <div class="u-err__msg">{{$errors->first('password')}}</div>
                 @endif
                 <div class="textfield__area">
                     <input type="password" class="textfield__input" name="password" placeholder="パスワードを入力してください。">
@@ -52,7 +52,7 @@
                     <label class=" textfield__label" for="Password">パスワード(確認)</label>
                 </div>
                 @if($errors->has('password_re'))
-                <div class="err__msg">{{$errors->first('password_confirmation')}}</div>
+                <div class="u-err__msg">{{$errors->first('password_confirmation')}}</div>
                 @endif
                 <div class="textfield__area">
                     <input type="password" class="textfield__input" name="password_confirmation" placeholder="パスワードを入力してください。">

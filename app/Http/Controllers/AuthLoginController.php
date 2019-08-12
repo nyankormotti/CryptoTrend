@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
@@ -11,13 +12,21 @@ class AuthLoginController extends Controller
 
 {
 
+    /**
+     * ログイン画面表示
+     * @return void
+     */
     public function index()
     {
         return view('authLogin');
     }
 
-
-    public function authLogin(Request $request) {
+    /**
+     * ログイン処理
+     * @param Request $request リクエスト
+     * @return void
+     */
+    public function authLogin(LoginRequest $request) {
 
         // ログイン保持情報
         $rem = $request->pass_save;

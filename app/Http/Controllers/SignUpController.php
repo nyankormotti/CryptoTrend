@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Hash;
 
 class SignUpController extends Controller
@@ -17,7 +18,7 @@ class SignUpController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function signup(Request $request)
+    protected function signup(SignUpRequest $request)
     {
 
         session()->put('screen_name', $request->screen_name);

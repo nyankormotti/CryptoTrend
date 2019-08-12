@@ -10,10 +10,8 @@
     <div class="form form__signup">
         <h2 class="form__title">会員登録</h2>
         <div class="form__content">
-            @if(count($errors) > 0)
+            @if(count($errors) > 0 || !empty($message))
             <p class="u-err__msg__main">入力値に問題があります。再入力してください。</p>
-            @elseif(!empty($message))
-            <p class="u-err__msg__main">{{$message}}</p>
             @endif
             <p class="form__content__descript">会員登録されるユーザー様お一人につき、
                 <br>twitterアカウントを1つ登録いたします。
@@ -26,9 +24,15 @@
                 </div>
                 @if($errors->has('screen_name'))
                 <div class="u-err__msg">{{$errors->first('screen_name')}}</div>
+                @elseif(!empty($message))
+                <div class="u-err__msg">{{$message}}</div>
                 @endif
                 <div class="textfield__area">
+                    @if(!empty($err_screen_name))
+                    <input type="text" class="textfield__input" name="screen_name" placeholder="@の後ろの文字を入力してください。" autocomplete="off" value="{{$err_screen_name}}">
+                    @else
                     <input type="text" class="textfield__input" name="screen_name" placeholder="@の後ろの文字を入力してください。" autocomplete="off" value="{{old('screen_name')}}">
+                    @endif
                 </div>
                 <div>
                     <label class="textfield__label" for="Email">メールアドレス</label>
@@ -37,7 +41,11 @@
                 <div class="u-err__msg">{{$errors->first('email')}}</div>
                 @endif
                 <div class="textfield__area">
+                    @if(!empty($err_email))
+                    <input type="text" class="textfield__input" name="email" placeholder="メールアドレスを入力してください。" autocomplete="off" value="{{$err_email}}">
+                    @else
                     <input type="text" class="textfield__input" name="email" placeholder="メールアドレスを入力してください。" autocomplete="off" value="{{old('email')}}">
+                    @endif
                 </div>
                 <div>
                     <label class="textfield__label" for="Password">パスワード</label>

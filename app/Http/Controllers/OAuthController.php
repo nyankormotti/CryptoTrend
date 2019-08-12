@@ -99,8 +99,14 @@ class OAuthController extends Controller
         if($screen_name !== $userInfo['screen_name']){
             // screen_nameがTwitterのユーザー情報と異なる場合
             // 会員登録画面にリダイレクト
-            session()->flush();
-            return redirect('signup');
+            // session()->flush();
+            $msg = 'Twitterアカウントが存在しません。';
+            session()->put('message', $msg);
+            \Log::info('Outhの連携');
+            \Log::info(session()->get('message'));
+            // return view('signup', ['message' => $msg, 'err_screen_name' => $err_screen_name, 'err_email' => $err_email]);
+            // return redirect()->action('SignUpController@index', ['message' => $msg, 'err_screen_name' => $err_screen_name, 'err_email' => $err_email]);
+            return redirect()->action('SignUpController@index');
         }
         // usersテーブルに会員情報を登録
         $user = new User;

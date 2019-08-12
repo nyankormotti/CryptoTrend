@@ -26,13 +26,9 @@ class ChangeTwitterAccountController extends Controller
      */
     public function changeAccount(ChangeTwitterAccount $request)
     {
+        // セッションに格納
         session()->put('screen_name', $request->screen_name);
         session()->put('change_account_flg', true);
-
-        \Log::info('changeAccount');
-        \Log::info(session()->get('screen_name'));
-        \Log::info(session()->get('change_account_flg'));
-
         // Twitter API連携処理を実施
         return redirect()->action('OAuthController@login');
 
@@ -46,8 +42,6 @@ class ChangeTwitterAccountController extends Controller
      * @return void
      */
     public function changeAccountMain() {
-        \Log::info('changeAccountMain');
-        \Log::info(session()->get('screen_name'));
         $user = User::where('id', Auth::id())->first();
 
         $screen_name = session()->get('screen_name');

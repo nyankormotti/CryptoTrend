@@ -10,6 +10,18 @@ class SignUpController extends Controller
 {
 
     public function index(){
+
+        if (!empty(session()->get('message'))) {
+            $msg = session()->get('message');
+            $err_screen_name = session()->get('screen_name');
+            $err_email = session()->get('email');
+            // エラーメッセージ、Twitterアカウント、メールアドレスのセッション情報を削除
+            session()->forget('message');
+            session()->forget('screen_name');
+            session()->forget('email');
+            return view('signup', ['message' => $msg, 'err_screen_name' => $err_screen_name, 'err_email' => $err_email]);
+        }
+
         return view('signup');
     }
     /**

@@ -13,7 +13,11 @@ class ContactAfterRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        if ($this->path() == 'mypage/contact') {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -24,7 +28,15 @@ class ContactAfterRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'comment' => 'required|between:0,1000'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'comment.required' => '入力必須です。',
+            'comment.between' => '1000文字以内で入力してください。'
         ];
     }
 }

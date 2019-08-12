@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\ChangeEmailRequest;
+use App\Http\Requests\ContactAfterRequest;
+use App\Http\Requests\ChangePasswordRequest;
 
 class MypageController extends Controller
 {
@@ -23,13 +26,12 @@ class MypageController extends Controller
 
     /**
      * メールアドレス変更処理
-     * @param $request リクエストパラメータ
+     * @param ChangeEmailRequest $request リクエストパラメータ
      * @return void
      */
-    public function changeEmail(Request $request)
+    public function changeEmail(ChangeEmailRequest $request)
     {
-        $id = Auth::id();
-        $user = User::where('id', $id)->first();
+        $user = User::where('id', Auth::id())->first();
         $user->email = $request->email;
         $user->save();
         $request->session()->flash('status', 'メールアドレスを変更しました。');
@@ -41,10 +43,9 @@ class MypageController extends Controller
      * @param $request リクエストパラメータ
      * @return void
      */
-    public function changePassword(Request $request)
+    public function changePassword(ChangePasswordRequest $request)
     {
-        $id = Auth::id();
-        $user = User::where('id', $id)->first();
+        $user = User::where('id', Auth::id())->first();
         $user->password = Hash::make($request->password);
         $user->save();
         Mail::to($user->email)->send(new ChangePasswordMail($request->password));
@@ -57,10 +58,9 @@ class MypageController extends Controller
      * @param $request リクエストパラメータ
      * @return void
      */
-    public function contact(Request $request)
+    public function contact(ContactAfterRequest $request)
     {
-        $id = Auth::id();
-        $user = User::where('id', $id)->first();
+        $user = User::where('id', Auth::id())->first();
         $fromEmail = $user->email;
         $comment = $request->comment;
         Mail::to('info@info.com')->send(new ContactMail($fromEmail, $comment));
@@ -76,8 +76,7 @@ class MypageController extends Controller
     public function withdraw(Request $request)
     {
         // usersテーブルの該当ユーザーを削除(削除フラグをONにする)
-        $id = Auth::id();
-        $user = User::where('id', $id)->first();
+        $user = User::where('id', Auth::id())->first();
         $user->delete_flg = true;
         $user->save();
 
@@ -89,7 +88,7 @@ class MypageController extends Controller
         // ログアウト処理
         Auth::logout();
 
-        return redirect()->action('withdrawDoneController@index', $request);
+        return redirect()->action('WithdrawDoneController@index', $request);
     }
 
 }

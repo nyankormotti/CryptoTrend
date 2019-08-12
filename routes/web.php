@@ -24,7 +24,7 @@ Route::group(['middleware' => ['before.login']], function () {
     // パスワードリマインダー(認証キー)送信
     Route::get('/passwordRemindRecieve', 'PasswordRemindRecieveController@index');
     // 退会完了画面
-    Route::get('/withdrawDone', 'withdrawDoneController@index');
+    Route::get('/withdrawDone', 'WithdrawDoneController@index');
 });
 
 // ログイン処理
@@ -35,7 +35,6 @@ Route::post('/signup', 'SignUpController@signup');
 Route::post('/passwordRemindSend', 'PasswordRemindSendController@send');
 // パスワードリマインダー送信(再発行パスワード)送信処理
 Route::post('/passwordRemindRecieve', 'PasswordRemindRecieveController@send');
-
 
 // Twitterアカウント変更
 Route::get('/changeTwitterAccount', 'ChangeTwitterAccountController@index');
@@ -70,8 +69,6 @@ Route::post('/account/auto', 'AccountController@autoFollow');
 Route::post('/account/follow', 'AccountController@follow');
 Route::post('/account/unfollow', 'AccountController@unFollow');
 
-// Twitterアカウント変更処理(マイページ)
-Route::post('/mypage/changeTwitterAccount', 'MypageController@changeTwitterAccount');
 // メールアドレス変更処理
 Route::post('/mypage/changeEmail', 'MypageController@changeEmail');
 // パスワード変更処理

@@ -5,8 +5,8 @@ $(function(){
     // ===========================================================
     let targetoffset = null;
     let err = $(".js-u-err__msg__main");
-    if (err !== null) {
-        targetoffset = $(".js-u-err__msg__main").offset();
+    if (err.length !== 0) {
+        targetoffset = err.offset();
         let hight = $("html,body");
         hight.animate({ scrollTop: targetoffset.top - 80 }, { queue: false });
     }

@@ -26,12 +26,15 @@
                     <form class="form__content toggle_contents" action="/mypage/changeEmail" method="post">
                         @endif
                         {{ csrf_field() }}
+                        @if($errors->has('email'))
+                        <p class="u-err__msg__main">入力値に問題があります。再入力してください。</p>
+                        @endif
                         <p class="form__content__descript">新しいメールアドレスを入力してください。</p>
                         <div>
                             <label class="textfield__label" for="Email">メールアドレス</label>
                         </div>
                         @if($errors->has('email'))
-                        <div class="err__msg">{{$errors->first('email')}}</div>
+                        <div class="u-err__msg">{{$errors->first('email')}}</div>
                         @endif
                         <div class="textfield__area">
                             @if($errors->has('email'))
@@ -48,7 +51,7 @@
 
         <!-- パスワード変更 -->
         <section class="mypage__parts mypage__account toggle_wrap">
-            @if($errors->has('email'))
+            @if($errors->has('password'))
             <div class="mypage__title toggle_switch open">
                 @else
                 <div class="mypage__title toggle_switch">
@@ -61,14 +64,17 @@
                     <form class="form__content toggle_contents" action="/mypage/changePassword" method="post">
                         @endif
                         {{ csrf_field() }}
-                        <input type="hidden" name="err_dummy">
+                        <input type="hidden" name="u-err_dummy">
+                        @if($errors->has('old_pass') || $errors->has('password'))
+                        <p class="u-err__msg__main">入力値に問題があります。再入力してください。</p>
+                        @endif
                         <p class="form__content__descript">パスワードを変更します。<br>
                             現在のパスワードと新しいパスワードを<br class="mypage__descropt__line">入力してください。</p>
                         <div>
                             <label class="textfield__label" for="Password">現在のパスワード</label>
                         </div>
                         @if($errors->has('old_pass'))
-                        <div class="err__msg">{{$errors->first('old_pass')}}</div>
+                        <div class="u-err__msg">{{$errors->first('old_pass')}}</div>
                         @endif
                         <div class="textfield__area">
                             <input type="password" class="textfield__input" name="old_pass" placeholder="パスワードを入力してください。">
@@ -77,7 +83,7 @@
                             <label class="textfield__label" for="Password">新しいパスワード</label><span>&nbsp;&nbsp;&nbsp;※半角英数字8桁以上</span>
                         </div>
                         @if($errors->has('password'))
-                        <div class="err__msg">{{$errors->first('password')}}</div>
+                        <div class="u-err__msg">{{$errors->first('password')}}</div>
                         @endif
                         <div class="textfield__area">
                             <input type="password" class="textfield__input" name="password" placeholder="パスワードを入力してください。">
@@ -96,24 +102,27 @@
 
         <!-- お問い合わせ -->
         <section class="mypage__parts mypage__account toggle_wrap">
-            @if($errors->has('email'))
+            @if($errors->has('comment'))
             <div class="mypage__title toggle_switch open">
                 @else
                 <div class="mypage__title toggle_switch">
                     @endif
                     <p class="mypage__title__sub">お問い合わせ</p>
                 </div>
-                @if($errors->has('old_pass') || $errors->has('comment'))
+                @if($errors->has('comment'))
                 <form class="form__content toggle_contents" action="/mypage/contact" method="post" style="display:block;">
                     @else
                     <form class="form__content toggle_contents" action="/mypage/contact" method="post">
                         @endif
                         {{ csrf_field() }}
+                        @if($errors->has('comment'))
+                        <p class="u-err__msg__main">入力値に問題があります。再入力してください。</p>
+                        @endif
                         <div>
                             <label class="textfield__label" for="Comment">お問い合わせ内容</label>
                         </div>
                         @if($errors->has('comment'))
-                        <div class="err__msg">{{$errors->first('comment')}}</div>
+                        <div class="u-err__msg">{{$errors->first('comment')}}</div>
                         @endif
                         <div class="textfield__comment__area">
                             <textarea class="textfield__comment" name="comment" id="" cols="30" rows="10" placeholder="1000文字以内にて入力してください。" value="{{old('comment')}}"></textarea>

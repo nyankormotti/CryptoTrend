@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class withdrawDoneController extends Controller
+class WithdrawDoneController extends Controller
 {
     /**
      * 退会完了画面表示

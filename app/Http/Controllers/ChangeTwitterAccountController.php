@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Abraham\TwitterOAuth\TwitterOAuth;
+use App\Http\Requests\ChangeTwitterAccount;
 
 class ChangeTwitterAccountController extends Controller
 {
@@ -23,7 +24,7 @@ class ChangeTwitterAccountController extends Controller
      * @param Request $request リクエストパラメータ
      * @return void
      */
-    public function changeAccount(Request $request)
+    public function changeAccount(ChangeTwitterAccount $request)
     {
         session()->put('screen_name', $request->screen_name);
         session()->put('change_account_flg', true);

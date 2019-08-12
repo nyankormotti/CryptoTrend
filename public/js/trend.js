@@ -32992,7 +32992,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_TrendComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/TrendComponent.vue */ "./resources/js/components/TrendComponent.vue");
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$axios = axios__WEBPACK_IMPORTED_MODULE_1___default.a; // Components
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$axios = axios__WEBPACK_IMPORTED_MODULE_1___default.a;
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.devtools = true; // Components
 
 
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({

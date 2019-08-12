@@ -3,7 +3,13 @@
 namespace App\Exceptions;
 
 use Exception;
+use PDOException;
+use ErrorException;
+use \Illuminate\Database\QueryException;
+use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +52,16 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if (
+            $exception instanceof QueryException
+            || $exception instanceof \Swift_TransportException
+            || $exception instanceof NotFoundHttpException
+            || $exception instanceof MethodNotAllowedHttpException
+            || $exception instanceof FatalThrowableError
+            || $exception instanceof ErrorException
+        ) {
+            return redirect()->action('ExceptionController@index');
+        }
         return parent::render($request, $exception);
     }
 }

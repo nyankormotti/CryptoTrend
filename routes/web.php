@@ -94,6 +94,10 @@ Route::get('/main', 'OAuthController@main');
 Route::get('/oauthlogout', 'OAuthController@logout');
 
 
+// 例外発生画面
+Route::get('/exception', 'ExceptionController@index');
+
+
 
 
 

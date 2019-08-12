@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\ContactBeforeRequest;
 
 class IndexController extends Controller
 {
@@ -22,7 +23,7 @@ class IndexController extends Controller
      * @param $request リクエストパラメータ
      * @return void
      */
-    public function contact(Request $request)
+    public function contact(ContactBeforeRequest $request)
     {
         $fromEmail = $request->email;
         $comment = $request->comment;

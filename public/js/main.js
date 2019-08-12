@@ -94,15 +94,26 @@
 /***/ (function(module, exports) {
 
 $(function () {
-  // ボタンを押した時の挙動
-  // $('.c-action-btn').on('click',function(){
-  //     let btn = $(this);
-  //     btn.toggleClass('c-action-btn--blue');
-  // });
   // ===========================================================
+  // バリデーションエラー時に、エラー個所まで画面をスクロールさせる(トップページのお問い合わせ機能のみに適用)
+  // ===========================================================
+  var targetoffset = null;
+  var err = $(".js-u-err__msg__main");
+
+  if (err !== null) {
+    targetoffset = $(".js-u-err__msg__main").offset();
+    var hight = $("html,body");
+    hight.animate({
+      scrollTop: targetoffset.top - 80
+    }, {
+      queue: false
+    });
+  } // ===========================================================
   // 続きを読むボタン(関連ニュース画面)
   // ===========================================================
   // 分割したい個数を入力
+
+
   var division = 5; // 要素の数を数える
 
   var divlength = $('.p-news__content__article').length; //分割数で割る

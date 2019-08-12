@@ -1,11 +1,15 @@
 $(function(){
 
-    // ボタンを押した時の挙動
-    // $('.c-action-btn').on('click',function(){
-    //     let btn = $(this);
-    //     btn.toggleClass('c-action-btn--blue');
-    // });
-
+    // ===========================================================
+    // バリデーションエラー時に、エラー個所まで画面をスクロールさせる(トップページのお問い合わせ機能のみに適用)
+    // ===========================================================
+    let targetoffset = null;
+    let err = $(".js-u-err__msg__main");
+    if (err !== null) {
+        targetoffset = $(".js-u-err__msg__main").offset();
+        let hight = $("html,body");
+        hight.animate({ scrollTop: targetoffset.top - 80 }, { queue: false });
+    }
 
     // ===========================================================
     // 続きを読むボタン(関連ニュース画面)

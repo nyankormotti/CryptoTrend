@@ -46,11 +46,13 @@ class AutoFollowBatch extends Command
 
         // user情報を取得(自動フォローONのユーザーのみ取得)
         $users = User::where('autofollow_flg', 1)
-        ->where('delete_flg', 0)
-        ->get();
+                ->where('delete_flg', 0)
+                ->get();
 
+        // ユーザーの数だけ繰り返し実施
+        // (1ユーザーに付き、1アカウントのみ自動フォローを実施する(30分ごとに実施))
         for ($i = 0; $i < count($users); $i++) {
-            \Log::info($i.'人目のユーザー');
+            \Log::info(($i + 1).'人目のユーザー');
             if($users[$i]->update_flg == 1) {
                 // アカウント情報をバッチで更新中の場合
                 // 60秒待機
@@ -58,14 +60,18 @@ class AutoFollowBatch extends Command
             }
             // userのuser_idに紐付くaccountsテーブルのレコードを取得
             // (フォローしていないアカウントのみ取得)
-            $accounts = DB::table('accounts')->where('user_id', $users[$i]->id)->where('follow_flg', 0)->get();
+            $accounts = DB::table('accounts')
+                        ->where('user_id', $users[$i]->id)
+                        ->where('follow_flg', 0)
+                        ->get();
+
             if (count($accounts) == 0) {
                 // アカウント情報が取得できなかった時
                 \Log::info('アカウント情報がありません。');
                 \Log::info('次のユーザーの処理を実施します。');
                 continue;
             }
-
+            // オブジェクトを配列形式に変換
             $array_account = json_decode(json_encode($accounts), true);
 
             // ランダムにアカウントを1つフォローする
@@ -93,12 +99,14 @@ class AutoFollowBatch extends Command
             $target = $twitter->get('users/show', ["user_id" => $twitter_id]);
             // オブジェクトを配列形式に変換
             $target_account = json_decode(json_encode($target), true);
+
             if (!empty($target_account['errors'])) {
                 // アカウントが存在しない場合、処理を中断
                 \Log::info('twitter上にアカウントが存在しない');
                 \Log::info('次のユーザーの処理を実施します。');
                 // そのアカウントはフォローできません。
                 continue;
+
             } else if ($target_account['following'] == true) {
                 // アカウントがフォロー済みの場合
                 \Log::info('フォロー済みのアカウントをフォローしようとしています。');
@@ -172,9 +180,9 @@ class AutoFollowBatch extends Command
             // リクエスト制限判定その2 終了
 
             // usersテーブルを更新
-            $users[$i]->request_count = $request_count;
-            $users[$i]->follow_limit = $follow_count;
-            $users[$i]->first_request_time = $first_request_time;
+            $users[$i]->request_count = $request_count; // リクエスト回数の更新
+            $users[$i]->follow_limit = $follow_count; //フォロー回数の更新
+            $users[$i]->first_request_time = $first_request_time; // リクエスト時間の更新
             $users[$i]->save();
 
             // 自動フォロー処理開始
@@ -199,7 +207,6 @@ class AutoFollowBatch extends Command
                         'follow_flg' => 1
                     ]);
             }
-
         }
 
         \Log::info('自動フォロー処理終了');

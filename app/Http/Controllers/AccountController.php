@@ -179,6 +179,7 @@ class AccountController extends Controller
         $user->first_request_time = $first_request_time; // リクエスト時間の更新
         $user->save();
 
+        // 手動フォロー処理開始
         // API連携(フォローリクエスト実施)
         $result = $twitter->post('friendships/create', ["user_id" => $request->twitter_id]);
         // オブジェクトを配列形式に変換
@@ -327,6 +328,7 @@ class AccountController extends Controller
         $user->first_request_time = $first_request_time;// リクエスト時間を更新
         $user->save();
 
+        // 手動フォロー解除処理開始
         // API連携(フォロー解除リクエスト実施)
         $result = $twitter->post('friendships/destroy', ["user_id" => $request->twitter_id]);
         // オブジェクトを配列形式に変換

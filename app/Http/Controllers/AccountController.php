@@ -21,12 +21,15 @@ class AccountController extends Controller
     }
     /**
      * 仮想通貨関連Twitterアカウント取得処理
-     * @param $request (follow_flg, last_updated)
+     * @param Request $request (follow_flg, last_updated)
      * @return array (アカウント情報)
      */
     public function getAccount(Request $request) {
 
-        $account_list = Account::where('user_id',Auth::id())->where('follow_flg', $request->follow_flg)->orderBy('last_updated','DESC')->get();
+        $account_list = Account::where('user_id',Auth::id())
+                        ->where('follow_flg', $request->follow_flg)
+                        ->orderBy('last_updated','DESC')
+                        ->get();
 
         return $account_list;
     }
@@ -44,7 +47,7 @@ class AccountController extends Controller
     /**
      * 自動フォローフラグの登録処理
      * (usersテーブルのautofollow_flgがtrueの場合、バッチ処理にて自動フォローが実施される)
-     * @param $request (autoFollow_flg)
+     * @param Request $request (autoFollow_flg)
      * @return array (ユーザー情報)
      */
     public function autoFollow(Request $request) {
@@ -58,8 +61,8 @@ class AccountController extends Controller
 
     /**
      * フォロー処理(API連携)
-     * @param $request (twitter_id)
-     * @return $action_flg (API連携成功の有無フラグ)
+     * @param Request $request (twitter_id)
+     * @return boolean $action_flg (API連携成功の有無フラグ)
      */
     public function follow(Request $request) {
         \Log::info('===============');
@@ -171,9 +174,9 @@ class AccountController extends Controller
             return $action_flg;
         }
         //  usersテーブルを更新
-        $user->request_count = $request_count;
-        $user->follow_limit = $follow_count;
-        $user->first_request_time = $first_request_time;
+        $user->request_count = $request_count; // リクエスト回数の更新
+        $user->follow_limit = $follow_count; //フォロー回数の更新
+        $user->first_request_time = $first_request_time; // リクエスト時間の更新
         $user->save();
 
         // API連携(フォローリクエスト実施)
@@ -268,7 +271,7 @@ class AccountController extends Controller
         $first_request_time = new Carbon($user->first_request_time);
         // usersテーブルより、リクエスト回数を取得
         $request_count = $user->request_count;
-        // usersテーブルより、フォロー回数を取得
+        // usersテーブルより、フォロー解除回数を取得
         $unfollow_count = $user->unfollow_limit;
         // 現在時刻を取得
         $now_time = new Carbon();
@@ -301,31 +304,30 @@ class AccountController extends Controller
             $request_count = 1;
             // リクエスト時間を現在時刻に更新
             $first_request_time = new Carbon();
-            
         }
 
         // リクエスト制限判定その2
         if (99 >= $unfollow_count) {
             \Log::info('フォロー解除した回数が100回以下');
-            // フォローした回数が99回以下の場合
-            // フォロー回数を+1回
+            // フォロー解除した回数が99回以下の場合
+            // フォロー解除回数を+1回
             $unfollow_count = $unfollow_count + 1;
         } else {
             \Log::info('フォロー解除した回数が100回以上');
             \Log::info('エラー：フォロー解除上限回数を超えています');
-            // フォローした回数が100回以上の場合
+            // フォロー解除した回数が100回以上の場合
             // 処理を中断
-            // フォロー上限回数を超えています
+            // フォロー解除上限回数を超えています
             $action_flg = 3;
             return $action_flg;
         }
         //  usersテーブルを更新
-        $user->request_count = $request_count;
-        $user->unfollow_limit = $unfollow_count;
-        $user->first_request_time = $first_request_time;
+        $user->request_count = $request_count; //リクエスト回数を更新
+        $user->unfollow_limit = $unfollow_count; //フォロー解除回数を更新
+        $user->first_request_time = $first_request_time;// リクエスト時間を更新
         $user->save();
 
-        // API連携(フォローリクエスト実施)
+        // API連携(フォロー解除リクエスト実施)
         $result = $twitter->post('friendships/destroy', ["user_id" => $request->twitter_id]);
         // オブジェクトを配列形式に変換
         $result_array = json_decode(json_encode($result), true);

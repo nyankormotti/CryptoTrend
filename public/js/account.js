@@ -1744,7 +1744,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+ //関連アカウント表示領域
 
+ //オプション領域
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1780,17 +1786,17 @@ __webpack_require__.r(__webpack_exports__);
       unFollowLimit: 0,
       // フォロー解除回数
       autoFollowFlg: 0,
-      //自動フォローフラグ
+      //自動フォローフラグ (0:OFF, 1:ON)
       // 手動フォロー時のフラグ、サイン
       resultFollowFlg: 1,
       //手動フォローの結果フラグ (0：API連携失敗, 1：正常終了, 2：リクエスト回数超過, 3：フォロー回数超過, 4：フォロー済アカウントをフォローしようとした場合)
       actFollowSign: 0,
-      //フォローリクエスト時のサイン (0:リクエスト完了)
+      //フォローリクエスト時のサイン (値が変化した際に手動フォロー後の処理を実行するサイン)
       // 手動フォロー解除時のフラグ、サイン
       resultUnfollowFlg: 1,
       //手動フォロー解除の結果フラグ(0：API連携失敗, 1：正常終了, 2：リクエスト回数超過, 3：フォロー解除回数超過, 4：未フォローのアカウントをフォロー解除しようとした場合)
       actUnfollowSign: 0,
-      //フォロー解除リクエスト時のサイン
+      //フォロー解除リクエスト時のサイン (値が変化した際に手動フォロー解除後の処理を実行するサイン)
       // setInterval用変数
       intervalId: undefined
     };
@@ -1804,6 +1810,7 @@ __webpack_require__.r(__webpack_exports__);
         // フォローの有無フラグにてフォロー済み、または未フォローのアカウント情報を取得
         follow_flg: this.followFlg
       }).then(function (res) {
+        //仮想通貨関連アカウント情報
         _this.accounts = res.data;
       })["catch"](function (err) {
         alert('例外が発生しました。しばらく経ってからお試しください。');
@@ -1824,13 +1831,13 @@ __webpack_require__.r(__webpack_exports__);
         _this2.autoFollowFlg = _this2.users.autofollow_flg;
       });
     },
-    // フォロー有無フラグ(アカウント情報の表示形式)変更処理
+    // フォロー有無フラグ(アカウント情報の表示形式)変更処理(子コンポーネントの未フォロー」または「フォロー済」ボタンをクリックした際に実行)
     searchAccount: function searchAccount() {
       // アカウント情報の表示形式変更(未フォロー：0 or フォロー済：1)
       // ウォッチャにて実施
       this.followFlg = !this.followFlg;
     },
-    // 自動フォローフラグ更新処理
+    // 自動フォローフラグ更新処理(子コンポーネントの自動フォローの「ON」または「OFF」ボタンをクリックした際に実行)
     autoFollow: function autoFollow() {
       var _this3 = this;
 
@@ -1847,106 +1854,81 @@ __webpack_require__.r(__webpack_exports__);
         alert('例外が発生しました。しばらく経ってからお試しください。');
       });
     },
+    // ページングの編集処理
     pageCount: function pageCount() {
-      this.count = this.accounts.length;
-      this.lastCount = this.page * this.perPage;
+      // アカウント情報の総数
+      this.count = this.accounts.length; // 1ページの表示終りの件数 = 現在のページ数 * 1ページの表示件数(20件)
 
-      if (this.count % 20 == 0 || this.lastCount <= 20) {
-        this.firstCount = 1;
-      } else if (this.lastCount <= this.count) {
-        this.firstCount = this.lastCount - 19;
-      } else {
-        this.firstCount = (this.page - 1) * this.perPage + 1;
-      }
+      this.lastCount = this.page * this.perPage; // 表示終りの件数がアカウント情報の総数より大きい場合
 
       if (this.lastCount > this.count) {
+        // 表示終りの件数 = アカウント情報の総数
         this.lastCount = this.count;
-        this.firstCount = (this.page - 1) * this.perPage + 1;
-      }
+      } // 1ページの表示初めの件数 = (現在のページ数 - 1) * 1ページの表示件数(20件) + 1
+      // 例：現在のページ数 = 1の場合 → 表示初めの件数:1
+      // 例：現在のページ数 = 2の場合 → 表示初めの件数:21
+
+
+      this.firstCount = (this.page - 1) * this.perPage + 1; // 総ページ数の算出
 
       this.totalPage = Math.ceil(this.accounts.length / this.perPage);
     },
+    // ページングの「Prev」ボタンクリック時、前のページに戻る
     onPrev: function onPrev() {
       this.page = Math.max(this.page - 1, 1);
     },
+    // ページングの「Next」ボタンクリック時、次のページに移動
     onNext: function onNext() {
       this.page = Math.min(this.page + 1, this.totalPage);
     },
-    // 手動フォローメソッド
+    // 手動フォローメソッド(「フォロー」ボタンをクリック時に実行)
     follow: function follow(id) {
       var _this4 = this;
 
       this.$axios.post('/account/follow', {
+        // 子コンポーネントから受け取ったTwitter_idをサーバーサイドへ渡す
         twitter_id: id
       }).then(function (res) {
-        _this4.resultFollowFlg = res.data;
+        // 手動フォローの結果フラグ 
+        _this4.resultFollowFlg = res.data; // フォローリクエスト時のサインの値を反転(手動フォロー後の処理をウォッチャで実施するため)
+
         _this4.actFollowSign = !_this4.actFollowSign;
       })["catch"](function (err) {
+        // フォローリクエスト時のサインの値を反転(手動フォロー後の処理をウォッチャで実施するため)
         _this4.actFollowSign = !_this4.actFollowSign;
         alert('例外が発生しました。しばらく経ってからお試しください。');
       });
     },
-    // 手動フォロー解除メソッド
+    // 手動フォロー解除メソッド(「フォロー解除」ボタンをクリック時に実行)
     unfollow: function unfollow(id) {
       var _this5 = this;
 
       this.$axios.post('/account/unfollow', {
+        // 子コンポーネントから受け取ったTwitter_idをサーバーサイドへ渡す
         twitter_id: id
       }).then(function (res) {
-        _this5.resultUnfollowFlg = res.data;
+        // 手動フォロー解除の結果フラグ 
+        _this5.resultUnfollowFlg = res.data; // フォロー解除リクエスト時のサインの値を反転(手動フォロー解除後の処理をウォッチャで実施するため)
+
         _this5.actUnfollowSign = !_this5.actUnfollowSign;
       })["catch"](function (err) {
+        // フォロー解除リクエスト時のサインの値を反転(手動フォロー解除後の処理をウォッチャで実施するため)
         _this5.actFollowSign = !_this5.actFollowSign;
         alert('例外が発生しました。しばらく経ってからお試しください。');
       });
     }
   },
   watch: {
+    // アカウント情報が変更された際、ページングの編集処理を実行
     accounts: function accounts() {
       this.pageCount();
     },
+    // 現在のページが変更された際、ページングの編集処理を実行
     page: function page() {
-      if (this.totalPage < this.page) {
-        this.page = this.totalPage;
-      }
-
-      this.lastCount = this.page * this.perPage;
-
-      if (this.count % 20 == 0 || this.lastCount <= 20) {
-        this.firstCount = 1;
-      } else if (this.lastCount <= this.count) {
-        this.firstCount = this.lastCount - 19;
-      } else {
-        this.firstCount = (this.page - 1) * this.perPage + 1;
-      }
-
-      if (this.lastCount > this.count) {
-        this.lastCount = this.count;
-        this.firstCount = (this.page - 1) * this.perPage + 1;
-      }
+      this.pageCount();
     },
-    count: function count() {
-      if (this.totalPage < this.page) {
-        this.page = this.totalPage;
-      } else if (this.count !== 0 && this.page == 0) {
-        this.page = 1;
-        this.lastCount = this.page * this.perPage;
-      }
-
-      this.lastCount = this.page * this.perPage;
-
-      if (this.count % 20 == 0 || this.lastCount <= 20) {
-        this.firstCount = 1;
-      } else {
-        this.firstCount = (this.page - 1) * this.perPage + 1;
-      }
-
-      if (this.lastCount > this.count) {
-        this.lastCount = this.count;
-      }
-    },
+    // 表示形式変更フラグが変わった際に、アカウント情報を取得する
     followFlg: function followFlg() {
-      // 表示形式変更フラグが変わった際に、アカウント情報を取得する
       // followFlgにてフォロー済み、または未フォローのアカウント情報を取得する。
       this.fetchAccount();
     },
@@ -1965,7 +1947,8 @@ __webpack_require__.r(__webpack_exports__);
       } else if (this.resultFollowFlg == 4) {
         // フォロー済みのアカウントの場合、アラートを発行
         alert('そのアカウントはフォロー済みです。');
-      }
+      } // 手動フォローの結果フラグ をデフォルト値に戻す
+
 
       this.resultFollowFlg = 1; // 仮想通貨関連アカウント情報取得
 
@@ -1985,7 +1968,8 @@ __webpack_require__.r(__webpack_exports__);
         alert('1日のフォロー解除上限回数を超えているため、処理できません。');
       } else if (this.resultUnfollowFlg == 4) {
         alert('そのアカウントはフォロー解除済です。');
-      }
+      } // 手動フォロー解除の結果フラグ をデフォルト値に戻す
+
 
       this.resultUnfollowFlg = 1; // 仮想通貨関連アカウント情報取得
 
@@ -2055,24 +2039,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['accounts', 'page', 'perPage', 'followFlg'],
-  data: function data() {
-    return {};
-  },
+  props: ['accounts', //仮想通貨関連アカウント情報
+  'page', //現在のページ番号
+  'perPage', //1ページ毎の表示件数
+  'followFlg' //フォローの有無フラグ(0:未フォロー, 1:フォロー済)
+  ],
   methods: {
+    // 「フォロー」ボタンをクリック
     follow: function follow(twitter_id) {
+      // 親コンポーネントに通知
       this.$emit('child-follow', twitter_id);
     },
+    // 「フォロー解除」ボタンをクリック
     unfollow: function unfollow(twitter_id) {
+      // 親コンポーネントに通知
       this.$emit('child-unfollow', twitter_id);
     }
   },
   computed: {
+    // １ページに表示するアカウント情報を編集
+    // this.perPage（表示件数）は20(固定)
     filterAccounts: function filterAccounts() {
       var _this = this;
 
       return this.accounts.filter(function (account, i) {
-        return i >= (_this.page - 1) * _this.perPage && i < _this.page * _this.perPage;
+        return (// 1ページに表示する初めのインデックスを算出
+          // 例：this.page(現在ページ)が1の場合
+          // → i(インデックス) >= 0
+          i >= (_this.page - 1) * _this.perPage && // 1ページに表示する終わりのインデックスを算出
+          // 例：this.page(現在ページ)が1の場合
+          // → i(インデックス) < 20
+          i < _this.page * _this.perPage
+        );
       });
     }
   }
@@ -2139,12 +2137,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["followLimit", "unFollowLimit", "autoFollowFlg", "followFlg"],
+  props: ["followLimit", //フォロー回数
+  "unFollowLimit", // フォロー解除回数
+  "autoFollowFlg", //自動フォローフラグ (0:OFF, 1:ON)
+  "followFlg"],
   methods: {
+    // 「未フォロー」または「フォロー済」ボタンをクリック
     search: function search() {
+      // 親コンポーネントに通知
       this.$emit('child-search');
     },
+    // 自動フォローの「ON」または「OFF」ボタンをクリック
     autoFollow: function autoFollow() {
+      // 親コンポーネントに通知
       this.$emit('child-auto');
     }
   }

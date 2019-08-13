@@ -28,28 +28,36 @@
 <script>
 export default {
     props: [
-        'accounts',
-        'page',
-        'perPage',
-        'followFlg'
+        'accounts', //仮想通貨関連アカウント情報
+        'page',  //現在のページ番号
+        'perPage', //1ページ毎の表示件数
+        'followFlg' //フォローの有無フラグ(0:未フォロー, 1:フォロー済)
     ],
-    data: function() {
-        return {
-        }
-    },
     methods: {
+        // 「フォロー」ボタンをクリック
         follow: function(twitter_id) {
+            // 親コンポーネントに通知
             this.$emit('child-follow',twitter_id)
         },
+        // 「フォロー解除」ボタンをクリック
         unfollow: function(twitter_id) {
+            // 親コンポーネントに通知
             this.$emit('child-unfollow',twitter_id)
         },
     },
     computed: {
+        // １ページに表示するアカウント情報を編集
+        // this.perPage（表示件数）は20(固定)
         filterAccounts() {
             return this.accounts.filter(
             (account, i) =>
+                // 1ページに表示する初めのインデックスを算出
+                // 例：this.page(現在ページ)が1の場合
+                // → i(インデックス) >= 0
                 i >= (this.page - 1) * this.perPage &&
+                // 1ページに表示する終わりのインデックスを算出
+                // 例：this.page(現在ページ)が1の場合
+                // → i(インデックス) < 20
                 i < this.page * this.perPage
             );
         }

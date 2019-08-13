@@ -50,16 +50,20 @@
 <script>
 export default {
     props: [
-        "followLimit",
-        "unFollowLimit",
-        "autoFollowFlg",
-        "followFlg",
+        "followLimit", //フォロー回数
+        "unFollowLimit", // フォロー解除回数
+        "autoFollowFlg", //自動フォローフラグ (0:OFF, 1:ON)
+        "followFlg", //フォローの有無フラグ (0:未フォロー, 1:フォロー済)
     ],
     methods: {
+        // 「未フォロー」または「フォロー済」ボタンをクリック
         search: function() {
+            // 親コンポーネントに通知
             this.$emit('child-search')
         },
+        // 自動フォローの「ON」または「OFF」ボタンをクリック
         autoFollow: function() {
+            // 親コンポーネントに通知
             this.$emit('child-auto')
         }
     }

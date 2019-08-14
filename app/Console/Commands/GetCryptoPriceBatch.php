@@ -40,7 +40,6 @@ class GetCryptoPriceBatch extends Command
      */
     public function handle()
     {
-
         \Log::info('===============');
         \Log::info('各銘柄の取引価格取得バッチ開始');
 

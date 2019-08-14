@@ -23,7 +23,7 @@
         </div>
         <div class="p-entrance__panel">
             <h2 class="p-entrance__panel__title">会員の方はこちら</h2>
-            <a href="authLogin" class="p-entrance__panel__btn login__btn">ログイン</a>
+            <a href="login" class="p-entrance__panel__btn login__btn">ログイン</a>
         </div>
     </section>
 </section>

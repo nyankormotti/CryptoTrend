@@ -6,7 +6,6 @@ use App\User;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use App\Mail\ChangePasswordMail;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -26,11 +25,12 @@ class MypageController extends Controller
 
     /**
      * メールアドレス変更処理
-     * @param ChangeEmailRequest $request リクエストパラメータ
+     * @param ChangeEmailRequest $request (email)
      * @return void
      */
     public function changeEmail(ChangeEmailRequest $request)
     {
+        // usersテーブルに新しいメールアドレスを更新
         $user = User::where('id', Auth::id())->first();
         $user->email = $request->email;
         $user->save();
@@ -40,14 +40,16 @@ class MypageController extends Controller
 
     /**
      * パスワード変更処理
-     * @param $request リクエストパラメータ
+     * @param ChangePasswordRequest $request (password)
      * @return void
      */
     public function changePassword(ChangePasswordRequest $request)
     {
+        // usersテーブルに新しいパスワードを更新
         $user = User::where('id', Auth::id())->first();
         $user->password = Hash::make($request->password);
         $user->save();
+        // パスワード変更をメールで通知
         Mail::to($user->email)->send(new ChangePasswordMail($request->password));
         $request->session()->flash('status', 'パスワードを変更しました。');
         return redirect()->action('TrendController@index');
@@ -55,7 +57,7 @@ class MypageController extends Controller
 
     /**
      * お問い合わせ処理
-     * @param $request リクエストパラメータ
+     * @param ContactAfterRequest $request (comment)
      * @return void
      */
     public function contact(ContactAfterRequest $request)
@@ -63,6 +65,7 @@ class MypageController extends Controller
         $user = User::where('id', Auth::id())->first();
         $fromEmail = $user->email;
         $comment = $request->comment;
+        // お問い合わせ内容をメール送信
         Mail::to('info@info.com')->send(new ContactMail($fromEmail, $comment));
         $request->session()->flash('status', 'お問い合わせメールを送信しました。');
         return redirect()->action('TrendController@index', $request);
@@ -70,7 +73,7 @@ class MypageController extends Controller
 
     /**
      * 退会処理
-     * @param $request リクエストパラメータ
+     * @param Request $request
      * @return void
      */
     public function withdraw(Request $request)

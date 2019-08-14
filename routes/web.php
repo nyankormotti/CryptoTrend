@@ -16,7 +16,7 @@ Route::group(['middleware' => ['before.login']], function () {
     // トップページ
     Route::get('/', 'IndexController@index');
     // ログイン
-    Route::get('/authLogin', 'AuthLoginController@index');
+    Route::get('/login', 'LoginController@index');
     // 会員登録
     Route::get('/signup', 'SignUpController@index');
     // パスワードリマインダー送信(認証キー)
@@ -28,7 +28,7 @@ Route::group(['middleware' => ['before.login']], function () {
 });
 
 // ログイン処理
-Route::post('/authLogin', 'AuthLoginController@authLogin');
+Route::post('/login', 'LoginController@login');
 // 会員登録処理
 Route::post('/signup', 'SignUpController@signup');
 // パスワードリマインダー送信(認証キー)送信処理

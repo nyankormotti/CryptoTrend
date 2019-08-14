@@ -6,7 +6,7 @@
 @include('common.header')
 
 @section('contents')
-<main>  
+<main>
     <div class="form form__bottom--reset">
         <h2 class="form__title">ログイン</h2>
         <div class="form__content">
@@ -16,7 +16,7 @@
             <p class="u-err__msg__main">{{$message}}</p>
             @endif
             <p class="form__content__descript">ログインメールアドレスとパスワードを入力してください。</p>
-            <form action="/authLogin" method="post" class="form__block">
+            <form action="/login" method="post" class="form__block">
                 {{ csrf_field() }}
                 <div>
                     <label class="textfield__label" for="Email">メールアドレス</label>
@@ -25,7 +25,11 @@
                 <div class="u-err__msg">{{$errors->first('email')}}</div>
                 @endif
                 <div class="textfield__area">
+                    @if(!empty($message))
+                    <input type="text" class="textfield__input" name="email" placeholder="メールアドレスを入力してください。" autocomplete="off" value="{{$error_email}}">
+                    @else
                     <input type="text" class="textfield__input" name="email" placeholder="メールアドレスを入力してください。" autocomplete="off" value="{{old('email')}}">
+                    @endif
                 </div>
                 <div>
                     <label class="textfield__label" for="Password">パスワード</label>

@@ -3,7 +3,7 @@
     下記のURLにて再発行パスワードをご入力頂き、ログインください。
 </p>
 <p>
-    ログインページ: <a href="http://localhost/authLogin">http://localhost/authLogin</a>
+    ログインページ: <a href="http://localhost/login">http://localhost/login</a>
 </p>
 <p>
     再発行パスワード：{{$password}}<br>

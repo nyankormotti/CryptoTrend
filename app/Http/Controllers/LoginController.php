@@ -8,25 +8,24 @@ use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
-class AuthLoginController extends Controller
+class LoginController extends Controller
 
 {
-
     /**
      * ログイン画面表示
      * @return void
      */
     public function index()
     {
-        return view('authLogin');
+        return view('login');
     }
 
     /**
      * ログイン処理
-     * @param Request $request リクエスト
+     * @param Request $request (email, password, pass_save)
      * @return void
      */
-    public function authLogin(LoginRequest $request) {
+    public function login(LoginRequest $request) {
 
         // ログイン保持情報
         $rem = $request->pass_save;
@@ -56,6 +55,8 @@ class AuthLoginController extends Controller
             session()->put('oauth_token', $oauth_token);
             session()->put('oauth_token_secret', $oauth_token_secret);
 
+            // Twitter上のアカウントと比較して、DBに保存しているアカウント情報が異なる場合、Twitterアカウント変更画面にリダイレクト
+            // (アカウントのTwitter_idが異なる場合(アカウントが存在しない場合)またはscreen_nameが異なる場合)
             if($user->twitter_id !== $userInfo['id_str'] || $user->screen_name !== $userInfo['screen_name']) {
                 return redirect()->action('ChangeTwitterAccountController@index');
             } else {
@@ -64,7 +65,7 @@ class AuthLoginController extends Controller
 
         } else {
             $msg = 'メールアドレスまたはパスワードが違います。';
-            return view('authLogin', ['message' => $msg]);
+            return view('login', ['message' => $msg, 'error_email' => $request->email]);
         }
 
     }

@@ -3,24 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Trend;
-use App\Currency;
 use Illuminate\Http\Request;
 
 class TrendController extends Controller
 {
 
+    /**
+     * トレンド画面表示
+     * @return void
+     */
     public function index() {
+
         return view('trend');
     }
 
     /**
      * トレンド一覧取得
-     * @param $request (twitter_id)
-     * @return $trends(トレンド一覧)
+     * @param Request $request (twitter_id)
+     * @return array $trends(トレンド一覧)
      */
     public function getTrend(Request $request)
     {
-        $trends = Trend::where('period_id',$request->period_id)->with('currency')->orderBy('tweet_count','DESC')->get();
+        $trends = Trend::where('period_id',$request->period_id)
+                        ->with('currency')
+                        ->orderBy('tweet_count','DESC')
+                        ->get();
         $rank = 0;
         // ランキング付け処理
         foreach($trends as $trend){
@@ -32,12 +39,15 @@ class TrendController extends Controller
 
     /**
      * トレンド一覧更新日取得
-     * @param $request (twitter_id)
-     * @return $updated (トレンド一覧更新日)
+     * @param Request $request (twitter_id)
+     * @return String $updated (トレンド一覧更新日)
      */
     public function getUpdated(Request $request)
     {
-        $trends = Trend::where('period_id', $request->period_id)->with('currency')->orderBy('tweet_count', 'DESC')->get();
+        $trends = Trend::where('period_id', $request->period_id)
+                    ->with('currency')
+                    ->orderBy('tweet_count', 'DESC')
+                    ->get();
         $updated = $trends[0]['updated_at'];
 
         return $updated;

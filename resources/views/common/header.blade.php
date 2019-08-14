@@ -17,7 +17,7 @@
                 @if(!Auth::check())
                 <li class="menu__item"><a href="/" class="menu__link">トップ</a></li>
                 <li class="menu__item"><a href="signup" class="menu__link menu__link--color">会員登録</a></li>
-                <li class="menu__item"><a href="authLogin" class="menu__link">ログイン</a></li>
+                <li class="menu__item"><a href="login" class="menu__link">ログイン</a></li>
                 @else
                 <li><a href="trend" class="menu__link menu__link--hover">トレンド</a></li>
                 <li><a href="account" class="menu__link menu__link--hover">関連アカウント</a></li>

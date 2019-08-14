@@ -16,7 +16,7 @@
             <ul class="menu">
                 <li class="menu__item"><a href="/" class="menu__link">トップ</a></li>
                 <li class="menu__item"><a href="signup" class="menu__link menu__link--color">会員登録</a></li>
-                <li class="menu__item"><a href="authLogin" class="menu__link">ログイン</a></li>
+                <li class="menu__item"><a href="login" class="menu__link">ログイン</a></li>
             </ul>
         </nav>
     </div>

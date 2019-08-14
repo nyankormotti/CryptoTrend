@@ -67,13 +67,13 @@ class GetCryptoTweetCountBatch extends Command
         );
 
         // ツイート検索期間の設定(開始日時、終了日時)
-        $nowDate = new Carbon();
         $date = substr(date("Y-m-d_H:i:s", strtotime('-1 hour', time())), 0, 13);
         // ツイート検索期間_開始日時
         $since_time = $date . ":00:00_JST";
         // ツイート検索期間_終了日時
         $until_time = $date . ":59:59_JST";
         // ツイート数取得時間(DB格納用)
+        $nowDate = new Carbon();
         $acquisition_date = (substr($nowDate->subHour(), 0, 13)).":00:00";
 
         // 15分間のAPIリクエスト上限回数
@@ -100,7 +100,6 @@ class GetCryptoTweetCountBatch extends Command
 
         // 銘柄ごとのツイート数を検索する
         for ($i = 0; $i < count($currency); $i++) {
-            // \Log::info(($i+1).'銘柄目処理スタート');
 
             // 現在時刻を取得
             $total_start_time = new Carbon();
@@ -125,17 +124,17 @@ class GetCryptoTweetCountBatch extends Command
                 if(3570 < $total_start_time->diffInSeconds($now_time)){
                     break;
                 }
-                // 初めのAPIリクエストより15分以上経過していないしていない
+                // 初めのAPIリクエストより15分(900秒)以上経過していないしていない
                 // かつリクエスト回数が上限(450回)に達した場合
                 elseif(900 > $start_time->diffInSeconds($now_time) && $request_count === $RQUEST_LIMIT){
-                    // 最初のリクエストから15分経過するまで待機
+                    // 最初のリクエストから15分(900秒)経過するまで待機
                     sleep(900 - $start_time->diffInMinutes($now_time));
                     // APIリクエスト開始時間を現在時刻に上書き
                     $start_time = new Carbon();
                     // リクエスト回数を初期化
                     $request_count = 0;
                 }
-                // 初めのAPIリクエストより15分以上経過した場合
+                // 初めのAPIリクエストより15分(900秒)以上経過した場合
                 elseif(900 <= $start_time->diffInSeconds($now_time)){
                     // APIリクエスト開始時間を現在時刻に上書き
                     $start_time = new Carbon();
@@ -193,7 +192,6 @@ class GetCryptoTweetCountBatch extends Command
         }
 
         DB::beginTransaction();
-
         try {
             // Trendsテーブルを更新
             // 1時間当たりの各銘柄のツイート数を更新 処理開始
@@ -275,7 +273,7 @@ class GetCryptoTweetCountBatch extends Command
             }
             // 現在時刻より過去1週間の各銘柄のツイート数を更新 処理終了
 
-            // 現在時間より1週間前のツイート数のレコードを削除(Tweetsテーブルより削除)
+            // 現在時間より1週間前より以前のツイート数のレコードを削除(Tweetsテーブルより削除)
             $delete_weeks_ago_date = date("Y-m-d H:i:s", strtotime($acquisition_date . "-7 day"));
 
             $tweet = DB::table('tweets')

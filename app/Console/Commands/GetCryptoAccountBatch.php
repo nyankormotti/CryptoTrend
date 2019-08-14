@@ -62,7 +62,9 @@ class GetCryptoAccountBatch extends Command
                 $user[$i]->save();
 
                 // 更新するユーザーのuser_idに紐付くaccountsテーブルのレコードを削除
-                DB::table('accounts')->where('user_id', $user[$i]->id)->delete();
+                DB::table('accounts')
+                    ->where('user_id', $user[$i]->id
+                    )->delete();
 
                 // User情報からアクセストークンを取得
                 $oauth_token = $user[$i]->oauth_token;
@@ -79,7 +81,7 @@ class GetCryptoAccountBatch extends Command
                     $oauth_token_secret
                 );
 
-                // APIフラグ(1ユーザーごとのAPI連携のフラグ、処理が終了したらfalseにする。)
+                // API連携フラグ(1ユーザーごとのAPI連携のフラグ、処理が終了したらfalseにする。)
                 $api_flg = true;
 
                 // リクエスト回数(カウント用)(15分間におけるリクエスト回数(上限は900回))
@@ -87,8 +89,8 @@ class GetCryptoAccountBatch extends Command
                 // ページカウント
                 $page_count = 0;
 
-                $one_month_ago = new Carbon();
                 // 現在日時より１ヶ月前の日付を取得
+                $one_month_ago = new Carbon();
                 $one_month_ago->subMonth();
 
                 // 初回API連携の時間を取得

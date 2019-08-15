@@ -532,6 +532,16 @@ body {
   text-align: center;
 }
 
+@media screen and (max-width: 480px) {
+  .c-action-btn--follow {
+    font-size: 16px;
+    padding: 15px 20px;
+    margin-bottom: 0;
+    margin-right: 0;
+    width: 25%;
+  }
+}
+
 .c-action-btn--follow--optionBlue {
   color: white;
   background: #5e8ddb;
@@ -965,6 +975,13 @@ body {
   border-radius: 5px;
 }
 
+@media screen and (max-width: 480px) {
+  .p-account {
+    width: 100%;
+    order: 1;
+  }
+}
+
 .p-account__top {
   padding: 10px 20px;
 }
@@ -1055,6 +1072,13 @@ body {
   border: 1px solid #ff9900;
 }
 
+@media screen and (max-width: 480px) {
+  .p-user__top__btn {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+}
+
 .p-user__top__btn:hover {
   color: #ff9900;
   background: white;
@@ -1070,6 +1094,13 @@ body {
   border: 1px solid #cc3d3d;
 }
 
+@media screen and (max-width: 480px) {
+  .p-user__top__btn--actUnFollow {
+    padding: 10px 15px;
+    font-size: 10px;
+  }
+}
+
 .p-user__top__btn--actUnFollow:hover {
   color: #cc3d3d;
   background: white;
@@ -1082,6 +1113,18 @@ body {
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
+}
+
+@media screen and (max-width: 480px) {
+  .p-user__status__screen {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .p-user__status__fcount {
+    font-size: 12px;
+  }
 }
 
 .p-user__text {
@@ -1145,6 +1188,12 @@ body {
   max-height: 380px;
 }
 
+@media screen and (max-width: 480px) {
+  .p-sidebar--option {
+    max-height: 450px;
+  }
+}
+
 .p-sidebar__top {
   padding: 10px 20px;
 }
@@ -1189,6 +1238,12 @@ body {
   padding: 10px 20px;
 }
 
+@media screen and (max-width: 480px) {
+  .p-sidebar__limit {
+    padding-top: 0;
+  }
+}
+
 .p-sidebar__limit__title {
   font-size: 18px;
   padding: 10px 0;
@@ -1205,6 +1260,12 @@ body {
   width: 45%;
 }
 
+@media screen and (max-width: 480px) {
+  .p-sidebar__limit__area--f_action {
+    font-size: 20px;
+  }
+}
+
 .p-sidebar__limit__area--f_action--title {
   padding: 5px 0;
 }
@@ -1213,9 +1274,21 @@ body {
   font-size: 14px;
 }
 
+@media screen and (max-width: 480px) {
+  .p-sidebar__limit__area--f_action--count {
+    font-size: 20px;
+  }
+}
+
 .p-sidebar__limit__area--f_action--count--now {
   font-size: 16px;
   font-weight: bold;
+}
+
+@media screen and (max-width: 480px) {
+  .p-sidebar__limit__area--f_action--count--now {
+    font-size: 24px;
+  }
 }
 
 .p-sidebar__brand {
@@ -1244,6 +1317,12 @@ body {
 .p-sidebar__follow {
   color: #5c5c5c;
   padding: 10px 20px;
+}
+
+@media screen and (max-width: 480px) {
+  .p-sidebar__follow {
+    padding-top: 0;
+  }
 }
 
 .p-sidebar__follow__title {

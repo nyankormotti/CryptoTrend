@@ -4,9 +4,12 @@
 .p-account{
     display:block;
     width:60%;
-    // min-height:650px;
     background:$background_color_white;
     border-radius:5px;
+    @include sl(){
+        width:100%;
+        order: 1;
+    }
     &__top{
         padding:10px 20px;
         &__area{
@@ -45,8 +48,6 @@
             display:block;
             text-decoration:none;
         }
-        &__total{
-        }
         &__next{
             display:block;
             text-decoration:none;
@@ -84,6 +85,10 @@
             color:$font-color_white;
             background:$background_color_orange;
             border:1px solid $background_color_orange;
+            @include sl() {
+                padding:10px 15px;
+                font-size:$font-size_m;
+            }
             &:hover{
                 color:$font-color_orange;
                 background:$background_color_white;
@@ -96,6 +101,10 @@
                 color:$font-color_white;
                 background:$background_color_softRed;
                 border:1px solid $font-color_softRed;
+                @include sl() {
+                    padding:10px 15px;
+                    font-size:10px;
+                }
                 &:hover{
                     color:$background_color_softRed;
                     background:$background_color_white;
@@ -110,6 +119,16 @@
         justify-content: space-between;
         align-items: center;
         font-size:$font-size_m;
+        &__screen {
+            @include sl(){
+                font-size:$font-size_s;
+            }
+        }
+        &__fcount {
+            @include sl(){
+                font-size:$font-size_s;
+            }
+        }
     }
     &__text{
         width:90%;

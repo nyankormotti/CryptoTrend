@@ -48,6 +48,13 @@
         padding:10px 10px;
         width:60px;
         text-align:center;
+        @include sl() {
+            font-size:$font-size_default;
+            padding:15px 20px;
+            margin-bottom:0;
+            margin-right:0;
+            width:25%;
+        }
         &--optionBlue{
             color:$font-color_white;
             background:$background_color_optionBlue;

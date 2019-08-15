@@ -14,6 +14,9 @@
     }
     &--option{
         max-height:380px;
+        @include sl() {
+            max-height:450px;
+        }
     }
     &__top{
         padding: 10px 20px;
@@ -49,6 +52,9 @@
     &__limit{
         color:$background_color_gray;
         padding: 10px 20px;
+        @include sl() {
+            padding-top:0;
+        }
         &__title{
             font-size: $font-size_l;
             padding:10px 0;
@@ -60,14 +66,23 @@
                 text-align:center;
                 font-size: $font-size_m;
                 width:45%;
+                @include sl() {
+                    font-size:$font-size_ll;
+                }
                 &--title{
                     padding:5px 0;
                 }
                 &--count{
                     font-size: $font-size_m;
+                    @include sl() {
+                        font-size:$font-size_ll;
+                    }
                     &--now{
                         font-size: $font-size_default;
                         font-weight:bold;
+                        @include sl() {
+                            font-size:$font-size_xl;
+                        }
                     }
                 }
             }
@@ -94,6 +109,9 @@
     &__follow{
         color:$background_color_gray;
         padding: 10px 20px;
+        @include sl() {
+            padding-top:0;
+        }
         &__title{
             font-size: $font-size_l;
             padding:10px 0;

@@ -48,7 +48,7 @@
                     @endif
                 </div>
                 <div>
-                    <label class="textfield__label" for="Password">パスワード  ※8桁以上 半角英数字</label>
+                    <label class="textfield__label" for="Password">パスワード</label><span>&nbsp;&nbsp;&nbsp;※半角英数字8桁以上</span>
                 </div>
                 @if($errors->has('password'))
                 <div class="u-err__msg">{{$errors->first('password')}}</div>

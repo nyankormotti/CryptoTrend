@@ -6,6 +6,9 @@
     margin-top:20px;
     margin-right:auto;
     margin-left:auto;
+    @include sl() {
+        width:80%;
+    }
     &__maintitle{
         width:100%;
         text-align:center;
@@ -15,6 +18,9 @@
     }
     &__parts{
         width:90%;
+        @include sl() {
+        width:100%;
+    }
         margin:30px auto;
         background:$background-color_white;
         border-radius:5px;
@@ -43,7 +49,6 @@
 // 退会メニューの説明文
 .withdraw{
     &__descropt{
-        text-align:center;
         margin-bottom:80px;
     }
 }

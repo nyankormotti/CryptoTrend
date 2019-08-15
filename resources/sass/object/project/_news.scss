@@ -6,7 +6,9 @@
     width:70%;
     background:$background_color_white;
     border-radius:3px;
-
+    @include sl() {
+        width:80%;
+    }
     &__title{
         width:100%;
         text-align:center;
@@ -49,15 +51,24 @@
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
+                    @include sl() {
+                        font-size:$font-size_m;
+                    }
                     &::before{
                         content:'■  ';
                         color:$font-color_red;
                         font-size:$font-size_l;
+                        @include sl() {
+                            font-size:$font-size_m;
+                        }
                     }
                 }
                 &__upday{
                     text-align:right;
                     color:$font-color_clear;
+                     @include sl() {
+                        font-size:$font-size_m;
+                    }
                 }
             }
         }

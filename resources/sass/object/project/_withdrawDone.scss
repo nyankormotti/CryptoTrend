@@ -9,7 +9,9 @@
     margin-top:80px;
     margin-right:auto;
     margin-left:auto;
-    margin-bottom:80px;
+    @include sl() {
+        width:80%;
+    }
     &__title{
         width:100%;
         padding:$space_xl;

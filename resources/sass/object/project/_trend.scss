@@ -6,6 +6,10 @@
     width:60%;
     background:$background_color_white;
     border-radius:5px;
+    @include sl(){
+        order: 1;
+        width:100%;
+    }
     &__top{
         padding:10px 20px;
         &__area{
@@ -23,6 +27,9 @@
                 text-align:right;
                 color:$font-color_gray;
                 font-size:$font-size_m;
+                @include sl() {
+                    font-size:8px;
+                }
             }
         }
         &__border{
@@ -43,7 +50,9 @@
     width:100%;
     &__thead{
         border-bottom:3px solid $background_color_clear;
-       
+       @include sl() {
+            font-size:$font-size_m;
+        }
        &__tr{
            &__th{
                padding-bottom:10px;
@@ -58,6 +67,9 @@
                padding:10px 0;
                line-height:150%;
                text-align:center;
+               @include sl() {
+                   padding:20px 0;
+               }
                &__link{
                    display:block;
                    text-decoration:none;

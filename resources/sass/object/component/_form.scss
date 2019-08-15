@@ -10,9 +10,15 @@
     margin-right:auto;
     margin-left:auto;
     margin-bottom:80px;
+    @include sl(){
+        width:80%;
+    }
     &__contact{
         width:60%;
         margin-top:40px;
+        @include sl(){
+            width:80%;
+        }
     }
 
     &__title{

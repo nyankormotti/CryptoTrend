@@ -19,8 +19,8 @@
         font-family: $font-family_corp;
         font-weight:bold;
         @include sl(){
-            right:0;
-            font-size:$font-size_s;
+            right:5%;
+            font-size:$font-size_default;
         }
         &--main{
             font-style:oblique;
@@ -34,15 +34,12 @@
     width:100%;
     height:300px;
     margin-top:40px;
-    @include sl(){
-        margin-top:0;
-        height:150px;
+    @include sl() {
+        height:250px;
     }
+    
     &__content{
         width:70%;
-        @include sl(){
-            width:100%;
-        }
         height:90%;
         margin-right:auto;
         margin-left:auto;
@@ -50,19 +47,27 @@
         flex-wrap:wrap;
         align-items:center;
         justify-content: space-between;
+        @include sl() {
+            width:100%;
+            display: block;
+        }
     }
     &__panel{
         width:40%;
         margin:0 auto;
+        @include sl(){
+            width:100%;
+            margin-bottom:50px;
+        }
         &__title{
             text-align:center;
             margin-top:20px;
             margin-bottom:20px;
             font-size:$font-size_xl;
             font-family:$font-family_corp;
-            @include sl(){
-                font-size:$font-size_m;
-            }
+            // @include sl(){
+            //     font-size:$font-size_m;
+            // }
         }
         &__btn{
             display:block;
@@ -78,9 +83,10 @@
             color:$font-color_white;
             font-family:$font-family_corp;
             @include sl(){
-                margin:0;
-                width:60%;
-                font-size:$font-size_m;
+                margin-top:0;
+                margin-bottom:0;
+                width:40%;
+                font-size:$font-size_xl;
             }
         }
     }
@@ -93,7 +99,6 @@
     &:hover{
         background:$background_color_white;
         color:$font-color_lightGreen;
-        
     }
 }
 
@@ -104,7 +109,6 @@
     &:hover{
         background:$background_color_white;
         color:$font-color_lightBlue;
-        
     }
 }
 
@@ -112,5 +116,4 @@
  // お問い合わせフォーム
 .p-contact{
     width:100%;
-    // min-height:300px;
 }

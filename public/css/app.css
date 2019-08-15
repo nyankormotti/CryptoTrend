@@ -391,9 +391,21 @@ body {
   margin-bottom: 80px;
 }
 
+@media screen and (max-width: 480px) {
+  .form {
+    width: 80%;
+  }
+}
+
 .form__contact {
   width: 60%;
   margin-top: 40px;
+}
+
+@media screen and (max-width: 480px) {
+  .form__contact {
+    width: 80%;
+  }
 }
 
 .form__title {
@@ -545,8 +557,8 @@ body {
 
 @media screen and (max-width: 480px) {
   .p-banner__title {
-    right: 0;
-    font-size: 12px;
+    right: 5%;
+    font-size: 16px;
   }
 }
 
@@ -562,8 +574,7 @@ body {
 
 @media screen and (max-width: 480px) {
   .p-entrance {
-    margin-top: 0;
-    height: 150px;
+    height: 250px;
   }
 }
 
@@ -581,6 +592,7 @@ body {
 @media screen and (max-width: 480px) {
   .p-entrance__content {
     width: 100%;
+    display: block;
   }
 }
 
@@ -589,18 +601,19 @@ body {
   margin: 0 auto;
 }
 
+@media screen and (max-width: 480px) {
+  .p-entrance__panel {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+}
+
 .p-entrance__panel__title {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 24px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-}
-
-@media screen and (max-width: 480px) {
-  .p-entrance__panel__title {
-    font-size: 14px;
-  }
 }
 
 .p-entrance__panel__btn {
@@ -620,9 +633,10 @@ body {
 
 @media screen and (max-width: 480px) {
   .p-entrance__panel__btn {
-    margin: 0;
-    width: 60%;
-    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 40%;
+    font-size: 24px;
   }
 }
 

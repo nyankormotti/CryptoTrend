@@ -34,11 +34,23 @@
     &__main{
         padding:10px 20px;
         overflow: scroll;
-        height: 450px;
+        height: 430px;
     }
     &__page{
-        padding:10px 20px;
+        padding:20px;
         text-align:center;
+        display:flex;
+        justify-content: space-around;
+        &__prev{
+            display:block;
+            text-decoration:none;
+        }
+        &__total{
+        }
+        &__next{
+            display:block;
+            text-decoration:none;
+        }
     }
 }
 

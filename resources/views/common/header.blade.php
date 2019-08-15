@@ -23,7 +23,7 @@
                 <li><a href="account" class="menu__link menu__link--hover">関連アカウント</a></li>
                 <li><a href="news" class="menu__link menu__link--hover">ニュース</a></li>
                 <li><a href="mypage" class="menu__link menu__link--hover">マイページ</a></li>
-                <li><a href="oauthlogout" class="menu__link menu__link--hover">ログアウト</a></li>
+                <li><a href="logout" class="menu__link menu__link--hover">ログアウト</a></li>
                 @endif
             </ul>
         </nav>
@@ -31,5 +31,9 @@
 </header>
 
 <div class="header--dummy"></div>
+
+@if(!empty($status))
+<div id="js-msg" class="u-fadein" style="display:none;">{{$status}}</div>
+@endif
 
 @endsection

@@ -21,7 +21,7 @@ Route::group(['middleware' => ['before.login']], function () {
     Route::get('/signup', 'SignUpController@index');
     // パスワードリマインダー送信(認証キー)
     Route::get('/passwordRemindSend', 'PasswordRemindSendController@index');
-    // パスワードリマインダー(認証キー)送信
+    // パスワードリマインダー(パスワード再発行)
     Route::get('/passwordRemindRecieve', 'PasswordRemindRecieveController@index');
     // 退会完了画面
     Route::get('/withdrawDone', 'WithdrawDoneController@index');
@@ -78,7 +78,8 @@ Route::post('/mypage/contact', 'MypageController@contact');
 // 退会処理
 Route::post('/mypage/withdraw', 'MypageController@withdraw');
 
-
+//ログアウト
+Route::get('/logout', 'LoginController@logout');
 
 
 // ====================================================================
@@ -90,8 +91,6 @@ Route::get('/callback', 'OAuthController@callBack');
 // callbackよりアクセストークンを受け取り、ログイン認証をするルーティング
 Route::get('/main', 'OAuthController@main');
 
-//ログアウト
-Route::get('/oauthlogout', 'OAuthController@logout');
 
 
 // 例外発生画面

@@ -8,6 +8,10 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
+/**
+ * 自動フォローバッチ
+ * usersテーブルのautofollow_flgがtrueのユーザーのみ、自動フォローを実施する
+ */
 class AutoFollowBatch extends Command
 {
     /**

@@ -12,9 +12,9 @@ class TrendController extends Controller
      * トレンド画面表示
      * @return void
      */
-    public function index() {
-
-        return view('trend');
+    public function index(Request $request) {
+        $status = $request->session()->get('status');
+        return view('trend', ['status' => $status]);
     }
 
     /**

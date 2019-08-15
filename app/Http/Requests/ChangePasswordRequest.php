@@ -33,6 +33,11 @@ class ChangePasswordRequest extends FormRequest
         ];
     }
 
+    /**
+     * エラーメッセージ
+     * 
+     * @return array
+     */
     public function messages()
     {
         return [

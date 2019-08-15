@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
+/**
+ * 仮想通貨関連アカウントコントローラ
+ * 
+ * 仮想通貨アカウント一覧画面表示
+ * アカウント情報取得、ユーザー情報取得、手動フォロー、手動フォロー解除
+ * (AccountComponent.vueよりaxios通信にて処理を行う)
+ */
 class AccountController extends Controller
 {
     /**
@@ -308,15 +315,15 @@ class AccountController extends Controller
         }
 
         // リクエスト制限判定その2
-        if (99 >= $unfollow_count) {
-            \Log::info('フォロー解除した回数が100回以下');
-            // フォロー解除した回数が99回以下の場合
+        if (24 >= $unfollow_count) {
+            \Log::info('フォロー解除した回数が24回以下');
+            // フォロー解除した回数が24回以下の場合
             // フォロー解除回数を+1回
             $unfollow_count = $unfollow_count + 1;
         } else {
-            \Log::info('フォロー解除した回数が100回以上');
+            \Log::info('フォロー解除した回数が25回以上');
             \Log::info('エラー：フォロー解除上限回数を超えています');
-            // フォロー解除した回数が100回以上の場合
+            // フォロー解除した回数が25回以上の場合
             // 処理を中断
             // フォロー解除上限回数を超えています
             $action_flg = 3;

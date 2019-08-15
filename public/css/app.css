@@ -179,6 +179,7 @@ body {
 }
 
 .wrapper {
+  position: relative;
   min-height: 100%;
   margin-bottom: -46px;
 }
@@ -805,12 +806,24 @@ body {
 .p-account__main {
   padding: 10px 20px;
   overflow: scroll;
-  height: 450px;
+  height: 430px;
 }
 
 .p-account__page {
-  padding: 10px 20px;
+  padding: 20px;
   text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.p-account__page__prev {
+  display: block;
+  text-decoration: none;
+}
+
+.p-account__page__next {
+  display: block;
+  text-decoration: none;
 }
 
 .p-user {
@@ -1165,5 +1178,18 @@ body {
     height: 10px;
     padding: 5px 0;
   }
+}
+
+.u-fadein {
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  height: 30px;
+  background: linear-gradient(#5e8ddb, #05215c);
+  font-size: 20px;
+  color: white;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-align: center;
+  line-height: 30px;
 }
 

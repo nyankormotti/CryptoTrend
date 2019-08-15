@@ -52,16 +52,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (
-            $exception instanceof QueryException
-            || $exception instanceof \Swift_TransportException
-            || $exception instanceof NotFoundHttpException
-            || $exception instanceof MethodNotAllowedHttpException
-            || $exception instanceof FatalThrowableError
-            || $exception instanceof ErrorException
-        ) {
-            return redirect()->action('ExceptionController@index');
-        }
+        // if (
+        //     $exception instanceof QueryException
+        //     || $exception instanceof \Swift_TransportException
+        //     || $exception instanceof NotFoundHttpException
+        //     || $exception instanceof MethodNotAllowedHttpException
+        //     || $exception instanceof FatalThrowableError
+        //     || $exception instanceof ErrorException
+        // ) {
+        //     // 例外発生画面へリダイレクト
+        //     return redirect()->action('ExceptionController@index');
+        // }
         return parent::render($request, $exception);
     }
 }

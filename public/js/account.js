@@ -1748,6 +1748,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
  //関連アカウント表示領域
 
  //オプション領域
@@ -1856,7 +1857,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     // ページングの編集処理
     pageCount: function pageCount() {
-      // アカウント情報の総数
+      // 総ページ数の算出
+      this.totalPage = Math.ceil(this.accounts.length / this.perPage); // 総ページ数がデフォルト値ではなく、かつ現在ページよりも小さい時
+
+      if (this.totalPage != 0 && this.page > this.totalPage) {
+        // 現在ページを総ページと同じ値にする
+        this.page = this.totalPage;
+      } // アカウント情報の総数
+
+
       this.count = this.accounts.length; // 1ページの表示終りの件数 = 現在のページ数 * 1ページの表示件数(20件)
 
       this.lastCount = this.page * this.perPage; // 表示終りの件数がアカウント情報の総数より大きい場合
@@ -1869,9 +1878,7 @@ __webpack_require__.r(__webpack_exports__);
       // 例：現在のページ数 = 2の場合 → 表示初めの件数:21
 
 
-      this.firstCount = (this.page - 1) * this.perPage + 1; // 総ページ数の算出
-
-      this.totalPage = Math.ceil(this.accounts.length / this.perPage);
+      this.firstCount = (this.page - 1) * this.perPage + 1;
     },
     // ページングの「Prev」ボタンクリック時、前のページに戻る
     onPrev: function onPrev() {
@@ -1925,6 +1932,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     // 現在のページが変更された際、ページングの編集処理を実行
     page: function page() {
+      this.pageCount();
+    },
+    // アカウント総数が変わった際、ページングの編集処理を実行
+    count: function count() {
       this.pageCount();
     },
     // 表示形式変更フラグが変わった際に、アカウント情報を取得する
@@ -2705,25 +2716,29 @@ var render = function() {
           _c(
             "a",
             {
-              staticClass: "prev",
+              staticClass: "p-account__page__prev",
               attrs: { href: "#" },
               on: { click: _vm.onPrev }
             },
-            [_vm._v("< Prev")]
+            [_vm._v("< 前ページ")]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "total" }, [
-            _vm._v("ページ " + _vm._s(_vm.page) + "/" + _vm._s(_vm.totalPage))
-          ]),
+          _vm.totalPage != 0
+            ? _c("div", { staticClass: "p-account__page__total" }, [
+                _vm._v(_vm._s(_vm.page) + "/" + _vm._s(_vm.totalPage))
+              ])
+            : _c("div", { staticClass: "p-account__page__total" }, [
+                _vm._v("0/" + _vm._s(_vm.totalPage))
+              ]),
           _vm._v(" "),
           _c(
             "a",
             {
-              staticClass: "next",
+              staticClass: "p-account__page__next",
               attrs: { href: "#" },
               on: { click: _vm.onNext }
             },
-            [_vm._v("Next >")]
+            [_vm._v("次ページ >")]
           )
         ])
       ],
@@ -2939,7 +2954,7 @@ var render = function() {
                 )
               ]
             ),
-            _vm._v(" / 100\n                ")
+            _vm._v(" / 25\n                ")
           ])
         ])
       ])

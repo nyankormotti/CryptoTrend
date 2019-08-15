@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class ExceptionController extends Controller
 {
     /**
      * 例外発生画面表示
+     * 
+     * @return void
      */
     public function index()
     {

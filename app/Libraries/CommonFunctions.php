@@ -6,6 +6,9 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
+/**
+ * 共通関数
+ */
 class CommonFunctions
 {
     /**

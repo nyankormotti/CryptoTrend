@@ -35,7 +35,8 @@ class SignUpRequest extends FormRequest
     }
 
     /**
-     * validation errmessage
+     * エラーメッセージ
+     * 
      * @return array
      */
     public function messages()

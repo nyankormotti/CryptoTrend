@@ -20,9 +20,10 @@
             @child-unfollow="unfollow">
             </AccountMain>
             <div class="p-account__page">
-                <a href="#" class="prev" @click="onPrev">&lt; Prev</a>
-                <div class="total">ページ {{page}}/{{totalPage}}</div>
-                <a href="#" class="next" @click="onNext">Next &gt;</a>
+                <a href="#" class="p-account__page__prev" @click="onPrev">&lt; 前ページ</a>
+                <div v-if="totalPage != 0" class="p-account__page__total">{{page}}/{{totalPage}}</div>
+                <div v-else class="p-account__page__total">0/{{totalPage}}</div>
+                <a href="#" class="p-account__page__next" @click="onNext">次ページ &gt;</a>
             </div>
         </section>
 
@@ -137,6 +138,13 @@ export default {
         },
         // ページングの編集処理
         pageCount: function() {
+            // 総ページ数の算出
+            this.totalPage = Math.ceil(this.accounts.length / this.perPage)
+            // 総ページ数がデフォルト値ではなく、かつ現在ページよりも小さい時
+            if(this.totalPage != 0 && this.page > this.totalPage) {
+                // 現在ページを総ページと同じ値にする
+                this.page = this.totalPage
+            } 
             // アカウント情報の総数
             this.count = this.accounts.length
             // 1ページの表示終りの件数 = 現在のページ数 * 1ページの表示件数(20件)
@@ -151,9 +159,6 @@ export default {
             // 例：現在のページ数 = 1の場合 → 表示初めの件数:1
             // 例：現在のページ数 = 2の場合 → 表示初めの件数:21
             this.firstCount = (this.page - 1) * this.perPage + 1
-
-            // 総ページ数の算出
-            this.totalPage = Math.ceil(this.accounts.length / this.perPage)
         },
         // ページングの「Prev」ボタンクリック時、前のページに戻る
         onPrev() {
@@ -203,6 +208,10 @@ export default {
         },
         // 現在のページが変更された際、ページングの編集処理を実行
         page: function() {
+            this.pageCount()
+        },
+        // アカウント総数が変わった際、ページングの編集処理を実行
+        count: function() {
             this.pageCount()
         },
         // 表示形式変更フラグが変わった際に、アカウント情報を取得する

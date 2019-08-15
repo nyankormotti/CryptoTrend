@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use App\Http\Requests\ChangeTwitterAccount;
@@ -16,10 +15,12 @@ class ChangeTwitterAccountController extends Controller
      */
     public function index()
     {
+        // エラーメッセージがある場合
         if (!empty(session()->get('message'))) {
+            // エラーメッセージ、Twitterアカウントのセッション情報を取得
             $msg = session()->get('message');
             $err_screen_name = session()->get('screen_name');
-            // エラーメッセージ、Twitterアカウント、メールアドレスのセッション情報を削除
+            // エラーメッセージ、Twitterアカウントのセッション情報を削除
             session()->forget('message');
             session()->forget('screen_name');
             return view('changeTwitterAccount', ['message' => $msg, 'err_screen_name' => $err_screen_name]);
@@ -29,7 +30,7 @@ class ChangeTwitterAccountController extends Controller
 
     /**
      * Twitterアカウント変更処理
-     * @param Request $request リクエストパラメータ
+     * @param ChangeTwitterAccount $request (screen_name)
      * @return void
      */
     public function changeAccount(ChangeTwitterAccount $request)
@@ -37,18 +38,18 @@ class ChangeTwitterAccountController extends Controller
         // セッションに格納
         session()->put('screen_name', $request->screen_name);
         session()->put('change_account_flg', true);
-        // Twitter API連携処理を実施
+        // Twitter API認証処理を実施
         return redirect()->action('OAuthController@login');
     }
 
     /**
-     * TwitterAPI連携後のアカウント変更処理
-     * @param Request $request リクエストパラメータ
+     * TwitterAPI連携後のアカウント変更処理 (Twitter API認証のcallback処理後に遷移してくる)
      * @return void
      */
     public function changeAccountMain() {
+        // ユーザー情報を取得
         $user = User::where('id', Auth::id())->first();
-
+        // セッションからscreen_nameを取得
         $screen_name = session()->get('screen_name');
         //セッションからアクセストークン取得
         $oauth_token = session()->get('oauth_token');
@@ -67,7 +68,6 @@ class ChangeTwitterAccountController extends Controller
 
         // twitterのユーザー情報を取得
         $userInfo = get_object_vars($twitter->get('account/verify_credentials'));
-
         if($screen_name !== $userInfo['screen_name']) {
             // screen_nameがTwitterのユーザー情報と異なる場合
             // Twitterアカウント変更画面にリダイレクト
@@ -75,12 +75,11 @@ class ChangeTwitterAccountController extends Controller
             session()->put('message', $msg);
             return redirect()->action('ChangeTwitterAccountController@index');
         }
-
         // Usersテーブルのアカウント情報を更新する
         if ($user->twitter_id !== $userInfo['id_str']) {
             // 別のTwitterアカウントを登録する場合
             $user->screen_name = $screen_name;
-            $user->twitter_id = $userInfo['id_str'];;
+            $user->twitter_id = $userInfo['id_str'];
             $user->oauth_token = $oauth_token;
             $user->oauth_token_secret = $oauth_token_secret;
             $user->request_count = 0;

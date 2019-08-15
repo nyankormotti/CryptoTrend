@@ -40,13 +40,22 @@ $(function(){
         for (k = 0; k < (index + 2) * division; k++) {
             $('.p-news__content__article,.morelink').eq(k).fadeIn();
         }
-
         //一旦全てのmorelink削除
         $('.morelink').hide();
         //次のmorelink(index+1)を表示
         $('.morelink').eq(index + 1).show();
-
     });
+
+    // ===========================================================
+    //処理完了時のメッセージ表示
+    // ===========================================================
+
+    let $jsShowMsg = $('#js-msg');
+    let msg = $jsShowMsg.text();
+    if (msg.replace(/^[\s ]+|[\s ]+$/g, "").length) {
+        $jsShowMsg.slideToggle('slow');
+        setTimeout(function () { $jsShowMsg.slideToggle('slow'); }, 5000);
+    }
 
     // ===========================================================
     // アコーディオンメニュー
@@ -57,7 +66,7 @@ $(function(){
     });
 
     // ===========================================================
-    // モーダルウィンドウ
+    // モーダルウィンドウ(退会ボタンクリック時)
     // ===========================================================
     $('#openModal').click(function () {
         $('#modalArea').fadeIn();

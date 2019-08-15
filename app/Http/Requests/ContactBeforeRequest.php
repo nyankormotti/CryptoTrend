@@ -33,6 +33,11 @@ class ContactBeforeRequest extends FormRequest
         ];
     }
 
+    /**
+     * エラーメッセージ
+     * 
+     * @return array
+     */
     public function messages()
     {
         return [

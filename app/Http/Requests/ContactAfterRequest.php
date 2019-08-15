@@ -32,6 +32,11 @@ class ContactAfterRequest extends FormRequest
         ];
     }
 
+    /**
+     * エラーメッセージ
+     * 
+     * @return array
+     */
     public function messages()
     {
         return [

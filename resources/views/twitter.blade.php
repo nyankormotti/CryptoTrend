@@ -65,7 +65,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-4">
-                        <a href="/oauthlogout" class="btn btn-primary">ログアウト</a>
+                        <a href="/logout" class="btn btn-primary">ログアウト</a>
                     </div>
                 </div>
             </div>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+/**
+ * 退会完了画面コントローラ
+ * 退会完了画面へ遷移するアクションを実装
+ */
 class WithdrawDoneController extends Controller
 {
     /**

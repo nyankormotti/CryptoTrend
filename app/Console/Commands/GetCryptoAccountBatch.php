@@ -9,6 +9,12 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
+/**
+ * 仮想通貨関連アカウント取得バッチ
+ * 
+ * 「仮想通貨」のキーワードをアカウント名、またはプロフィールに含むTwitterアカウントを取得する
+ * (最終更新日時が過去1ヶ月の間にあるアカウントのみ対象)
+ */
 class GetCryptoAccountBatch extends Command
 {
     /**

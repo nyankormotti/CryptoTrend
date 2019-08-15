@@ -69,4 +69,20 @@ class LoginController extends Controller
         }
 
     }
+
+    /**
+     * ログアウト処理
+     * @return void
+     */
+    public function logout()
+    {
+        //セッションクリア
+        //アクセストークンだけsessionから破棄
+        session()->forget('oauth_token');
+        session()->forget('oauth_token_secret');
+        // ログアウト処理
+        Auth::logout();
+        //トップページにリダイレクト
+        return redirect('/');
+    }
 }

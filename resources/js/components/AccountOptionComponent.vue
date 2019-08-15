@@ -16,7 +16,7 @@
                     <p class="p-sidebar__limit__area--f_action--count">
                         <span class="p-sidebar__limit__area--f_action--count--now">
                             {{unFollowLimit}}
-                        </span> / 100
+                        </span> / 25
                     </p>
                 </div>
             </div>

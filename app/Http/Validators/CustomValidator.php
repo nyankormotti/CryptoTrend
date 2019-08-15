@@ -6,6 +6,9 @@ use Illuminate\Validation\Validator;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * カスタムバリデータ
+ */
 class CustomValidator extends Validator
 {
     /**
@@ -17,8 +20,6 @@ class CustomValidator extends Validator
     {
         return !preg_match('/^@/', $value);
     }
-
-
 
     /**
      * 半角英数字チェック

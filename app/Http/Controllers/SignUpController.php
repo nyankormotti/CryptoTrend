@@ -8,10 +8,15 @@ use Illuminate\Support\Facades\Hash;
 
 class SignUpController extends Controller
 {
-
+    /**
+     * 会員登録画面表示
+     * @return void
+     */
     public function index(){
 
+        // エラーメッセージがある場合
         if (!empty(session()->get('message'))) {
+            // エラーメッセージ、Twitterアカウント、メールアドレスのセッション情報を取得
             $msg = session()->get('message');
             $err_screen_name = session()->get('screen_name');
             $err_email = session()->get('email');
@@ -24,11 +29,11 @@ class SignUpController extends Controller
 
         return view('signup');
     }
+
     /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
+     * 会員登録処理
+     * @param  SignUpRequest  $request (screen_name, email, password)
+     * @return void
      */
     protected function signup(SignUpRequest $request)
     {
@@ -36,6 +41,7 @@ class SignUpController extends Controller
         session()->put('email', $request->email);
         session()->put('password', Hash::make($request->password));
 
+        // TwitterAPI連携処理にリダイレクト
         return redirect('oauth');
     }
 }

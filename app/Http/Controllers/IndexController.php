@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactMail;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\ContactBeforeRequest;
 
@@ -16,11 +17,13 @@ class IndexController extends Controller
 {
     /**
      * トップページ表示
+     * @param Request $request (status)
      * @return void
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('index');
+        $status = $request->session()->get('status');
+        return view('index', ['status' => $status]);
     }
 
     /**

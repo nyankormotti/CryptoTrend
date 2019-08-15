@@ -11,7 +11,6 @@
     height:36px;
     font-size:$font-size_l;
     font-weight:bold;
-    // box-shadow:0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
     cursor: pointer;
     &:hover{
         background:$background_color_white;
@@ -33,15 +32,6 @@
     cursor:pointer;
     margin-bottom:10px;
     margin-right:10px;
-    // &--actUnFollow{
-    //     padding:0px;
-    //     font-size:$font-size_s;
-    //     border:1px solid $background_color_gray;
-    //     border-radius:30px;
-    //     cursor:pointer;
-    //     margin-bottom:10px;
-    //     margin-right:10px;
-    // }
     &--blue{
         color:$font-color_white;
         background:$background_color_main2;
@@ -63,5 +53,4 @@
             border:1px solid $background_color_optionGreen;
         }
     }
-    
 }

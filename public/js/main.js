@@ -94,9 +94,14 @@
 /***/ (function(module, exports) {
 
 $(function () {
-  // ===========================================================
+  // SPメニュー
+  $('.js-toggle-sp--menu').on('click', function () {
+    $(this).toggleClass('active');
+    $('.js-toggle-sp--menu-target').toggleClass('active');
+  }); // ===========================================================
   // バリデーションエラー時に、エラー個所まで画面をスクロールさせる(トップページのお問い合わせ機能のみに適用)
   // ===========================================================
+
   var targetoffset = null;
   var err = $(".js-u-err__msg__main");
 

@@ -9,4 +9,9 @@
     padding-top:$space_l;
     padding-bottom:$space_l;
     font-size:$font-size_default;
+    @include sl() {
+        padding-top:$space_xl;
+        padding-bottom:$space_xl;
+        font-size:$font-size_s;
+    }
 }

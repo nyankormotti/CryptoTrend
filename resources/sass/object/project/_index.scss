@@ -18,6 +18,10 @@
         font-size:$font-size_xxl;
         font-family: $font-family_corp;
         font-weight:bold;
+        @include sl(){
+            right:0;
+            font-size:$font-size_s;
+        }
         &--main{
             font-style:oblique;
         }
@@ -30,9 +34,15 @@
     width:100%;
     height:300px;
     margin-top:40px;
-    
+    @include sl(){
+        margin-top:0;
+        height:150px;
+    }
     &__content{
         width:70%;
+        @include sl(){
+            width:100%;
+        }
         height:90%;
         margin-right:auto;
         margin-left:auto;
@@ -50,6 +60,9 @@
             margin-bottom:20px;
             font-size:$font-size_xl;
             font-family:$font-family_corp;
+            @include sl(){
+                font-size:$font-size_m;
+            }
         }
         &__btn{
             display:block;
@@ -58,13 +71,17 @@
             margin-left:auto;
             width:40%;
             text-align:center;
-            // border:none;
             border-radius:5px;
             font-size:$font-size_xl;
             text-decoration:none;
             padding:10px 20px;
             color:$font-color_white;
             font-family:$font-family_corp;
+            @include sl(){
+                margin:0;
+                width:60%;
+                font-size:$font-size_m;
+            }
         }
     }
 }

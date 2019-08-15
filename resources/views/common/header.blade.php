@@ -33,7 +33,11 @@
 <div class="header--dummy"></div>
 
 @if(!empty($status))
+@if(\Route::current() -> getName() == '')
+<div id="js-msg" class="u-fadein u-fadein--index" style="display:none;">{{$status}}</div>
+@else
 <div id="js-msg" class="u-fadein" style="display:none;">{{$status}}</div>
+@endif
 @endif
 
 @endsection

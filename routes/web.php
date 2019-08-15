@@ -86,7 +86,7 @@ Route::get('/logout', 'LoginController@logout');
 // Twitter認証処理のルーティング
 // Twitter認証のルーティング
 Route::get('/oauth', 'OAuthController@login');
-//Callback用のルーティング
+// Callback用のルーティング
 Route::get('/callback', 'OAuthController@callBack');
 // callbackよりアクセストークンを受け取り、ログイン認証をするルーティング
 Route::get('/main', 'OAuthController@main');

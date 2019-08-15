@@ -25,7 +25,7 @@
     }
     &__done{
         display:none;
-        @include mq(){
+        @include sl(){
             width:90%;
             text-align:center;
             display:block;

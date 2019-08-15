@@ -12,4 +12,9 @@
     font-family:$font-family_corp;
     text-align:center;
     line-height: 30px;
+    &--index {
+        background: $background_color_yellow;
+        color:$font_color_main1;
+        z-index:2;
+    }
 }

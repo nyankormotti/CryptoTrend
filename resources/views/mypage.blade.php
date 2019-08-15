@@ -159,10 +159,10 @@
             <div class="modal__Contents">
                 <p class="modal__state">本当に退会しますか？</p>
                 <div class="modal__btn__part">
-                    <div class="btn__mypage__user btn__form">
+                    <div class="btn__mypage__user btn__mypage__user__withdraw btn__form">
                         <input id="btn--withdraw__btn" class="btn withdraw__btn" type="submit" name="submit" value="退会">
                     </div>
-                    <div class="btn__mypage__user btn__form">
+                    <div class="btn__mypage__user btn__mypage__user__withdraw  btn__form">
                         <div id="closeModal" class="btn modal__btn">閉じる</div>
                     </div>
                 </div>

@@ -50,6 +50,9 @@
     @include sm() {
         font-size:$font-size_m;
     }
+    @include ss() {
+        font-size:$font-size_s;
+    }
     &--trend{
         @include tm() {
             margin-right:15px;
@@ -81,6 +84,9 @@
         @include sm() {
             font-size:$font-size_m;
             padding:10px;
+        }
+        @include ss() {
+            font-size:$font-size_s;
         }
         &--optionBlue{
             color:$font-color_white;

@@ -90,6 +90,9 @@
                @include sm() {
                    font-size:$font-size_m;
                }
+               @include ss() {
+                    font-size:$font-size_s;
+                }
                &__link{
                    display:block;
                    text-decoration:none;
@@ -130,6 +133,9 @@
         color:$font_color_main2;
         @include sm() {
             font-size:$font-size_m;
+        }
+        @include ss() {
+            font-size:$font-size_ss;
         }
     }
 }

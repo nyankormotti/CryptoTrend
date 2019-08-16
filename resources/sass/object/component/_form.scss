@@ -89,6 +89,9 @@
     &__area{
         width:80%;
         padding:$space_m 0 $space_xxl 0;
+        @include ss() {
+            width:90%;
+        }
     }
     &__input{
         width:100%;
@@ -99,6 +102,7 @@
         @include sm() {
             font-size:$font-size_s;
         }
+        
     }
     &__comment{
         width:100%;

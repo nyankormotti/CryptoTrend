@@ -32,6 +32,9 @@
         font-size:$font-size_xxl;
         font-family:$font-family_corp;
         color:$background-color_main1;
+        @include ss() {
+            font-size:$font-size_xl;
+        }
         &__sub{
             text-align:center;
         }

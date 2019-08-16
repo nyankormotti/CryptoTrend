@@ -111,6 +111,9 @@
             @include sm() {
                 width:23%;
             }
+            @include ss() {
+                font-size:$font-size_s;
+            }
             &:hover{
                 color:$font-color_orange;
                 background:$background_color_white;
@@ -131,6 +134,7 @@
                 @include sm() {
                     width:30%;
                 }
+                
                 &:hover{
                     color:$background_color_softRed;
                     background:$background_color_white;

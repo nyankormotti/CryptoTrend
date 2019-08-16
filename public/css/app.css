@@ -515,6 +515,12 @@ body {
   padding: 10px 0 30px 0;
 }
 
+@media screen and (max-width: 375px) {
+  .textfield__area {
+    width: 90%;
+  }
+}
+
 .textfield__input {
   width: 100%;
   border: none;
@@ -623,6 +629,12 @@ body {
   }
 }
 
+@media screen and (max-width: 375px) {
+  .c-action-btn {
+    font-size: 12px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .c-action-btn--trend {
     margin-right: 15px;
@@ -668,6 +680,12 @@ body {
   .c-action-btn--follow {
     font-size: 14px;
     padding: 10px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .c-action-btn--follow {
+    font-size: 12px;
   }
 }
 
@@ -891,6 +909,12 @@ body {
   font-size: 30px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: #05215c;
+}
+
+@media screen and (max-width: 375px) {
+  .mypage__title {
+    font-size: 24px;
+  }
 }
 
 .mypage__title__sub {
@@ -1177,6 +1201,12 @@ body {
   }
 }
 
+@media screen and (max-width: 375px) {
+  .p-table__tbody__tr__td {
+    font-size: 12px;
+  }
+}
+
 .p-table__tbody__tr__td__link {
   display: block;
   text-decoration: none;
@@ -1222,6 +1252,12 @@ body {
 @media screen and (max-width: 414px) {
   .p-note__describe {
     font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .p-note__describe {
+    font-size: 10px;
   }
 }
 
@@ -1376,6 +1412,12 @@ body {
 @media screen and (max-width: 414px) {
   .p-user__top__btn {
     width: 23%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .p-user__top__btn {
+    font-size: 12px;
   }
 }
 

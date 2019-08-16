@@ -53,6 +53,9 @@
         @include sl() {
             height: 430px;
         }
+        @include sss() {
+            padding:10px;
+        }
     }
     &__page{
         padding:20px;
@@ -84,6 +87,11 @@
         display:flex;
         justify-content: space-between;
         align-items: center;
+        @include sss() {
+            width:95%;
+            padding:10px 0 5px 0;
+            margin:0 auto;
+        }
         &__name{
             width:70%;
             font-size:$font-size_xl;
@@ -134,7 +142,6 @@
                 @include sm() {
                     width:30%;
                 }
-                
                 &:hover{
                     color:$background_color_softRed;
                     background:$background_color_white;
@@ -149,6 +156,11 @@
         justify-content: space-between;
         align-items: center;
         font-size:$font-size_m;
+        @include sss() {
+            width:95%;
+            padding:10px 0;
+            margin:0 auto;
+        }
         &__screen {
             @include sl(){
                 font-size:$font-size_s;
@@ -170,6 +182,9 @@
         width:90%;
         padding:5px 20px;
         font-size:$font-size_s;
+        @include sss() {
+            width:85%;
+        }
         &__profile{
             &__describe{
                 padding:5px 5px 10px 5px;

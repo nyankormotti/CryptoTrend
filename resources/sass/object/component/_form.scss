@@ -13,6 +13,9 @@
     @include tl() {
         width:80%;
     }
+    @include sss() {
+        width:90%;
+    }
     &__contact{
         width:60%;
         margin-top:40px;
@@ -23,10 +26,16 @@
         @include sl(){
             margin-top:80px;
         }
+        @include sss() {
+            width:90%;
+        }
     }
     &__signup{
         @include tm() {
             margin-bottom:0;
+        }
+         @include sl() {
+            margin-top:30px;
         }
         @include sm() {
             margin-bottom:80px;
@@ -61,12 +70,15 @@
     }
 
     &__bottom--reset{
-        margin-bottom:0;
+        margin-bottom:80px;;
         @include tl() {
             margin-bottom:80px;
         }
         @include tm() {
             margin-bottom:0;
+        }
+        @include sl() {
+            margin-top:30px;
         }
         @include sm() {
             margin-bottom:80px;

@@ -31,6 +31,9 @@
          @include ss() {
              font-size:$font-size_s;
          }
+         @include sss() {
+             font-size:$font-size_ss;
+         }
         &--main{
             font-style:oblique;
         }

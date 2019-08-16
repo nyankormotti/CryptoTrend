@@ -36,6 +36,9 @@
                 @include sm() {
                     width:60%;
                 }
+                @include sss() {
+                    width:70%;
+                }
             }
         }
         &__border{
@@ -65,6 +68,9 @@
         @include sm() {
             font-size:$font-size_s;
         }
+        @include sss() {
+            font-size:$font-size_ss;
+        }
        &__tr{
            &__th{
                padding-bottom:10px;
@@ -85,13 +91,10 @@
                 }
                @include sl() {
                    padding:20px 0;
-                   font-size:$font-size_default;
+                   font-size:$font-size_s;
                }
-               @include sm() {
-                   font-size:$font-size_m;
-               }
-               @include ss() {
-                    font-size:$font-size_s;
+               @include sss() {
+                    font-size:$font-size_ss;
                 }
                &__link{
                    display:block;

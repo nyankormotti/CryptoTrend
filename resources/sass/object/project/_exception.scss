@@ -36,6 +36,9 @@
              margin-bottom:$space_xxl;
              line-height:150%;
              text-align:center;
+             @include sss() {
+                 font-size:$font-size_s;
+             }
         }
         &__link{
             text-align: center;

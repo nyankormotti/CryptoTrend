@@ -2,6 +2,7 @@
 // メディアクエリのブレークポイント設定
 // ==========================
 $breakpoints: (    
+    'sss' : 'screen and (max-width: 320px)',
     'ss' : 'screen and (max-width: 375px)',
     'sm' : 'screen and (max-width: 414px)',
     'sl' : 'screen and (max-width: 480px)',
@@ -12,6 +13,12 @@ $breakpoints: (
 // ==========================
 // mixin
 // ==========================
+@mixin sss($breakpoint: sss) {
+    @media #{map-get($breakpoints, $breakpoint)} {
+        @content;
+    }
+}
+
 @mixin ss($breakpoint: ss) {
     @media #{map-get($breakpoints, $breakpoint)} {
         @content;

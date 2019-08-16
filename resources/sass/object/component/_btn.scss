@@ -47,12 +47,18 @@
         margin-bottom:15px;
         margin-right:25px;
     }
+    @include sm() {
+        font-size:$font-size_m;
+    }
     &--trend{
         @include tm() {
             margin-right:15px;
         }
         @include sl() {
             margin-right:25px;
+        }
+        @include sm() {
+            margin-right:15px;
         }
     }
     &--blue{
@@ -71,6 +77,10 @@
             margin-bottom:0;
             margin-right:0;
             width:25%;
+        }
+        @include sm() {
+            font-size:$font-size_m;
+            padding:10px;
         }
         &--optionBlue{
             color:$font-color_white;

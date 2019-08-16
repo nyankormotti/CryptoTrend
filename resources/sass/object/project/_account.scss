@@ -15,6 +15,9 @@
         &__area{
             display:flex;
             align-items: flex-end;
+            @include sl() {
+                justify-content: space-between;
+            }
             &__title{
                 width:60%;
                 font-size:$font-size_ll;
@@ -24,6 +27,12 @@
             &__page{
                 width:30%;
                 text-align:right;
+                @include sl() {
+                    font-size:$font-size_m;
+                }
+                @include sm() {
+                    font-size:$font-size_s;
+                }
             }
         }
         &__border{
@@ -82,6 +91,9 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            @include sm() {
+                font-size:$font-size_l;
+            }
         }
         &__btn{
             margin-right:0;
@@ -94,6 +106,9 @@
             @include sl() {
                 padding:10px 15px;
                 font-size:$font-size_m;
+            }
+            @include sm() {
+                width:23%;
             }
             &:hover{
                 color:$font-color_orange;
@@ -110,6 +125,9 @@
                 @include sl() {
                     padding:10px 15px;
                     font-size:10px;
+                }
+                @include sm() {
+                    width:30%;
                 }
                 &:hover{
                     color:$background_color_softRed;
@@ -129,10 +147,16 @@
             @include sl(){
                 font-size:$font-size_s;
             }
+            @include sm(){
+                font-size:10px;
+            }
         }
         &__fcount {
             @include sl(){
                 font-size:$font-size_s;
+            }
+            @include sm() {
+                font-size:10px;
             }
         }
     }

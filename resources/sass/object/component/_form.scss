@@ -28,6 +28,9 @@
         @include tm() {
             margin-bottom:0;
         }
+        @include sm() {
+            margin-bottom:80px;
+        }
     }
 
     &__title{
@@ -59,6 +62,9 @@
         @include tm() {
             margin-bottom:0;
         }
+        @include sm() {
+            margin-bottom:80px;
+        }
     }
 }
 
@@ -76,6 +82,9 @@
         border-bottom:1px solid $font-color_clear;
         font-size:$font-size_default;
         padding:4px;
+        @include sm() {
+            font-size:$font-size_s;
+        }
     }
     &__comment{
         width:100%;
@@ -84,6 +93,9 @@
         border-radius:5px;
         box-sizing:border-box;
         font-size:$font-size_default;
+        @include sm() {
+            font-size:$font-size_s;
+        }
         &__area{
             width:100%;
             padding-top:$space_xl;

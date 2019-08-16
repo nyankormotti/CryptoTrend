@@ -64,6 +64,9 @@
                 font-size: $font-size_l;
                 padding:10px 0;
              }
+             @include sl() {
+                font-size: $font-size_default;
+             }
         }
         &__area{
             display:flex;
@@ -92,6 +95,9 @@
             @include sl() {
                 text-align: left;
             }
+            @include sm() {
+                font-size: $font-size_default;
+            }
         }
         &__area{
             display:flex;
@@ -115,6 +121,9 @@
                     width:45%;
                     font-size:$font-size_ll;
                 }
+                @include sm() {
+                    font-size: $font-size_m;
+                }
                 &--title{
                     padding:5px 0;
                 }
@@ -123,12 +132,18 @@
                     @include sl() {
                         font-size:$font-size_ll;
                     }
+                    @include sm() {
+                        font-size: $font-size_default;
+                    }
                     &--now{
                         font-size: $font-size_default;
                         font-weight:bold;
                         @include sl() {
                             font-size:$font-size_xl;
                         }
+                        @include sm() {
+                        font-size: $font-size_l;
+                    }
                     }
                 }
             }
@@ -152,6 +167,9 @@
                 font-size: $font-size_l;
                 padding:10px 0;
              }
+             @include sm() {
+                font-size: $font-size_default;
+             }
         }
         &__area{
             display:flex;
@@ -174,6 +192,9 @@
             }
             @include sl() {
                 text-align: left;
+            }
+            @include sm() {
+                font-size: $font-size_default;
             }
         }
         &__area{

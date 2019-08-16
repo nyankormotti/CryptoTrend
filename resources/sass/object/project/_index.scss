@@ -25,6 +25,9 @@
          @include sl() {
              font-size:$font-size_default;
          }
+         @include sm() {
+             font-size:$font-size_m;
+         }
         &--main{
             font-style:oblique;
         }

@@ -3,27 +3,27 @@
         <div class="p-sidebar__period">
             <h3 class="p-sidebar__period__title">期間</h3>
             <div class="p-sidebar__period__area">
-                <div v-if="period == 1" class="c-action-btn c-action-btn--blue">1時間</div>
-                <div v-else class="c-action-btn" @click="hourPeriod">1時間</div>
-                <div v-if="period == 2" class="c-action-btn c-action-btn--blue">1日間</div>
-                <div v-else class="c-action-btn" @click="datePeriod">1日間</div>
-                <div v-if="period == 3" class="c-action-btn c-action-btn--blue">1週間</div>
-                <div v-else class="c-action-btn" @click="weekPeriod">1週間</div>
+                <div v-if="period == 1" class="c-action-btn c-action-btn--trend c-action-btn--blue">1時間</div>
+                <div v-else class="c-action-btn c-action-btn--trend" @click="hourPeriod">1時間</div>
+                <div v-if="period == 2" class="c-action-btn c-action-btn--trend c-action-btn--blue">1日間</div>
+                <div v-else class="c-action-btn c-action-btn--trend" @click="datePeriod">1日間</div>
+                <div v-if="period == 3" class="c-action-btn c-action-btn--trend c-action-btn--blue">1週間</div>
+                <div v-else class="c-action-btn c-action-btn--trend" @click="weekPeriod">1週間</div>
             </div>
         </div>
         <div class="p-sidebar__brand">
             <h3 class="p-sidebar__brand__title">銘柄</h3>
             <div class="p-sidebar__brand__area">
-                <div class="c-action-btn" v-bind:class="[currency1 ? 'c-action-btn--blue':'']" @click="clickBTC">$BTC</div>
-                <div class="c-action-btn" v-bind:class="[currency2 ? 'c-action-btn--blue':'']" @click="clickETH">$ETH</div>
-                <div class="c-action-btn" v-bind:class="[currency3 ? 'c-action-btn--blue':'']" @click="clickETC">$ETC</div>
-                <div class="c-action-btn" v-bind:class="[currency4 ? 'c-action-btn--blue':'']" @click="clickLSK">$LSK</div>
-                <div class="c-action-btn" v-bind:class="[currency5 ? 'c-action-btn--blue':'']" @click="clickFCT">$FCT</div>
-                <div class="c-action-btn" v-bind:class="[currency6 ? 'c-action-btn--blue':'']" @click="clickXRP">$XRP</div>
-                <div class="c-action-btn" v-bind:class="[currency7 ? 'c-action-btn--blue':'']" @click="clickXEM">$XEM</div>
-                <div class="c-action-btn" v-bind:class="[currency8 ? 'c-action-btn--blue':'']" @click="clickLTC">$LTC</div>
-                <div class="c-action-btn" v-bind:class="[currency9 ? 'c-action-btn--blue':'']" @click="clickBCH">$BCH</div>
-                <div class="c-action-btn" v-bind:class="[currency10 ? 'c-action-btn--blue':'']" @click="clickMONA">$MONA</div>
+                <div class="c-action-btn c-action-btn--trend" v-bind:class="[currency1 ? 'c-action-btn--blue':'']" @click="clickBTC">$BTC</div>
+                <div class="c-action-btn c-action-btn--trend" v-bind:class="[currency2 ? 'c-action-btn--blue':'']" @click="clickETH">$ETH</div>
+                <div class="c-action-btn c-action-btn--trend" v-bind:class="[currency3 ? 'c-action-btn--blue':'']" @click="clickETC">$ETC</div>
+                <div class="c-action-btn c-action-btn--trend" v-bind:class="[currency4 ? 'c-action-btn--blue':'']" @click="clickLSK">$LSK</div>
+                <div class="c-action-btn c-action-btn--trend" v-bind:class="[currency5 ? 'c-action-btn--blue':'']" @click="clickFCT">$FCT</div>
+                <div class="c-action-btn c-action-btn--trend" v-bind:class="[currency6 ? 'c-action-btn--blue':'']" @click="clickXRP">$XRP</div>
+                <div class="c-action-btn c-action-btn--trend" v-bind:class="[currency7 ? 'c-action-btn--blue':'']" @click="clickXEM">$XEM</div>
+                <div class="c-action-btn c-action-btn--trend" v-bind:class="[currency8 ? 'c-action-btn--blue':'']" @click="clickLTC">$LTC</div>
+                <div class="c-action-btn c-action-btn--trend" v-bind:class="[currency9 ? 'c-action-btn--blue':'']" @click="clickBCH">$BCH</div>
+                <div class="c-action-btn c-action-btn--trend" v-bind:class="[currency10 ? 'c-action-btn--blue':'']" @click="clickMONA">$MONA</div>
             </div>
         </div>
     </div>

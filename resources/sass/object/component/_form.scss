@@ -24,6 +24,11 @@
             margin-top:80px;
         }
     }
+    &__signup{
+        @include tm() {
+            margin-bottom:0;
+        }
+    }
 
     &__title{
         width:100%;
@@ -48,6 +53,12 @@
 
     &__bottom--reset{
         margin-bottom:0;
+        @include tl() {
+            margin-bottom:80px;
+        }
+        @include tm() {
+            margin-bottom:0;
+        }
     }
 }
 

@@ -76,6 +76,9 @@
         @include tl() {
             width:25%;
         }
+        @include tm() {
+            width:30%;
+        }
         @include sl() {
             width:90%;
             padding-top:0;
@@ -83,16 +86,33 @@
         &__title{
             font-size: $font-size_l;
             padding:10px 0;
-             
+            @include tm() {
+                text-align: center;
+            }
+            @include sl() {
+                text-align: left;
+            }
         }
         &__area{
             display:flex;
             justify-content:space-around;
+            @include tm() {
+                display:block;
+            }
+            @include sl() {
+                display:flex;
+            }
             &--f_action{
                 text-align:center;
                 font-size: $font-size_m;
                 width:45%;
+                @include tm() {
+                    margin-bottom:10px;
+                    width:100%;
+                }
                 @include sl() {
+                    margin-bottom:0;
+                    width:45%;
                     font-size:$font-size_ll;
                 }
                 &--title{
@@ -149,6 +169,12 @@
         &__title{
             font-size: $font-size_l;
             padding:10px 0;
+            @include tm() {
+                text-align: center;
+            }
+            @include sl() {
+                text-align: left;
+            }
         }
         &__area{
             padding:5px;

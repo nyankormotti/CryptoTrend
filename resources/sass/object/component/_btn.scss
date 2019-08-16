@@ -38,11 +38,22 @@
         margin-bottom:15px;
         margin-right:25px;
     }
+    @include tm() {
+        margin-right:0;
+    }
     @include sl() {
         font-size:$font-size_default;
         padding:10px 20px;
         margin-bottom:15px;
         margin-right:25px;
+    }
+    &--trend{
+        @include tm() {
+            margin-right:15px;
+        }
+        @include sl() {
+            margin-right:25px;
+        }
     }
     &--blue{
         color:$font-color_white;

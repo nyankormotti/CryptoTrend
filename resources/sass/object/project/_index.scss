@@ -18,10 +18,13 @@
         font-size:$font-size_xxl;
         font-family: $font-family_corp;
         font-weight:bold;
-        @include sl(){
+        @include tm(){
             right:5%;
-            font-size:$font-size_default;
+            font-size:$font-size_xl;
         }
+         @include sl() {
+             font-size:$font-size_default;
+         }
         &--main{
             font-style:oblique;
         }

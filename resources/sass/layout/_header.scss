@@ -30,7 +30,7 @@
         height:60px;
     }
 
-    @include sl() {
+    @include tm() {
     .nav__menu {
         display:block;
         position:absolute;
@@ -80,7 +80,7 @@
             }
         }
 
-        @include sl() {
+        @include tm() {
             display:block;
             font-size:$font-size_xxl;
             &__item {
@@ -107,7 +107,7 @@
 // TODO:レスポンシブ対応時に修正
 .menu__trigger{
     display:none;
-    @include sl(){
+    @include tm(){
         display:inline-block;
     }
     transition:all .4s;

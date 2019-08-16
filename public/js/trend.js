@@ -20595,32 +20595,56 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "p-sidebar__period__area" }, [
         _vm.period == 1
-          ? _c("div", { staticClass: "c-action-btn c-action-btn--blue" }, [
-              _vm._v("1時間")
-            ])
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "c-action-btn c-action-btn--trend c-action-btn--blue"
+              },
+              [_vm._v("1時間")]
+            )
           : _c(
               "div",
-              { staticClass: "c-action-btn", on: { click: _vm.hourPeriod } },
+              {
+                staticClass: "c-action-btn c-action-btn--trend",
+                on: { click: _vm.hourPeriod }
+              },
               [_vm._v("1時間")]
             ),
         _vm._v(" "),
         _vm.period == 2
-          ? _c("div", { staticClass: "c-action-btn c-action-btn--blue" }, [
-              _vm._v("1日間")
-            ])
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "c-action-btn c-action-btn--trend c-action-btn--blue"
+              },
+              [_vm._v("1日間")]
+            )
           : _c(
               "div",
-              { staticClass: "c-action-btn", on: { click: _vm.datePeriod } },
+              {
+                staticClass: "c-action-btn c-action-btn--trend",
+                on: { click: _vm.datePeriod }
+              },
               [_vm._v("1日間")]
             ),
         _vm._v(" "),
         _vm.period == 3
-          ? _c("div", { staticClass: "c-action-btn c-action-btn--blue" }, [
-              _vm._v("1週間")
-            ])
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "c-action-btn c-action-btn--trend c-action-btn--blue"
+              },
+              [_vm._v("1週間")]
+            )
           : _c(
               "div",
-              { staticClass: "c-action-btn", on: { click: _vm.weekPeriod } },
+              {
+                staticClass: "c-action-btn c-action-btn--trend",
+                on: { click: _vm.weekPeriod }
+              },
               [_vm._v("1週間")]
             )
       ])
@@ -20633,7 +20657,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "c-action-btn",
+            staticClass: "c-action-btn c-action-btn--trend",
             class: [_vm.currency1 ? "c-action-btn--blue" : ""],
             on: { click: _vm.clickBTC }
           },
@@ -20643,7 +20667,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "c-action-btn",
+            staticClass: "c-action-btn c-action-btn--trend",
             class: [_vm.currency2 ? "c-action-btn--blue" : ""],
             on: { click: _vm.clickETH }
           },
@@ -20653,7 +20677,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "c-action-btn",
+            staticClass: "c-action-btn c-action-btn--trend",
             class: [_vm.currency3 ? "c-action-btn--blue" : ""],
             on: { click: _vm.clickETC }
           },
@@ -20663,7 +20687,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "c-action-btn",
+            staticClass: "c-action-btn c-action-btn--trend",
             class: [_vm.currency4 ? "c-action-btn--blue" : ""],
             on: { click: _vm.clickLSK }
           },
@@ -20673,7 +20697,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "c-action-btn",
+            staticClass: "c-action-btn c-action-btn--trend",
             class: [_vm.currency5 ? "c-action-btn--blue" : ""],
             on: { click: _vm.clickFCT }
           },
@@ -20683,7 +20707,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "c-action-btn",
+            staticClass: "c-action-btn c-action-btn--trend",
             class: [_vm.currency6 ? "c-action-btn--blue" : ""],
             on: { click: _vm.clickXRP }
           },
@@ -20693,7 +20717,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "c-action-btn",
+            staticClass: "c-action-btn c-action-btn--trend",
             class: [_vm.currency7 ? "c-action-btn--blue" : ""],
             on: { click: _vm.clickXEM }
           },
@@ -20703,7 +20727,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "c-action-btn",
+            staticClass: "c-action-btn c-action-btn--trend",
             class: [_vm.currency8 ? "c-action-btn--blue" : ""],
             on: { click: _vm.clickLTC }
           },
@@ -20713,7 +20737,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "c-action-btn",
+            staticClass: "c-action-btn c-action-btn--trend",
             class: [_vm.currency9 ? "c-action-btn--blue" : ""],
             on: { click: _vm.clickBCH }
           },
@@ -20723,7 +20747,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "c-action-btn",
+            staticClass: "c-action-btn c-action-btn--trend",
             class: [_vm.currency10 ? "c-action-btn--blue" : ""],
             on: { click: _vm.clickMONA }
           },

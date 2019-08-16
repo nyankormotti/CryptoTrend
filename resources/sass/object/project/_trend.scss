@@ -6,7 +6,7 @@
     width:60%;
     background:$background_color_white;
     border-radius:5px;
-    @include sl(){
+    @include tl(){
         order: 1;
         width:100%;
     }
@@ -50,7 +50,10 @@
     width:100%;
     &__thead{
         border-bottom:3px solid $background_color_clear;
-       @include sl() {
+        @include tl() {
+            font-size:$font-size_l;
+        }
+        @include sl() {
             font-size:$font-size_m;
         }
        &__tr{
@@ -67,8 +70,13 @@
                padding:10px 0;
                line-height:150%;
                text-align:center;
+               @include tl() {
+                    padding:20px 0;
+                    font-size:$font-size_xl;
+                }
                @include sl() {
                    padding:20px 0;
+                   font-size:$font-size_default;
                }
                &__link{
                    display:block;

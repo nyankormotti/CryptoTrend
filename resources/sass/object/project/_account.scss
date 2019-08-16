@@ -6,7 +6,7 @@
     width:60%;
     background:$background_color_white;
     border-radius:5px;
-    @include sl(){
+    @include tl() {
         width:100%;
         order: 1;
     }
@@ -38,6 +38,12 @@
         padding:10px 20px;
         overflow: scroll;
         height: 430px;
+        @include tl() {
+            height: 850px;
+        }
+        @include sl() {
+            height: 430px;
+        }
     }
     &__page{
         padding:20px;

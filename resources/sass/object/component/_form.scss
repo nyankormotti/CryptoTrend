@@ -10,14 +10,18 @@
     margin-right:auto;
     margin-left:auto;
     margin-bottom:80px;
-    @include sl(){
+    @include tl() {
         width:80%;
     }
     &__contact{
         width:60%;
         margin-top:40px;
-        @include sl(){
+        @include tl() {
+            margin-top:0;
             width:80%;
+        }
+        @include sl(){
+            margin-top:80px;
         }
     }
 

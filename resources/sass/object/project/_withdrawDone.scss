@@ -9,6 +9,9 @@
     margin-top:80px;
     margin-right:auto;
     margin-left:auto;
+    @include tl() {
+        width:50%;
+    }
     @include sl() {
         width:80%;
     }

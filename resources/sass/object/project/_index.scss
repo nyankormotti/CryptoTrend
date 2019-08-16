@@ -47,8 +47,10 @@
         flex-wrap:wrap;
         align-items:center;
         justify-content: space-between;
-        @include sl() {
+        @include tl() {
             width:100%;
+        }
+        @include sl() {
             display: block;
         }
     }
@@ -65,9 +67,6 @@
             margin-bottom:20px;
             font-size:$font-size_xl;
             font-family:$font-family_corp;
-            // @include sl(){
-            //     font-size:$font-size_m;
-            // }
         }
         &__btn{
             display:block;
@@ -82,10 +81,15 @@
             padding:10px 20px;
             color:$font-color_white;
             font-family:$font-family_corp;
+            @include tl() {
+                padding:20px 20px;
+                font-size:$font-size_xxl;
+            }
             @include sl(){
                 margin-top:0;
                 margin-bottom:0;
                 width:40%;
+                padding:10px 20px;
                 font-size:$font-size_xl;
             }
         }

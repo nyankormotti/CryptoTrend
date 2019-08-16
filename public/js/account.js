@@ -2909,145 +2909,165 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-sidebar__area" }, [
-    _c("div", { staticClass: "p-sidebar__limit" }, [
-      _c("h3", { staticClass: "p-sidebar__limit__title" }, [
-        _vm._v("上限回数")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "p-sidebar__limit__area" }, [
-        _c("div", { staticClass: "p-sidebar__limit__area--f_action" }, [
-          _c("h3", { staticClass: "p-sidebar__limit__area--f_action--title" }, [
-            _vm._v("フォロー")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "p-sidebar__limit__area--f_action--count" }, [
-            _c(
-              "span",
-              { staticClass: "p-sidebar__limit__area--f_action--count--now" },
-              [
-                _vm._v(
-                  "\n                        " +
-                    _vm._s(_vm.followLimit) +
-                    "\n                    "
-                )
-              ]
-            ),
-            _vm._v(" / 25\n                ")
-          ])
+  return _c(
+    "div",
+    { staticClass: "p-sidebar__area p-sidebar__area--account" },
+    [
+      _c("div", { staticClass: "p-sidebar__limit" }, [
+        _c("h3", { staticClass: "p-sidebar__limit__title" }, [
+          _vm._v("上限回数")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "p-sidebar__limit__area--f_action" }, [
-          _c("h3", { staticClass: "p-sidebar__limit__area--f_action--title" }, [
-            _vm._v("フォロー解除")
+        _c("div", { staticClass: "p-sidebar__limit__area" }, [
+          _c("div", { staticClass: "p-sidebar__limit__area--f_action" }, [
+            _c(
+              "h3",
+              { staticClass: "p-sidebar__limit__area--f_action--title" },
+              [_vm._v("フォロー")]
+            ),
+            _vm._v(" "),
+            _c(
+              "p",
+              { staticClass: "p-sidebar__limit__area--f_action--count" },
+              [
+                _c(
+                  "span",
+                  {
+                    staticClass: "p-sidebar__limit__area--f_action--count--now"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.followLimit) +
+                        "\n                    "
+                    )
+                  ]
+                ),
+                _vm._v(" / 25\n                ")
+              ]
+            )
           ]),
           _vm._v(" "),
-          _c("p", { staticClass: "p-sidebar__limit__area--f_action--count" }, [
+          _c("div", { staticClass: "p-sidebar__limit__area--f_action" }, [
             _c(
-              "span",
-              { staticClass: "p-sidebar__limit__area--f_action--count--now" },
-              [
-                _vm._v(
-                  "\n                        " +
-                    _vm._s(_vm.unFollowLimit) +
-                    "\n                    "
-                )
-              ]
+              "h3",
+              { staticClass: "p-sidebar__limit__area--f_action--title" },
+              [_vm._v("フォロー解除")]
             ),
-            _vm._v(" / 25\n                ")
+            _vm._v(" "),
+            _c(
+              "p",
+              { staticClass: "p-sidebar__limit__area--f_action--count" },
+              [
+                _c(
+                  "span",
+                  {
+                    staticClass: "p-sidebar__limit__area--f_action--count--now"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.unFollowLimit) +
+                        "\n                    "
+                    )
+                  ]
+                ),
+                _vm._v(" / 25\n                ")
+              ]
+            )
           ])
         ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-sidebar__follow" }, [
-      _c("h3", { staticClass: "p-sidebar__follow__title" }, [
-        _vm._v("表示形式")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "p-sidebar__follow__area" }, [
-        !_vm.followFlg
-          ? _c(
-              "div",
-              {
-                staticClass:
-                  "c-action-btn c-action-btn--follow c-action-btn--follow--optionBlue"
-              },
-              [_vm._v("\n                未フォロー\n            ")]
-            )
-          : _c(
-              "div",
-              {
-                staticClass: "c-action-btn c-action-btn--follow",
-                on: { click: _vm.search }
-              },
-              [_vm._v("未フォロー")]
-            ),
+      _c("div", { staticClass: "p-sidebar__follow" }, [
+        _c("h3", { staticClass: "p-sidebar__follow__title" }, [
+          _vm._v("表示形式")
+        ]),
         _vm._v(" "),
-        _vm.followFlg
-          ? _c(
-              "div",
-              {
-                staticClass:
-                  "c-action-btn c-action-btn--follow c-action-btn--follow--optionBlue"
-              },
-              [_vm._v("\n                フォロー済\n            ")]
-            )
-          : _c(
-              "div",
-              {
-                staticClass: "c-action-btn c-action-btn--follow",
-                on: { click: _vm.search }
-              },
-              [_vm._v("フォロー済")]
-            )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-sidebar__follow" }, [
-      _c("h3", { staticClass: "p-sidebar__follow__title" }, [
-        _vm._v("自動フォロー")
+        _c("div", { staticClass: "p-sidebar__follow__area" }, [
+          !_vm.followFlg
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "c-action-btn c-action-btn--follow c-action-btn--follow--optionBlue"
+                },
+                [_vm._v("\n                未フォロー\n            ")]
+              )
+            : _c(
+                "div",
+                {
+                  staticClass: "c-action-btn c-action-btn--follow",
+                  on: { click: _vm.search }
+                },
+                [_vm._v("未フォロー")]
+              ),
+          _vm._v(" "),
+          _vm.followFlg
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "c-action-btn c-action-btn--follow c-action-btn--follow--optionBlue"
+                },
+                [_vm._v("\n                フォロー済\n            ")]
+              )
+            : _c(
+                "div",
+                {
+                  staticClass: "c-action-btn c-action-btn--follow",
+                  on: { click: _vm.search }
+                },
+                [_vm._v("フォロー済")]
+              )
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "p-sidebar__follow__area" }, [
-        _vm.autoFollowFlg
-          ? _c(
-              "div",
-              {
-                staticClass:
-                  "c-action-btn c-action-btn--follow c-action-btn--follow--optionGreen"
-              },
-              [_vm._v("ON")]
-            )
-          : _c(
-              "div",
-              {
-                staticClass: "c-action-btn c-action-btn--follow",
-                on: { click: _vm.autoFollow }
-              },
-              [_vm._v("ON")]
-            ),
+      _c("div", { staticClass: "p-sidebar__follow" }, [
+        _c("h3", { staticClass: "p-sidebar__follow__title" }, [
+          _vm._v("自動フォロー")
+        ]),
         _vm._v(" "),
-        !_vm.autoFollowFlg
-          ? _c(
-              "div",
-              {
-                staticClass:
-                  "c-action-btn c-action-btn--follow c-action-btn--follow--optionGreen"
-              },
-              [_vm._v("OFF")]
-            )
-          : _c(
-              "div",
-              {
-                staticClass: "c-action-btn c-action-btn--follow",
-                on: { click: _vm.autoFollow }
-              },
-              [_vm._v("OFF")]
-            )
+        _c("div", { staticClass: "p-sidebar__follow__area" }, [
+          _vm.autoFollowFlg
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "c-action-btn c-action-btn--follow c-action-btn--follow--optionGreen"
+                },
+                [_vm._v("ON")]
+              )
+            : _c(
+                "div",
+                {
+                  staticClass: "c-action-btn c-action-btn--follow",
+                  on: { click: _vm.autoFollow }
+                },
+                [_vm._v("ON")]
+              ),
+          _vm._v(" "),
+          !_vm.autoFollowFlg
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "c-action-btn c-action-btn--follow c-action-btn--follow--optionGreen"
+                },
+                [_vm._v("OFF")]
+              )
+            : _c(
+                "div",
+                {
+                  staticClass: "c-action-btn c-action-btn--follow",
+                  on: { click: _vm.autoFollow }
+                },
+                [_vm._v("OFF")]
+              )
+        ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -6,7 +6,7 @@
     margin-top:20px;
     margin-right:auto;
     margin-left:auto;
-    @include sl() {
+    @include tl() {
         width:80%;
     }
     &__maintitle{

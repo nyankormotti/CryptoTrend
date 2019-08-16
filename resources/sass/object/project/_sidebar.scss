@@ -7,10 +7,23 @@
     max-height:350px;
     background:$background_color_white;
     border-radius:5px;
-    @include sl(){
+    @include tl() {
         width:100%;
         margin-bottom:30px;
+    }
+    @include sl(){
         max-height:450px;
+    }
+    &__area {
+        &--account {
+            @include tl() {
+                display:flex;
+                justify-content: space-around;
+            }
+            @include sl() {
+                display:block;
+            }
+        }
     }
     &--option{
         max-height:380px;
@@ -37,12 +50,20 @@
     &__period{
         color:$background_color_gray;
         padding: 10px 20px;
-        @include sl() {
+        @include tl() {
              padding: 0 20px;
          }
         &__title{
             font-size: $font-size_l;
             padding:10px 0;
+             @include tl() {
+                font-size: $font-size_xl; 
+                padding:20px 10px;
+             }
+             @include sl() {
+                font-size: $font-size_l;
+                padding:10px 0;
+             }
         }
         &__area{
             display:flex;
@@ -52,12 +73,17 @@
     &__limit{
         color:$background_color_gray;
         padding: 10px 20px;
+        @include tl() {
+            width:25%;
+        }
         @include sl() {
+            width:90%;
             padding-top:0;
         }
         &__title{
             font-size: $font-size_l;
             padding:10px 0;
+             
         }
         &__area{
             display:flex;
@@ -98,6 +124,14 @@
         &__title{
             font-size: $font-size_l;
             padding:10px 0;
+            @include tl() {
+                font-size: $font-size_xl; 
+                padding:20px 10px;
+             }
+             @include sl() {
+                font-size: $font-size_l;
+                padding:10px 0;
+             }
         }
         &__area{
             display:flex;

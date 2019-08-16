@@ -1,5 +1,5 @@
 <template>
-    <div class="p-sidebar__area">
+    <div class="p-sidebar__area p-sidebar__area--account">
         <div class="p-sidebar__limit">
             <h3 class="p-sidebar__limit__title">上限回数</h3>
             <div class="p-sidebar__limit__area">

@@ -9,6 +9,9 @@
     @include tl() {
         width:80%;
     }
+    @include ss() {
+        width:90%;
+    }
     &__title{
         width:100%;
         text-align:center;

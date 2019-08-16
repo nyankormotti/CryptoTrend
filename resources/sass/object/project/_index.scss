@@ -28,6 +28,9 @@
          @include sm() {
              font-size:$font-size_m;
          }
+         @include ss() {
+             font-size:$font-size_s;
+         }
         &--main{
             font-style:oblique;
         }
@@ -73,6 +76,9 @@
             margin-bottom:20px;
             font-size:$font-size_xl;
             font-family:$font-family_corp;
+            @include ss() {
+                font-size:$font-size_l;
+            }
         }
         &__btn{
             display:block;

@@ -13,14 +13,15 @@
     &__msg{
         color:$font-color_red;
         padding:10px 0;
+        @include ss() {
+            font-size:11px;
+        }
         &__main{
             color:$font-color_red;
             padding:10px 0;
-        }
-        &--create{
-            color:$font-color_red;
-            padding:5px 0;
-            font-size:$font-size_m;
+            @include ss() {
+                 font-size:11px;
+            }
         }
     }
     &__done{

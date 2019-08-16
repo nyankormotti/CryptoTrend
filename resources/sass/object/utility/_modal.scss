@@ -40,6 +40,9 @@
         text-align: center;
         line-height: 36px;
         cursor: pointer;
+        @include ss() {
+            font-size:$font-size_m;
+        }
     }
 }
 
@@ -49,6 +52,9 @@
     cursor: pointer;
     text-align: center;
     height: 40px;
+    @include ss() {
+        font-size:$font-size_m;
+    }
 }
 
 

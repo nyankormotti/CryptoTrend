@@ -44,6 +44,7 @@
         transition:.5s;
         z-index:4;
         &.active{
+            
             transition:.5s;
             transform:translateX(-100%);
             z-index:4;
@@ -137,6 +138,7 @@
         }
     }
     &.active span {
+        background-color:$background_color_white;
         &:nth-of-type(1) {
             transform: translateY(12px) rotate(-45deg);
         }

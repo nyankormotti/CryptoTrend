@@ -80,7 +80,7 @@
                             <input type="password" class="textfield__input" name="old_pass" placeholder="パスワードを入力してください。">
                         </div>
                         <div>
-                            <label class="textfield__label" for="Password">新しいパスワード</label><span>&nbsp;&nbsp;&nbsp;※半角英数字8桁以上</span>
+                            <label class="textfield__label" for="Password">新しいパスワード</label><span class="textfield__label__describe">&nbsp;&nbsp;&nbsp;※半角英数字8桁以上</span>
                         </div>
                         @if($errors->has('password'))
                         <div class="u-err__msg">{{$errors->first('password')}}</div>

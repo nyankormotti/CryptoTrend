@@ -41,6 +41,9 @@
         font-family:$font-family_corp;
         color:$font-color_main1;
         text-align:center;
+        @include ss() {
+            font-size:$font-size_ll;
+        }
     }
 
     &__content{
@@ -51,6 +54,9 @@
         &__descript{
              margin-bottom:$space_xxl;
              line-height:150%;
+             @include ss() {
+                 font-size:$font-size_s;
+             }
         }
     }
 
@@ -71,6 +77,14 @@
 .textfield{
     &__label{
         font-size:$font-size_default;
+        @include ss(){
+            font-size:$font-size_s;
+        }
+        &__describe{
+            @include ss(){
+                font-size:$font-size_s;
+            }
+        }
     }
     &__area{
         width:80%;

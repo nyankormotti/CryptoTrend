@@ -1749,6 +1749,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
  //関連アカウント表示領域
 
  //オプション領域
@@ -1765,6 +1766,8 @@ __webpack_require__.r(__webpack_exports__);
       //仮想通貨関連アカウント情報
       users: [],
       //ユーザー情報
+      twitterUserAccounts: [],
+      //ユーザーのTwitterアカウント情報
       // ページネーション関連
       count: 0,
       //仮想通貨関連アカウント情報の総数
@@ -1830,6 +1833,18 @@ __webpack_require__.r(__webpack_exports__);
         _this2.unFollowLimit = _this2.users.unfollow_limit; // ユーザー情報の自動フォロー有無フラグ
 
         _this2.autoFollowFlg = _this2.users.autofollow_flg;
+      })["catch"](function (err) {
+        alert('問題が発生しました。しばらく経ってからお試しください。');
+      });
+    },
+    fetchTwitterUserAccount: function fetchTwitterUserAccount() {
+      var _this3 = this;
+
+      this.$axios.post('/account/twitter').then(function (res) {
+        // ユーザー情報
+        _this3.twitterUserAccounts = res.data;
+      })["catch"](function (err) {
+        alert('問題が発生しました。しばらく経ってからお試しください。');
       });
     },
     // フォロー有無フラグ(アカウント情報の表示形式)変更処理(子コンポーネントの未フォロー」または「フォロー済」ボタンをクリックした際に実行)
@@ -1840,7 +1855,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     // 自動フォローフラグ更新処理(子コンポーネントの自動フォローの「ON」または「OFF」ボタンをクリックした際に実行)
     autoFollow: function autoFollow() {
-      var _this3 = this;
+      var _this4 = this;
 
       // 自動フォロー有無の値が変更された際に実施
       // ユーザー情報の自動フォローフラグを更新する(ON or OFF)
@@ -1848,9 +1863,9 @@ __webpack_require__.r(__webpack_exports__);
         autoFollow_flg: this.autoFollowFlg
       }).then(function (res) {
         // ユーザー情報
-        _this3.users = res.data; // ユーザー情報の自動フォロー有無フラグ
+        _this4.users = res.data; // ユーザー情報の自動フォロー有無フラグ
 
-        _this3.autoFollowFlg = _this3.users.autofollow_flg;
+        _this4.autoFollowFlg = _this4.users.autofollow_flg;
       })["catch"](function (err) {
         alert('問題が発生しました。しばらく経ってからお試しください。');
       });
@@ -1894,37 +1909,37 @@ __webpack_require__.r(__webpack_exports__);
     },
     // 手動フォローメソッド(「フォロー」ボタンをクリック時に実行)
     follow: function follow(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       this.$axios.post('/account/follow', {
         // 子コンポーネントから受け取ったTwitter_idをサーバーサイドへ渡す
         twitter_id: id
       }).then(function (res) {
         // 手動フォローの結果フラグ 
-        _this4.resultFollowFlg = res.data; // フォローリクエスト時のサインの値を反転(手動フォロー後の処理をウォッチャで実施するため)
+        _this5.resultFollowFlg = res.data; // フォローリクエスト時のサインの値を反転(手動フォロー後の処理をウォッチャで実施するため)
 
-        _this4.actFollowSign = !_this4.actFollowSign;
+        _this5.actFollowSign = !_this5.actFollowSign;
       })["catch"](function (err) {
         // フォローリクエスト時のサインの値を反転(手動フォロー後の処理をウォッチャで実施するため)
-        _this4.actFollowSign = !_this4.actFollowSign;
+        _this5.actFollowSign = !_this5.actFollowSign;
         alert('問題が発生しました。しばらく経ってからお試しください。');
       });
     },
     // 手動フォロー解除メソッド(「フォロー解除」ボタンをクリック時に実行)
     unfollow: function unfollow(id) {
-      var _this5 = this;
+      var _this6 = this;
 
       this.$axios.post('/account/unfollow', {
         // 子コンポーネントから受け取ったTwitter_idをサーバーサイドへ渡す
         twitter_id: id
       }).then(function (res) {
         // 手動フォロー解除の結果フラグ 
-        _this5.resultUnfollowFlg = res.data; // フォロー解除リクエスト時のサインの値を反転(手動フォロー解除後の処理をウォッチャで実施するため)
+        _this6.resultUnfollowFlg = res.data; // フォロー解除リクエスト時のサインの値を反転(手動フォロー解除後の処理をウォッチャで実施するため)
 
-        _this5.actUnfollowSign = !_this5.actUnfollowSign;
+        _this6.actUnfollowSign = !_this6.actUnfollowSign;
       })["catch"](function (err) {
         // フォロー解除リクエスト時のサインの値を反転(手動フォロー解除後の処理をウォッチャで実施するため)
-        _this5.actFollowSign = !_this5.actFollowSign;
+        _this6.actFollowSign = !_this6.actFollowSign;
         alert('問題が発生しました。しばらく経ってからお試しください。');
       });
     }
@@ -1969,7 +1984,9 @@ __webpack_require__.r(__webpack_exports__);
 
       this.fetchAccount(); // ユーザー情報取得
 
-      this.fetchUser();
+      this.fetchUser(); // ユーザーのTwitterアカウント情報
+
+      this.fetchTwitterUserAccount();
     },
     // 手動フォロー解除リクエスト時のサイン
     // 手動フォロー解除実行後に処理を実行する。
@@ -1990,13 +2007,17 @@ __webpack_require__.r(__webpack_exports__);
 
       this.fetchAccount(); // ユーザー情報取得
 
-      this.fetchUser();
+      this.fetchUser(); // ユーザーのTwitterアカウント情報
+
+      this.fetchTwitterUserAccount();
     }
   },
   created: function created() {
     // 初期表示時に、アカウント情報、ユーザー情報を取得
     this.fetchAccount();
-    this.fetchUser();
+    this.fetchUser(); // ユーザーのTwitterアカウント情報
+
+    this.fetchTwitterUserAccount();
   },
   mounted: function mounted() {
     var that = this; // 毎分、最新のアカウント情報とユーザー情報を描画(DBからデータを取得)
@@ -2006,7 +2027,9 @@ __webpack_require__.r(__webpack_exports__);
       // 仮想通貨関連アカウント情報取得
       that.fetchAccount(); // ユーザー情報取得
 
-      that.fetchUser();
+      that.fetchUser(); // ユーザーのTwitterアカウント情報
+
+      that.fetchTwitterUserAccount();
     }, 60000);
   },
   beforeDestroy: function beforeDestroy() {
@@ -2151,8 +2174,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["followLimit", //フォロー回数
+  props: ["twitterUserAccounts", //ユーザーのTwitterアカウント情報
+  "followLimit", //フォロー回数
   "unFollowLimit", // フォロー解除回数
   "autoFollowFlg", //自動フォローフラグ (0:OFF, 1:ON)
   "followFlg"],
@@ -2757,6 +2801,7 @@ var render = function() {
         _vm._v(" "),
         _c("AccountOption", {
           attrs: {
+            twitterUserAccounts: _vm.twitterUserAccounts,
             followLimit: _vm.followLimit,
             unFollowLimit: _vm.unFollowLimit,
             followFlg: _vm.followFlg,
@@ -2848,12 +2893,12 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "p-user__status__fcount" }, [
-            _vm._v(
-              _vm._s(account.follow) +
-                " フォロー | " +
-                _vm._s(account.follower) +
-                " フォロワー"
-            )
+            _vm._v(_vm._s(account.follow) + " フォロー "),
+            _c("span", { staticClass: "p-user__status__fcount--span" }, [
+              _vm._v("|")
+            ]),
+            _c("br", { staticClass: "p-user__status__fcount--br" }),
+            _vm._v(" " + _vm._s(account.follower) + " フォロワー")
           ])
         ]),
         _vm._v(" "),
@@ -2917,6 +2962,63 @@ var render = function() {
     "div",
     { staticClass: "p-sidebar__area p-sidebar__area--account" },
     [
+      _c("div", { staticClass: "p-sidebar__twitter" }, [
+        _c("div", { staticClass: "p-sidebar__twitter__img" }, [
+          _c("img", {
+            staticClass: "p-sidebar__twitter__img__area",
+            attrs: { src: _vm.twitterUserAccounts.profile_image_url, alt: "" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "p-sidebar__twitter__describe" }, [
+          _c("p", { staticClass: "p-sidebar__twitter__name" }, [
+            _vm._v(_vm._s(_vm.twitterUserAccounts.name))
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "p-sidebar__twitter__screen" }, [
+            _vm._v(_vm._s(_vm.twitterUserAccounts.screen_name))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-sidebar__twitter__status" }, [
+            _c("div", { staticClass: "p-sidebar__twitter__status__folow" }, [
+              _c(
+                "p",
+                { staticClass: "p-sidebar__twitter__status__folow__describe" },
+                [_vm._v("フォロー")]
+              ),
+              _vm._v(" "),
+              _c(
+                "p",
+                {
+                  staticClass:
+                    "p-sidebar__twitter__status__folow__describe--value"
+                },
+                [_vm._v(_vm._s(_vm.twitterUserAccounts.friends_count))]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-sidebar__twitter__status__folower" }, [
+              _c(
+                "p",
+                {
+                  staticClass: "p-sidebar__twitter__status__folower__describe"
+                },
+                [_vm._v("フォロワー")]
+              ),
+              _vm._v(" "),
+              _c(
+                "p",
+                {
+                  staticClass:
+                    "p-sidebar__twitter__status__folower__describe--value"
+                },
+                [_vm._v(_vm._s(_vm.twitterUserAccounts.followers_count))]
+              )
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "p-sidebar__limit" }, [
         _c("h3", { staticClass: "p-sidebar__limit__title" }, [
           _vm._v("上限回数")
@@ -2984,9 +3086,14 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "p-sidebar__follow" }, [
-        _c("h3", { staticClass: "p-sidebar__follow__title" }, [
-          _vm._v("表示形式")
-        ]),
+        _c(
+          "h3",
+          {
+            staticClass:
+              "p-sidebar__follow__title p-sidebar__follow__title--display"
+          },
+          [_vm._v("表示形式")]
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "p-sidebar__follow__area" }, [
           !_vm.followFlg

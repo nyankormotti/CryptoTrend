@@ -23,6 +23,10 @@
                 font-size:$font-size_ll;
                 font-weight:bold;
                 color:$font_color_main1;
+                @include sss() {
+                    font-size: $font-size_m;
+                    width:20%;
+                }
             }
             &__page{
                 width:30%;
@@ -87,6 +91,10 @@
         display:flex;
         justify-content: space-between;
         align-items: center;
+        @include sm() {
+            padding:10px 0 5px 0;
+            margin: 0 auto;
+        }
         @include sss() {
             width:95%;
             padding:10px 0 5px 0;
@@ -121,6 +129,7 @@
             }
             @include ss() {
                 font-size:$font-size_s;
+                width:25%;
             }
             &:hover{
                 color:$font-color_orange;
@@ -142,6 +151,9 @@
                 @include sm() {
                     width:30%;
                 }
+                @include ss() {
+                    width:33%;
+                }
                 &:hover{
                     color:$background_color_softRed;
                     background:$background_color_white;
@@ -156,6 +168,10 @@
         justify-content: space-between;
         align-items: center;
         font-size:$font-size_m;
+        @include sm() {
+            padding:10px 0;
+            margin: 0 auto;
+        }
         @include sss() {
             width:95%;
             padding:10px 0;
@@ -172,9 +188,21 @@
         &__fcount {
             @include sl(){
                 font-size:$font-size_s;
+                line-height: $font-size_s;  
             }
             @include sm() {
                 font-size:10px;
+            }
+            &--span{
+                @include sl() {
+                    display:none;
+                }
+            }
+            &--br{
+                display:none;
+                @include sl() {
+                    display:block;
+                }
             }
         }
     }
@@ -182,6 +210,10 @@
         width:90%;
         padding:5px 20px;
         font-size:$font-size_s;
+        @include sm() {
+            padding:5px 0;
+            margin: 0 auto;
+        }
         @include sss() {
             width:85%;
         }

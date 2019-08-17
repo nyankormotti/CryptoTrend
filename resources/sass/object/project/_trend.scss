@@ -24,6 +24,10 @@
                 @include sm() {
                     width:40%;
                 }
+                @include sss() {
+                    font-size:$font-size_m;
+                    width:20%;
+                }
             }
             &__page{
                 width:50%;
@@ -36,7 +40,7 @@
                 @include sm() {
                     width:60%;
                 }
-                @include sss() {
+                @include ss() {
                     width:70%;
                 }
             }
@@ -68,7 +72,7 @@
         @include sm() {
             font-size:$font-size_s;
         }
-        @include sss() {
+        @include ss() {
             font-size:$font-size_ss;
         }
        &__tr{

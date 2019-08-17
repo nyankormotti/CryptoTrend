@@ -34,6 +34,7 @@
                 <span class="p-sidebar__top__border"></span>
             </div>
             <AccountOption
+            :twitterUserAccounts="twitterUserAccounts"
             :followLimit="followLimit"
             :unFollowLimit="unFollowLimit"
             :followFlg="followFlg"
@@ -61,6 +62,7 @@ export default {
         return {
             accounts: [], //仮想通貨関連アカウント情報
             users:[], //ユーザー情報
+            twitterUserAccounts:[], //ユーザーのTwitterアカウント情報
 
             // ページネーション関連
             count: 0, //仮想通貨関連アカウント情報の総数
@@ -113,7 +115,17 @@ export default {
                 this.unFollowLimit = this.users.unfollow_limit
                 // ユーザー情報の自動フォロー有無フラグ
                 this.autoFollowFlg = this.users.autofollow_flg
-            })
+            }).catch(err => {
+                alert('問題が発生しました。しばらく経ってからお試しください。')
+            });
+        },
+        fetchTwitterUserAccount: function() {
+            this.$axios.post('/account/twitter').then((res)=>{
+                // ユーザー情報
+                this.twitterUserAccounts = res.data
+            }).catch(err => {
+                alert('問題が発生しました。しばらく経ってからお試しください。')
+            });
         },
         // フォロー有無フラグ(アカウント情報の表示形式)変更処理(子コンポーネントの未フォロー」または「フォロー済」ボタンをクリックした際に実行)
         searchAccount: function() {
@@ -244,6 +256,8 @@ export default {
             this.fetchAccount()
             // ユーザー情報取得
             this.fetchUser()
+            // ユーザーのTwitterアカウント情報
+            this.fetchTwitterUserAccount()
         },
         // 手動フォロー解除リクエスト時のサイン
         // 手動フォロー解除実行後に処理を実行する。
@@ -264,12 +278,16 @@ export default {
             this.fetchAccount()
             // ユーザー情報取得
             this.fetchUser()
+            // ユーザーのTwitterアカウント情報
+            this.fetchTwitterUserAccount()
         }
     },
     created() {
         // 初期表示時に、アカウント情報、ユーザー情報を取得
         this.fetchAccount()
         this.fetchUser()
+        // ユーザーのTwitterアカウント情報
+        this.fetchTwitterUserAccount()
     },
     mounted () {
         let that = this
@@ -280,6 +298,8 @@ export default {
             that.fetchAccount()
             // ユーザー情報取得
             that.fetchUser()
+            // ユーザーのTwitterアカウント情報
+            that.fetchTwitterUserAccount()
         },60000);
     },
     beforeDestroy() {

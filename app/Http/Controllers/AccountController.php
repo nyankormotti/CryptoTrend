@@ -23,7 +23,8 @@ class AccountController extends Controller
      * 仮想通貨アカウント一覧画面表示
      * @return void
      */
-    public function index() {
+    public function index() 
+    {
         return view('account');
     }
     /**
@@ -31,7 +32,8 @@ class AccountController extends Controller
      * @param Request $request (follow_flg, last_updated)
      * @return array (アカウント情報)
      */
-    public function getAccount(Request $request) {
+    public function getAccount(Request $request) 
+    {
 
         $account_list = Account::where('user_id',Auth::id())
                         ->where('follow_flg', $request->follow_flg)
@@ -52,12 +54,48 @@ class AccountController extends Controller
     }
 
     /**
+     * ユーザーのTwitterアカウント情報取得
+     * @return array (ユーザーのTwitterアカウント情報)
+     */
+    public function getUserTwitterAccount()
+    {
+        // セッションのユーザーIDよりUser情報を取得
+        $user = User::find(Auth::id());
+        // User情報からアクセストークンを取得
+        $oauth_token = $user->oauth_token;
+        $oauth_token_secret = $user->oauth_token_secret;
+
+        //インスタンス生成
+        $twitter = new TwitterOAuth(
+            //API Key
+            env('TWITTER_CLIENT_KEY'),
+            //API Secret
+            env('TWITTER_CLIENT_SECRET'),
+            //アクセストークン
+            $oauth_token,
+            $oauth_token_secret
+        );
+
+        //ユーザ情報を取得
+        //'account/verify_credentials'はユーザ情報を取得するためのAPIのリソース
+        // get_object_vars()でオブジェクトの中身をjsonで返す
+        $userInfo = get_object_vars($twitter->get('account/verify_credentials'));
+        $userTwitterAccount = json_decode(json_encode($userInfo), true);
+
+        // var_dump($userInfo);exit;
+
+        return $userTwitterAccount;
+
+    }
+
+    /**
      * 自動フォローフラグの登録処理
      * (usersテーブルのautofollow_flgがtrueの場合、バッチ処理にて自動フォローが実施される)
      * @param Request $request (autoFollow_flg)
      * @return array (ユーザー情報)
      */
-    public function autoFollow(Request $request) {
+    public function autoFollow(Request $request)
+    {
 
         $user = User::find(Auth::id());
         $user->autofollow_flg = !$request->autoFollow_flg;
@@ -71,7 +109,8 @@ class AccountController extends Controller
      * @param Request $request (twitter_id)
      * @return boolean $action_flg (API連携成功の有無フラグ)
      */
-    public function follow(Request $request) {
+    public function follow(Request $request) 
+    {
         \Log::info('===============');
         \Log::info('手動フォロー開始');
 

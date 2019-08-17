@@ -52,8 +52,9 @@
     }
     @include ss() {
         font-size:$font-size_s;
+        padding:10px 15px;
     }
-     @include sss() {
+    @include sss() {
         padding:10px;
     }
     &--trend{
@@ -89,9 +90,6 @@
             padding:10px;
         }
         @include ss() {
-            font-size:$font-size_s;
-        }
-        @include sss() {
             font-size:$font-size_ss;
         }
         &--optionBlue{

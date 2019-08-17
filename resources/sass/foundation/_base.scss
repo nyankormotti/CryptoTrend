@@ -20,8 +20,11 @@ body{
     flex-wrap: wrap;
     justify-content:space-around;
     width:80%;
-    @include ss() {
-        width:90%;
+    @include tl() {
+      width:95%;
+    }
+    @include sl() {
+        width:80%;
     }
     
 

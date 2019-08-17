@@ -8,7 +8,7 @@
             </div>
             <div class="p-user__status">
                 <p class="p-user__status__screen">@{{account.screen_name}}</p>
-                <p class="p-user__status__fcount">{{account.follow}} フォロー | {{account.follower}} フォロワー</p>
+                <p class="p-user__status__fcount">{{account.follow}} フォロー <span class="p-user__status__fcount--span">|</span><br class="p-user__status__fcount--br"> {{account.follower}} フォロワー</p>
             </div>
             <div class="p-user__text">
                 <div class="p-user__text__profile">

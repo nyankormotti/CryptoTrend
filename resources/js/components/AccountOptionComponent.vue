@@ -1,5 +1,25 @@
 <template>
     <div class="p-sidebar__area p-sidebar__area--account">
+        <div class="p-sidebar__twitter">
+            <div class="p-sidebar__twitter__img">
+                <img :src="twitterUserAccounts.profile_image_url" alt="" class="p-sidebar__twitter__img__area">
+            </div>
+            <div class="p-sidebar__twitter__describe">
+                <p class="p-sidebar__twitter__name">{{twitterUserAccounts.name}}</p>
+                <p class="p-sidebar__twitter__screen">{{twitterUserAccounts.screen_name}}</p>
+                <div class="p-sidebar__twitter__status">
+                    <div class="p-sidebar__twitter__status__folow">
+                        <p class="p-sidebar__twitter__status__folow__describe">フォロー</p>
+                        <p class="p-sidebar__twitter__status__folow__describe--value">{{twitterUserAccounts.friends_count}}</p>
+                    </div>
+                    <div class="p-sidebar__twitter__status__folower">
+                        <p class="p-sidebar__twitter__status__folower__describe">フォロワー</p>
+                        <p class="p-sidebar__twitter__status__folower__describe--value">{{twitterUserAccounts.followers_count}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
         <div class="p-sidebar__limit">
             <h3 class="p-sidebar__limit__title">上限回数</h3>
             <div class="p-sidebar__limit__area">
@@ -22,7 +42,7 @@
             </div>
         </div>
         <div class="p-sidebar__follow">
-            <h3 class="p-sidebar__follow__title">表示形式</h3>
+            <h3 class="p-sidebar__follow__title p-sidebar__follow__title--display">表示形式</h3>
             <div class="p-sidebar__follow__area">
                 <div v-if="!followFlg" class="c-action-btn c-action-btn--follow c-action-btn--follow--optionBlue">
                     未フォロー
@@ -50,6 +70,7 @@
 <script>
 export default {
     props: [
+        "twitterUserAccounts",//ユーザーのTwitterアカウント情報
         "followLimit", //フォロー回数
         "unFollowLimit", // フォロー解除回数
         "autoFollowFlg", //自動フォローフラグ (0:OFF, 1:ON)

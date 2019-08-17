@@ -20324,7 +20324,10 @@ var render = function() {
       _vm._v(" "),
       _c(
         "section",
-        { staticClass: "p-sidebar", attrs: { id: "trend_main_template" } },
+        {
+          staticClass: "p-sidebar p-sidebar--search",
+          attrs: { id: "trend_main_template" }
+        },
         [
           _vm._m(0),
           _vm._v(" "),

@@ -17,7 +17,7 @@
         </section>
 
         <!-- 検索フォーム -->
-        <section id="trend_main_template" class="p-sidebar">
+        <section id="trend_main_template" class="p-sidebar p-sidebar--search">
             <div class="p-sidebar__top">
                 <h2 class="p-sidebar__top__title">Search</h2>
                 <span class="p-sidebar__top__border"></span>

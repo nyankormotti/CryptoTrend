@@ -65,6 +65,7 @@ Route::post('/trend/getUpdated', 'TrendController@getUpdated');
 // 仮想通貨関連アカウント一覧画面 axios連携ルーティング
 Route::post('/account/get', 'AccountController@getAccount');
 Route::post('/account/user', 'AccountController@getUser');
+Route::post('/account/twitter', 'AccountController@getUserTwitterAccount');
 Route::post('/account/auto', 'AccountController@autoFollow');
 Route::post('/account/follow', 'AccountController@follow');
 Route::post('/account/unfollow', 'AccountController@unFollow');
@@ -98,4 +99,5 @@ Route::get('/main', 'OAuthController@main');
 
 // 例外発生画面
 Route::get('/exception', 'ExceptionController@index');
+
 

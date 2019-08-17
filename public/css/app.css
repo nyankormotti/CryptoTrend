@@ -194,9 +194,15 @@ body {
   width: 80%;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 1024px) {
   .main__base {
-    width: 90%;
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .main__base {
+    width: 80%;
   }
 }
 
@@ -674,6 +680,7 @@ body {
 @media screen and (max-width: 375px) {
   .c-action-btn {
     font-size: 12px;
+    padding: 10px 15px;
   }
 }
 
@@ -732,12 +739,6 @@ body {
 }
 
 @media screen and (max-width: 375px) {
-  .c-action-btn--follow {
-    font-size: 12px;
-  }
-}
-
-@media screen and (max-width: 320px) {
   .c-action-btn--follow {
     font-size: 10px;
   }
@@ -1169,6 +1170,13 @@ body {
   }
 }
 
+@media screen and (max-width: 320px) {
+  .p-trend__top__area__title {
+    font-size: 14px;
+    width: 20%;
+  }
+}
+
 .p-trend__top__area__page {
   width: 50%;
   text-align: right;
@@ -1188,7 +1196,7 @@ body {
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .p-trend__top__area__page {
     width: 70%;
   }
@@ -1232,7 +1240,7 @@ body {
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .p-table__thead {
     font-size: 10px;
   }
@@ -1363,6 +1371,13 @@ body {
   color: #05215c;
 }
 
+@media screen and (max-width: 320px) {
+  .p-account__top__area__title {
+    font-size: 14px;
+    width: 20%;
+  }
+}
+
 .p-account__top__area__page {
   width: 30%;
   text-align: right;
@@ -1448,6 +1463,13 @@ body {
   align-items: center;
 }
 
+@media screen and (max-width: 414px) {
+  .p-user__top {
+    padding: 10px 0 5px 0;
+    margin: 0 auto;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .p-user__top {
     width: 95%;
@@ -1498,6 +1520,7 @@ body {
 @media screen and (max-width: 375px) {
   .p-user__top__btn {
     font-size: 12px;
+    width: 25%;
   }
 }
 
@@ -1530,6 +1553,12 @@ body {
   }
 }
 
+@media screen and (max-width: 375px) {
+  .p-user__top__btn--actUnFollow {
+    width: 33%;
+  }
+}
+
 .p-user__top__btn--actUnFollow:hover {
   color: #cc3d3d;
   background: white;
@@ -1542,6 +1571,13 @@ body {
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
+}
+
+@media screen and (max-width: 414px) {
+  .p-user__status {
+    padding: 10px 0;
+    margin: 0 auto;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -1567,6 +1603,7 @@ body {
 @media screen and (max-width: 480px) {
   .p-user__status__fcount {
     font-size: 12px;
+    line-height: 12px;
   }
 }
 
@@ -1576,10 +1613,33 @@ body {
   }
 }
 
+@media screen and (max-width: 480px) {
+  .p-user__status__fcount--span {
+    display: none;
+  }
+}
+
+.p-user__status__fcount--br {
+  display: none;
+}
+
+@media screen and (max-width: 480px) {
+  .p-user__status__fcount--br {
+    display: block;
+  }
+}
+
 .p-user__text {
   width: 90%;
   padding: 5px 20px;
   font-size: 12px;
+}
+
+@media screen and (max-width: 414px) {
+  .p-user__text {
+    padding: 5px 0;
+    margin: 0 auto;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -1626,7 +1686,6 @@ body {
 .p-sidebar {
   display: block;
   width: 30%;
-  max-height: 400px;
   background: white;
   border-radius: 5px;
 }
@@ -1657,13 +1716,13 @@ body {
   }
 }
 
-.p-sidebar--option {
-  max-height: 380px;
+.p-sidebar--search {
+  max-height: 400px;
 }
 
 @media screen and (max-width: 480px) {
   .p-sidebar--option {
-    max-height: 450px;
+    max-height: 560px;
   }
 }
 
@@ -1675,6 +1734,12 @@ body {
   font-size: 20px;
   font-weight: bold;
   color: #05215c;
+}
+
+@media screen and (max-width: 320px) {
+  .p-sidebar__top__title {
+    font-size: 14px;
+  }
 }
 
 .p-sidebar__top__border {
@@ -1732,20 +1797,130 @@ body {
   }
 }
 
+.p-sidebar__twitter {
+  color: #5c5c5c;
+  padding: 10px 20px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-around;
+}
+
+@media screen and (max-width: 1024px) {
+  .p-sidebar__twitter {
+    margin-top: 10px;
+    padding: 10px 0 10px 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .p-sidebar__twitter {
+    margin-top: 0;
+    padding: 10px 0;
+  }
+}
+
+.p-sidebar__twitter__img {
+  width: 90%;
+}
+
+@media screen and (max-width: 480px) {
+  .p-sidebar__twitter__img {
+    width: 30%;
+  }
+}
+
+.p-sidebar__twitter__img__area {
+  height: 100px;
+  display: block;
+}
+
+@media screen and (max-width: 1024px) {
+  .p-sidebar__twitter__img__area {
+    height: 125px;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .p-sidebar__twitter__img__area {
+    height: 115px;
+  }
+}
+
+.p-sidebar__twitter__describe {
+  padding: 0 10px;
+  width: 40%;
+}
+
+@media screen and (max-width: 1024px) {
+  .p-sidebar__twitter__describe {
+    padding: 0 0 0 10px;
+    width: 100px;
+  }
+}
+
+.p-sidebar__twitter__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-bottom: 3px;
+}
+
+@media screen and (max-width: 1024px) {
+  .p-sidebar__twitter__name {
+    font-size: 18px;
+  }
+}
+
+.p-sidebar__twitter__screen {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-bottom: 3px;
+}
+
+.p-sidebar__twitter__status {
+  margin-top: 3px;
+}
+
+@media screen and (max-width: 1024px) {
+  .p-sidebar__twitter__status {
+    margin-top: 10px;
+  }
+}
+
+.p-sidebar__twitter__status__folow {
+  padding: 2px 0;
+}
+
+.p-sidebar__twitter__status__folow__describe {
+  padding-bottom: 2px;
+}
+
+.p-sidebar__twitter__status__folower {
+  padding: 2px 0;
+}
+
+.p-sidebar__twitter__status__folower__describe {
+  padding-bottom: 2px;
+}
+
 .p-sidebar__limit {
   color: #5c5c5c;
   padding: 10px 20px;
+  margin-top: 10px;
 }
 
 @media screen and (max-width: 1024px) {
   .p-sidebar__limit {
-    width: 25%;
+    margin-top: 0;
+    width: 11%;
   }
 }
 
 @media screen and (max-width: 768px) {
   .p-sidebar__limit {
-    width: 30%;
+    width: 20%;
+    padding: 10px 0;
   }
 }
 
@@ -1761,7 +1936,7 @@ body {
   padding: 10px 0;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .p-sidebar__limit__title {
     text-align: center;
   }
@@ -1770,6 +1945,7 @@ body {
 @media screen and (max-width: 480px) {
   .p-sidebar__limit__title {
     text-align: left;
+    margin-left: 30px;
   }
 }
 
@@ -1784,7 +1960,7 @@ body {
   justify-content: space-around;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .p-sidebar__limit__area {
     display: block;
   }
@@ -1802,10 +1978,15 @@ body {
   width: 45%;
 }
 
+@media screen and (max-width: 1024px) {
+  .p-sidebar__limit__area--f_action {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .p-sidebar__limit__area--f_action {
     margin-bottom: 10px;
-    width: 100%;
   }
 }
 
@@ -1820,6 +2001,12 @@ body {
 @media screen and (max-width: 414px) {
   .p-sidebar__limit__area--f_action {
     font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .p-sidebar__limit__area--f_action:first-child {
+    margin-bottom: 10px;
   }
 }
 
@@ -1910,13 +2097,29 @@ body {
 }
 
 .p-sidebar__follow {
+  margin-top: 10px;
   color: #5c5c5c;
   padding: 10px 20px;
+}
+
+@media screen and (max-width: 1024px) {
+  .p-sidebar__follow {
+    margin-top: 0;
+    width: 15%;
+  }
 }
 
 @media screen and (max-width: 480px) {
   .p-sidebar__follow {
     padding-top: 0;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .p-sidebar__follow {
+    padding-right: 0;
+    width: 90%;
   }
 }
 
@@ -1934,6 +2137,7 @@ body {
 @media screen and (max-width: 480px) {
   .p-sidebar__follow__title {
     text-align: left;
+    padding-left: 10px;
   }
 }
 
@@ -1943,12 +2147,29 @@ body {
   }
 }
 
+.p-sidebar__follow__title--display {
+  text-align: left;
+  padding-left: 10px;
+}
+
 .p-sidebar__follow__area {
   padding: 5px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: flex-start;
+}
+
+@media screen and (max-width: 480px) {
+  .p-sidebar__follow__area {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .p-sidebar__follow__area {
+    width: 90%;
+  }
 }
 
 .p-withdrawDone {

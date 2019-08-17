@@ -63,10 +63,6 @@ class GetCryptoAccountBatch extends Command
             // ユーザーごとにアカウント情報を更新する
             for ($i = 0; $i < count($user); $i++) {
 
-                // ユーザー情報をアカウント情報更新中に更新
-                $user[$i]->update_flg = 1;
-                $user[$i]->save();
-
                 // 更新するユーザーのuser_idに紐付くaccountsテーブルのレコードを削除
                 DB::table('accounts')
                     ->where('user_id', $user[$i]->id
@@ -180,10 +176,8 @@ class GetCryptoAccountBatch extends Command
                     }
                 }
                 // ユーザー情報をアカウント情報更新完了に更新
-                // update_flg(アカウント更新フラグ)をfalse
                 // follow_limit(フォロー回数)を初期化
                 // unfollow_limit(フォロー解除回数)を初期化
-                $user[$i]->update_flg = 0;
                 $user[$i]->follow_limit = 0;
                 $user[$i]->unfollow_limit = 0;
                 $user[$i]->save();

@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Auth;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use App\Http\Requests\ChangeTwitterAccount;
 
+/**
+ * 仮想通貨関連アカウントコントローラ
+ * 
+ */
 class ChangeTwitterAccountController extends Controller
 {
     /**
@@ -71,7 +75,7 @@ class ChangeTwitterAccountController extends Controller
         if($screen_name !== $userInfo['screen_name']) {
             // screen_nameがTwitterのユーザー情報と異なる場合
             // Twitterアカウント変更画面にリダイレクト
-            $msg = 'このTwitterアカウントは存在しません。';
+            $msg = '認証するTwitterアカウントが異なります。';
             session()->put('message', $msg);
             return redirect()->action('ChangeTwitterAccountController@index');
         }
@@ -91,8 +95,6 @@ class ChangeTwitterAccountController extends Controller
         }
         // Usersテーブル更新処理
         $user->save();
-        // Twitterアカウントのセッション情報を削除
-        session()->forget('screen_name');
 
         return redirect()->action('TrendController@index');
     }

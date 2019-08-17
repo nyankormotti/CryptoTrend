@@ -75,7 +75,7 @@ export default {
             }).then((res)=>{
                 this.trends = res.data
             }).catch(err => {
-                alert('例外が発生しました。しばらく経ってからお試しください。')
+                alert('問題が発生しました。しばらく経ってからお試しください。')
             });
         },
         // トレンド情報の最終更新日時を取得
@@ -85,7 +85,7 @@ export default {
             }).then((res)=>{
                 this.updated = res.data
             }).catch(err => {
-                alert('例外が発生しました。しばらく経ってからお試しください。')
+                alert('問題が発生しました。しばらく経ってからお試しください。')
             });
         },
         // 銘柄検索結果を表示する配列に格納

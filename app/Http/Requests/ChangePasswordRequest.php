@@ -28,7 +28,7 @@ class ChangePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'old_pass' => 'required|alpha_num_check|pass_verifi|min:8|different:password',
+            'old_pass' => 'required|alpha_num_check|min:8|pass_verifi|different:password',
             'password' => 'required|alpha_num_check|min:8|confirmed'
         ];
     }

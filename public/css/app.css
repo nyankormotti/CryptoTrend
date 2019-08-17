@@ -2230,6 +2230,12 @@ body {
   line-height: 30px;
 }
 
+@media screen and (max-width: 320px) {
+  .u-fadein {
+    font-size: 18px;
+  }
+}
+
 .u-fadein--index {
   background: #ffd537;
   color: #05215c;

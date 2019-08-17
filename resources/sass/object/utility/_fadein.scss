@@ -7,11 +7,14 @@
     width:100%;
     height:30px;
     background: linear-gradient($background_color_optionBlue, $background_color_main1);
-    font-size:20px;
+    font-size:$font-size_ll;
     color:$font-color_white;
     font-family:$font-family_corp;
     text-align:center;
     line-height: 30px;
+    @include sss() {
+        font-size:$font-size_l;
+    }
     &--index {
         background: $background_color_yellow;
         color:$font_color_main1;

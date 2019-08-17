@@ -28,7 +28,11 @@
                 <div class="u-err__msg">{{$message}}</div>
                 @endif
                 <div class="textfield__area">
+                    @if(!empty($message))
+                    <input type="text" class="textfield__input" name="screen_name" placeholder="@の後ろの文字を入力してください。" autocomplete="off" value="{{$err_screen_name}}">
+                    @else
                     <input type="text" class="textfield__input" name="screen_name" placeholder="@の後ろの文字を入力してください。" autocomplete="off" value="{{old('screen_name')}}">
+                    @endif
                 </div>
                 <div class="btn__content btn__form">
                     <input class="btn" type="submit" name="submit" value="変更">

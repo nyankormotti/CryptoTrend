@@ -31,7 +31,7 @@ class LoginController extends Controller
         $rem = $request->pass_save;
 
         // 認証
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $rem)) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'delete_flg' => false], $rem)) {
             $user = User::where('id', Auth::id())->first();
 
             $oauth_token = $user->oauth_token;

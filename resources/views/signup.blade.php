@@ -14,8 +14,8 @@
             <p class="u-err__msg__main">入力値に問題があります。再入力してください。</p>
             @endif
             <p class="form__content__descript">会員登録されるユーザー様お一人につき、
-                <br>twitterアカウントを1つ登録いたします。
-                <br>ご登録されるtwitterアカウントにてTwitterにログインし、
+                <br>Twitterアカウントを1つ登録いたします。
+                <br>ご登録されるTwitterアカウントにてTwitterにログインし、
                 <br>会員登録を行ってください。</p>
             <form action="/signup" method="post" class="form__block">
                 {{ csrf_field() }}

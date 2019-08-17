@@ -9,6 +9,9 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
+/**
+ * 各銘柄のツイート数集計バッチ
+ */
 class GetCryptoTweetCountBatch extends Command
 {
     /**

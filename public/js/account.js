@@ -1814,7 +1814,7 @@ __webpack_require__.r(__webpack_exports__);
         //仮想通貨関連アカウント情報
         _this.accounts = res.data;
       })["catch"](function (err) {
-        alert('例外が発生しました。しばらく経ってからお試しください。');
+        alert('問題が発生しました。しばらく経ってからお試しください。');
       });
     },
     // ユーザー情報取得処理
@@ -1852,7 +1852,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this3.autoFollowFlg = _this3.users.autofollow_flg;
       })["catch"](function (err) {
-        alert('例外が発生しました。しばらく経ってからお試しください。');
+        alert('問題が発生しました。しばらく経ってからお試しください。');
       });
     },
     // ページングの編集処理
@@ -1863,6 +1863,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.totalPage != 0 && this.page > this.totalPage) {
         // 現在ページを総ページと同じ値にする
         this.page = this.totalPage;
+      }
+
+      if (this.page == 0 && this.totalPage != 0) {
+        this.page = 1;
       } // アカウント情報の総数
 
 
@@ -1903,7 +1907,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         // フォローリクエスト時のサインの値を反転(手動フォロー後の処理をウォッチャで実施するため)
         _this4.actFollowSign = !_this4.actFollowSign;
-        alert('例外が発生しました。しばらく経ってからお試しください。');
+        alert('問題が発生しました。しばらく経ってからお試しください。');
       });
     },
     // 手動フォロー解除メソッド(「フォロー解除」ボタンをクリック時に実行)
@@ -1921,7 +1925,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         // フォロー解除リクエスト時のサインの値を反転(手動フォロー解除後の処理をウォッチャで実施するため)
         _this5.actFollowSign = !_this5.actFollowSign;
-        alert('例外が発生しました。しばらく経ってからお試しください。');
+        alert('問題が発生しました。しばらく経ってからお試しください。');
       });
     }
   },
@@ -1951,7 +1955,7 @@ __webpack_require__.r(__webpack_exports__);
         alert('そのアカウントはフォローできません。');
       } else if (this.resultFollowFlg == 2) {
         // リクエスト制限が超えている場合、アラートを発行
-        alert('15分間のリクエスト回数を超えているため、フォローできません。');
+        alert('15分間のフォローリクエスト回数を超えているため、フォローできません。');
       } else if (this.resultFollowFlg == 3) {
         // 1日のフォロー制限を超えている場合、アラートを発行
         alert('1日のフォロー上限回数を超えているため、処理できません。');
@@ -1974,7 +1978,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.resultUnfollowFlg == 0) {
         alert('そのアカウントはフォロー解除できません。');
       } else if (this.resultUnfollowFlg == 2) {
-        alert('15分間のリクエスト回数を超えているため、フォロー解除できません。');
+        alert('15分間のフォロー解除リクエスト回数を超えているため、フォロー解除できません。');
       } else if (this.resultUnfollowFlg == 3) {
         alert('1日のフォロー解除上限回数を超えているため、処理できません。');
       } else if (this.resultUnfollowFlg == 4) {

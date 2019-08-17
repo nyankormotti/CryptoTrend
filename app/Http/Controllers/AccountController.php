@@ -127,23 +127,23 @@ class AccountController extends Controller
         }
 
         // usersテーブルより初回リクエスト時間を取得
-        $first_request_time = new Carbon($user->first_request_time);
+        $follow_request_time = new Carbon($user->follow_request_time);
         // usersテーブルより、リクエスト回数を取得
-        $request_count = $user->request_count;
+        $follow_request_count = $user->follow_request_count;
         // usersテーブルより、フォロー回数を取得
         $follow_count = $user->follow_limit;
         // 現在時刻を取得
         $now_time = new Carbon();
 
         // リクエスト制限判定その１
-        if(900 > $first_request_time->diffInSeconds($now_time)) {
+        if(900 > $follow_request_time->diffInSeconds($now_time)) {
             \Log::info('初回リクエストから15分未満');
             // 初回リクエストした時間から15分経過していない場合
-            if(15 > $request_count){
+            if(15 > $follow_request_count){
                 \Log::info('リクエスト回数が15回未満');
                 // リクエスト回数が15回未満の場合
                 // リクエスト回数+1回
-                $request_count = $request_count + 1;
+                $follow_request_count = $follow_request_count + 1;
             } else {
                 \Log::info('リクエスト回数が15回以上');
                 \Log::info('エラー：15分間のリクエスト回数を超えています');
@@ -153,16 +153,16 @@ class AccountController extends Controller
                 $action_flg = 2;
                 return $action_flg;
             }
-        } elseif(900 <= $first_request_time->diffInSeconds($now_time) && $request_count != 0) {
+        } else {
             \Log::info('初回リクエストから15分以上');
             \Log::info('リクエスト回数を初期化');
             \Log::info('リクエスト時間を初期化');
             // 初回リクエストした時間から15分以上経過した場合
             // 現在時刻を初回リクエスト時間に登録
             // リクエスト回数を初期化
-            $request_count = 1;
+            $follow_request_count = 1;
             // リクエスト時間を現在時刻に更新
-            $first_request_time = new Carbon();
+            $follow_request_time = new Carbon();
         }
 
         // リクエスト制限判定その2
@@ -181,9 +181,9 @@ class AccountController extends Controller
             return $action_flg;
         }
         //  usersテーブルを更新
-        $user->request_count = $request_count; // リクエスト回数の更新
+        $user->follow_request_count = $follow_request_count; // リクエスト回数の更新
         $user->follow_limit = $follow_count; //フォロー回数の更新
-        $user->first_request_time = $first_request_time; // リクエスト時間の更新
+        $user->follow_request_time = $follow_request_time; // リクエスト時間の更新
         $user->save();
 
         // 手動フォロー処理開始
@@ -276,23 +276,23 @@ class AccountController extends Controller
         }
 
         // usersテーブルより初回リクエスト時間を取得
-        $first_request_time = new Carbon($user->first_request_time);
+        $unfollow_request_time = new Carbon($user->unfollow_request_time);
         // usersテーブルより、リクエスト回数を取得
-        $request_count = $user->request_count;
+        $unfollow_request_count = $user->unfollow_request_count;
         // usersテーブルより、フォロー解除回数を取得
         $unfollow_count = $user->unfollow_limit;
         // 現在時刻を取得
         $now_time = new Carbon();
 
         // リクエスト制限判定その１
-        if (900 > $first_request_time->diffInSeconds($now_time)) {
+        if (900 > $unfollow_request_time->diffInSeconds($now_time)) {
             \Log::info('初回リクエストから15分未満');
             // 初回リクエストした時間から15分経過していない場合
-            if (15 > $request_count) {
+            if (15 > $unfollow_request_count) {
                 \Log::info('リクエスト回数が15回未満');
                 // リクエスト回数が15回未満の場合
                 // リクエスト回数+1回
-                $request_count = $request_count + 1;
+                $unfollow_request_count = $unfollow_request_count + 1;
             } else {
                 \Log::info('リクエスト回数が15回以上');
                 \Log::info('エラー：15分間のリクエスト回数を超えています');
@@ -302,16 +302,16 @@ class AccountController extends Controller
                 $action_flg = 2;
                 return $action_flg;
             }
-        } else if(900 <= $first_request_time->diffInSeconds($now_time) && $request_count != 0) {
+        } else {
             \Log::info('初回リクエストから15分以上');
             \Log::info('リクエスト回数を初期化');
             \Log::info('リクエスト時間を初期化');
             // リクエスト回数が1回以上であり、初回リクエストした時間から15分以上経過した場合
             // 現在時刻を初回リクエスト時間に登録
             // リクエスト回数を初期化
-            $request_count = 1;
+            $unfollow_request_count = 1;
             // リクエスト時間を現在時刻に更新
-            $first_request_time = new Carbon();
+            $unfollow_request_time = new Carbon();
         }
 
         // リクエスト制限判定その2
@@ -330,9 +330,9 @@ class AccountController extends Controller
             return $action_flg;
         }
         //  usersテーブルを更新
-        $user->request_count = $request_count; //リクエスト回数を更新
+        $user->unfollow_request_count = $unfollow_request_count; //フォロー解除リクエスト回数を更新
         $user->unfollow_limit = $unfollow_count; //フォロー解除回数を更新
-        $user->first_request_time = $first_request_time;// リクエスト時間を更新
+        $user->unfollow_request_time = $unfollow_request_time;// フォロー解除リクエスト時間を更新
         $user->save();
 
         // 手動フォロー解除処理開始

@@ -105,7 +105,7 @@ class OAuthController extends Controller
         if($screen_name !== $userInfo['screen_name']){
             // screen_nameがTwitterのユーザー情報と異なる場合
             // 会員登録画面にリダイレクト
-            $msg = 'このTwitterアカウントは存在しません。';
+            $msg = '認証するTwitterアカウントが異なります。';
             session()->put('message', $msg);
             return redirect()->action('SignUpController@index');
         }
@@ -117,8 +117,10 @@ class OAuthController extends Controller
         $user->twitter_id = $userInfo['id_str'];;
         $user->oauth_token = $oauth_token;
         $user->oauth_token_secret = $oauth_token_secret;
-        $user->first_request_time = new Carbon();
-        $user->request_count = 0;
+        $user->follow_request_time = new Carbon();
+        $user->follow_request_count = 0;
+        $user->unfollow_request_time = new Carbon();
+        $user->unfollow_request_count = 0;
         $user->follow_limit = 0;
         $user->unfollow_limit = 0;
         $user->save();

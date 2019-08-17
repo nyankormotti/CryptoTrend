@@ -99,7 +99,7 @@ export default {
                 //仮想通貨関連アカウント情報
                 this.accounts = res.data
             }).catch(err => {
-                alert('例外が発生しました。しばらく経ってからお試しください。')
+                alert('問題が発生しました。しばらく経ってからお試しください。')
             });
         },
         // ユーザー情報取得処理
@@ -133,7 +133,7 @@ export default {
                 // ユーザー情報の自動フォロー有無フラグ
                 this.autoFollowFlg = this.users.autofollow_flg
             }).catch(err => {
-                alert('例外が発生しました。しばらく経ってからお試しください。')
+                alert('問題が発生しました。しばらく経ってからお試しください。')
             });
         },
         // ページングの編集処理
@@ -145,6 +145,9 @@ export default {
                 // 現在ページを総ページと同じ値にする
                 this.page = this.totalPage
             } 
+            if(this.page == 0 && this.totalPage != 0) {
+                this.page = 1
+            }
             // アカウント情報の総数
             this.count = this.accounts.length
             // 1ページの表示終りの件数 = 現在のページ数 * 1ページの表示件数(20件)
@@ -181,7 +184,7 @@ export default {
             }).catch(err => {
                 // フォローリクエスト時のサインの値を反転(手動フォロー後の処理をウォッチャで実施するため)
                 this.actFollowSign = !this.actFollowSign
-                alert('例外が発生しました。しばらく経ってからお試しください。')
+                alert('問題が発生しました。しばらく経ってからお試しください。')
             });
         },
         // 手動フォロー解除メソッド(「フォロー解除」ボタンをクリック時に実行)
@@ -197,7 +200,7 @@ export default {
             }).catch(err => {
                 // フォロー解除リクエスト時のサインの値を反転(手動フォロー解除後の処理をウォッチャで実施するため)
                 this.actFollowSign = !this.actFollowSign
-                alert('例外が発生しました。しばらく経ってからお試しください。')
+                alert('問題が発生しました。しばらく経ってからお試しください。')
             });
         }
     },
@@ -227,7 +230,7 @@ export default {
                 alert('そのアカウントはフォローできません。')
             } else if(this.resultFollowFlg == 2) {
                 // リクエスト制限が超えている場合、アラートを発行
-                alert('15分間のリクエスト回数を超えているため、フォローできません。')
+                alert('15分間のフォローリクエスト回数を超えているため、フォローできません。')
             } else if(this.resultFollowFlg == 3) {
                 // 1日のフォロー制限を超えている場合、アラートを発行
                 alert('1日のフォロー上限回数を超えているため、処理できません。')
@@ -249,7 +252,7 @@ export default {
             if(this.resultUnfollowFlg == 0) {
                 alert('そのアカウントはフォロー解除できません。')
             } else if(this.resultUnfollowFlg == 2) {
-                alert('15分間のリクエスト回数を超えているため、フォロー解除できません。')
+                alert('15分間のフォロー解除リクエスト回数を超えているため、フォロー解除できません。')
             } else if(this.resultUnfollowFlg == 3) {
                 alert('1日のフォロー解除上限回数を超えているため、処理できません。')
             } else if(this.resultUnfollowFlg == 4) {

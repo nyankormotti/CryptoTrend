@@ -38,7 +38,7 @@
                         @endif
                         <div class="textfield__area">
                             @if($errors->has('email'))
-                            <input type="text" class="textfield__input" name="email" autocomplete="off" value="{{old('email')}}">
+                            <input type="text" class="textfield__input" name="email" autocomplete="off" placeholder="メールアドレスを入力してください。" value="{{old('email')}}">
                             @else
                             <input type="text" class="textfield__input" name="email" autocomplete="off" placeholder="メールアドレスを入力してください。">
                             @endif
@@ -125,7 +125,11 @@
                         <div class="u-err__msg">{{$errors->first('comment')}}</div>
                         @endif
                         <div class="textfield__comment__area">
-                            <textarea class="textfield__comment" name="comment" id="" cols="30" rows="10" placeholder="1000文字以内にて入力してください。" value="{{old('comment')}}"></textarea>
+                            @if($errors->has('comment'))
+                            <textarea class="textfield__comment" name="comment" id="" cols="30" rows="10">{{old('comment')}}</textarea>
+                            @else
+                            <textarea class="textfield__comment" name="comment" id="" cols="30" rows="10" placeholder="1000文字以内にて入力してください。"></textarea>
+                            @endif
                         </div>
                         <div class="btn__contact btn__form">
                             <input class="btn" type="submit" name="submit" value="送信">

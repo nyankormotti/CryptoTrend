@@ -45,8 +45,8 @@ Route::get('/changeTwitterAccountMain', 'ChangeTwitterAccountController@changeAc
 Route::post('/contact', 'IndexController@contact');
 
 // ===================================================
-// ログイン後
 
+// ログイン後
 Route::group(['middleware' => ['after.login']], function () {
     // 仮想通貨トレンド画面
     Route::get('/trend', 'TrendController@index')->name('trend');
@@ -84,6 +84,7 @@ Route::get('/logout', 'LoginController@logout');
 
 // ====================================================================
 // Twitter認証処理のルーティング
+
 // Twitter認証のルーティング
 Route::get('/oauth', 'OAuthController@login');
 // Callback用のルーティング
@@ -92,28 +93,9 @@ Route::get('/callback', 'OAuthController@callBack');
 Route::get('/main', 'OAuthController@main');
 
 
+// ====================================================================
+// その他
 
 // 例外発生画面
 Route::get('/exception', 'ExceptionController@index');
 
-
-
-
-
-
-
-// ===================================================
-// 検証用コントローラ
-// ツイート数
-Route::get('/tweet', 'TweetCountController@index')->name('tweet');
-
-// アカウント数
-Route::get('/accountSearch', 'AccountSearchController@index')->name('accountSearch');
-
-// coincheck
-Route::get('/coincheck', 'CoincheckController@index')->name('coin');
-
-// アカウントテーブルからの取得
-
-// 検証用コントローラ
-// ===================================================

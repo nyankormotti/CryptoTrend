@@ -154,6 +154,11 @@ class GetCryptoTweetCountBatch extends Command
                 // オブジェクトを配列に変換
                 $tweets_arr = json_decode(json_encode($tweets_obj), true);
 
+                // Tweet数が取得できない場合,(statusesがない場合)、処理を終了
+                if (empty($tweets_arr['statuses'])) {
+                    break;
+                }
+
                 // ツイート本文を抽出
                 for ($k = 0; $k < count($tweets_arr['statuses']); $k++) {
                     $tweet_texts[] = $tweets_arr['statuses'][$k]['text'];

@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TrendTableSeeder::class);
         // テストデータ作成
         $this->call(TestTweetsTableSeeder::class);
+        $this->call(TestTrendsTableSeeder::class);
     }
 }

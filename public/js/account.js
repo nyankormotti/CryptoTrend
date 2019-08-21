@@ -1789,7 +1789,7 @@ __webpack_require__.r(__webpack_exports__);
       //フォロー回数
       unFollowLimit: 0,
       // フォロー解除回数
-      autoFollowFlg: 0,
+      autoFollowFlg: false,
       //自動フォローフラグ (0:OFF, 1:ON)
       // 手動フォロー時のフラグ、サイン
       resultFollowFlg: 1,
@@ -1832,7 +1832,11 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.unFollowLimit = _this2.users.unfollow_limit; // ユーザー情報の自動フォロー有無フラグ
 
-        _this2.autoFollowFlg = _this2.users.autofollow_flg;
+        if (_this2.users.autofollow_flg == 0) {
+          _this2.autoFollowFlg = false;
+        } else {
+          _this2.autoFollowFlg = true;
+        }
       })["catch"](function (err) {
         alert('問題が発生しました。しばらく経ってからお試しください。');
       });
@@ -1865,7 +1869,11 @@ __webpack_require__.r(__webpack_exports__);
         // ユーザー情報
         _this4.users = res.data; // ユーザー情報の自動フォロー有無フラグ
 
-        _this4.autoFollowFlg = _this4.users.autofollow_flg;
+        if (_this4.users.autofollow_flg == 0) {
+          _this4.autoFollowFlg = false;
+        } else {
+          _this4.autoFollowFlg = true;
+        }
       })["catch"](function (err) {
         alert('問題が発生しました。しばらく経ってからお試しください。');
       });

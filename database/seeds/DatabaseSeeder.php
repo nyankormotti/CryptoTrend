@@ -13,5 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CurrencyTableSeeder::class);
         $this->call(TrendTableSeeder::class);
+        // テストデータ作成
+        $this->call(TestTweetsTableSeeder::class);
     }
 }

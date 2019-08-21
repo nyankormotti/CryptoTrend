@@ -36,7 +36,7 @@ class IndexController extends Controller
         $fromEmail = $request->email;
         $comment = $request->comment;
         // メール送信処理
-        Mail::to('info@info.com')->send(new ContactMail($fromEmail, $comment));
+        Mail::to('cryptotrend@nyankormotti.com')->send(new ContactMail($fromEmail, $comment));
         $request->session()->flash('status', 'お問い合わせメールを送信しました。');
         return redirect()->action('IndexController@index', $request);
     }

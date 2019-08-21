@@ -59,6 +59,11 @@ class AutoFollowBatch extends Command
             // (1ユーザーに付き、1アカウントのみ自動フォローを実施する(30分ごとに実施))
             for ($i = 0; $i < count($users); $i++) {
                 \Log::info(($i + 1).'人目のユーザー');
+                if ($users[$i]->update_flg == 1) {
+                    // アカウント情報をバッチで更新中の場合
+                    // 60秒待機
+                    sleep(60);
+                }
                 // userのuser_idに紐付くaccountsテーブルのレコードを取得
                 // (フォローしていないアカウントのみ取得)
                 $accounts = DB::table('accounts')

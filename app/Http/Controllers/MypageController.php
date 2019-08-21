@@ -66,7 +66,7 @@ class MypageController extends Controller
         $fromEmail = $user->email;
         $comment = $request->comment;
         // お問い合わせ内容をメール送信
-        Mail::to('info@info.com')->send(new ContactMail($fromEmail, $comment));
+        Mail::to('cryptotrend@nyankormotti.com')->send(new ContactMail($fromEmail, $comment));
         $request->session()->flash('status', 'お問い合わせメールを送信しました。');
         return redirect()->action('TrendController@index', $request);
     }

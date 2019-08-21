@@ -29,7 +29,7 @@ class ChangePasswordMail extends Mailable
     public function build()
     {
         return $this
-            ->from('info@info.com') // 送信元
+            ->from('cryptotrend@nyankormotti.com') // 送信元
             ->subject('【パスワード変更】変更パスワードの連絡') // メールタイトル
             ->view('mail.changePasswordMail') // どのテンプレートを呼び出すか
             ->with(['password' => $this->password]); // withオプションでセットしたデータをテンプレートへ受け渡す

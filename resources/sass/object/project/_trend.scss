@@ -7,8 +7,8 @@
     background:$background_color_white;
     border-radius:5px;
     @include tl(){
-        order: 1;
         width:100%;
+        margin-bottom:30px;
     }
     &__top{
         padding:10px 20px;

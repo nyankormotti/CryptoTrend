@@ -31,7 +31,7 @@ class PasswordRemindRecieveMail extends Mailable
     public function build()
     {
         return $this
-            ->from('info@info.com') // 送信元
+            ->from('cryptotrend@nyankormotti.com') // 送信元
             ->subject('【パスワード再発行】再発行パスワード送付') // メールタイトル
             ->view('mail.passwordRemindRecieveMail') // どのテンプレートを呼び出すか
             ->with(['password' => $this->password]); // withオプションでセットしたデータをテンプレートへ受け渡す

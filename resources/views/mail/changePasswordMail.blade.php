@@ -7,7 +7,7 @@
 <p>
     ///////////////////////////////////////////////<br>
     CryptoTrendカスタマーセンター<br>
-    URL http://localhost<br>
-    E-mail info@info.com<br>
+    URL https://cryptotrend.nyankormotti.com<br>
+    E-mail cryptotrend@nyankormotti.com<br>
     ///////////////////////////////////////////////
 </p>

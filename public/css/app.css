@@ -1142,8 +1142,8 @@ body {
 
 @media screen and (max-width: 1024px) {
   .p-trend {
-    order: 1;
     width: 100%;
+    margin-bottom: 30px;
   }
 }
 
@@ -1345,7 +1345,7 @@ body {
 @media screen and (max-width: 1024px) {
   .p-account {
     width: 100%;
-    order: 1;
+    margin-bottom: 30px;
   }
 }
 
@@ -1392,6 +1392,18 @@ body {
 @media screen and (max-width: 414px) {
   .p-account__top__area__page {
     font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .p-account__top__area__page {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .p-account__top__area__page {
+    width: 60%;
   }
 }
 
@@ -1693,7 +1705,6 @@ body {
 @media screen and (max-width: 1024px) {
   .p-sidebar {
     width: 100%;
-    margin-bottom: 30px;
   }
 }
 

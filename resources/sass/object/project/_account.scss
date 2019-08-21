@@ -8,7 +8,7 @@
     border-radius:5px;
     @include tl() {
         width:100%;
-        order: 1;
+        margin-bottom:30px;
     }
     &__top{
         padding:10px 20px;
@@ -36,6 +36,12 @@
                 }
                 @include sm() {
                     font-size:$font-size_s;
+                }
+                @include ss() {
+                    font-size:$font-size_ss;
+                }
+                @include sss() {
+                    width:60%;
                 }
             }
         }

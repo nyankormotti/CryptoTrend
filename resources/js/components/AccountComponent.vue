@@ -77,7 +77,7 @@ export default {
                          // (0:未フォロー, 1:フォロー済)
             followLimit: 0, //フォロー回数
             unFollowLimit: 0, // フォロー解除回数
-            autoFollowFlg:0, //自動フォローフラグ (0:OFF, 1:ON)
+            autoFollowFlg:false, //自動フォローフラグ (0:OFF, 1:ON)
 
             // 手動フォロー時のフラグ、サイン
             resultFollowFlg:1,//手動フォローの結果フラグ (0：API連携失敗, 1：正常終了, 2：リクエスト回数超過, 3：フォロー回数超過, 4：フォロー済アカウントをフォローしようとした場合)
@@ -114,7 +114,11 @@ export default {
                 // ユーザー情報のフォロー解除回数
                 this.unFollowLimit = this.users.unfollow_limit
                 // ユーザー情報の自動フォロー有無フラグ
-                this.autoFollowFlg = this.users.autofollow_flg
+                if(this.users.autofollow_flg == 0) {
+                    this.autoFollowFlg = false
+                } else {
+                    this.autoFollowFlg = true
+                }
             }).catch(err => {
                 alert('問題が発生しました。しばらく経ってからお試しください。')
             });
@@ -143,7 +147,11 @@ export default {
                 // ユーザー情報
                 this.users = res.data
                 // ユーザー情報の自動フォロー有無フラグ
-                this.autoFollowFlg = this.users.autofollow_flg
+                if(this.users.autofollow_flg == 0) {
+                    this.autoFollowFlg = false
+                } else {
+                    this.autoFollowFlg = true
+                }
             }).catch(err => {
                 alert('問題が発生しました。しばらく経ってからお試しください。')
             });

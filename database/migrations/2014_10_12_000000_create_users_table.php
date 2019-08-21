@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->integer('unfollow_request_count')->unsigned()->comment('フォロー解除するためにTwitterAPIの連携回数(初めて連携した時間からの連携回数をカウント, 現在日時より15分以上過去の場合はリセットする)');
             $table->integer('follow_limit')->unsigned()->comment('1日の間にフォローした回数(上限値25回、初期値0)');
             $table->integer('unfollow_limit')->unsigned()->comment('1日の間にフォロー解除した回数(上限値25回、初期値0)');
+            $table->boolean('update_flg')->default(false)->comment('accountsテーブル更新中のフラグ(0:更新完了, 1:更新中)(バッチ処理にて毎日24:00に実施)');
             $table->boolean('autofollow_flg')->default(false)->comment('自動フォローフラグ(0:OFF, 1:ON)');
             $table->boolean('delete_flg')->default(false)->comment('削除フラグ');
             $table->timestamp('email_verified_at')->nullable();

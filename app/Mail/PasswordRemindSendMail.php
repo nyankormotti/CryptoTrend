@@ -31,7 +31,7 @@ class PasswordRemindSendMail extends Mailable
     public function build()
     {
         return $this
-            ->from('info@info.com') // 送信元
+            ->from('cryptotrend@nyankormotti.com') // 送信元
             ->subject('【パスワード再発行】認証キー送付') // メールタイトル
             ->view('mail.passwordRemindSendMail') // どのテンプレートを呼び出すか
             ->with(['auth_key' => $this->auth_key]); // withオプションでセットしたデータをテンプレートへ受け渡す

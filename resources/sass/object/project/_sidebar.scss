@@ -9,7 +9,6 @@
     border-radius:5px;
     @include tl() {
         width:100%;
-        margin-bottom:30px;
     }
     @include sl(){
         max-height:450px;

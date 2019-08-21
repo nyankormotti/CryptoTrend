@@ -3,7 +3,7 @@
     下記のURLにて再発行パスワードをご入力頂き、ログインください。
 </p>
 <p>
-    ログインページ: <a href="http://localhost/login">http://localhost/login</a>
+    ログインページ: <a href="https://cryptotrend.nyankormotti.com/login">https://cryptotrend.nyankormotti.com/login</a>
 </p>
 <p>
     再発行パスワード：{{$password}}<br>
@@ -13,7 +13,7 @@
 <p>
     ///////////////////////////////////////////////<br>
     CryptoTrendカスタマーセンター<br>
-    URL http://localhost<br>
-    E-mail info@info.com<br>
+    URL https://cryptotrend.nyankormotti.com<br>
+    E-mail cryptotrend@nyankormotti.com<br>
     ///////////////////////////////////////////////
 </p>

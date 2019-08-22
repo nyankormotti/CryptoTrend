@@ -6,6 +6,10 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * trendsテーブルのテストデータを作成する
+ * (tweetsテーブルを集計する)
+ */
 class TestTrendsTableSeeder extends Seeder
 {
     /**

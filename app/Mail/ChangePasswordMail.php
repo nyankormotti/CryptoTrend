@@ -5,8 +5,10 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
+/**
+ * パスワード変更メール送信
+ */
 class ChangePasswordMail extends Mailable
 {
     use Queueable, SerializesModels;

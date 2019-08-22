@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\PasswordRemindRecieveMail;
 use App\Http\Requests\PasswordRemindRecieveRequest;
 
+/**
+ * パスワードリマインダーコントローラ(認証キーを入力し、パスワードを再発行する)
+ */
 class PasswordRemindRecieveController extends Controller
 {
     /**
@@ -49,6 +52,7 @@ class PasswordRemindRecieveController extends Controller
         $user->save();
         // メール送信処理
         Mail::to($toEmail)->send(new PasswordRemindRecieveMail($password));
+        // リダイレクト後、画面に表示させるメッセージをセッションに格納
         $request->session()->flash('status', 'パスワードを再発行しました。');
         return redirect()->action('IndexController@index', $request);
     }

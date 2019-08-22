@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Http\Validators\CustomValidator;
 
+/**
+ * カスタムばりデータを登録するサービスプロバイダ
+ */
 class ValidationServiceProvider extends ServiceProvider
 {
     /**

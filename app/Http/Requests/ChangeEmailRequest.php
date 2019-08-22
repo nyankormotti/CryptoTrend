@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * メールアドレス変更処理のフォームリクエスト
+ */
 class ChangeEmailRequest extends FormRequest
 {
     /**

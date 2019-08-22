@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * トップページから実施するお問い合わせ処理のフォームリクエスト
+ */
 class ContactBeforeRequest extends FormRequest
 {
     /**

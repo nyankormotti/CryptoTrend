@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * 会員登録コントローラ
+ */
 class SignUpController extends Controller
 {
     /**
      * 会員登録画面表示
      * @return void
      */
-    public function index(){
-
-        // エラーメッセージがある場合
+    public function index()
+    {
+        // エラーメッセージがある場合(TwitterAPI認証処理からリダイレクトした場合)
         if (!empty(session()->get('message'))) {
             // エラーメッセージ、Twitterアカウント、メールアドレスのセッション情報を取得
             $msg = session()->get('message');
@@ -32,6 +34,7 @@ class SignUpController extends Controller
 
     /**
      * 会員登録処理
+     * 入力値をセッションに格納し、TwitterAPI認証処理にリダイレクトする
      * @param  SignUpRequest  $request (screen_name, email, password)
      * @return void
      */

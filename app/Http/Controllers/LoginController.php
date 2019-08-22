@@ -8,8 +8,10 @@ use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
+/**
+ * ログインコントローラ
+ */
 class LoginController extends Controller
-
 {
     /**
      * ログイン画面表示
@@ -22,6 +24,10 @@ class LoginController extends Controller
 
     /**
      * ログイン処理
+     * 入力値をusersテーブルの値と照合
+     * usersテーブルのメールアドレスとパスワードの称号が問題なければ、usersテーブルに登録されたアクセストークンを用いて、
+     * Twitterのアカウント情報を取得し、usersテーブルに登録したscreen_nameと照合する。
+     * 同じであれば、トレンド一覧画面へ遷移、異なれば、Twitterアカウント変更画面へ遷移する。
      * @param Request $request (email, password, pass_save)
      * @return void
      */
@@ -67,7 +73,6 @@ class LoginController extends Controller
             $msg = 'メールアドレスまたはパスワードが違います。';
             return view('login', ['message' => $msg, 'error_email' => $request->email]);
         }
-
     }
 
     /**

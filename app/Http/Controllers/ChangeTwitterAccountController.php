@@ -8,7 +8,7 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 use App\Http\Requests\ChangeTwitterAccount;
 
 /**
- * 仮想通貨関連アカウントコントローラ
+ * 仮想通貨関連アカウント変更コントローラ
  * 
  */
 class ChangeTwitterAccountController extends Controller
@@ -19,7 +19,7 @@ class ChangeTwitterAccountController extends Controller
      */
     public function index()
     {
-        // エラーメッセージがある場合
+        // エラーメッセージがある場合(changeAccountMainからリダイレクトした場合)
         if (!empty(session()->get('message'))) {
             // エラーメッセージ、Twitterアカウントのセッション情報を取得
             $msg = session()->get('message');
@@ -34,20 +34,23 @@ class ChangeTwitterAccountController extends Controller
 
     /**
      * Twitterアカウント変更処理
+     * セッションに画面で入力した値と、Twitterアカウント変更画面から遷移した意味を示すフラグを格納し、Twitter認証処理へリダイレクトする
      * @param ChangeTwitterAccount $request (screen_name)
      * @return void
      */
     public function changeAccount(ChangeTwitterAccount $request)
     {
         // セッションに格納
-        session()->put('screen_name', $request->screen_name);
-        session()->put('change_account_flg', true);
+        session()->put('screen_name', $request->screen_name); //Twitterアカウント変更画面で入力したTwitterアカウント(screen_name)
+        session()->put('change_account_flg', true);//Twitterアカウント変更画面から遷移した意味を示すフラグ(OAuthControllerのcallBackメソッドにて使用)
         // Twitter API認証処理を実施
         return redirect()->action('OAuthController@login');
     }
 
     /**
      * TwitterAPI連携後のアカウント変更処理 (Twitter API認証のcallback処理後に遷移してくる)
+     * Twitter上の自身のアカウント情報を取得し、画面で入力したscreen_nameを比較
+     * 同じであれば、usersテーブルのscreen_nameを更新、異なれば、Twitterアカウント変更画面へリダイレクト
      * @return void
      */
     public function changeAccountMain() {

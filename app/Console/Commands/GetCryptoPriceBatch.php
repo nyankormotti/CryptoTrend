@@ -7,6 +7,10 @@ use Illuminate\Console\Command;
 use App\Libraries\CommonFunctions;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * 各銘柄の「24時間当たりの最高取引価格」と「24時間当たりの最安取引価格」を取得し、currenciesテーブルを更新
+ * （coincheckのTickerではBTCの取引価格のみ取得可能、そのため、CurrenciesテーブルのBTCのレコードにのみ、取引価格の値を更新する。）
+ */
 class GetCryptoPriceBatch extends Command
 {
     /**

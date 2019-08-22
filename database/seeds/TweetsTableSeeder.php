@@ -6,6 +6,9 @@ use Carbon\Carbon;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Database\Seeder;
 
+/**
+ * 
+ */
 class TweetsTableSeeder extends Seeder
 {
     /**

@@ -11,6 +11,8 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 
 /**
  * 各銘柄のツイート数集計バッチ
+ * tweetsテーブルに各銘柄の1時間当たりのツイート数を集計し登録
+ * trendsテーブルに各銘柄の1時間、1日、1週間当たりのツイート数をしゅうけいし登録
  */
 class GetCryptoTweetCountBatch extends Command
 {
@@ -164,7 +166,7 @@ class GetCryptoTweetCountBatch extends Command
                     $tweet_texts[] = $tweets_arr['statuses'][$k]['text'];
                 }
 
-                // next_results が無ければ処理を終了
+                // next_results が無ければ処理を終了(次のツイートがない場合)
                 if (empty($tweets_arr['search_metadata']['next_results'])) {
                     break;
                 }
@@ -283,13 +285,12 @@ class GetCryptoTweetCountBatch extends Command
 
             // 現在時間より1週間前より以前のツイート数のレコードを削除(Tweetsテーブルより削除)
             $delete_weeks_ago_date = date("Y-m-d H:i:s", strtotime($acquisition_date . "-7 day"));
-
             $tweet = DB::table('tweets')
                 ->where('acquisition_date', '<=', $delete_weeks_ago_date)
                 ->delete();
             // 削除処理終了
-
             DB::commit();
+
         } catch(Exception $e) {
             DB::rollback();
         }

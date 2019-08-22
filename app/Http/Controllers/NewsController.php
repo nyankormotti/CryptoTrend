@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use \App\Libraries\CommonFunctions;
-
+/**
+ * 仮想通貨関連ニュースコントローラ
+ */
 class NewsController extends Controller
 {
     /**

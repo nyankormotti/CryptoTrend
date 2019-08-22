@@ -27,6 +27,7 @@ class AccountController extends Controller
     {
         return view('account');
     }
+
     /**
      * 仮想通貨関連Twitterアカウント取得処理
      * @param Request $request (follow_flg, last_updated)
@@ -34,7 +35,6 @@ class AccountController extends Controller
      */
     public function getAccount(Request $request) 
     {
-
         $account_list = Account::where('user_id',Auth::id())
                         ->where('follow_flg', $request->follow_flg)
                         ->orderBy('last_updated','DESC')
@@ -47,8 +47,8 @@ class AccountController extends Controller
      * ユーザー情報取得処理
      * @return array (ユーザー情報)
      */
-    public function getUser() {
-
+    public function getUser() 
+    {
         $user = User::find(Auth::id());
         return $user;
     }
@@ -82,8 +82,6 @@ class AccountController extends Controller
         $userInfo = get_object_vars($twitter->get('account/verify_credentials'));
         $userTwitterAccount = json_decode(json_encode($userInfo), true);
 
-        // var_dump($userInfo);exit;
-
         return $userTwitterAccount;
 
     }
@@ -96,7 +94,6 @@ class AccountController extends Controller
      */
     public function autoFollow(Request $request)
     {
-
         $user = User::find(Auth::id());
         $user->autofollow_flg = !$request->autoFollow_flg;
         $user->save();
@@ -255,8 +252,8 @@ class AccountController extends Controller
 
     /**
      * フォロー解除処理(API連携)
-     * @param $request (twitter_id)
-     * @return $action_flg (API連携の成功の有無)
+     * @param Request $request (twitter_id)
+     * @return boolean $action_flg (API連携の成功の有無)
      */
     public function unfollow(Request $request)
     {

@@ -129,7 +129,7 @@ class AutoFollowBatch extends Command
                 // Twitterアプリ内アカウント確認処理終了
 
 
-                // usersテーブルよ、フォロー初回リクエスト時間を取得
+                // usersテーブルより、フォロー初回リクエスト時間を取得
                 $follow_request_time = new Carbon($users[$i]->follow_request_time);
                 // usersテーブルより、フォローリクエスト回数を取得
                 $follow_request_count = $users[$i]->follow_request_count;

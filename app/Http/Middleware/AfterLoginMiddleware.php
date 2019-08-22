@@ -6,6 +6,13 @@ use Closure;
 use App\Libraries\CommonFunctions;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * ログイン後に使用できる画面に遷移した際に処理を実行するミドルウェア
+ * ログイン情報がセッションになければ、トップページにリダイレクト
+ * あれば、希望の画面のコントローラに遷移する
+ * (この際、usersテーブルに登録されたTwitterアカウントの情報がTwitter上のものと違いがないかを確認する。
+ * 違いがあれば、Twitterアカウント変更画面へリダイレクト)
+ */
 class AfterLoginMiddleware
 {
     /**

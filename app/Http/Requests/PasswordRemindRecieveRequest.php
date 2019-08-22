@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * パスワードリマインダー(パスワード再発行)処理のフォームリクエスト
+ */
 class PasswordRemindRecieveRequest extends FormRequest
 {
     /**

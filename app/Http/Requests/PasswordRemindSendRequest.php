@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * パスワードリマインダー（認証キー発行）処理のフォームリクエスト
+ */
 class PasswordRemindSendRequest extends FormRequest
 {
     /**

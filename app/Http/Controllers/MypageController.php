@@ -13,6 +13,9 @@ use App\Http\Requests\ChangeEmailRequest;
 use App\Http\Requests\ContactAfterRequest;
 use App\Http\Requests\ChangePasswordRequest;
 
+/**
+ * マイページコントローラ
+ */
 class MypageController extends Controller
 {
     /**
@@ -34,6 +37,7 @@ class MypageController extends Controller
         $user = User::where('id', Auth::id())->first();
         $user->email = $request->email;
         $user->save();
+        // リダイレクト後、画面に表示させるメッセージをセッションに格納
         $request->session()->flash('status', 'メールアドレスを変更しました。');
         return redirect()->action('TrendController@index');
     }
@@ -51,6 +55,7 @@ class MypageController extends Controller
         $user->save();
         // パスワード変更をメールで通知
         Mail::to($user->email)->send(new ChangePasswordMail($request->password));
+        // リダイレクト後、画面に表示させるメッセージをセッションに格納
         $request->session()->flash('status', 'パスワードを変更しました。');
         return redirect()->action('TrendController@index');
     }
@@ -67,6 +72,7 @@ class MypageController extends Controller
         $comment = $request->comment;
         // お問い合わせ内容をメール送信
         Mail::to('cryptotrend@nyankormotti.com')->send(new ContactMail($fromEmail, $comment));
+        // リダイレクト後、画面に表示させるメッセージをセッションに格納
         $request->session()->flash('status', 'お問い合わせメールを送信しました。');
         return redirect()->action('TrendController@index', $request);
     }
@@ -82,12 +88,10 @@ class MypageController extends Controller
         $user = User::where('id', Auth::id())->first();
         $user->delete_flg = true;
         $user->save();
-
         //セッションクリア
         //アクセストークンだけsessionから破棄
         session()->forget('oauth_token');
         session()->forget('oauth_token_secret');
-
         // ログアウト処理
         Auth::logout();
 

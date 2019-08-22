@@ -5,6 +5,11 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * tweetsテーブルのテストデータを作成する
+ * 1週間分のツイート数を作成(1時間ごとに各銘柄でレコードを登録)
+ * (ツイート数はテストのためランダムな値を登録)
+ */
 class TestTweetsTableSeeder extends Seeder
 {
     /**

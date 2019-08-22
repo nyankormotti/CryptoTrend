@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Twitterアカウント変更処理のフォームリクエスト
+ */
 class ChangeTwitterAccount extends FormRequest
 {
     /**

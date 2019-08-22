@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
+/**
+ * Twitter認証コントローラ
+ */
 class OAuthController extends Controller
 {
     /**
@@ -31,6 +34,9 @@ class OAuthController extends Controller
 
     /**
      * callback処理
+     * ユーザーのTwitterアカウントのアクセストークンを取得
+     * Twitterアカウント変更画面からの遷移の場合、TwitterAPI連携後のアカウント変更処理にリダイレクト
+     * 上記以外の場合、mainメソッドの処理にリダイレクト
      * @return void
      */
     public function callBack()
@@ -59,7 +65,7 @@ class OAuthController extends Controller
         session()->put('oauth_token_secret', $accessToken['oauth_token_secret']);
 
         if(!empty(session()->get('change_account_flg'))) {
-            // Twitterアカウント変更画面からの遷移の場合、Twitterアカウント変更画面にリダイレクト
+            // Twitterアカウント変更画面からの遷移の場合、TwitterAPI連携後のアカウント変更処理にリダイレクト
             session()->forget('change_account_flg');
             return redirect('changeTwitterAccountMain');
             return redirect()->action('ChangeTwitterAccountController@changeAccountMain');
@@ -73,6 +79,7 @@ class OAuthController extends Controller
     /**
      * usersテーブルにユーザー情報を登録する
      * (会員登録画面より指定したscreen_nameのTwitterアカウント情報をusersテーブルに登録する)
+     * ログイン処理を実行する
      * 登録したユーザーにてAPI連携し、仮想通貨関連アカウントをaccountsテーブルに登録する
      * @return void
      */
@@ -214,7 +221,7 @@ class OAuthController extends Controller
                 if ($account_date < $one_month_ago) {
                     continue;
                 }
-                // 自分と同じアカウントはAccoutテーブルには格納しない。
+                // 自分と同じアカウントはAccountテーブルには格納しない。
                 if ($screen_name == $twitter_account[$i]['screen_name']) {
                     continue;
                 }
@@ -234,8 +241,6 @@ class OAuthController extends Controller
             }
         }
 
-        //twitterというビューにユーザ情報が入った$userInfoを受け渡す
         return redirect('trend');
-        // return view('trend');
     }
 }

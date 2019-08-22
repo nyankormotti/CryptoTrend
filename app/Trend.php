@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * trendsテーブルのモデル
+ */
 class Trend extends Model
 {
     protected $table = 'trends';

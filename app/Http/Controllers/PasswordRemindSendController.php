@@ -6,6 +6,9 @@ use App\Mail\PasswordRemindSendMail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\PasswordRemindSendRequest;
 
+/**
+ * パスワードリマインダーコントローラ(自身のメールアドレスを入力し、認証キーを発行する)
+ */
 class PasswordRemindSendController extends Controller
 {
     /**
@@ -33,6 +36,7 @@ class PasswordRemindSendController extends Controller
         }
         // メール送信処理
         Mail::to($toEmail)->send(new PasswordRemindSendMail($auth_key));
+        // リダイレクト後、画面に表示させるメッセージをセッションに格納
         $request->session()->flash('status', '認証キーを発行しました。');
         // メールアドレスをセッションに格納
         $request->session()->put('toEmail', $toEmail);

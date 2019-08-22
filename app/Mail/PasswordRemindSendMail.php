@@ -5,8 +5,10 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
+/**
+ * パスワードリマインダー(認証キー発行)
+ */
 class PasswordRemindSendMail extends Mailable
 {
     use Queueable, SerializesModels;

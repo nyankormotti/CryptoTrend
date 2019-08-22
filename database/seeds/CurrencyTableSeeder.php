@@ -4,6 +4,10 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * currenciesテーブルのレコードを登録するシーダー
+ * (バッチ処理では、このレコードを更新する)
+ */
 class CurrencyTableSeeder extends Seeder
 {
     /**

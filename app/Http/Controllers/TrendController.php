@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Trend;
 use Illuminate\Http\Request;
 
+/**
+ * 仮想通貨関連トレンド一覧コントローラ
+ */
 class TrendController extends Controller
 {
-
     /**
      * トレンド画面表示
      * @param Request $request (status)
@@ -15,6 +17,7 @@ class TrendController extends Controller
      */
     public function index(Request $request) 
     {
+        // マイページ画面にて、メールアドレス変更、パスワード変更、お問い合わせ処理が完了した際に、その旨のメッセージを出力する
         $status = $request->session()->get('status');
         return view('trend', ['status' => $status]);
     }

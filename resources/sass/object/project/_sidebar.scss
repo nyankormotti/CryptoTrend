@@ -61,7 +61,7 @@
             font-size: $font-size_l;
             padding:10px 0;
              @include tl() {
-                font-size: $font-size_xl; 
+                font-size: $font-size_xl;
                 padding:20px 10px;
              }
              @include sl() {
@@ -250,7 +250,7 @@
             font-size: $font-size_l;
             padding:10px 0;
             @include tl() {
-                font-size: $font-size_xl; 
+                font-size: $font-size_xl;
                 padding:20px 10px;
              }
              @include sl() {

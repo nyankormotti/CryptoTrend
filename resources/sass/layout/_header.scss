@@ -31,36 +31,32 @@
     }
 
     @include tm() {
-    .nav__menu {
-        display:block;
-        position:absolute;
-        top:0;
-        right:-100%;
-        background:$background_color_main1;
-        opacity:.9;
-        width:100%;
-        height:100vh;
-        padding-top:50px;
-        transition:.5s;
-        z-index:4;
-        &.active{
-            
+        .nav__menu {
+            display:block;
+            position:absolute;
+            top:0;
+            right:-100%;
+            background:$background_color_main1;
+            opacity:.9;
+            width:100%;
+            height:100vh;
+            padding-top:50px;
             transition:.5s;
-            transform:translateX(-100%);
             z-index:4;
+            &.active{
+                transition:.5s;
+                transform:translateX(-100%);
+                z-index:4;
+            }
         }
     }
-    }
-
     .menu{
         display:flex;
         align-items:center;
         font-size:$font-size_m;
-
         &__item{
             margin-right:$space_xxl;
         }
-
         &__link{
             text-decoration:none;
             color:$font_color_main2;
@@ -80,7 +76,6 @@
                 border-radius:10px;
             }
         }
-
         @include tm() {
             display:block;
             font-size:$font-size_xxl;
@@ -111,7 +106,6 @@
     }
 }
 
-// TODO:レスポンシブ対応時に修正
 .menu__trigger{
     display:none;
     @include tm(){

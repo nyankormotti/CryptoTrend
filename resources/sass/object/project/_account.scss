@@ -194,7 +194,7 @@
         &__fcount {
             @include sl(){
                 font-size:$font-size_s;
-                line-height: $font-size_s;  
+                line-height: $font-size_s;
             }
             @include sm() {
                 font-size:10px;

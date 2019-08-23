@@ -11,19 +11,6 @@
       font-weight:bold;
   }
 }
-// .toggle_switch::after {
-//   content: "";
-//   display: inline-block;
-//   width: 18px;
-//   height: 11px;
-//   background: url(http://agdemo.net/sample/toggle/img/arrow_down.svg) no-repeat center center;
-//   background-size: contain;
-//   position: absolute;
-//   top: 50%;
-//   transform: translateY(-50%);
-//   right: 20px;
-//   transition: transform .2s;
-// }
 .toggle_switch.open::after {
   transform: rotateZ(180deg);
   top: 46%;

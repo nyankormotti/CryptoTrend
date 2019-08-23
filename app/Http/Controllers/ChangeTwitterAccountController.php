@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Carbon\Carbon;
+use App\Libraries\CommonFunctions;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use App\Http\Requests\ChangeTwitterAccount;
@@ -89,15 +92,36 @@ class ChangeTwitterAccountController extends Controller
             $user->twitter_id = $userInfo['id_str'];
             $user->oauth_token = $oauth_token;
             $user->oauth_token_secret = $oauth_token_secret;
-            $user->request_count = 0;
+            $user->follow_request_time = new Carbon();
+            $user->follow_request_count = 0;
+            $user->unfollow_request_time = new Carbon();
+            $user->unfollow_request_count = 0;
             $user->follow_limit = 0;
             $user->unfollow_limit = 0;
+            $user->autofollow_flg = 0;
+            // Usersテーブル更新処理
+            $user->save();
+
+            // 更新したuser情報を取得
+            $user = User::where('id', Auth::id())->first();
+            // ユーザーのuser_idに紐付くaccountsテーブルのレコードを削除
+            DB::table('accounts')
+                ->where(
+                    'user_id',
+                    $user->id
+                )->delete();
+
+            // 登録したユーザー情報にひもづく仮想通貨関連アカウントを取得
+            // 共通関数呼び出し
+            $commonFunc = new CommonFunctions;
+            $commonFunc->getAccount($user);
+
         } else {
             // Twitterのscreen_nameのみ変更する場合
             $user->screen_name = $userInfo['screen_name'];
+            // Usersテーブル更新処理
+            $user->save();
         }
-        // Usersテーブル更新処理
-        $user->save();
 
         return redirect()->action('TrendController@index');
     }

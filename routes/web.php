@@ -10,8 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// ログイン前の画面表示
+// ===================================================
+// ログイン前
 Route::group(['middleware' => ['before.login']], function () {
     // トップページ
     Route::get('/', 'IndexController@index');
@@ -45,7 +45,6 @@ Route::get('/changeTwitterAccountMain', 'ChangeTwitterAccountController@changeAc
 Route::post('/contact', 'IndexController@contact');
 
 // ===================================================
-
 // ログイン後
 Route::group(['middleware' => ['after.login']], function () {
     // 仮想通貨トレンド画面

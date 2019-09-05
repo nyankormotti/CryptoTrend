@@ -75,7 +75,7 @@
         &__area{
             display:flex;
             justify-content:flex-start;
-            @include sss() {
+            @include sl() {
                 justify-content: space-between;
             }
         }
@@ -266,7 +266,7 @@
             flex-wrap:wrap;
             justify-content:flex-start;
             align-content:flex-start;
-            @include sss() {
+            @include sl() {
                 justify-content: space-between;
             }
         }

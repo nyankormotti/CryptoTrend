@@ -23,9 +23,6 @@ body{
     @include tl() {
       width:95%;
     }
-    @include sl() {
-        width:80%;
-    }
   }
   &__dummy{
     width:100%;

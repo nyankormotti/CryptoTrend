@@ -200,12 +200,6 @@ body {
   }
 }
 
-@media screen and (max-width: 480px) {
-  .main__base {
-    width: 80%;
-  }
-}
-
 .main__dummy {
   width: 100%;
   height: 80px;
@@ -1053,8 +1047,12 @@ body {
 }
 
 .p-news__content__article__area:last-child {
-  display: block;
-  padding-top: 10px;
+  padding-top: 5px;
+}
+
+.p-news__content__article__area--option {
+  display: flex;
+  justify-content: space-between;
 }
 
 .p-news__content__article__area__mark {
@@ -1093,6 +1091,20 @@ body {
   }
 }
 
+.p-news__content__article__area__media {
+  width: 50%;
+  line-height: 150%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 480px) {
+  .p-news__content__article__area__media {
+    font-size: 10px;
+  }
+}
+
 .p-news__content__article__area__upday {
   text-align: right;
   color: #969696;
@@ -1100,7 +1112,13 @@ body {
 
 @media screen and (max-width: 480px) {
   .p-news__content__article__area__upday {
-    font-size: 14px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .p-news__content__article__area__upday {
+    font-size: 10px;
   }
 }
 
@@ -1249,6 +1267,7 @@ body {
 .p-table__thead__tr__th {
   padding-bottom: 10px;
   color: #5c5c5c;
+  width: 20%;
 }
 
 .p-table__tbody__tr {
@@ -1289,18 +1308,21 @@ body {
 
 .p-table__tbody__tr__td__link--gold {
   background: #e6b422;
+  width: 100%;
   padding: 5px 0;
   border-radius: 10px;
 }
 
 .p-table__tbody__tr__td__link--silver {
   background: silver;
+  width: 100%;
   padding: 5px 0;
   border-radius: 10px;
 }
 
 .p-table__tbody__tr__td__link--blonze {
   background: #8e4841;
+  width: 100%;
   padding: 5px 0;
   border-radius: 10px;
   color: white;
@@ -1802,7 +1824,7 @@ body {
   justify-content: flex-start;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 480px) {
   .p-sidebar__period__area {
     justify-content: space-between;
   }
@@ -2101,7 +2123,7 @@ body {
   align-content: flex-start;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 480px) {
   .p-sidebar__brand__area {
     justify-content: space-between;
   }

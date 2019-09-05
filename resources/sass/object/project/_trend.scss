@@ -79,6 +79,7 @@
            &__th{
                padding-bottom:10px;
                color:$font-color_gray;
+               width:20%;
            }
        }
     }
@@ -105,22 +106,25 @@
                    text-decoration:none;
                    color:$font-color_black;
 
-                &--gold{
-                   background:$background_color_gold;
-                   padding:5px 0;
-                   border-radius:10px;
-               }
-               &--silver{
-                   background:$background_color_silver;
-                   padding:5px 0;
-                   border-radius:10px;
-               }
-               &--blonze{
-                   background:$background_color_blonze;
-                   padding:5px 0;
-                   border-radius:10px;
-                   color:$background_color_white;
-               }
+                    &--gold{
+                        background:$background_color_gold;
+                        width:100%;
+                        padding:5px 0;
+                        border-radius:10px;
+                    }
+                    &--silver{
+                        background:$background_color_silver;
+                        width:100%;
+                        padding:5px 0;
+                        border-radius:10px;
+                    }
+                    &--blonze{
+                        background:$background_color_blonze;
+                        width:100%;
+                        padding:5px 0;
+                        border-radius:10px;
+                        color:$background_color_white;
+                    }
                }
                
            }

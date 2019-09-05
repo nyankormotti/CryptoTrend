@@ -33127,7 +33127,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$axios = axios__WEBPACK_IMPORTED_MODULE_1___default.a;
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.devtools = true; // Components
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.devtools = true; //トレンド一覧画面のVue
+// Components
 
 
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({

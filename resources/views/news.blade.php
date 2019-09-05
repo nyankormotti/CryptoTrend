@@ -14,8 +14,9 @@
                 <div class="p-news__content__article__area">
                     <a href="{{$list['url']}}" class="p-news__content__article__area__describe" target=”_blank” rel=”noopener”>{{$list['title']}}</a>
                 </div>
-                <div class="p-news__content__article__area">
-                    <p class="p-news__content__article__area__upday">更新日：{{$list['updated']}}</p>
+                <div class="p-news__content__article__area p-news__content__article__area--option">
+                    <p class="p-news__content__article__area__media">media: {{$list['media']}}</p>
+                    <p class=" p-news__content__article__area__upday">更新日：{{$list['updated']}}</p>
                 </div>
             </div>
             @endforeach

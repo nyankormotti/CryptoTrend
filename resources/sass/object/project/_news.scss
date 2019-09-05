@@ -36,8 +36,11 @@
                 padding:3px;
                 display:flex;
                 &:last-child{
-                    display:block;
-                    padding-top:10px;
+                    padding-top:5px;
+                }
+                &--option{
+                    display:flex;
+                    justify-content: space-between;
                 }
                 &__mark{
                     width:20px;
@@ -66,11 +69,24 @@
                         }
                     }
                 }
+                &__media{
+                    width:50%;
+                    line-height:150%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    @include sl() {
+                        font-size:$font-size_ss;
+                    }
+                }
                 &__upday{
                     text-align:right;
                     color:$font-color_clear;
                      @include sl() {
-                        font-size:$font-size_m;
+                        font-size:$font-size_s;
+                    }
+                     @include sss() {
+                        font-size:$font-size_ss;
                     }
                 }
             }

@@ -36,8 +36,11 @@ class CommonFunctions
         $data = $xml->entry;
         //記事のタイトルとURLを取り出して配列に格納
         for ($i = 0; $i < count($data); $i++) {
+            $total_title = mb_convert_encoding($data[$i]->title, "UTF-8", "auto");
             // ニュースタイトル
-            $list[$i]['title'] = mb_convert_encoding($data[$i]->title, "UTF-8", "auto");
+            $list[$i]['title'] = substr($total_title, 0, strpos($total_title, '-', 0));
+            // メディア
+            $list[$i]['media'] = substr($total_title, strpos($total_title, '-', 0) + 1, strlen($total_title) - 1);
             // 更新日時
             $list[$i]['updated'] = mb_convert_encoding($data[$i]->updated, "UTF-8", "auto");
             $list[$i]['updated'] = substr($list[$i]['updated'],0,10).' '. substr($list[$i]['updated'], 11, 8);
@@ -45,6 +48,7 @@ class CommonFunctions
             $url_split =  explode("=", (string) $data[$i]->link->attributes()->href);
             $list[$i]['url'] = end($url_split);
         }
+
 
         return $list;
     }

@@ -1699,8 +1699,21 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AccountMainComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AccountMainComponent.vue */ "./resources/js/components/AccountMainComponent.vue");
 /* harmony import */ var _AccountOptionComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AccountOptionComponent.vue */ "./resources/js/components/AccountOptionComponent.vue");
-/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! timers */ "./node_modules/timers-browserify/main.js");
-/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(timers__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _AccountOptionSpComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AccountOptionSpComponent.vue */ "./resources/js/components/AccountOptionSpComponent.vue");
+/* harmony import */ var _AccountLimitComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AccountLimitComponent.vue */ "./resources/js/components/AccountLimitComponent.vue");
+/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! timers */ "./node_modules/timers-browserify/main.js");
+/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(timers__WEBPACK_IMPORTED_MODULE_4__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1754,11 +1767,17 @@ __webpack_require__.r(__webpack_exports__);
 
  //オプション領域
 
+ //オプション領域(スマートフォン専用)
+
+ //リクエスト制限表示領域(スマートフォン専用)
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     AccountMain: _AccountMainComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    AccountOption: _AccountOptionComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    AccountOption: _AccountOptionComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    AccountOptionSp: _AccountOptionSpComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    AccountLimit: _AccountLimitComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
@@ -2031,7 +2050,7 @@ __webpack_require__.r(__webpack_exports__);
     var that = this; // 毎分、最新のアカウント情報とユーザー情報を描画(DBからデータを取得)
     // 自動フォローをバッチで行なっているため、リアルタイムでの描画が必要となる(自動フォロー処理は30分毎に1アカウントをフォローしている)
 
-    this.intervalId = Object(timers__WEBPACK_IMPORTED_MODULE_2__["setInterval"])(function () {
+    this.intervalId = Object(timers__WEBPACK_IMPORTED_MODULE_4__["setInterval"])(function () {
       // 仮想通貨関連アカウント情報取得
       that.fetchAccount(); // ユーザー情報取得
 
@@ -2044,6 +2063,51 @@ __webpack_require__.r(__webpack_exports__);
     // Vueインスタンスが破壊される直前に、setInteval処理を中断する。
     clearInterval(this.intervalId);
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AccountLimitComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AccountLimitComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["followLimit", //フォロー回数
+  "unFollowLimit"]
 });
 
 /***/ }),
@@ -2202,6 +2266,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["twitterUserAccounts", //ユーザーのTwitterアカウント情報
   "followLimit", //フォロー回数
@@ -2209,6 +2279,118 @@ __webpack_require__.r(__webpack_exports__);
   "autoFollowFlg", //自動フォローフラグ (0:OFF, 1:ON)
   "followFlg"],
   methods: {
+    // 「未フォロー」または「フォロー済」ボタンをクリック
+    search: function search() {
+      // 親コンポーネントに通知
+      this.$emit('child-search');
+    },
+    // 自動フォローの「ON」または「OFF」ボタンをクリック
+    autoFollow: function autoFollow() {
+      // 親コンポーネントに通知
+      this.$emit('child-auto');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AccountOptionSpComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AccountOptionSpComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      openFlg: 0
+    };
+  },
+  props: ["twitterUserAccounts", //ユーザーのTwitterアカウント情報
+  "followLimit", //フォロー回数
+  "unFollowLimit", // フォロー解除回数
+  "autoFollowFlg", //自動フォローフラグ (0:OFF, 1:ON)
+  "followFlg"],
+  methods: {
+    // オプションを開くor閉じる
+    show: function show() {
+      var option = document.querySelector('.p-sidebar__sp--dom');
+      option.classList.toggle('p-sidebar__sp');
+      this.openFlg = !this.openFlg;
+    },
     // 「未フォロー」または「フォロー済」ボタンをクリック
     search: function search() {
       // 親コンポーネントに通知
@@ -2729,100 +2911,183 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "main__base" }, [
-    _c(
-      "section",
-      { staticClass: "p-account" },
-      [
-        _c("div", { staticClass: "p-account__top" }, [
-          _c("div", { staticClass: "p-account__top__area" }, [
-            _c("h2", { staticClass: "p-account__top__area__title" }, [
-              _vm._v("Crypto Account")
+  return _c(
+    "section",
+    { staticClass: "main__base" },
+    [
+      _c("AccountLimit", {
+        attrs: {
+          followLimit: _vm.followLimit,
+          unFollowLimit: _vm.unFollowLimit
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "section",
+        { staticClass: "p-account" },
+        [
+          _c("div", { staticClass: "p-account__top" }, [
+            _c("div", { staticClass: "p-account__top__area" }, [
+              _c("h2", { staticClass: "p-account__top__area__title" }, [
+                _vm._v("Crypto Account")
+              ]),
+              _vm._v(" "),
+              _vm.count !== 0
+                ? _c("p", { staticClass: "p-account__top__area__page" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.firstCount) +
+                        " - " +
+                        _vm._s(_vm.lastCount) +
+                        " / " +
+                        _vm._s(_vm.count) +
+                        "\n                "
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
-            _vm.count !== 0
-              ? _c("p", { staticClass: "p-account__top__area__page" }, [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm.firstCount) +
-                      " - " +
-                      _vm._s(_vm.lastCount) +
-                      " / " +
-                      _vm._s(_vm.count) +
-                      "\n                "
-                  )
-                ])
-              : _vm._e()
+            _c("span", { staticClass: "p-account__top__border" })
           ]),
           _vm._v(" "),
-          _c("span", { staticClass: "p-account__top__border" })
+          _c("AccountMain", {
+            attrs: {
+              accounts: _vm.accounts,
+              page: _vm.page,
+              perPage: _vm.perPage,
+              followFlg: _vm.followFlg
+            },
+            on: { "child-follow": _vm.follow, "child-unfollow": _vm.unfollow }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-account__page" }, [
+            _c(
+              "a",
+              {
+                staticClass: "p-account__page__prev",
+                attrs: { href: "#" },
+                on: { click: _vm.onPrev }
+              },
+              [_vm._v("< 前ページ")]
+            ),
+            _vm._v(" "),
+            _vm.totalPage != 0
+              ? _c("div", { staticClass: "p-account__page__total" }, [
+                  _vm._v(_vm._s(_vm.page) + "/" + _vm._s(_vm.totalPage))
+                ])
+              : _c("div", { staticClass: "p-account__page__total" }, [
+                  _vm._v("0/" + _vm._s(_vm.totalPage))
+                ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "p-account__page__next",
+                attrs: { href: "#" },
+                on: { click: _vm.onNext }
+              },
+              [_vm._v("次ページ >")]
+            )
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("AccountOption", {
+        attrs: {
+          twitterUserAccounts: _vm.twitterUserAccounts,
+          followLimit: _vm.followLimit,
+          unFollowLimit: _vm.unFollowLimit,
+          followFlg: _vm.followFlg,
+          autoFollowFlg: _vm.autoFollowFlg
+        },
+        on: { "child-search": _vm.searchAccount, "child-auto": _vm.autoFollow }
+      }),
+      _vm._v(" "),
+      _c("AccountOptionSp", {
+        attrs: {
+          twitterUserAccounts: _vm.twitterUserAccounts,
+          followLimit: _vm.followLimit,
+          unFollowLimit: _vm.unFollowLimit,
+          followFlg: _vm.followFlg,
+          autoFollowFlg: _vm.autoFollowFlg
+        },
+        on: { "child-search": _vm.searchAccount, "child-auto": _vm.autoFollow }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AccountLimitComponent.vue?vue&type=template&id=2365d398&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AccountLimitComponent.vue?vue&type=template&id=2365d398& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", { staticClass: "p-sidebar p-sidebar--limit" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-sidebar__limit" }, [
+      _c("div", { staticClass: "p-sidebar__limit__area" }, [
+        _c("div", { staticClass: "p-sidebar__limit__area--f_action" }, [
+          _c("h3", { staticClass: "p-sidebar__limit__area--f_action--title" }, [
+            _vm._v("フォロー")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "p-sidebar__limit__area--f_action--count" }, [
+            _c(
+              "span",
+              { staticClass: "p-sidebar__limit__area--f_action--count--now" },
+              [
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.followLimit) +
+                    "\n                    "
+                )
+              ]
+            ),
+            _vm._v(" / 25\n                ")
+          ])
         ]),
         _vm._v(" "),
-        _c("AccountMain", {
-          attrs: {
-            accounts: _vm.accounts,
-            page: _vm.page,
-            perPage: _vm.perPage,
-            followFlg: _vm.followFlg
-          },
-          on: { "child-follow": _vm.follow, "child-unfollow": _vm.unfollow }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-account__page" }, [
-          _c(
-            "a",
-            {
-              staticClass: "p-account__page__prev",
-              attrs: { href: "#" },
-              on: { click: _vm.onPrev }
-            },
-            [_vm._v("< 前ページ")]
-          ),
+        _c("div", { staticClass: "p-sidebar__limit__area--f_action" }, [
+          _c("h3", { staticClass: "p-sidebar__limit__area--f_action--title" }, [
+            _vm._v("フォロー解除")
+          ]),
           _vm._v(" "),
-          _vm.totalPage != 0
-            ? _c("div", { staticClass: "p-account__page__total" }, [
-                _vm._v(_vm._s(_vm.page) + "/" + _vm._s(_vm.totalPage))
-              ])
-            : _c("div", { staticClass: "p-account__page__total" }, [
-                _vm._v("0/" + _vm._s(_vm.totalPage))
-              ]),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "p-account__page__next",
-              attrs: { href: "#" },
-              on: { click: _vm.onNext }
-            },
-            [_vm._v("次ページ >")]
-          )
+          _c("p", { staticClass: "p-sidebar__limit__area--f_action--count" }, [
+            _c(
+              "span",
+              { staticClass: "p-sidebar__limit__area--f_action--count--now" },
+              [
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.unFollowLimit) +
+                    "\n                    "
+                )
+              ]
+            ),
+            _vm._v(" / 25\n                ")
+          ])
         ])
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "section",
-      { staticClass: "p-sidebar p-sidebar--option" },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("AccountOption", {
-          attrs: {
-            twitterUserAccounts: _vm.twitterUserAccounts,
-            followLimit: _vm.followLimit,
-            unFollowLimit: _vm.unFollowLimit,
-            followFlg: _vm.followFlg,
-            autoFollowFlg: _vm.autoFollowFlg
-          },
-          on: {
-            "child-search": _vm.searchAccount,
-            "child-auto": _vm.autoFollow
-          }
-        })
-      ],
-      1
-    )
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -2831,7 +3096,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "p-sidebar__top" }, [
-      _c("h2", { staticClass: "p-sidebar__top__title" }, [_vm._v("Option")]),
+      _c("h2", { staticClass: "p-sidebar__top__title" }, [
+        _vm._v("Follow Limit")
+      ]),
       _vm._v(" "),
       _c("span", { staticClass: "p-sidebar__top__border" })
     ])
@@ -2966,10 +3233,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "p-sidebar__area p-sidebar__area--account" },
-    [
+  return _c("section", { staticClass: "p-sidebar p-sidebar--option" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-sidebar__area p-sidebar__area--account" }, [
       _c("div", { staticClass: "p-sidebar__twitter" }, [
         _c("div", { staticClass: "p-sidebar__twitter__img" }, [
           _c("img", {
@@ -3051,13 +3318,13 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                        " +
+                      "\n                            " +
                         _vm._s(_vm.followLimit) +
-                        "\n                    "
+                        "\n                        "
                     )
                   ]
                 ),
-                _vm._v(" / 25\n                ")
+                _vm._v(" / 25\n                    ")
               ]
             )
           ]),
@@ -3080,13 +3347,13 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                        " +
+                      "\n                            " +
                         _vm._s(_vm.unFollowLimit) +
-                        "\n                    "
+                        "\n                        "
                     )
                   ]
                 ),
-                _vm._v(" / 25\n                ")
+                _vm._v(" / 25\n                    ")
               ]
             )
           ])
@@ -3111,7 +3378,7 @@ var render = function() {
                   staticClass:
                     "c-action-btn c-action-btn--follow c-action-btn--follow--optionBlue"
                 },
-                [_vm._v("\n                未フォロー\n            ")]
+                [_vm._v("\n                    未フォロー\n                ")]
               )
             : _c(
                 "div",
@@ -3129,7 +3396,7 @@ var render = function() {
                   staticClass:
                     "c-action-btn c-action-btn--follow c-action-btn--follow--optionBlue"
                 },
-                [_vm._v("\n                フォロー済\n            ")]
+                [_vm._v("\n                    フォロー済\n                ")]
               )
             : _c(
                 "div",
@@ -3185,10 +3452,273 @@ var render = function() {
               )
         ])
       ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-sidebar__top" }, [
+      _c("h2", { staticClass: "p-sidebar__top__title" }, [_vm._v("Option")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "p-sidebar__top__border" })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AccountOptionSpComponent.vue?vue&type=template&id=0b36f129&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AccountOptionSpComponent.vue?vue&type=template&id=0b36f129& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    { staticClass: "p-sidebar p-sidebar--option p-sidebar--option--sp" },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "p-sidebar__area p-sidebar__area--account" }, [
+        _c("div", { staticClass: "p-sidebar__twitter" }, [
+          _c("div", { staticClass: "p-sidebar__twitter__img" }, [
+            _c("img", {
+              staticClass: "p-sidebar__twitter__img__area",
+              attrs: { src: _vm.twitterUserAccounts.profile_image_url, alt: "" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-sidebar__twitter__describe" }, [
+            _c("p", { staticClass: "p-sidebar__twitter__name" }, [
+              _vm._v(_vm._s(_vm.twitterUserAccounts.name))
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "p-sidebar__twitter__screen" }, [
+              _vm._v(_vm._s(_vm.twitterUserAccounts.screen_name))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-sidebar__twitter__status" }, [
+              _c("div", { staticClass: "p-sidebar__twitter__status__folow" }, [
+                _c(
+                  "p",
+                  {
+                    staticClass: "p-sidebar__twitter__status__folow__describe"
+                  },
+                  [_vm._v("フォロー")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass:
+                      "p-sidebar__twitter__status__folow__describe--value"
+                  },
+                  [_vm._v(_vm._s(_vm.twitterUserAccounts.friends_count))]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "p-sidebar__twitter__status__folower" },
+                [
+                  _c(
+                    "p",
+                    {
+                      staticClass:
+                        "p-sidebar__twitter__status__folower__describe"
+                    },
+                    [_vm._v("フォロワー")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      staticClass:
+                        "p-sidebar__twitter__status__folower__describe--value"
+                    },
+                    [_vm._v(_vm._s(_vm.twitterUserAccounts.followers_count))]
+                  )
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "p-sidebar__accordion" }, [
+          !_vm.openFlg
+            ? _c("div", { staticClass: "p-sidebar__accordion__area" }, [
+                _c("img", {
+                  staticClass: "p-sidebar__accordion__area__img",
+                  attrs: { src: "/assets/open_icon.png" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass:
+                      "p-sidebar__accordion__area__state p-sidebar__accordion__area__state--open",
+                    on: { click: _vm.show }
+                  },
+                  [_vm._v("OPEN")]
+                )
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "p-sidebar__sp p-sidebar__sp--dom" }, [
+          _c("div", { staticClass: "p-sidebar__follow" }, [
+            _c(
+              "h3",
+              {
+                staticClass:
+                  "p-sidebar__follow__title p-sidebar__follow__title--display"
+              },
+              [_vm._v("表示形式")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-sidebar__follow__area" }, [
+              !_vm.followFlg
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "c-action-btn c-action-btn--follow c-action-btn--follow--optionBlue"
+                    },
+                    [
+                      _vm._v(
+                        "\n                        未フォロー\n                    "
+                      )
+                    ]
+                  )
+                : _c(
+                    "div",
+                    {
+                      staticClass: "c-action-btn c-action-btn--follow",
+                      on: { click: _vm.search }
+                    },
+                    [_vm._v("未フォロー")]
+                  ),
+              _vm._v(" "),
+              _vm.followFlg
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "c-action-btn c-action-btn--follow c-action-btn--follow--optionBlue"
+                    },
+                    [
+                      _vm._v(
+                        "\n                        フォロー済\n                    "
+                      )
+                    ]
+                  )
+                : _c(
+                    "div",
+                    {
+                      staticClass: "c-action-btn c-action-btn--follow",
+                      on: { click: _vm.search }
+                    },
+                    [_vm._v("フォロー済")]
+                  )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-sidebar__follow" }, [
+            _c("h3", { staticClass: "p-sidebar__follow__title" }, [
+              _vm._v("自動フォロー")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-sidebar__follow__area" }, [
+              _vm.autoFollowFlg
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "c-action-btn c-action-btn--follow c-action-btn--follow--optionGreen"
+                    },
+                    [_vm._v("ON")]
+                  )
+                : _c(
+                    "div",
+                    {
+                      staticClass: "c-action-btn c-action-btn--follow",
+                      on: { click: _vm.autoFollow }
+                    },
+                    [_vm._v("ON")]
+                  ),
+              _vm._v(" "),
+              !_vm.autoFollowFlg
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "c-action-btn c-action-btn--follow c-action-btn--follow--optionGreen"
+                    },
+                    [_vm._v("OFF")]
+                  )
+                : _c(
+                    "div",
+                    {
+                      staticClass: "c-action-btn c-action-btn--follow",
+                      on: { click: _vm.autoFollow }
+                    },
+                    [_vm._v("OFF")]
+                  )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "p-sidebar__accordion" }, [
+          _vm.openFlg
+            ? _c("div", { staticClass: "p-sidebar__accordion__area" }, [
+                _c("img", {
+                  staticClass: "p-sidebar__accordion__area__img",
+                  attrs: { src: "/assets/close_icon.png" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass:
+                      "p-sidebar__accordion__area__state p-sidebar__accordion__area__state--open",
+                    on: { click: _vm.show }
+                  },
+                  [_vm._v("CLOSE")]
+                )
+              ])
+            : _vm._e()
+        ])
+      ])
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-sidebar__top" }, [
+      _c("h2", { staticClass: "p-sidebar__top__title" }, [_vm._v("Status")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "p-sidebar__top__border" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -15397,6 +15927,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/AccountLimitComponent.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/AccountLimitComponent.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AccountLimitComponent_vue_vue_type_template_id_2365d398___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AccountLimitComponent.vue?vue&type=template&id=2365d398& */ "./resources/js/components/AccountLimitComponent.vue?vue&type=template&id=2365d398&");
+/* harmony import */ var _AccountLimitComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AccountLimitComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/AccountLimitComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AccountLimitComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AccountLimitComponent_vue_vue_type_template_id_2365d398___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AccountLimitComponent_vue_vue_type_template_id_2365d398___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AccountLimitComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/AccountLimitComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/AccountLimitComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountLimitComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AccountLimitComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AccountLimitComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountLimitComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AccountLimitComponent.vue?vue&type=template&id=2365d398&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/AccountLimitComponent.vue?vue&type=template&id=2365d398& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountLimitComponent_vue_vue_type_template_id_2365d398___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AccountLimitComponent.vue?vue&type=template&id=2365d398& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AccountLimitComponent.vue?vue&type=template&id=2365d398&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountLimitComponent_vue_vue_type_template_id_2365d398___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountLimitComponent_vue_vue_type_template_id_2365d398___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/AccountMainComponent.vue":
 /*!**********************************************************!*\
   !*** ./resources/js/components/AccountMainComponent.vue ***!
@@ -15530,6 +16129,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountOptionComponent_vue_vue_type_template_id_b2080e74___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountOptionComponent_vue_vue_type_template_id_b2080e74___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/AccountOptionSpComponent.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/AccountOptionSpComponent.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AccountOptionSpComponent_vue_vue_type_template_id_0b36f129___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AccountOptionSpComponent.vue?vue&type=template&id=0b36f129& */ "./resources/js/components/AccountOptionSpComponent.vue?vue&type=template&id=0b36f129&");
+/* harmony import */ var _AccountOptionSpComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AccountOptionSpComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/AccountOptionSpComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AccountOptionSpComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AccountOptionSpComponent_vue_vue_type_template_id_0b36f129___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AccountOptionSpComponent_vue_vue_type_template_id_0b36f129___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AccountOptionSpComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/AccountOptionSpComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/AccountOptionSpComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountOptionSpComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AccountOptionSpComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AccountOptionSpComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountOptionSpComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AccountOptionSpComponent.vue?vue&type=template&id=0b36f129&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/AccountOptionSpComponent.vue?vue&type=template&id=0b36f129& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountOptionSpComponent_vue_vue_type_template_id_0b36f129___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AccountOptionSpComponent.vue?vue&type=template&id=0b36f129& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AccountOptionSpComponent.vue?vue&type=template&id=0b36f129&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountOptionSpComponent_vue_vue_type_template_id_0b36f129___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountOptionSpComponent_vue_vue_type_template_id_0b36f129___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -4,7 +4,6 @@
 .p-sidebar{
     display:block;
     width:30%;
-    // max-height:400px;
     background:$background_color_white;
     border-radius:5px;
     @include tl() {
@@ -28,8 +27,28 @@
         max-height:400px;
     }
     &--option{
+        @include tl(){
+            order:-2;
+            margin-bottom:30px;
+        }
         @include sl() {
+            display:none;
             max-height:560px;
+        }
+        &--sp{
+            display:none;
+             @include sl() {
+                display:block;
+                max-height:560px;
+            }
+        }
+    }
+    &--limit{
+        display:none;
+        @include sl() {
+            display:block;
+            order:-1;
+            margin-bottom:30px;
         }
     }
     &__top{
@@ -156,6 +175,11 @@
         color:$background_color_gray;
         padding: 10px 20px;
         margin-top:10px;
+        // &--display{
+        //     @include sl(){
+        //         display:none;
+        //     }
+        // }
         @include tl() {
             margin-top:0;
             width:11%;
@@ -282,6 +306,7 @@
         @include sl() {
             padding-top:0;
             width:100%;
+            box-sizing: border-box;
         }
         @include ss() {
             padding-right:0;
@@ -313,10 +338,43 @@
             align-content:flex-start;
             @include sl() {
                 width:85%;
+                margin: 0 auto;
             }
             @include ss() {
                 width:90%;
             }
+        }
+    }
+    &__accordion{
+        width:100%;
+        &__area{
+            margin-top:20px;
+                margin-bottom:20px;
+            margin-right:auto;
+            margin-left:auto;
+            width:20%;
+            display:flex;
+            @include ss() {
+                width:30%;
+            }
+            &__state {
+                padding:0 10px;
+                box-sizing:border-box;
+                text-align:center;
+                // background:$background_color_clear;
+                // border-radius:5px;
+                // border:none;
+                font-size:$font-size_l;
+                font-weight:bold;
+            }
+            &__img {
+                display:block;
+            }
+        }
+    }
+    &__sp{
+        @include sl(){
+            display:none;
         }
     }
 }

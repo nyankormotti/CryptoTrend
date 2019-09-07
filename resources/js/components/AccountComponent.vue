@@ -1,5 +1,11 @@
 <template>
     <section class="main__base">
+        <!-- リクエスト制限表示領域(スマホレスポンシブ時のみ表示) -->
+         <AccountLimit
+         :followLimit="followLimit"
+         :unFollowLimit="unFollowLimit"
+         >
+         </AccountLimit>
         <!-- 関連アカウント表示領域 -->
         <section class="p-account">
             <div class="p-account__top">
@@ -28,11 +34,6 @@
         </section>
 
         <!-- オプション領域 -->
-        <section class="p-sidebar p-sidebar--option">
-            <div class="p-sidebar__top">
-                <h2 class="p-sidebar__top__title">Option</h2>
-                <span class="p-sidebar__top__border"></span>
-            </div>
             <AccountOption
             :twitterUserAccounts="twitterUserAccounts"
             :followLimit="followLimit"
@@ -42,7 +43,17 @@
             @child-search="searchAccount"
             @child-auto="autoFollow"
             ></AccountOption>
-        </section>
+
+        <!-- オプション領域(スマホレスポンシブ時のみ表示) -->
+            <AccountOptionSp
+            :twitterUserAccounts="twitterUserAccounts"
+            :followLimit="followLimit"
+            :unFollowLimit="unFollowLimit"
+            :followFlg="followFlg"
+            :autoFollowFlg="autoFollowFlg"
+            @child-search="searchAccount"
+            @child-auto="autoFollow"
+            ></AccountOptionSp>
 
     </section>
 </template>
@@ -51,12 +62,16 @@
 
 import AccountMain from './AccountMainComponent.vue' //関連アカウント表示領域
 import AccountOption from './AccountOptionComponent.vue' //オプション領域
+import AccountOptionSp from './AccountOptionSpComponent.vue' //オプション領域(スマートフォン専用)
+import AccountLimit from './AccountLimitComponent.vue' //リクエスト制限表示領域(スマートフォン専用)
 import { setInterval } from 'timers';
 
 export default {
     components: {
         AccountMain,
-        AccountOption
+        AccountOption,
+        AccountOptionSp,
+        AccountLimit
     },
     data: function() {
         return {

@@ -6,6 +6,7 @@ use Exception;
 use PDOException;
 use ErrorException;
 use \Illuminate\Database\QueryException;
+use Abraham\TwitterOAuth\TwitterOAuthException;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -58,6 +59,7 @@ class Handler extends ExceptionHandler
             || $exception instanceof NotFoundHttpException
             || $exception instanceof MethodNotAllowedHttpException
             || $exception instanceof FatalThrowableError
+            || $exception instanceof TwitterOAuthException
             || $exception instanceof ErrorException
         ) {
             // 例外発生画面へリダイレクト

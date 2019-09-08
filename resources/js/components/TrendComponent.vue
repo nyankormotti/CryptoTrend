@@ -17,12 +17,7 @@
         </section>
 
         <!-- 検索フォーム -->
-        <section id="trend_main_template" class="p-sidebar p-sidebar--search">
-            <div class="p-sidebar__top">
-                <h2 class="p-sidebar__top__title">Search</h2>
-                <span class="p-sidebar__top__border"></span>
-            </div>
-            <TrendSearch
+        <TrendSearch
             :period="period"
             :currency1="currency1"
             :currency2="currency2"
@@ -47,9 +42,35 @@
             @child-LTC="changeLTC"
             @child-BCH="changeBCH"
             @child-MONA="changeMONA"
-            ></TrendSearch>
-        </section>
+        ></TrendSearch>
 
+        <!-- 検索フォーム(レスポンシブ) -->
+        <TrendSearchSp
+            :period="period"
+            :currency1="currency1"
+            :currency2="currency2"
+            :currency3="currency3"
+            :currency4="currency4"
+            :currency5="currency5"
+            :currency6="currency6"
+            :currency7="currency7"
+            :currency8="currency8"
+            :currency9="currency9"
+            :currency10="currency10"
+            @child-h-period="searchHourPeriod"
+            @child-d-period="searchDatePeriod"
+            @child-w-period="searchWeekPeriod"
+            @child-BTC="changeBTC"
+            @child-ETH="changeETH"
+            @child-ETC="changeETC"
+            @child-LSK="changeLSK"
+            @child-FCT="changeFCT"
+            @child-XRP="changeXRP"
+            @child-XEM="changeXEM"
+            @child-LTC="changeLTC"
+            @child-BCH="changeBCH"
+            @child-MONA="changeMONA"
+        ></TrendSearchSp>
     </section>
 </template>
 
@@ -57,11 +78,13 @@
 
 import TrendMain from './TrendMainComponent.vue' //トレンドランキング表示領域
 import TrendSearch from './TrendSearchComponent.vue' //検索フォーム
+import TrendSearchSp from './TrendSearchSpComponent.vue' //検索フォーム
 
 export default {
     components: {
         TrendMain,
-        TrendSearch
+        TrendSearch,
+        TrendSearchSp
     },
     data: function() {
         return {

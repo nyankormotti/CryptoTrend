@@ -28,7 +28,7 @@
             <div class="p-sidebar__accordion">
                 <div v-if="!openFlg" class="p-sidebar__accordion__area">
                     <img class="p-sidebar__accordion__area__img" :src="'/assets/open_icon.png'">
-                    <p class="p-sidebar__accordion__area__state p-sidebar__accordion__area__state--open" @click="show">OPEN</p>
+                    <p class="p-sidebar__accordion__area__state p-sidebar__accordion__area__state--open" @click="show">設定</p>
                 </div>
             </div>
             <!-- アコーディオン表示領域 -->
@@ -58,9 +58,9 @@
                 </div>
             </div>
             <div class="p-sidebar__accordion">
-                <div v-if="openFlg" class="p-sidebar__accordion__area">
+                <div v-if="openFlg" class="p-sidebar__accordion__area p-sidebar__accordion__area--close">
                     <img class="p-sidebar__accordion__area__img" :src="'/assets/close_icon.png'">
-                    <p class="p-sidebar__accordion__area__state p-sidebar__accordion__area__state--open" @click="show">CLOSE</p>
+                    <p class="p-sidebar__accordion__area__state p-sidebar__accordion__area__state--open" @click="show">閉じる</p>
                 </div>
             </div>
             <!-- アコーディオン表示領域 終-->

@@ -1,5 +1,5 @@
 <template>
-    <section id="trend_main_template" class="p-sidebar p-sidebar--search">
+    <section id="trend_main_template" class="p-sidebar p-sidebar--search p-sidebar--search--sp">
         <div class="p-sidebar__top">
             <h2 class="p-sidebar__top__title">Search</h2>
             <span class="p-sidebar__top__border"></span>
@@ -16,7 +16,14 @@
                     <div v-else class="c-action-btn c-action-btn--trend" @click="weekPeriod">1週間</div>
                 </div>
             </div>
-            <div class="p-sidebar__brand">
+            <div class="p-sidebar__accordion">
+                <div v-if="!openFlg" class="p-sidebar__accordion__area p-sidebar__accordion__area--brand">
+                    <img class="p-sidebar__accordion__area__img" :src="'/assets/open_icon.png'">
+                    <p class="p-sidebar__accordion__area__state p-sidebar__accordion__area__state--open" @click="show">銘柄を絞る</p>
+                </div>
+            </div>
+            <!-- アコーディオン表示領域 -->
+            <div class="p-sidebar__brand p-sidebar__sp p-sidebar__sp--brand">
                 <h3 class="p-sidebar__brand__title">銘柄</h3>
                 <div class="p-sidebar__brand__area">
                     <label for="BTC"  class="p-sidebar__brand__check" >
@@ -51,12 +58,24 @@
                     </label>
                 </div>
             </div>
+            <div class="p-sidebar__accordion">
+                <div v-if="openFlg" class="p-sidebar__accordion__area p-sidebar__accordion__area--close">
+                    <img class="p-sidebar__accordion__area__img" :src="'/assets/close_icon.png'">
+                    <p class="p-sidebar__accordion__area__state p-sidebar__accordion__area__state--open" @click="show">閉じる</p>
+                </div>
+            </div>
+             <!-- アコーディオン表示領域 終-->
         </div>
     </section>
 </template>
 
 <script>
 export default {
+    data() {
+        return {
+            openFlg:0
+        }
+    },
     props:[
         'period', //期間(1:1時間, 2:1日, 3:１週間)
         'currency1', // 銘柄検索フラグ ($BTC)
@@ -71,6 +90,12 @@ export default {
         'currency10' // 銘柄検索フラグ ($MONA)
     ],
     methods: {
+         // オプションを開くor閉じる
+        show: function() {
+            let option = document.querySelector('.p-sidebar__sp--brand')
+            option.classList.toggle('p-sidebar__sp')
+            this.openFlg = !this.openFlg
+        },
         // 期間：「1時間」を選択した場合
         hourPeriod:function() {
             // 親コンポーネントに通知

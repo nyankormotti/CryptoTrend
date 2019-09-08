@@ -638,7 +638,7 @@ body {
   border-radius: 30px;
   cursor: pointer;
   margin-bottom: 10px;
-  margin-right: 10px;
+  margin-right: 25px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -713,6 +713,7 @@ body {
   padding: 10px 10px;
   width: 60px;
   text-align: center;
+  margin-right: 10px;
 }
 
 @media screen and (max-width: 480px) {
@@ -1750,7 +1751,31 @@ body {
 }
 
 .p-sidebar--search {
-  max-height: 400px;
+  max-height: 360px;
+}
+
+@media screen and (max-width: 1024px) {
+  .p-sidebar--search {
+    display: none;
+  }
+}
+
+.p-sidebar--search--sp {
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .p-sidebar--search--sp {
+    display: block;
+    order: -1;
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .p-sidebar--search--sp {
+    max-height: 500px;
+  }
 }
 
 @media screen and (max-width: 1024px) {
@@ -2156,7 +2181,29 @@ body {
 
 @media screen and (max-width: 480px) {
   .p-sidebar__brand__area {
-    justify-content: space-between;
+    justify-content: space-around;
+  }
+}
+
+.p-sidebar__brand__check {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+@media screen and (max-width: 1024px) {
+  .p-sidebar__brand__check {
+    margin-right: 20px;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .p-sidebar__brand__check {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
   }
 }
 
@@ -2242,6 +2289,18 @@ body {
   width: 100%;
 }
 
+@media screen and (max-width: 1024px) {
+  .p-sidebar__accordion {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .p-sidebar__accordion {
+    display: block;
+  }
+}
+
 .p-sidebar__accordion__area {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -2267,6 +2326,36 @@ body {
 
 .p-sidebar__accordion__area__img {
   display: block;
+}
+
+@media screen and (max-width: 480px) {
+  .p-sidebar__accordion__area--brand {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .p-sidebar__accordion__area--brand {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .p-sidebar__accordion__area--brand {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .p-sidebar__accordion__area--close {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .p-sidebar__accordion__area--close {
+    width: 40%;
+  }
 }
 
 @media screen and (max-width: 480px) {

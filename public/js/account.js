@@ -3574,7 +3574,7 @@ var render = function() {
                       "p-sidebar__accordion__area__state p-sidebar__accordion__area__state--open",
                     on: { click: _vm.show }
                   },
-                  [_vm._v("OPEN")]
+                  [_vm._v("設定")]
                 )
               ])
             : _vm._e()
@@ -3685,22 +3685,29 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "p-sidebar__accordion" }, [
           _vm.openFlg
-            ? _c("div", { staticClass: "p-sidebar__accordion__area" }, [
-                _c("img", {
-                  staticClass: "p-sidebar__accordion__area__img",
-                  attrs: { src: "/assets/close_icon.png" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  {
-                    staticClass:
-                      "p-sidebar__accordion__area__state p-sidebar__accordion__area__state--open",
-                    on: { click: _vm.show }
-                  },
-                  [_vm._v("CLOSE")]
-                )
-              ])
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "p-sidebar__accordion__area p-sidebar__accordion__area--close"
+                },
+                [
+                  _c("img", {
+                    staticClass: "p-sidebar__accordion__area__img",
+                    attrs: { src: "/assets/close_icon.png" }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      staticClass:
+                        "p-sidebar__accordion__area__state p-sidebar__accordion__area__state--open",
+                      on: { click: _vm.show }
+                    },
+                    [_vm._v("閉じる")]
+                  )
+                ]
+              )
             : _vm._e()
         ])
       ])

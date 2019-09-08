@@ -1699,6 +1699,28 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TrendMainComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TrendMainComponent.vue */ "./resources/js/components/TrendMainComponent.vue");
 /* harmony import */ var _TrendSearchComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TrendSearchComponent.vue */ "./resources/js/components/TrendSearchComponent.vue");
+/* harmony import */ var _TrendSearchSpComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TrendSearchSpComponent.vue */ "./resources/js/components/TrendSearchSpComponent.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1758,10 +1780,13 @@ __webpack_require__.r(__webpack_exports__);
 
  //検索フォーム
 
+ //検索フォーム
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     TrendMain: _TrendMainComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    TrendSearch: _TrendSearchComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    TrendSearch: _TrendSearchComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    TrendSearchSp: _TrendSearchSpComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -2107,6 +2132,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['period', //期間(1:1時間, 2:1日, 3:１週間)
   'currency1', // 銘柄検索フラグ ($BTC)
@@ -2121,6 +2172,181 @@ __webpack_require__.r(__webpack_exports__);
   'currency10' // 銘柄検索フラグ ($MONA)
   ],
   methods: {
+    // 期間：「1時間」を選択した場合
+    hourPeriod: function hourPeriod() {
+      // 親コンポーネントに通知
+      this.$emit('child-h-period');
+    },
+    // 期間：「1日」を選択した場合
+    datePeriod: function datePeriod() {
+      // 親コンポーネントに通知
+      this.$emit('child-d-period');
+    },
+    // 期間：「1週間」を選択した場合
+    weekPeriod: function weekPeriod() {
+      // 親コンポーネントに通知
+      this.$emit('child-w-period');
+    },
+    // 銘柄：「$BTC」を選択した場合
+    clickBTC: function clickBTC() {
+      // 親コンポーネントに通知
+      this.$emit('child-BTC');
+    },
+    // 銘柄：「$ETH」を選択した場合
+    clickETH: function clickETH() {
+      // 親コンポーネントに通知
+      this.$emit('child-ETH');
+    },
+    // 銘柄：「$ETC」を選択した場合
+    clickETC: function clickETC() {
+      // 親コンポーネントに通知
+      this.$emit('child-ETC');
+    },
+    // 銘柄：「$LSK」を選択した場合
+    clickLSK: function clickLSK() {
+      // 親コンポーネントに通知
+      this.$emit('child-LSK');
+    },
+    // 銘柄：「$FCT」を選択した場合
+    clickFCT: function clickFCT() {
+      // 親コンポーネントに通知
+      this.$emit('child-FCT');
+    },
+    // 銘柄：「$XRP」を選択した場合
+    clickXRP: function clickXRP() {
+      // 親コンポーネントに通知
+      this.$emit('child-XRP');
+    },
+    // 銘柄：「$XEM」を選択した場合
+    clickXEM: function clickXEM() {
+      // 親コンポーネントに通知
+      this.$emit('child-XEM');
+    },
+    // 銘柄：「$LTC」を選択した場合
+    clickLTC: function clickLTC() {
+      // 親コンポーネントに通知
+      this.$emit('child-LTC');
+    },
+    // 銘柄：「$BCH」を選択した場合
+    clickBCH: function clickBCH() {
+      // 親コンポーネントに通知
+      this.$emit('child-BCH');
+    },
+    // 銘柄：「$MONA」を選択した場合
+    clickMONA: function clickMONA() {
+      // 親コンポーネントに通知
+      this.$emit('child-MONA');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TrendSearchSpComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TrendSearchSpComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      openFlg: 0
+    };
+  },
+  props: ['period', //期間(1:1時間, 2:1日, 3:１週間)
+  'currency1', // 銘柄検索フラグ ($BTC)
+  'currency2', // 銘柄検索フラグ ($ETH)
+  'currency3', // 銘柄検索フラグ ($ETC)
+  'currency4', // 銘柄検索フラグ ($LSK)
+  'currency5', // 銘柄検索フラグ ($FCT)
+  'currency6', // 銘柄検索フラグ ($XRP)
+  'currency7', // 銘柄検索フラグ ($XEM)
+  'currency8', // 銘柄検索フラグ ($LTC)
+  'currency9', // 銘柄検索フラグ ($BCH)
+  'currency10' // 銘柄検索フラグ ($MONA)
+  ],
+  methods: {
+    // オプションを開くor閉じる
+    show: function show() {
+      var option = document.querySelector('.p-sidebar__sp--brand');
+      option.classList.toggle('p-sidebar__sp');
+      this.openFlg = !this.openFlg;
+    },
     // 期間：「1時間」を選択した場合
     hourPeriod: function hourPeriod() {
       // 親コンポーネントに通知
@@ -20322,64 +20548,72 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c(
-        "section",
-        {
-          staticClass: "p-sidebar p-sidebar--search",
-          attrs: { id: "trend_main_template" }
+      _c("TrendSearch", {
+        attrs: {
+          period: _vm.period,
+          currency1: _vm.currency1,
+          currency2: _vm.currency2,
+          currency3: _vm.currency3,
+          currency4: _vm.currency4,
+          currency5: _vm.currency5,
+          currency6: _vm.currency6,
+          currency7: _vm.currency7,
+          currency8: _vm.currency8,
+          currency9: _vm.currency9,
+          currency10: _vm.currency10
         },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("TrendSearch", {
-            attrs: {
-              period: _vm.period,
-              currency1: _vm.currency1,
-              currency2: _vm.currency2,
-              currency3: _vm.currency3,
-              currency4: _vm.currency4,
-              currency5: _vm.currency5,
-              currency6: _vm.currency6,
-              currency7: _vm.currency7,
-              currency8: _vm.currency8,
-              currency9: _vm.currency9,
-              currency10: _vm.currency10
-            },
-            on: {
-              "child-h-period": _vm.searchHourPeriod,
-              "child-d-period": _vm.searchDatePeriod,
-              "child-w-period": _vm.searchWeekPeriod,
-              "child-BTC": _vm.changeBTC,
-              "child-ETH": _vm.changeETH,
-              "child-ETC": _vm.changeETC,
-              "child-LSK": _vm.changeLSK,
-              "child-FCT": _vm.changeFCT,
-              "child-XRP": _vm.changeXRP,
-              "child-XEM": _vm.changeXEM,
-              "child-LTC": _vm.changeLTC,
-              "child-BCH": _vm.changeBCH,
-              "child-MONA": _vm.changeMONA
-            }
-          })
-        ],
-        1
-      )
+        on: {
+          "child-h-period": _vm.searchHourPeriod,
+          "child-d-period": _vm.searchDatePeriod,
+          "child-w-period": _vm.searchWeekPeriod,
+          "child-BTC": _vm.changeBTC,
+          "child-ETH": _vm.changeETH,
+          "child-ETC": _vm.changeETC,
+          "child-LSK": _vm.changeLSK,
+          "child-FCT": _vm.changeFCT,
+          "child-XRP": _vm.changeXRP,
+          "child-XEM": _vm.changeXEM,
+          "child-LTC": _vm.changeLTC,
+          "child-BCH": _vm.changeBCH,
+          "child-MONA": _vm.changeMONA
+        }
+      }),
+      _vm._v(" "),
+      _c("TrendSearchSp", {
+        attrs: {
+          period: _vm.period,
+          currency1: _vm.currency1,
+          currency2: _vm.currency2,
+          currency3: _vm.currency3,
+          currency4: _vm.currency4,
+          currency5: _vm.currency5,
+          currency6: _vm.currency6,
+          currency7: _vm.currency7,
+          currency8: _vm.currency8,
+          currency9: _vm.currency9,
+          currency10: _vm.currency10
+        },
+        on: {
+          "child-h-period": _vm.searchHourPeriod,
+          "child-d-period": _vm.searchDatePeriod,
+          "child-w-period": _vm.searchWeekPeriod,
+          "child-BTC": _vm.changeBTC,
+          "child-ETH": _vm.changeETH,
+          "child-ETC": _vm.changeETC,
+          "child-LSK": _vm.changeLSK,
+          "child-FCT": _vm.changeFCT,
+          "child-XRP": _vm.changeXRP,
+          "child-XEM": _vm.changeXEM,
+          "child-LTC": _vm.changeLTC,
+          "child-BCH": _vm.changeBCH,
+          "child-MONA": _vm.changeMONA
+        }
+      })
     ],
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-sidebar__top" }, [
-      _c("h2", { staticClass: "p-sidebar__top__title" }, [_vm._v("Search")]),
-      _vm._v(" "),
-      _c("span", { staticClass: "p-sidebar__top__border" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -20592,175 +20826,1232 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-sidebar__area" }, [
-    _c("div", { staticClass: "p-sidebar__period" }, [
-      _c("h3", { staticClass: "p-sidebar__period__title" }, [_vm._v("期間")]),
+  return _c(
+    "section",
+    {
+      staticClass: "p-sidebar p-sidebar--search",
+      attrs: { id: "trend_main_template" }
+    },
+    [
+      _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "p-sidebar__period__area" }, [
-        _vm.period == 1
-          ? _c(
-              "div",
-              {
-                staticClass:
-                  "c-action-btn c-action-btn--trend c-action-btn--blue"
-              },
-              [_vm._v("1時間")]
-            )
-          : _c(
-              "div",
-              {
-                staticClass: "c-action-btn c-action-btn--trend",
-                on: { click: _vm.hourPeriod }
-              },
-              [_vm._v("1時間")]
+      _c("div", { staticClass: "p-sidebar__area" }, [
+        _c("div", { staticClass: "p-sidebar__period" }, [
+          _c("h3", { staticClass: "p-sidebar__period__title" }, [
+            _vm._v("期間")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-sidebar__period__area" }, [
+            _vm.period == 1
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "c-action-btn c-action-btn--trend c-action-btn--blue"
+                  },
+                  [_vm._v("1時間")]
+                )
+              : _c(
+                  "div",
+                  {
+                    staticClass: "c-action-btn c-action-btn--trend",
+                    on: { click: _vm.hourPeriod }
+                  },
+                  [_vm._v("1時間")]
+                ),
+            _vm._v(" "),
+            _vm.period == 2
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "c-action-btn c-action-btn--trend c-action-btn--blue"
+                  },
+                  [_vm._v("1日間")]
+                )
+              : _c(
+                  "div",
+                  {
+                    staticClass: "c-action-btn c-action-btn--trend",
+                    on: { click: _vm.datePeriod }
+                  },
+                  [_vm._v("1日間")]
+                ),
+            _vm._v(" "),
+            _vm.period == 3
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "c-action-btn c-action-btn--trend c-action-btn--blue"
+                  },
+                  [_vm._v("1週間")]
+                )
+              : _c(
+                  "div",
+                  {
+                    staticClass: "c-action-btn c-action-btn--trend",
+                    on: { click: _vm.weekPeriod }
+                  },
+                  [_vm._v("1週間")]
+                )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "p-sidebar__brand" }, [
+          _c("h3", { staticClass: "p-sidebar__brand__title" }, [
+            _vm._v("銘柄")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-sidebar__brand__area" }, [
+            _c(
+              "label",
+              { staticClass: "p-sidebar__brand__check", attrs: { for: "BTC" } },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.currency1,
+                      expression: "currency1"
+                    }
+                  ],
+                  attrs: { type: "checkbox", id: "BTC" },
+                  domProps: {
+                    checked: Array.isArray(_vm.currency1)
+                      ? _vm._i(_vm.currency1, null) > -1
+                      : _vm.currency1
+                  },
+                  on: {
+                    click: _vm.clickBTC,
+                    change: function($event) {
+                      var $$a = _vm.currency1,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.currency1 = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.currency1 = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.currency1 = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v("$BTC\n                ")
+              ]
             ),
-        _vm._v(" "),
-        _vm.period == 2
-          ? _c(
-              "div",
-              {
-                staticClass:
-                  "c-action-btn c-action-btn--trend c-action-btn--blue"
-              },
-              [_vm._v("1日間")]
-            )
-          : _c(
-              "div",
-              {
-                staticClass: "c-action-btn c-action-btn--trend",
-                on: { click: _vm.datePeriod }
-              },
-              [_vm._v("1日間")]
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "p-sidebar__brand__check", attrs: { for: "ETH" } },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.currency2,
+                      expression: "currency2"
+                    }
+                  ],
+                  attrs: { type: "checkbox", id: "ETH" },
+                  domProps: {
+                    checked: Array.isArray(_vm.currency2)
+                      ? _vm._i(_vm.currency2, null) > -1
+                      : _vm.currency2
+                  },
+                  on: {
+                    click: _vm.clickETH,
+                    change: function($event) {
+                      var $$a = _vm.currency2,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.currency2 = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.currency2 = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.currency2 = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v("$ETH\n                ")
+              ]
             ),
-        _vm._v(" "),
-        _vm.period == 3
-          ? _c(
-              "div",
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "p-sidebar__brand__check", attrs: { for: "ETC" } },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.currency3,
+                      expression: "currency3"
+                    }
+                  ],
+                  attrs: { type: "checkbox", id: "ETC" },
+                  domProps: {
+                    checked: Array.isArray(_vm.currency3)
+                      ? _vm._i(_vm.currency3, null) > -1
+                      : _vm.currency3
+                  },
+                  on: {
+                    click: _vm.clickETC,
+                    change: function($event) {
+                      var $$a = _vm.currency3,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.currency3 = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.currency3 = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.currency3 = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v("$ETC\n                ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "p-sidebar__brand__check", attrs: { for: "LSK" } },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.currency4,
+                      expression: "currency4"
+                    }
+                  ],
+                  attrs: { type: "checkbox", id: "LSK" },
+                  domProps: {
+                    checked: Array.isArray(_vm.currency4)
+                      ? _vm._i(_vm.currency4, null) > -1
+                      : _vm.currency4
+                  },
+                  on: {
+                    click: _vm.clickLSK,
+                    change: function($event) {
+                      var $$a = _vm.currency4,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.currency4 = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.currency4 = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.currency4 = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v("$LSK\n                ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "p-sidebar__brand__check", attrs: { for: "FCT" } },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.currency5,
+                      expression: "currency5"
+                    }
+                  ],
+                  attrs: { type: "checkbox", id: "FCT" },
+                  domProps: {
+                    checked: Array.isArray(_vm.currency5)
+                      ? _vm._i(_vm.currency5, null) > -1
+                      : _vm.currency5
+                  },
+                  on: {
+                    click: _vm.clickFCT,
+                    change: function($event) {
+                      var $$a = _vm.currency5,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.currency5 = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.currency5 = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.currency5 = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v("$FCT\n                ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "p-sidebar__brand__check", attrs: { for: "XRP" } },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.currency6,
+                      expression: "currency6"
+                    }
+                  ],
+                  attrs: { type: "checkbox", id: "XRP" },
+                  domProps: {
+                    checked: Array.isArray(_vm.currency6)
+                      ? _vm._i(_vm.currency6, null) > -1
+                      : _vm.currency6
+                  },
+                  on: {
+                    click: _vm.clickXRP,
+                    change: function($event) {
+                      var $$a = _vm.currency6,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.currency6 = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.currency6 = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.currency6 = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v("$XRP\n                ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "p-sidebar__brand__check", attrs: { for: "XEM" } },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.currency7,
+                      expression: "currency7"
+                    }
+                  ],
+                  attrs: { type: "checkbox", id: "XEM" },
+                  domProps: {
+                    checked: Array.isArray(_vm.currency7)
+                      ? _vm._i(_vm.currency7, null) > -1
+                      : _vm.currency7
+                  },
+                  on: {
+                    click: _vm.clickXEM,
+                    change: function($event) {
+                      var $$a = _vm.currency7,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.currency7 = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.currency7 = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.currency7 = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v("$XEM\n                ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "p-sidebar__brand__check", attrs: { for: "LTC" } },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.currency8,
+                      expression: "currency8"
+                    }
+                  ],
+                  attrs: { type: "checkbox", id: "LTC" },
+                  domProps: {
+                    checked: Array.isArray(_vm.currency8)
+                      ? _vm._i(_vm.currency8, null) > -1
+                      : _vm.currency8
+                  },
+                  on: {
+                    click: _vm.clickLTC,
+                    change: function($event) {
+                      var $$a = _vm.currency8,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.currency8 = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.currency8 = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.currency8 = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v("$LTC\n                ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "p-sidebar__brand__check", attrs: { for: "BCH" } },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.currency9,
+                      expression: "currency9"
+                    }
+                  ],
+                  attrs: { type: "checkbox", id: "BCH" },
+                  domProps: {
+                    checked: Array.isArray(_vm.currency9)
+                      ? _vm._i(_vm.currency9, null) > -1
+                      : _vm.currency9
+                  },
+                  on: {
+                    click: _vm.clickBCH,
+                    change: function($event) {
+                      var $$a = _vm.currency9,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.currency9 = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.currency9 = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.currency9 = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v("$BCH\n                ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "label",
               {
-                staticClass:
-                  "c-action-btn c-action-btn--trend c-action-btn--blue"
+                staticClass: "p-sidebar__brand__check",
+                attrs: { for: "MONA" }
               },
-              [_vm._v("1週間")]
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.currency10,
+                      expression: "currency10"
+                    }
+                  ],
+                  attrs: { type: "checkbox", id: "MONA" },
+                  domProps: {
+                    checked: Array.isArray(_vm.currency10)
+                      ? _vm._i(_vm.currency10, null) > -1
+                      : _vm.currency10
+                  },
+                  on: {
+                    click: _vm.clickMONA,
+                    change: function($event) {
+                      var $$a = _vm.currency10,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.currency10 = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.currency10 = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.currency10 = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v("$MONA\n                ")
+              ]
             )
-          : _c(
-              "div",
-              {
-                staticClass: "c-action-btn c-action-btn--trend",
-                on: { click: _vm.weekPeriod }
-              },
-              [_vm._v("1週間")]
-            )
+          ])
+        ])
       ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-sidebar__brand" }, [
-      _c("h3", { staticClass: "p-sidebar__brand__title" }, [_vm._v("銘柄")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "p-sidebar__brand__area" }, [
-        _c(
-          "div",
-          {
-            staticClass: "c-action-btn c-action-btn--trend",
-            class: [_vm.currency1 ? "c-action-btn--blue" : ""],
-            on: { click: _vm.clickBTC }
-          },
-          [_vm._v("$BTC")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "c-action-btn c-action-btn--trend",
-            class: [_vm.currency2 ? "c-action-btn--blue" : ""],
-            on: { click: _vm.clickETH }
-          },
-          [_vm._v("$ETH")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "c-action-btn c-action-btn--trend",
-            class: [_vm.currency3 ? "c-action-btn--blue" : ""],
-            on: { click: _vm.clickETC }
-          },
-          [_vm._v("$ETC")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "c-action-btn c-action-btn--trend",
-            class: [_vm.currency4 ? "c-action-btn--blue" : ""],
-            on: { click: _vm.clickLSK }
-          },
-          [_vm._v("$LSK")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "c-action-btn c-action-btn--trend",
-            class: [_vm.currency5 ? "c-action-btn--blue" : ""],
-            on: { click: _vm.clickFCT }
-          },
-          [_vm._v("$FCT")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "c-action-btn c-action-btn--trend",
-            class: [_vm.currency6 ? "c-action-btn--blue" : ""],
-            on: { click: _vm.clickXRP }
-          },
-          [_vm._v("$XRP")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "c-action-btn c-action-btn--trend",
-            class: [_vm.currency7 ? "c-action-btn--blue" : ""],
-            on: { click: _vm.clickXEM }
-          },
-          [_vm._v("$XEM")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "c-action-btn c-action-btn--trend",
-            class: [_vm.currency8 ? "c-action-btn--blue" : ""],
-            on: { click: _vm.clickLTC }
-          },
-          [_vm._v("$LTC")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "c-action-btn c-action-btn--trend",
-            class: [_vm.currency9 ? "c-action-btn--blue" : ""],
-            on: { click: _vm.clickBCH }
-          },
-          [_vm._v("$BCH")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "c-action-btn c-action-btn--trend",
-            class: [_vm.currency10 ? "c-action-btn--blue" : ""],
-            on: { click: _vm.clickMONA }
-          },
-          [_vm._v("$MONA")]
-        )
-      ])
-    ])
-  ])
+    ]
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-sidebar__top" }, [
+      _c("h2", { staticClass: "p-sidebar__top__title" }, [_vm._v("Search")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "p-sidebar__top__border" })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TrendSearchSpComponent.vue?vue&type=template&id=13454ee6&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TrendSearchSpComponent.vue?vue&type=template&id=13454ee6& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    {
+      staticClass: "p-sidebar p-sidebar--search p-sidebar--search--sp",
+      attrs: { id: "trend_main_template" }
+    },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "p-sidebar__area" }, [
+        _c("div", { staticClass: "p-sidebar__period" }, [
+          _c("h3", { staticClass: "p-sidebar__period__title" }, [
+            _vm._v("期間")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-sidebar__period__area" }, [
+            _vm.period == 1
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "c-action-btn c-action-btn--trend c-action-btn--blue"
+                  },
+                  [_vm._v("1時間")]
+                )
+              : _c(
+                  "div",
+                  {
+                    staticClass: "c-action-btn c-action-btn--trend",
+                    on: { click: _vm.hourPeriod }
+                  },
+                  [_vm._v("1時間")]
+                ),
+            _vm._v(" "),
+            _vm.period == 2
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "c-action-btn c-action-btn--trend c-action-btn--blue"
+                  },
+                  [_vm._v("1日間")]
+                )
+              : _c(
+                  "div",
+                  {
+                    staticClass: "c-action-btn c-action-btn--trend",
+                    on: { click: _vm.datePeriod }
+                  },
+                  [_vm._v("1日間")]
+                ),
+            _vm._v(" "),
+            _vm.period == 3
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "c-action-btn c-action-btn--trend c-action-btn--blue"
+                  },
+                  [_vm._v("1週間")]
+                )
+              : _c(
+                  "div",
+                  {
+                    staticClass: "c-action-btn c-action-btn--trend",
+                    on: { click: _vm.weekPeriod }
+                  },
+                  [_vm._v("1週間")]
+                )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "p-sidebar__accordion" }, [
+          !_vm.openFlg
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "p-sidebar__accordion__area p-sidebar__accordion__area--brand"
+                },
+                [
+                  _c("img", {
+                    staticClass: "p-sidebar__accordion__area__img",
+                    attrs: { src: "/assets/open_icon.png" }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      staticClass:
+                        "p-sidebar__accordion__area__state p-sidebar__accordion__area__state--open",
+                      on: { click: _vm.show }
+                    },
+                    [_vm._v("銘柄を絞る")]
+                  )
+                ]
+              )
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "p-sidebar__brand p-sidebar__sp p-sidebar__sp--brand"
+          },
+          [
+            _c("h3", { staticClass: "p-sidebar__brand__title" }, [
+              _vm._v("銘柄")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-sidebar__brand__area" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "p-sidebar__brand__check",
+                  attrs: { for: "BTC" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.currency1,
+                        expression: "currency1"
+                      }
+                    ],
+                    attrs: { type: "checkbox", id: "BTC" },
+                    domProps: {
+                      checked: Array.isArray(_vm.currency1)
+                        ? _vm._i(_vm.currency1, null) > -1
+                        : _vm.currency1
+                    },
+                    on: {
+                      click: _vm.clickBTC,
+                      change: function($event) {
+                        var $$a = _vm.currency1,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.currency1 = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.currency1 = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.currency1 = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v("$BTC\n                ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "p-sidebar__brand__check",
+                  attrs: { for: "ETH" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.currency2,
+                        expression: "currency2"
+                      }
+                    ],
+                    attrs: { type: "checkbox", id: "ETH" },
+                    domProps: {
+                      checked: Array.isArray(_vm.currency2)
+                        ? _vm._i(_vm.currency2, null) > -1
+                        : _vm.currency2
+                    },
+                    on: {
+                      click: _vm.clickETH,
+                      change: function($event) {
+                        var $$a = _vm.currency2,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.currency2 = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.currency2 = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.currency2 = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v("$ETH\n                ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "p-sidebar__brand__check",
+                  attrs: { for: "ETC" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.currency3,
+                        expression: "currency3"
+                      }
+                    ],
+                    attrs: { type: "checkbox", id: "ETC" },
+                    domProps: {
+                      checked: Array.isArray(_vm.currency3)
+                        ? _vm._i(_vm.currency3, null) > -1
+                        : _vm.currency3
+                    },
+                    on: {
+                      click: _vm.clickETC,
+                      change: function($event) {
+                        var $$a = _vm.currency3,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.currency3 = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.currency3 = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.currency3 = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v("$ETC\n                ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "p-sidebar__brand__check",
+                  attrs: { for: "LSK" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.currency4,
+                        expression: "currency4"
+                      }
+                    ],
+                    attrs: { type: "checkbox", id: "LSK" },
+                    domProps: {
+                      checked: Array.isArray(_vm.currency4)
+                        ? _vm._i(_vm.currency4, null) > -1
+                        : _vm.currency4
+                    },
+                    on: {
+                      click: _vm.clickLSK,
+                      change: function($event) {
+                        var $$a = _vm.currency4,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.currency4 = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.currency4 = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.currency4 = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v("$LSK\n                ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "p-sidebar__brand__check",
+                  attrs: { for: "FCT" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.currency5,
+                        expression: "currency5"
+                      }
+                    ],
+                    attrs: { type: "checkbox", id: "FCT" },
+                    domProps: {
+                      checked: Array.isArray(_vm.currency5)
+                        ? _vm._i(_vm.currency5, null) > -1
+                        : _vm.currency5
+                    },
+                    on: {
+                      click: _vm.clickFCT,
+                      change: function($event) {
+                        var $$a = _vm.currency5,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.currency5 = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.currency5 = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.currency5 = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v("$FCT\n                ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "p-sidebar__brand__check",
+                  attrs: { for: "XRP" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.currency6,
+                        expression: "currency6"
+                      }
+                    ],
+                    attrs: { type: "checkbox", id: "XRP" },
+                    domProps: {
+                      checked: Array.isArray(_vm.currency6)
+                        ? _vm._i(_vm.currency6, null) > -1
+                        : _vm.currency6
+                    },
+                    on: {
+                      click: _vm.clickXRP,
+                      change: function($event) {
+                        var $$a = _vm.currency6,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.currency6 = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.currency6 = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.currency6 = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v("$XRP\n                ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "p-sidebar__brand__check",
+                  attrs: { for: "XEM" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.currency7,
+                        expression: "currency7"
+                      }
+                    ],
+                    attrs: { type: "checkbox", id: "XEM" },
+                    domProps: {
+                      checked: Array.isArray(_vm.currency7)
+                        ? _vm._i(_vm.currency7, null) > -1
+                        : _vm.currency7
+                    },
+                    on: {
+                      click: _vm.clickXEM,
+                      change: function($event) {
+                        var $$a = _vm.currency7,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.currency7 = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.currency7 = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.currency7 = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v("$XEM\n                ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "p-sidebar__brand__check",
+                  attrs: { for: "LTC" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.currency8,
+                        expression: "currency8"
+                      }
+                    ],
+                    attrs: { type: "checkbox", id: "LTC" },
+                    domProps: {
+                      checked: Array.isArray(_vm.currency8)
+                        ? _vm._i(_vm.currency8, null) > -1
+                        : _vm.currency8
+                    },
+                    on: {
+                      click: _vm.clickLTC,
+                      change: function($event) {
+                        var $$a = _vm.currency8,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.currency8 = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.currency8 = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.currency8 = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v("$LTC\n                ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "p-sidebar__brand__check",
+                  attrs: { for: "BCH" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.currency9,
+                        expression: "currency9"
+                      }
+                    ],
+                    attrs: { type: "checkbox", id: "BCH" },
+                    domProps: {
+                      checked: Array.isArray(_vm.currency9)
+                        ? _vm._i(_vm.currency9, null) > -1
+                        : _vm.currency9
+                    },
+                    on: {
+                      click: _vm.clickBCH,
+                      change: function($event) {
+                        var $$a = _vm.currency9,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.currency9 = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.currency9 = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.currency9 = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v("$BCH\n                ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "p-sidebar__brand__check",
+                  attrs: { for: "MONA" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.currency10,
+                        expression: "currency10"
+                      }
+                    ],
+                    attrs: { type: "checkbox", id: "MONA" },
+                    domProps: {
+                      checked: Array.isArray(_vm.currency10)
+                        ? _vm._i(_vm.currency10, null) > -1
+                        : _vm.currency10
+                    },
+                    on: {
+                      click: _vm.clickMONA,
+                      change: function($event) {
+                        var $$a = _vm.currency10,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.currency10 = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.currency10 = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.currency10 = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v("$MONA\n                ")
+                ]
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "p-sidebar__accordion" }, [
+          _vm.openFlg
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "p-sidebar__accordion__area p-sidebar__accordion__area--close"
+                },
+                [
+                  _c("img", {
+                    staticClass: "p-sidebar__accordion__area__img",
+                    attrs: { src: "/assets/close_icon.png" }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      staticClass:
+                        "p-sidebar__accordion__area__state p-sidebar__accordion__area__state--open",
+                      on: { click: _vm.show }
+                    },
+                    [_vm._v("閉じる")]
+                  )
+                ]
+              )
+            : _vm._e()
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-sidebar__top" }, [
+      _c("h2", { staticClass: "p-sidebar__top__title" }, [_vm._v("Search")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "p-sidebar__top__border" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -33105,6 +34396,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TrendSearchComponent_vue_vue_type_template_id_0190a1c3___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TrendSearchComponent_vue_vue_type_template_id_0190a1c3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/TrendSearchSpComponent.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/TrendSearchSpComponent.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TrendSearchSpComponent_vue_vue_type_template_id_13454ee6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TrendSearchSpComponent.vue?vue&type=template&id=13454ee6& */ "./resources/js/components/TrendSearchSpComponent.vue?vue&type=template&id=13454ee6&");
+/* harmony import */ var _TrendSearchSpComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TrendSearchSpComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/TrendSearchSpComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TrendSearchSpComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TrendSearchSpComponent_vue_vue_type_template_id_13454ee6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TrendSearchSpComponent_vue_vue_type_template_id_13454ee6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/TrendSearchSpComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/TrendSearchSpComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/TrendSearchSpComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TrendSearchSpComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TrendSearchSpComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TrendSearchSpComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TrendSearchSpComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TrendSearchSpComponent.vue?vue&type=template&id=13454ee6&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/TrendSearchSpComponent.vue?vue&type=template&id=13454ee6& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TrendSearchSpComponent_vue_vue_type_template_id_13454ee6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TrendSearchSpComponent.vue?vue&type=template&id=13454ee6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TrendSearchSpComponent.vue?vue&type=template&id=13454ee6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TrendSearchSpComponent_vue_vue_type_template_id_13454ee6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TrendSearchSpComponent_vue_vue_type_template_id_13454ee6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

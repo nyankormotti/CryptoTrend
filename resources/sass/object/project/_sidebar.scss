@@ -24,7 +24,21 @@
         }
     }
     &--search {
-        max-height:400px;
+        max-height:360px;
+        @include tl(){
+            display:none;
+        }
+        &--sp {
+            display:none;
+            @include tl() {
+                display:block;
+                order:-1;
+                margin-bottom:30px;
+            }
+            @include sl {
+                max-height:500px;
+            }
+        }
     }
     &--option{
         @include tl(){
@@ -291,7 +305,22 @@
             justify-content:flex-start;
             align-content:flex-start;
             @include sl() {
-                justify-content: space-between;
+                justify-content: space-around;
+            }
+        }
+        &__check{
+            margin-right:10px;
+            margin-bottom:10px;
+            padding:5px;
+            @include tl() {
+                margin-right:20px;
+                margin-bottom:20px;
+                font-size:$font-size_xl;
+            }
+            @include sl() {
+                margin-right:10px;
+                margin-bottom:10px;
+                font-size:$font-size_l;
             }
         }
     }
@@ -346,10 +375,16 @@
         }
     }
     &__accordion{
+        @include tl() {
+            display:none;
+        }
+        @include sl() {
+            display:block;
+        }
         width:100%;
         &__area{
             margin-top:20px;
-                margin-bottom:20px;
+            margin-bottom:20px;
             margin-right:auto;
             margin-left:auto;
             width:20%;
@@ -361,14 +396,30 @@
                 padding:0 10px;
                 box-sizing:border-box;
                 text-align:center;
-                // background:$background_color_clear;
-                // border-radius:5px;
-                // border:none;
                 font-size:$font-size_l;
                 font-weight:bold;
             }
             &__img {
                 display:block;
+            }
+            &--brand{
+                @include sl() {
+                    width:30%;
+                }
+                @include sm() {
+                    width:40%;
+                }
+                @include sss() {
+                    width:50%;
+                }
+            }
+            &--close{
+                @include sm() {
+                    width:30%;
+                }
+                @include sss() {
+                    width:40%;
+                }
             }
         }
     }
@@ -376,5 +427,10 @@
         @include sl(){
             display:none;
         }
+        // &--brand{
+        //     @include sl(){
+        //         display:none;
+        //     }
+        // }
     }
 }

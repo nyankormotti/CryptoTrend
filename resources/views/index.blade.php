@@ -9,9 +9,77 @@
 
 <!-- トップバナー -->
 <section class="p-banner">
-    <img class="p-banner__img" src="{{ asset('images/top_banner.jpg') }}" alt="トップ画像">
-    <h1 class="p-banner__title">仮想通貨トレンド分析システム
+    <h1 class="p-banner__title">
+        <span class="p-banner__title--sub">仮想通貨トレンド分析システム</span>
         <br><span class="p-banner__title--main">CryptoTrend</span></h1>
+</section>
+
+<!-- ABOUT -->
+<section class="p-about">
+    <div class="p-about__area">
+        <h2 class="p-about__area__title">CryptoTrendとは</h2>
+        <div class="p-about__area__under"><span class="p-about__area__under__line"></span></div>
+        <div class="p-about__area__describe">
+            <p class="p-about__area__describe__main">仮想通貨のトレンドをいち早くキャッチできるよう<br>あなたをサポートいたします！</p>
+        </div>
+    </div>
+</section>
+
+<!-- DETAIL -->
+<section class="p-detail">
+    <div class="p-detail__area">
+        <div class="p-detail__panel p-detail__panel--describe">
+            <h2 class="p-detail__panel__title">話題性を<br class="p-detail__panel__title--br">ランキング！！</h2>
+            <div class="p-detail__panel__describe">
+                <p class="p-detail__panel__describe__area">
+                    Twitter上で呟かれた仮想通貨のツイート数を銘柄毎に集計し、ランキング表示します！
+                    <br>
+                    <br>※取扱銘柄は、<a href="https://coincheck.com/ja/exchange/closing_prices" target="_blank" rel="noopener noreferrer">こちら</a>をご確認ください。
+                </p>
+            </div>
+        </div>
+        <div class="p-detail__panel p-detail__panel--img">
+            <img class="p-detail__panel__img" src="{{ asset('images/top_panel_1.png') }}" alt="パネル画像1">
+        </div>
+    </div>
+</section>
+
+<section class="p-detail">
+    <div class="p-detail__area">
+        <div class="p-detail__panel">
+            <img class="p-detail__panel__img" src="{{ asset('images/top_panel_2.png') }}" alt="パネル画像1">
+        </div>
+        <div class="p-detail__panel  p-detail__panel--describe">
+            <h2 class="p-detail__panel__title">アカウントを<br class="p-detail__panel__title--br">自動フォロー！！</h2>
+            <div class="p-detail__panel__describe">
+                <p class="p-detail__panel__describe__area">
+                    「仮想通貨」キーワードを含むのTwitterアカウントを自動フォローできます！
+                    <br>もちろんサイト上で選んで個別にフォローも可能です！！
+                    <br>
+                    <br>※1日25回までの制限です。
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="p-detail">
+    <div class="p-detail__area">
+        <div class="p-detail__panel  p-detail__panel--describe">
+            <h2 class="p-detail__panel__title">関連ニュースを<br class="p-detail__panel__title--br">リアルタイムで確認！！</h2>
+            <div class="p-detail__panel__describe">
+                <p class="p-detail__panel__describe__area">
+                    最新の仮想通貨関連のニュースをリアルタイムで取得し、サイト上で確認できます！
+                    <br>
+                    <br>※Googleニュースより最新の100件を取得します。
+
+                </p>
+            </div>
+        </div>
+        <div class="p-detail__panel">
+            <img class="p-detail__panel__img" src="{{ asset('images/top_panel_3.png') }}" alt="パネル画像1">
+        </div>
+    </div>
 </section>
 
 <!-- 会員登録、ログインボタン -->

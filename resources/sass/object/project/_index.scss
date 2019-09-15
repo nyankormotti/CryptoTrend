@@ -5,22 +5,31 @@
 .p-banner{
     position:relative;
     width:100%;
+    background-image: url('../images/top_banner.jpg');
+    // background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 700px;
+    @include ss() {
+        height: 610px;
+    }
+    @include sss() {
+        height: 510px;
+    }
     &__img{
         width:100%;
     }
     &__title{
-        position:absolute;
-        top:30%;
-        right:10%;
         text-align:center;
         line-height:150%;
-        color:$font-color_titleYellow;
-        font-size:$font-size_xxl;
+        color:$font-color_orange;
+        font-size:$font-size_xl;
         font-family: $font-family_corp;
         font-weight:bold;
         @include tm(){
             right:5%;
-            font-size:$font-size_xl;
+            font-size:$font-size_ll;
         }
          @include sl() {
              font-size:$font-size_default;
@@ -34,8 +43,56 @@
          @include sss() {
              font-size:$font-size_ss;
          }
-        &--main{
+         &--sub{
+             padding-top:260px;
+             display: block;
+             @include sl(){
+                 padding-top:280px;
+                 font-size:20px;
+             }
+             @include ss(){
+                  padding-top:260px;
+             }
+             @include sss() {
+                 padding-top:210px;
+                 font-size:16px;
+             }
+         }
+         &--main{
             font-style:oblique;
+            font-size: 60px;
+            display: block;
+            @include tm() {
+                font-size:55px;
+            }
+            @include sl() {
+                font-size:50px;
+                padding:15px;
+            }
+            @include sm() {
+                font-size:40px;
+            }
+            @include sss(){
+                font-size:36px;
+                padding:10px;
+            }
+         }
+    }
+    &__panel{
+        position: absolute;
+        top: 20%;
+        right: 10%;
+        width:60%;
+        &__btn {
+            display:block;
+            width:40%;
+            text-align:center;
+            border-radius:5px;
+            font-size:$font-size_xl;
+            text-decoration:none;
+            padding:10px 20px;
+            color:$font-color_white;
+            font-family:$font-family_corp;
         }
     }
 }
@@ -48,6 +105,7 @@
     margin-top:40px;
     @include sl() {
         height:250px;
+        margin-top:100px;
     }
     &__content{
         width:70%;
@@ -128,6 +186,160 @@
         background:$background_color_white;
         color:$font-color_lightBlue;
     }
+}
+
+// ABOUT
+.p-about{
+    margin-top:60px;
+    margin-bottom:60px;
+    width:100%;
+    min-height:200px;
+    @include sss(){
+        min-height:160px;
+    }
+    @include sl() {
+       margin-bottom:0; 
+    }
+    &__area{
+        margin:20px auto;
+        width:60%;
+        @include tl() {
+            width:80%;
+        }
+        @include sl(){
+            margin:10px auto;
+            width:90%;
+        }
+        &__title{
+            text-align:center;
+            font-size:40px;
+            font-weight:bold;
+            margin-bottom:20px;
+            @include ss() {
+                font-size:36px;
+            }
+            @include sss() {
+                font-size:32px;
+            }
+        }
+        &__under{
+            margin-bottom: 40px;
+            &__line {
+                display: block;
+                margin: 0px auto;
+                width:330px;
+                border-style: solid;
+                border-bottom-width: 3px;
+                border-color: $background_color_orange;
+                border-top: 0;
+                border-right: 0;
+                border-left: 0;
+                @include sss() {
+                    width:100%;
+                }
+                
+            }
+        }
+        &__describe{
+            width:100%;
+            &__main{
+                font-size:25px;
+                text-align:center;
+                line-height:150%;
+                @include sl(){
+                    font-size:$font-size_l;
+                }
+                @include sm() {
+                    font-size:$font-size_default;
+                }
+                @include ss(){
+                    font-size:$font-size_m;
+                }
+                @include sss(){
+                    font-size:$font-size_s;
+                }
+            }
+        }
+    }
+}
+
+.p-detail{
+    width:100%;
+    max-height:400px;
+    margin-bottom:50px;
+    &__area{
+        width:60%;
+        margin:20px auto;
+        display:flex;
+        flex-wrap:wrap;
+        @include tl() {
+            width:80%;
+        }
+        @include sl(){
+            margin:10px auto;
+            width:90%;
+        }
+    }
+    &__panel{
+            width:50%;
+            @include sl(){
+                width:100%;
+            }
+            &--describe{
+                @include sl(){
+                    order:1
+                }
+            }
+            &__img{
+                display:block;
+                margin:0 auto;
+                width:80%;
+                @include sl(){
+                    width:40%;
+                }
+            }
+            &__title{
+                margin-top:20px;
+                margin-bottom:20px;
+                margin-right:auto;
+                margin-left:auto;
+                width:90%;
+                text-align:center;
+                font-size:24px;
+                line-height:130%;
+                font-weight:bold;
+                @include sl() {
+                    font-size:$font-size_ll;
+                }
+                @include sm(){
+                    width:100%;
+                }
+                @include ss(){
+                    font-size:$font-size_l;
+                }
+                @include sss() {
+                    font-size:$font-size_default;
+                }
+                &--br{
+                    @include sl() {
+                        display:none;
+                    }
+                }
+            }
+            &__describe{
+                margin:0 auto;
+                width:90%;
+                line-height:140%;
+                &__area{
+                    @include sl() {
+                        font-size:$font-size_m;
+                    }
+                    @include ss(){
+                        font-size:$font-size_s;
+                    }
+                }
+            }
+        }
 }
 
 

@@ -1,7 +1,7 @@
 <template>
     <section class="p-sidebar p-sidebar--option">
         <div class="p-sidebar__top">
-            <h2 class="p-sidebar__top__title">Option</h2>
+            <h2 class="p-sidebar__top__title">Status</h2>
             <span class="p-sidebar__top__border"></span>
         </div>
         <div class="p-sidebar__area p-sidebar__area--account">

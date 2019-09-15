@@ -3461,7 +3461,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "p-sidebar__top" }, [
-      _c("h2", { staticClass: "p-sidebar__top__title" }, [_vm._v("Option")]),
+      _c("h2", { staticClass: "p-sidebar__top__title" }, [_vm._v("Status")]),
       _vm._v(" "),
       _c("span", { staticClass: "p-sidebar__top__border" })
     ])

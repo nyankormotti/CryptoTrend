@@ -34,7 +34,7 @@
                 <p class="p-detail__panel__describe__area">
                     Twitter上で呟かれた仮想通貨のツイート数を銘柄毎に集計し、ランキング表示します！
                     <br>
-                    <br>※取扱銘柄は、<a href="https://coincheck.com/ja/exchange/closing_prices" target="_blank" rel="noopener noreferrer">こちら</a>をご確認ください。
+                    <br>※取扱銘柄は、BTC、ETH、ETC、LSK、FCT、XRP、XEM、LTC、BCH、MONAの10種類です。
                 </p>
             </div>
         </div>

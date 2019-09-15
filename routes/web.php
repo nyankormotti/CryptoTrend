@@ -16,15 +16,15 @@ Route::group(['middleware' => ['before.login']], function () {
     // トップページ
     Route::get('/', 'IndexController@index');
     // ログイン
-    Route::get('/login', 'LoginController@index');
+    Route::get('/login', 'LoginController@index')->name('login');
     // 会員登録
-    Route::get('/signup', 'SignUpController@index');
+    Route::get('/signup', 'SignUpController@index')->name('signup');
     // パスワードリマインダー送信(認証キー)
-    Route::get('/passwordRemindSend', 'PasswordRemindSendController@index');
+    Route::get('/passwordRemindSend', 'PasswordRemindSendController@index')->name('passRemindSend');
     // パスワードリマインダー(パスワード再発行)
-    Route::get('/passwordRemindRecieve', 'PasswordRemindRecieveController@index');
+    Route::get('/passwordRemindRecieve', 'PasswordRemindRecieveController@index')->name('passRemindRec');
     // 退会完了画面
-    Route::get('/withdrawDone', 'WithdrawDoneController@index');
+    Route::get('/withdrawDone', 'WithdrawDoneController@index')->name('withDraw');
 });
 
 // ログイン処理
@@ -37,7 +37,7 @@ Route::post('/passwordRemindSend', 'PasswordRemindSendController@send');
 Route::post('/passwordRemindRecieve', 'PasswordRemindRecieveController@send');
 
 // Twitterアカウント変更
-Route::get('/changeTwitterAccount', 'ChangeTwitterAccountController@index');
+Route::get('/changeTwitterAccount', 'ChangeTwitterAccountController@index')->name('changeAccount');
 Route::post('/changeTwitterAccount', 'ChangeTwitterAccountController@changeAccount');
 Route::get('/changeTwitterAccountMain', 'ChangeTwitterAccountController@changeAccountMain');
 
@@ -97,6 +97,6 @@ Route::get('/main', 'OAuthController@main');
 // その他
 
 // 例外発生画面
-Route::get('/exception', 'ExceptionController@index');
+Route::get('/exception', 'ExceptionController@index')->name('exception');
 
 

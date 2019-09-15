@@ -79,6 +79,14 @@ body {
   min-height: 100%;
   margin-bottom: -46px;
 }
+.wrapper--signup {
+  position: relative;
+}
+.wrapper--login {
+  position: relative;
+  min-height: 100%;
+  margin-bottom: 0;
+}
 
 .main__base {
   margin-top: 40px;
@@ -319,7 +327,7 @@ body {
 }
 .form__signup {
   margin-top: 30px;
-  margin-bottom: 0;
+  margin-bottom: 30px;
 }
 @media screen and (max-width: 1024px) {
   .form__signup {
@@ -366,7 +374,8 @@ body {
   }
 }
 .form__bottom--reset {
-  margin-bottom: 80px;
+  margin-bottom: 0;
+  margin-top: 30px;
 }
 @media screen and (max-width: 1024px) {
   .form__bottom--reset {

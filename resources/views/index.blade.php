@@ -53,7 +53,7 @@
             <h2 class="p-detail__panel__title">アカウントを<br class="p-detail__panel__title--br">自動フォロー！！</h2>
             <div class="p-detail__panel__describe">
                 <p class="p-detail__panel__describe__area">
-                    「仮想通貨」キーワードを含むのTwitterアカウントを自動フォローできます！
+                    「仮想通貨」キーワードを含むTwitterアカウントを自動フォローできます！
                     <br>もちろんサイト上で選んで個別にフォローも可能です！！
                     <br>
                     <br>※フォローは個別・自動含めて、1日25回までの制限です。

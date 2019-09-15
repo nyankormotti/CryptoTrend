@@ -3,13 +3,19 @@
 @yield('head')
 
 <body>
-    <div class="wrapper">
-        @yield('header')
+    @if(\Route::current() -> getName() == 'signup')
+    <div class="wrapper--signup">
+        @elseif(\Route::current() -> getName() == 'login' && ( count($errors) > 0 || !empty($message)))
+        <div class="wrapper--login">
+            @else
+            <div class="wrapper">
+                @endif
+                @yield('header')
 
-        @yield('contents')
+                @yield('contents')
 
-    </div>
-    @yield('footer')
+            </div>
+            @yield('footer')
 
 </body>
 

@@ -32,7 +32,7 @@
     }
     &__signup{
         margin-top:30px;
-        margin-bottom:0;
+        margin-bottom:30px;
         @include tl() {
             margin-top:80px;
         }
@@ -72,7 +72,8 @@
     }
 
     &__bottom--reset{
-        margin-bottom:80px;;
+        margin-bottom: 0;
+        margin-top: 30px;
         @include tl() {
             margin-bottom:80px;
         }

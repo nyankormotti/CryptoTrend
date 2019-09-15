@@ -2,7 +2,9 @@
 
 <head>
     <meta charset="UTF-8">
-    @if(\Route::current() -> getName() == '')
+    @if(\Route::current() -> getName() == 'login')
+    <meta name="description" content="ログイン画面">
+    @elseif(\Route::current() -> getName() == '')
     <meta name="description" content="仮想通貨の銘柄ごとのツイート数を集計し、各銘柄の話題性をお伝えします。
     また、Twitterの仮想通貨関連のアカウントを一覧表示し、注目度の高いアカウントをフォローできるサービスです。">
     @endif

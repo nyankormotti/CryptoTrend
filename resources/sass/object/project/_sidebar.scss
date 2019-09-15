@@ -25,10 +25,12 @@
     }
     &--search {
         max-height:360px;
+        width:35%;
         @include tl(){
             display:none;
         }
         &--sp {
+            width:100%;
             display:none;
             @include tl() {
                 display:block;

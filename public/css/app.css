@@ -1705,6 +1705,7 @@ body {
 }
 .p-sidebar--search {
   max-height: 360px;
+  width: 35%;
 }
 @media screen and (max-width: 1024px) {
   .p-sidebar--search {
@@ -1712,6 +1713,7 @@ body {
   }
 }
 .p-sidebar--search--sp {
+  width: 100%;
   display: none;
 }
 @media screen and (max-width: 1024px) {

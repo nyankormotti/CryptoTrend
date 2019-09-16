@@ -132,6 +132,11 @@ body {
   min-height: 100%;
   margin-bottom: -46px;
 }
+@media screen and (max-width: 320px) {
+  .wrapper--login {
+    margin-bottom: 25px;
+  }
+}
 .wrapper--login--errors {
   position: relative;
   min-height: 100%;

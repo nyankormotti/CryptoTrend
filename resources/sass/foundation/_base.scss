@@ -49,6 +49,9 @@ body{
       position:relative;
       min-height:100%;
       margin-bottom:-46px;
+      @include sss() {
+        margin-bottom:25px;
+      }
       &--errors{
         position:relative;
         min-height:100%;

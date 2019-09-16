@@ -79,6 +79,16 @@ body {
   min-height: 100%;
   margin-bottom: -46px;
 }
+.wrapper--errors {
+  position: relative;
+  min-height: 100%;
+  margin-bottom: -46px;
+}
+@media screen and (max-width: 320px) {
+  .wrapper--errors {
+    margin-bottom: 20px;
+  }
+}
 .wrapper--signup {
   position: relative;
   min-height: 100%;

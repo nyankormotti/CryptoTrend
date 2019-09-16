@@ -71,7 +71,8 @@ class LoginController extends Controller
 
         } else {
             $msg = 'メールアドレスまたはパスワードが違います。';
-            return view('login', ['message' => $msg, 'error_email' => $request->email]);
+            $loginError = true;
+            return view('login', ['message' => $msg, 'loginError' => $loginError, 'error_email' => $request->email]);
         }
     }
 

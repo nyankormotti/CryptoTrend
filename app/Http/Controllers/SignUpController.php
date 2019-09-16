@@ -26,7 +26,8 @@ class SignUpController extends Controller
             session()->forget('message');
             session()->forget('screen_name');
             session()->forget('email');
-            return view('signup', ['message' => $msg, 'err_screen_name' => $err_screen_name, 'err_email' => $err_email]);
+            $signError = true;
+            return view('signup', ['message' => $msg, 'signError' => $signError, 'err_screen_name' => $err_screen_name, 'err_email' => $err_email]);
         }
 
         return view('signup');

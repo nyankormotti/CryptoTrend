@@ -27,6 +27,7 @@ body{
       &--errors{
         position:relative;
         min-height:100%;
+        margin-bottom:20px;
         @include tl(){
           min-height:100%;
           margin-bottom:-46px;

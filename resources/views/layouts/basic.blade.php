@@ -3,11 +3,12 @@
 @yield('head')
 
 <body>
-    @if(\Route::current() -> getName() == 'signup' && ( count($errors) > 0 || !empty($message)))
+    @if(\Route::current() -> getName() == 'signup' && count($errors) > 0 || !empty($signError))
     <div class="wrapper--signup--errors">
         @elseif(\Route::current() -> getName() == 'signup')
         <div class="wrapper--signup">
-            @elseif(\Route::current() -> getName() == 'login' && ( count($errors) > 0 || !empty($message)))
+
+            @elseif(\Route::current() -> getName() == 'login' && count($errors) > 0 || !empty($loginError))
             <div class="wrapper--login--errors">
                 @elseif(\Route::current() -> getName() == 'login')
                 <div class="wrapper--login">

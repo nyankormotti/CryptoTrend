@@ -42,7 +42,7 @@ class PasswordRemindSendController extends Controller
         session()->put('toEmail', $toEmail);
         // 認証キーをセッションに格納
         session(['auth_key' => $auth_key]);
-        return redirect()->action('PasswordRemindRecieveController@index', $request);
+        return redirect()->action('PasswordRemindRecieveController@index');
     }
 
 }

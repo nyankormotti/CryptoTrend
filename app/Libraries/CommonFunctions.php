@@ -46,7 +46,11 @@ class CommonFunctions
             $list[$i]['updated'] = substr($list[$i]['updated'],0,10).' '. substr($list[$i]['updated'], 11, 8);
             // 記事URL
             $url_split =  explode("=", (string) $data[$i]->link->attributes()->href);
-            $list[$i]['url'] = end($url_split);
+            if(end($url_split) === 'all') {
+                $list[$i]['url'] = $url_split[0];
+            } else {
+                $list[$i]['url'] = end($url_split);
+            }
         }
 
 

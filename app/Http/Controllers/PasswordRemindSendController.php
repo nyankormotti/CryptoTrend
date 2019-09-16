@@ -39,7 +39,7 @@ class PasswordRemindSendController extends Controller
         // リダイレクト後、画面に表示させるメッセージをセッションに格納
         $request->session()->flash('status', '認証キーを発行しました。');
         // メールアドレスをセッションに格納
-        $request->session()->put('toEmail', $toEmail);
+        session()->put('toEmail', $toEmail);
         // 認証キーをセッションに格納
         session(['auth_key' => $auth_key]);
         return redirect()->action('PasswordRemindRecieveController@index', $request);

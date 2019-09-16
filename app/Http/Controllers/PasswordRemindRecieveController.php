@@ -32,7 +32,7 @@ class PasswordRemindRecieveController extends Controller
     public function send(PasswordRemindRecieveRequest $request)
     {
         // リクエスト情報、セッション情報を取得
-        $toEmail = $request->session()->get('toEmail');
+        $toEmail = session()->get('toEmail');
         $auth_key = session()->get('auth_key');
         session()->forget('toEmail');
         session()->forget('auth_key');
@@ -54,6 +54,6 @@ class PasswordRemindRecieveController extends Controller
         Mail::to($toEmail)->send(new PasswordRemindRecieveMail($password));
         // リダイレクト後、画面に表示させるメッセージをセッションに格納
         $request->session()->flash('status', 'パスワードを再発行しました。');
-        return redirect()->action('IndexController@index', $request);
+        return redirect()->action('IndexController@index');
     }
 }

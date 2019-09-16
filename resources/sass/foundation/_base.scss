@@ -20,7 +20,6 @@ body{
     &--signup {
       position:relative;
       min-height:100%;
-      margin-bottom:-46px;
       @include tl() {
         min-height:100%;
         margin-bottom:-46px;

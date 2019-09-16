@@ -92,7 +92,6 @@ body {
 .wrapper--signup {
   position: relative;
   min-height: 100%;
-  margin-bottom: -46px;
 }
 @media screen and (max-width: 1024px) {
   .wrapper--signup {

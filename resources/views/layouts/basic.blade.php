@@ -14,15 +14,17 @@
                 <div class="wrapper--login">
                     @elseif(count($errors) > 0 || !empty($message))
                     <div class="wrapper--errors">
-                        @else
-                        <div class="wrapper">
-                            @endif
-                            @yield('header')
+                        @elseif(\Route::current() -> getName() == 'changeAccount')
+                        <div class="wrapper--change">
+                            @else
+                            <div class="wrapper">
+                                @endif
+                                @yield('header')
 
-                            @yield('contents')
+                                @yield('contents')
 
-                        </div>
-                        @yield('footer')
+                            </div>
+                            @yield('footer')
 
 </body>
 

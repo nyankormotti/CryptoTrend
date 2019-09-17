@@ -13,7 +13,7 @@ body{
       position:relative;
       min-height:100%;
       margin-bottom:-46px;
-      @include sss(){
+      @include ss(){
         margin-bottom:20px;
       }
     }
@@ -43,6 +43,7 @@ body{
           margin-bottom:0;
         }
       }
+      
     }
     &--login{
       position:relative;
@@ -62,6 +63,11 @@ body{
           margin-bottom:25px;
         }
       }
+    }
+    &--change{
+      position:relative;
+      min-height:100%;
+      margin-bottom:-40px;
     }
 }
 

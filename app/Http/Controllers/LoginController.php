@@ -63,7 +63,7 @@ class LoginController extends Controller
 
             // Twitter上のアカウントと比較して、DBに保存しているアカウント情報が異なる場合、Twitterアカウント変更画面にリダイレクト
             // (アカウントのTwitter_idが異なる場合(アカウントが存在しない場合)またはscreen_nameが異なる場合)
-            if($user->twitter_id !== $userInfo['id_str'] || $user->screen_name !== $userInfo['screen_name']) {
+            if(empty($userInfo['id_str']) || !empty($userInfo['id_str']) && ($user->twitter_id !== $userInfo['id_str'] || $user->screen_name !== $userInfo['screen_name'])) {
                 return redirect()->action('ChangeTwitterAccountController@index');
             } else {
                 return redirect('trend');

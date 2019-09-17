@@ -213,7 +213,7 @@ class CommonFunctions
         // twitterのユーザー情報を取得
         $userInfo = get_object_vars($twitter->get('account/verify_credentials'));
 
-        if ($screen_name !== $userInfo['screen_name']) {
+        if (empty($userInfo['screen_name']) || !empty($userInfo['screen_name']) && $screen_name !== $userInfo['screen_name']) {
             // Twitterアカウントのスクリーンネームが、CryptoTrendに保持しているユーザー情報のものと異なる場合、
             // Twitterアカウント変更画面にリダイレクト
             $change_flg = true;
